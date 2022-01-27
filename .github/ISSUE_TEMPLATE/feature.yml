@@ -40,9 +40,9 @@ body:
     label: Your Environment
     description: Include as many relevant details about the environment, that may be useful when considering implementation of this feature.
     placeholder: |
-      * Version used:
-      * Browser Name and version:
-      * Operating System and version (desktop or mobile):
-      * Link to your project:
+      Version used:
+      Browser Name and version:
+      Operating System and version (desktop or mobile):
+      Link to your project:
   validations:
     required: false
