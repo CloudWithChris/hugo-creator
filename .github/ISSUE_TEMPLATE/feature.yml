@@ -1,0 +1,48 @@
+name: ⚒️ Feature request
+description: File a bug report
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this feature request!
+  - type: textarea
+    id: general-summary
+    attributes:
+      label: Provide a general summary of the suggestion
+      description: Help us paint the picture. Why is this a useful feature for you?
+      placeholder: Tell us what you'd like to see!
+      value: "This will help me achieve greatness!"
+    validations:
+      required: true
+- type: textarea
+  id: context
+  attributes:
+    label: Context
+    description: Why is this change important to you? How would you use it? How can it benefit other users?
+    placeholder: |
+      This theme is currently inaccessible. I use a screen reader, but I'm unable to navigate through the main navigation area.
+  validations:
+    required: true
+- type: textarea
+  id: possible-implementation
+  attributes:
+    label: Possible Implementation
+    description: Not obligatory, but suggest an idea for implementing addition or change 
+    placeholder: |
+      Ensure you are using aria labels across those navigation items.
+  validations:
+    required: false
+- type: textarea
+  id: your-environment
+  attributes:
+    label: Your Environment
+    description: Include as many relevant details about the environment, that may be useful when considering implementation of this feature.
+    placeholder: |
+      * Version used:
+      * Browser Name and version:
+      * Operating System and version (desktop or mobile):
+      * Link to your project:
+  validations:
+    required: false
