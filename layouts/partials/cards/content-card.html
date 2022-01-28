@@ -52,7 +52,7 @@
         {{ with .Params.author }}              
           {{ $name := . }}
           {{ $scratch.Set "person" ($name | urlize) }}
-          {{- range where $site.Pages "Type" "host" -}}
+          {{- range where $site.Pages "Type" "person" -}}
             {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
               {{- $scratch.Set "host-exist" "true" -}}     
                   <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
@@ -64,7 +64,7 @@
         {{ with .Params.hosts }}              
           {{ range $name := . }}
             {{ $scratch.Set "person" ($name | urlize) }}
-            {{- range where $site.Pages "Type" "host" -}}
+            {{- range where $site.Pages "Type" "person" -}}
               {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
                 {{- $scratch.Set "host-exist" "true" -}}     
                     <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
@@ -77,7 +77,7 @@
         {{ with .Params.guests }}              
           {{ range $name := . }}
             {{ $scratch.Set "person" ($name | urlize) }}
-            {{- range where $site.Pages "Type" "guest" -}}
+            {{- range where $site.Pages "Type" "person" -}}
               {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
                 {{- $scratch.Set "guest-exist" "true" -}}     
                     <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>

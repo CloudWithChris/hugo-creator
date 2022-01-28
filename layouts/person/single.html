@@ -1,24 +1,26 @@
 {{ define "main" }}
   <div class="container">
     <div class="row g-2">
-      {{ $upcomingEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "==" true) ".Params.hosts" "intersect" (slice $.File.BaseFileName) }}
-      {{ $pastEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "!=" true) ".Params.hosts" "intersect" (slice $.File.BaseFileName) }}
+
+
+      {{ $upcomingGuestEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "==" true) ".Params.guests" "intersect" (slice $.File.BaseFileName) }}
+      {{ $upcomingHostEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "==" true) ".Params.hosts" "intersect" (slice $.File.BaseFileName) }}
+      {{ $upcomingEpisodes := union $upcomingHostEpisodes $upcomingGuestEpisodes}}
+      {{ $pastGuestEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "!=" true) ".Params.guests" "intersect" (slice $.File.BaseFileName) }}
+      {{ $pastHostEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "!=" true) ".Params.hosts" "intersect" (slice $.File.BaseFileName) }}
+      {{ $pastEpisodes:= union $pastGuestEpisodes $pastHostEpisodes }}
 
       {{ if gt (len $upcomingEpisodes) 0}}
       <h2>Upcoming Episodes</h2>
-      {{- range first 4 $upcomingEpisodes.ByDate -}}
-        {{- partial "cards/episode-card.html" . -}}
+      {{- range $upcomingEpisodes.ByDate -}}
+        {{- partial "cards/content-card.html" . -}}
       {{ end }}
     {{ end}}
-
-    <div class="col-12">
-      <p>See <a href="/upcoming">all upcoming episodes</a></p>
-    </div>
 
     {{ if gt (len $pastEpisodes) 0}}
       <h2>Past Episodes</h2>
       {{- range $pastEpisodes -}}
-        {{- partial "cards/episode-card.html" . -}}
+        {{- partial "cards/content-card.html" . -}}
       {{ end }}
     {{ end}}
     </div>
@@ -26,6 +28,20 @@
 {{ end }}
 
 {{ define "top" }}
+
+  <section class="py-5 container" align="center">
+    <div class="col">
+      <div class="row">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/guest">Guests</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ .Title }}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </section>
   <div class="container" align="center">
     <img src="{{ .Params.image | absURL}}" width="150" class="rounded-circle z-depth-2" alt="{{ .Title }}" title="{{ .Title }}" />
     <p>
@@ -49,5 +65,6 @@
       {{ end }}
     </p>
     <p>{{ .Content }}</p>
+
   </div>
 {{ end }}

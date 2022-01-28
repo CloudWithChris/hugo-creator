@@ -5,12 +5,12 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Guests</li>
+            <li class="breadcrumb-item active" aria-current="page">People</li>
           </ol>
         </nav>
       </div>
       <div class="row">    
-        {{- partial "random-speakers-header.html" . -}}    
+        {{- partial "random-people-header.html" . -}}    
       </div>
 
       <div class="row text-center">
@@ -24,12 +24,12 @@
 {{ define "main" }}
 <div class="container" align="center">
   <div class="row g-2">   
-    {{ $paginator := .Paginate (where $.Site.RegularPages "Section" "guest").ByTitle }}
+    {{ $paginator := .Paginate (where $.Site.RegularPages "Section" "person").ByTitle }}
 
     {{- partial "paginator.html" . -}}
     
     {{ range $paginator.Pages }}
-      {{- partial "cards/guest-card.html" . -}}
+      {{- partial "cards/person-card.html" . -}}
     {{ end }}
 
     {{- partial "paginator.html" . -}}

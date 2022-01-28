@@ -6,7 +6,7 @@
         <li class="breadcrumb-item active" aria-current="page">Episodes</li>
       </ol>
     </nav>
-    {{- partial "random-speakers-header.html" . -}}    
+    {{- partial "random-people-header.html" . -}}    
 
     <div class="row text-center">
     <p>Interested in becoming a guest on the show? <a href="https://www.sessionize.com/cloudwithchris/">Sign up!</a></p>
@@ -23,7 +23,7 @@
     {{- partial "paginator.html" . -}}
     
     {{ range $index, $value := $paginator.Pages }}
-      {{- partial "cards/episode-card.html" . -}}
+      {{- partial "cards/content-card.html" . -}}
       {{ if not (modBool $index 2 )}}  
         <div class="dropdown-divider"></div>
        {{ else }}

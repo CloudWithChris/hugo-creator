@@ -6,7 +6,7 @@
     {{- partial "paginator.html" . -}}
     
     {{ range $index, $value := $paginator.Pages }}
-      {{- partial "cards/talk-card.html" . -}}
+      {{- partial "cards/content-card.html" . -}}
       {{ if not (modBool $index 2 )}}  
         <div class="dropdown-divider"></div>
        {{ else }}
