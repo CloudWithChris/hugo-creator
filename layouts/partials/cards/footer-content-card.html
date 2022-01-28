@@ -2,9 +2,9 @@
 {{ $site := .Site }}
 {{ $scratch := .Scratch }}
 
-<div class="col-md-6 col-12">    
+<div class="col-md-3 col-12">    
   <div class="row g-0">
-    <div class="col-12 col-sm-4">
+    <div class="col-3 col-sm-4">
       <p>
         {{ if eq .Section "talk" }}
           {{ if .Params.externalLink }}
@@ -52,7 +52,7 @@
         {{ with .Params.author }}              
           {{ $name := . }}
           {{ $scratch.Set "person" ($name | urlize) }}
-          {{- range where $site.Pages "Type" "host" -}}
+          {{- range where $site.Pages "Type" "person" -}}
             {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
               {{- $scratch.Set "host-exist" "true" -}}     
                   <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
@@ -64,7 +64,7 @@
         {{ with .Params.hosts }}              
           {{ range $name := . }}
             {{ $scratch.Set "person" ($name | urlize) }}
-            {{- range where $site.Pages "Type" "host" -}}
+            {{- range where $site.Pages "Type" "person" -}}
               {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
                 {{- $scratch.Set "host-exist" "true" -}}     
                     <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
@@ -77,10 +77,10 @@
         {{ with .Params.guests }}              
           {{ range $name := . }}
             {{ $scratch.Set "person" ($name | urlize) }}
-            {{- range where $site.Pages "Type" "guest" -}}
+            {{- range where $site.Pages "Type" "person" -}}
               {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
                 {{- $scratch.Set "guest-exist" "true" -}}     
-                    <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
+                    <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth- person-image2" alt="{{ .Title }}" title="{{ .Title }}" /></a>
                 {{- $scratch.Set "guest-exist" "false" -}}
               {{ end }}
             {{- end -}}

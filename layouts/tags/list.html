@@ -1,18 +1,3 @@
-{{ define "main" }}
-<div class="container" align="center">
-  <div class="row g-2">   
-    {{ $paginator := .Paginate (where .Data.Pages ".Params.upcoming" "!=" true) }}
-    {{- partial "paginator.html" . -}}
-    
-    {{ range $paginator.Pages }}
-      {{- partial "cards/generic-card.html" . -}}
-    {{ end }}
-
-    {{- partial "paginator.html" . -}}
-  </div>
-</div>
-{{ end }}
-
 {{ define "top" }}
 <section class="py-5 container">
   <div class="row">
@@ -25,4 +10,18 @@
     </nav>
   </div>
 </section>
+{{ end }}
+{{ define "main" }}
+<div class="container" align="center">
+  <div class="row g-2">   
+    {{ $paginator := .Paginate (where .Data.Pages ".Params.upcoming" "!=" true) }}
+    {{- partial "paginator.html" . -}}
+    
+    {{ range $paginator.Pages }}
+      {{- partial "cards/content-card.html" . -}}
+    {{ end }}
+
+    {{- partial "paginator.html" . -}}
+  </div>
+</div>
 {{ end }}
