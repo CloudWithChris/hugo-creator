@@ -49,16 +49,15 @@
         {{ end }}
         <p class="card-text">
 
-        {{ with .Params.author }}              
-          {{ $name := . }}
-          {{ $scratch.Set "person" ($name | urlize) }}
-          {{- range where $site.Pages "Type" "person" -}}
-            {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
-              {{- $scratch.Set "host-exist" "true" -}}     
-                  <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
-              {{- $scratch.Set "host-exist" "false" -}}
-            {{ end }}
-          {{- end -}}
+          {{ with .Params.Authors }}              
+          {{ range $name := . }}
+            {{ $scratch.Set "person" ($name | urlize) }}
+            {{- range where $site.Pages "Type" "person" -}}
+              {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
+                    <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
+              {{ end }}
+            {{- end -}}
+          {{ end }}
         {{ end }}
           
         {{ with .Params.hosts }}              
@@ -66,9 +65,7 @@
             {{ $scratch.Set "person" ($name | urlize) }}
             {{- range where $site.Pages "Type" "person" -}}
               {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
-                {{- $scratch.Set "host-exist" "true" -}}     
                     <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
-                {{- $scratch.Set "host-exist" "false" -}}
               {{ end }}
             {{- end -}}
           {{ end }}
@@ -78,10 +75,8 @@
           {{ range $name := . }}
             {{ $scratch.Set "person" ($name | urlize) }}
             {{- range where $site.Pages "Type" "person" -}}
-              {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
-                {{- $scratch.Set "guest-exist" "true" -}}     
+              {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}     
                     <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
-                {{- $scratch.Set "guest-exist" "false" -}}
               {{ end }}
             {{- end -}}
           {{ end }}

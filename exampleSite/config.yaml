@@ -63,9 +63,9 @@ menu:
     - name: "Talks"
       weight: 5
       url: "/talk"
-    - name: "Guests"
+    - name: "People"
       weight: 6
-      url: "/guest"
+      url: "/person"
     - name: "Series"
       weight: 7
       url: "/series"

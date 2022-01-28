@@ -5,7 +5,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">People</li>
+            <li class="breadcrumb-item active" aria-current="page">{{ .Title }}</li>
           </ol>
         </nav>
       </div>
@@ -14,8 +14,7 @@
       </div>
 
       <div class="row text-center">
-        <p>Interested in becoming a guest on the show? <a href="https://www.sessionize.com/cloudwithchris/">Sign up!</a></p>
-        <p>Have ideas for a new episode topic, or perhaps a new series? <a href="https://www.twitter.com/reddobowen">Tweet me on Twitter!</a></p> 
+        {{ .Content }}
       </div> 
     </div>
   </div>

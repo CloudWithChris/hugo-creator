@@ -1,8 +1,6 @@
 {{ define "main" }}
   <div class="container">
     <div class="row g-2">
-
-
       {{ $upcomingGuestEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "==" true) ".Params.guests" "intersect" (slice $.File.BaseFileName) }}
       {{ $upcomingHostEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "==" true) ".Params.hosts" "intersect" (slice $.File.BaseFileName) }}
       {{ $upcomingEpisodes := union $upcomingHostEpisodes $upcomingGuestEpisodes}}
@@ -11,24 +9,23 @@
       {{ $pastEpisodes:= union $pastGuestEpisodes $pastHostEpisodes }}
 
       {{ if gt (len $upcomingEpisodes) 0}}
-      <h2>Upcoming Episodes</h2>
-      {{- range $upcomingEpisodes.ByDate -}}
-        {{- partial "cards/content-card.html" . -}}
-      {{ end }}
-    {{ end}}
+        <h2>Upcoming Episodes</h2>
+        {{- range $upcomingEpisodes.ByDate -}}
+          {{- partial "cards/content-card.html" . -}}
+        {{ end }}
+      {{ end}}
 
-    {{ if gt (len $pastEpisodes) 0}}
-      <h2>Past Episodes</h2>
-      {{- range $pastEpisodes -}}
-        {{- partial "cards/content-card.html" . -}}
-      {{ end }}
-    {{ end}}
+      {{ if gt (len $pastEpisodes) 0}}
+        <h2>Past Episodes</h2>
+        {{- range $pastEpisodes -}}
+          {{- partial "cards/content-card.html" . -}}
+        {{ end }}
+      {{ end}}
     </div>
   </div>
 {{ end }}
 
 {{ define "top" }}
-
   <section class="py-5 container" align="center">
     <div class="col">
       <div class="row">
@@ -65,6 +62,5 @@
       {{ end }}
     </p>
     <p>{{ .Content }}</p>
-
   </div>
 {{ end }}
