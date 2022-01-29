@@ -50,6 +50,7 @@ jobs:
       - name: Build
         run: |
           pushd $SITE_FOLDER_PATH
+          npm ci
           hugo --minify --theme "$THEME_NAME" --themesDir "../../" --baseURL "/"
           popd
   contentLinter:  
@@ -97,8 +98,6 @@ jobs:
         with:
           hugo-version: ${{ env.LATEST_HUGO_VERSION }}
           extended: true
-      - name: 'Install Node Dependencies'
-        run: npm ci    
       - name: Wait for the Netlify Preview
         uses: jakepartusch/wait-for-netlify-action@v1
         id: netlify
@@ -107,6 +106,7 @@ jobs:
       - name: "Build Hugo"
         run: |
           pushd '$SITE_FOLDER_PATH'
+          npm ci
           hugo --minify --theme "$SITE_NAME" --themesDir "../../" --baseURL ${{ steps.netlify.outputs.url }}
           popd
       - name: "Check HTML Output"
