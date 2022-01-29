@@ -100,12 +100,12 @@ jobs:
         uses: jakepartusch/wait-for-netlify-action@v1
         id: netlify
         with:
-          site_name: ${{ env.SITE_NAME }}
+          site_name: ${{ env.THEME_NAME }}
       - name: "Build Hugo"
         run: |
           pushd '$SITE_FOLDER_PATH'
           npm ci
-          hugo --minify --theme "$SITE_NAME" --themesDir "../../" --baseURL ${{ steps.netlify.outputs.url }}
+          hugo --minify --theme "$THEME_NAME" --themesDir "../../" --baseURL ${{ steps.netlify.outputs.url }}
           popd
       - name: "Check HTML Output"
         run: |
@@ -123,12 +123,12 @@ jobs:
         uses: jakepartusch/wait-for-netlify-action@v1
         id: netlify
         with:
-          site_name: ${{ env.SITE_NAME }}
+          site_name: ${{ env.THEME_NAME }}
       - name: Use Node.js 10.x
         uses: actions/setup-node@v1
         with:
           node-version: 10.x
-      - name: Lighthouse ${{ env.SITE_NAME }} (Preview)
+      - name: Lighthouse ${{ env.THEME_NAME }} (Preview)
         run: |
           npm install -g @lhci/cli@0.6.x
           lhci collect --urls ${{ steps.netlify.outputs.url }} --url ${{ steps.netlify.outputs.url }}/blog/ --url ${{ steps.netlify.outputs.url }}/talk/ --url ${{ steps.netlify.outputs.url }}/person/ --url ${{ steps.netlify.outputs.url }}/series/ --url ${{ steps.netlify.outputs.url }}/episode/
