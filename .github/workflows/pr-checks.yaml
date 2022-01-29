@@ -69,7 +69,7 @@ jobs:
       # Run Linter against code base #
       ################################
       - name: Lint ${{env.SITE_FOLDER_PATH}} Content
-        uses: github/super-linter@v3
+        uses: github/super-linter@v4
         env:
           FILTER_REGEX_INCLUDE: ${{env.SITE_FOLDER_PATH}}/content/**
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
@@ -78,7 +78,7 @@ jobs:
       # Run Linter against code base #
       ################################
       - name: Lint ${{env.THEME_NAME}} Theme Archetypes Folder
-        uses: github/super-linter@v3
+        uses: github/super-linter@v4
         env:
           FILTER_REGEX_INCLUDE: archetypes/**
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -103,7 +103,7 @@ jobs:
           site_name: ${{ env.THEME_NAME }}
       - name: "Build Hugo"
         run: |
-          pushd '$SITE_FOLDER_PATH'
+          pushd $SITE_FOLDER_PATH
           npm ci
           hugo --minify --theme "$THEME_NAME" --themesDir "../../" --baseURL ${{ steps.netlify.outputs.url }}
           popd
