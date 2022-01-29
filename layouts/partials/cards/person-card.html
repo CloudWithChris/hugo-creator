@@ -15,7 +15,7 @@
         <p class="card-text">{{ .Content | truncate 300}}</p>
         
         {{ with .Params.tags }}
-          <p>{{ partial "tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}</p>
+          <p>{{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}</p>
         {{ end }}
       </div>
     </div>

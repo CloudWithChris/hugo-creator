@@ -10,27 +10,28 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="/blog">Blog</a></li>
+            <li class="breadcrumb-item"><a href="{{ (.Section | urlize) | absLangURL }}">{{ with .Site.GetPage (printf "/%s" .Section) }}{{ .Title }}{{ end }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ .Title }}</li>
           </ol>
         </nav>
 
-        {{ with .Params.author }}              
-          {{ $name := . }}
-          {{ $scratch.Set "person" ($name | urlize) }}
-          {{- range where $site.Pages "Type" "host" -}}
-            {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
-              {{- $scratch.Set "host-exist" "true" -}}     
-                  <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="100" class="rounded-circle z-depth-2" alt="{{ .Title }}" title="{{ .Title }}" /></a>
-              {{- $scratch.Set "host-exist" "false" -}}
-            {{ end }}
-          {{- end -}}
+        <p>{{ with .Params.Authors }}              
+          {{ range $name := . }}
+            {{ $scratch.Set "person" ($name | urlize) }}
+            {{- range where $site.Pages "Type" "person" -}}
+              {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
+                {{- $scratch.Set "host-exist" "true" -}}     
+                    <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="100" class="rounded-circle z-depth-2" alt="{{ .Title }}" title="{{ .Title }}" /></a>
+                {{- $scratch.Set "host-exist" "false" -}}
+              {{ end }}
+            {{- end -}}
+          {{ end }}
         {{ end }}
         </p>
       </div>
 
       <div class="row">
-        {{ partial "socialshare.html" . }}
+        {{ partial "content/socialshare.html" . }}
       </div>
       
       <div class="row d-flex align-items-center justify-content-center">
@@ -39,13 +40,13 @@
       
       
       {{ with .Params.tags }}
-        <p>{{ partial "tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}</p>
+        <p>{{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}</p>
       {{ end }}
 
       <p></p>
       {{ with .Params.Series }}
         <p>
-          <p>{{ partial "series.html" (dict "taxo" "series" "value" . "site" $.Site ) }}</p>
+          <p>{{ partial "content/series.html" (dict "taxo" "series" "value" . "site" $.Site ) }}</p>
         </p>
       {{ end }}
       <ul class="list-group">

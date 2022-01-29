@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns#" lang="{{ .Language }}">
-    {{- partial "head.html" . -}}
+    {{- partial "site-metadata.html" . -}}
     <body class="d-flex flex-column min-vh-100">
-        {{- partial "header.html" . -}}
+        {{- partial "header/all.html" . -}}
             <main class="d-flex flex-column flex-fill">
                 {{- block "top" . }}{{- end }}
                 <div class="bg-main flex-fill">
@@ -10,6 +10,6 @@
                  </div>
                  {{- block "bottom" . }}{{- end }}
             </main>
-        {{- partial "footer.html" . -}}
+        {{- partialCached  "footer/all.html" . -}}
     </body>
 </html>

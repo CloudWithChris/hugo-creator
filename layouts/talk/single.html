@@ -7,7 +7,7 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="/">Home</a></li>
-              <li class="breadcrumb-item"><a href="/talk">Talks</a></li>
+              <li class="breadcrumb-item"><a href="{{ (.Section | urlize) | absLangURL }}">{{ with .Site.GetPage (printf "/%s" .Section) }}{{ .Title }}{{ end }}</a></li>
               <li class="breadcrumb-item active" aria-current="page">{{ .Title }}</li>
             </ol>
           </nav>
@@ -27,7 +27,7 @@
         </div>
 
         <div class="row">
-          {{ partial "socialshare.html" . }}
+          {{ partial "content/socialshare.html" . }}
         </div>
         
         <div class="row">
@@ -36,7 +36,7 @@
 
         {{ with .Params.tags }}
           <div class="row">
-            <p>{{ partial "tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}</p>
+            <p>{{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}</p>
           </div>
         {{ end }}
 

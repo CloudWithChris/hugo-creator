@@ -2,7 +2,7 @@
 <section class="py-5 container">
   <div class="row float-center">
     {{ range first 3 (where (where $.Site.RegularPages "Section" "episode") ".Params.upcoming" true).ByDate }}         
-      {{- partial "upcoming-episode.html" . -}}
+      {{- partial "block/upcoming-episode.html" . -}}
     {{ end }}
   </div>  
   <div class="row float-end">
@@ -15,7 +15,7 @@
 <div class="container" align="center">
   <div class="row">
     <div class="col">
-      {{- partial "latest.html" . -}}
+      {{- partial "block/latest-episode.html" . -}}
     </div>
   </div>  
   <div class="dropdown-divider"></div>

@@ -17,11 +17,11 @@
         <p class="card-text">{{ .Content | truncate 300}}</p>
         
         {{ with .Params.tags }}
-          <p>{{ partial "tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}</p>
+          <p>{{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}</p>
         {{ end }}
         {{ with .Params.Series }}
           <p>
-            <p>{{ partial "series.html" (dict "taxo" "series" "value" . "site" $.Site ) }}</p>
+            <p>{{ partial "content/series.html" (dict "taxo" "series" "value" . "site" $.Site ) }}</p>
           </p>
         {{ end }}
         <p class="card-text">

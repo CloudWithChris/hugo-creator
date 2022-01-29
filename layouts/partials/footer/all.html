@@ -32,7 +32,7 @@
           <li class="nav-item"><a class="nav-link" href="#" id="changePreferences">Cookie Preferences</a></li>
           {{ $currentPage := . }}
             {{ range .Site.Menus.footer }}
-              {{ partial "helper/navigation-menu.html" (dict "context" . "currentPage" $currentPage) }}
+              {{ partial "nav-links.html" (dict "context" . "currentPage" $currentPage) }}
             {{ end }}
         </ul>
       </div>
@@ -52,7 +52,7 @@
 
 <script type="text/javascript" charset="UTF-8">
 document.addEventListener('DOMContentLoaded', function () {
-cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express","palette":"light","language":"en","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false,"website_name":"Cloud With Chris","open_preferences_center_selector":"#changePreferences","website_privacy_policy_url":"https://www.cloudwithchris.com/privacy-policy"});
+cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express","palette":"light","language":"en","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false,"website_name":"{{ .Site.Title }}","open_preferences_center_selector":"#changePreferences","website_privacy_policy_url":"https://www.cloudwithchris.com/privacy-policy"});
 });
 </script>
 

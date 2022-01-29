@@ -36,7 +36,7 @@
     <h2>Published on {{ .PublishDate.Format "Mon, Jan 2, 2006" }}</h2>
     
     {{ with .Params.tags }}
-      <p>{{ partial "tags.html" (dict "taxo" "tags" "value" . "site" $site ) }}</p>
+      <p>{{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $site ) }}</p>
     {{ end }}
 
     {{ if .Params.Youtube }}

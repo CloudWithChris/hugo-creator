@@ -2,7 +2,7 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-cwc">
     <div class="container">
-        <a class="navbar-brand" href="{{ "/" | absURL }}"><img src="{{ "img/Cloud.png" | absURL }}" alt="Cloud With Chris" title="Cloud With Chris" height="145" /></a>
+        <a class="navbar-brand" href="{{ "/" | absURL }}"><img src="{{ "img/Cloud.png" | absURL }}" alt="{{ .Site.Title }}" title="{{ .Site.Title }}" height="145" /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <i class="fas fa-bars"></i>
         </button>
@@ -11,7 +11,7 @@
           <ul class="navbar-nav ms-auto">
             {{ $currentPage := . }}
               {{ range .Site.Menus.main }}
-                {{ partial "helper/navigation-menu.html" (dict "context" . "currentPage" $currentPage) }}
+                {{ partial "nav-links.html" (dict "context" . "currentPage" $currentPage) }}
               {{ end }}      
           </ul>          
           <form class="d-flex" action="{{ "search" | absURL }}">
