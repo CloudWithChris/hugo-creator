@@ -83,7 +83,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   htmlproofer:
     needs: matrixBuild
-    name: Verify ${{env.SITE_FOLDER_PATH}} HTML Output
+    name: Verify exampleSite HTML Output
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
