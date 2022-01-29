@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [16, 17, 18]
+        node: [12, 14, 16]
         hugo: [0.76.5, 0.92.0, 0.92.1]
     steps:
       - name: Checkout Code
