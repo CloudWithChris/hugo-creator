@@ -4,6 +4,8 @@ changelog:
   exclude:
     labels:
       - Release/Ignore
+      - Type/Duplicate
+      - Type/WontFix
     authors:
       - octocat
   categories:
