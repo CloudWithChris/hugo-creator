@@ -83,7 +83,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   htmlproofer:
     needs: matrixBuild
-    name: "Verify ${{env.SITE_FOLDER_PATH}} HTML Output"
+    name: Verify ${{env.SITE_FOLDER_PATH}} HTML Output
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -126,7 +126,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 10.x
-      - name: "Lighthouse ${{ env.SITE_NAME }} (Preview)"
+      - name: Lighthouse ${{ env.SITE_NAME }} (Preview)
         run: |
           npm install -g @lhci/cli@0.6.x
           lhci collect --urls ${{ steps.netlify.outputs.url }} --url ${{ steps.netlify.outputs.url }}/blog/ --url ${{ steps.netlify.outputs.url }}/talk/ --url ${{ steps.netlify.outputs.url }}/person/ --url ${{ steps.netlify.outputs.url }}/series/ --url ${{ steps.netlify.outputs.url }}/episode/
