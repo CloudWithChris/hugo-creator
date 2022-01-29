@@ -11,9 +11,8 @@
   </div>
   <div class="row float-center text-center">
     <p>{{ .Content }}</p>
-    <p>Interested on being on the show? Then propose a session on the <a href="https://sessionize.com/cloudwithchris">Cloud With Chris Sessionize Page</a>!</p>
     {{ range first 3 (where .Data.Pages ".Params.upcoming" true).ByDate }}         
-      {{- partial "upcoming-episode.html" . -}}
+      {{- partial "block/upcoming-episode.html" . -}}
     {{ end }}
   </div>  
   {{ if ge (where .Data.Pages ".Params.upcoming" true) 1 }}

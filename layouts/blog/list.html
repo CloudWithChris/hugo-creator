@@ -12,7 +12,7 @@
       {{ $upcomingTalks := first 3 (shuffle (where $.Site.RegularPages "Section" "blog")) }}
       {{ $count := len $upcomingTalks }}
       {{ range $upcomingTalks }}
-      {{- partial "random-blog.html" (dict "count" $count "value" . "site" $.Site ) -}}
+      {{- partial "block/random-blog.html" (dict "count" $count "value" . "site" $.Site ) -}}
       {{ end }}
     </div>
 

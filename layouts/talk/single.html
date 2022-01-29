@@ -27,7 +27,7 @@
         </div>
 
         <div class="row">
-          {{ partial "socialshare.html" . }}
+          {{ partial "content/socialshare.html" . }}
         </div>
         
         <div class="row">
@@ -36,7 +36,7 @@
 
         {{ with .Params.tags }}
           <div class="row">
-            <p>{{ partial "tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}</p>
+            <p>{{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}</p>
           </div>
         {{ end }}
 

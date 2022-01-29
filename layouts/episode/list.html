@@ -6,7 +6,7 @@
         <li class="breadcrumb-item active" aria-current="page">{{ .Title }}</li>
       </ol>
     </nav>
-    {{- partial "random-people-header.html" . -}}    
+    {{- partial "block/random-people.html" . -}}    
 
     <div class="row text-center">
       {{ .Content }}
@@ -42,7 +42,7 @@
       <div class="row float-center">
         <h2 align="center">Coming Up...</h2>
         {{ range first 3 (where (where $.Site.RegularPages "Section" "episode") ".Params.upcoming" true).ByDate }}         
-          {{- partial "upcoming-episode.html" . -}}
+          {{- partial "block/upcoming-episode.html" . -}}
         {{ end }}
       </div>  
     </section>
