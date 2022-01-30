@@ -1,5 +1,5 @@
 #!/bin/bash
-content_directory ${1:-content}
+# content_directory ${1:-content}
 subdirectories=("blog" "episode" "person" "series" "talk")
 
 # Loop through each subfolder
@@ -24,7 +24,20 @@ for subfolder in ${subdirectories[@]}; do
 
     # Create a folder to replace the markdown file
     mkdir "${directory}/${folder_name}"
+    mkdir "${directory}/${folder_name}/images"
     cp $f "${directory}/${folder_name}/index.md"
+
+    if [ -d "static/img/${subfolder}/${folder_name}" ]; then
+      echo "Image folder exists"
+      find . -name "./static/img/${subfolder}/${folder_name}/*" -exec echo '{}' "${directory}/${folder_name}/images/*" \;
+    fi
+    
+    echo "Checking static/img/${subfolder}/${folder_name}.*"
+    if  [ -f "static/img/${subfolder}/${folder_name}.*" ]; then
+      echo "Image (individual) exists"
+      find . -name "./static/img/${subfolder}/${folder_name}.*" -exec echo '{}' "${directory}/${folder_name}/images/image.*" \;
+    fi
+
     rm $f
   done
 done
