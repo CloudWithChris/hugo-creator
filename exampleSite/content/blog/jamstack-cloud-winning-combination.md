@@ -6,6 +6,8 @@ image: img/cloudwithchrislogo.png
 date: "2021-01-20T12:00:00Z"
 images:
 - img/cloudwithchrislogo.png
+series:
+- Architecting for the Cloud, one pattern at a time
 tags:
 - Development
 - Static Content

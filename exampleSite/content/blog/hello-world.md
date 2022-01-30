@@ -1,5 +1,6 @@
 ---
-Author: chrisreddington
+Authors:
+- chrisreddington
 Description: Surely, a Hello World post is a right of passage for technical bloggers?
 PublishDate: "2016-07-04T12:00:00Z"
 image: img/cloudwithchrislogo.png

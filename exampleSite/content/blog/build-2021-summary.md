@@ -1,5 +1,6 @@
 ---
-Author: chrisreddington
+Authors:
+- chrisreddington
 Description: "If you follow the news around Microsoft, you've probably found it very hard to miss the fact that the Microsoft //Build conference happened this week. Microsoft //Build is their annual developer-focused conference, where they typically announce new features, updates and share their strategy as they evolve technologies. In this update, I'll provide a summary of the announcements that particularly stood out to me and give you some context around why. Whether that's announcements that excite me, features that I think are crucial to be adopted, etc. It's worth noting that I'll be focusing primarily on the Microsoft Azure Updates here, as that's my typical area of expertise!"
 PublishDate: "2021-05-28T12:00:00Z"
 image: img/cloudwithchrislogo.png

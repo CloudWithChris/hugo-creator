@@ -7,6 +7,8 @@ image: img/cloudwithchrislogo.png
 date: "2021-04-08T08:00:00Z"
 images:
 - img/cloudwithchrislogo.png
+series:
+- Architecting for the Cloud, one pattern at a time
 tags:
 - Technology
 - DevOps

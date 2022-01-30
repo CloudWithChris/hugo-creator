@@ -1,39 +1,35 @@
 {{ define "top" }}
-<section class="py-5 container">
-  <div class="row">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ (.Section | urlize) | absLangURL }}">{{ with .Site.GetPage (printf "/%s" .Section) }}{{ .Title }}{{ end }}</a></li>
-        <li class="breadcrumb-item active" aria-current="page">{{ .Title }}</li>
-      </ol>
-    </nav>
-  </div>
-  <div class="row float-center text-center">
-    <p>{{ .Content }}</p>
-    {{ range first 3 (where .Data.Pages ".Params.upcoming" true).ByDate }}         
-      {{- partial "block/upcoming-episode.html" . -}}
-    {{ end }}
-  </div>  
-  {{ if ge (where .Data.Pages ".Params.upcoming" true) 1 }}
-  <div class="row float-end">
-    <p><a href="{{ "/upcoming" | absURL }}">See all upcoming episodes</a></p>
-  </div>
-  {{ end }}
-</section>
+  <section class="py-5 container">
+    <div class="col">
+      <div class="row">
+        {{ partial "content/breadcrumbs.html" . }}
+      </div>
+      <div class="row float-center text-center">
+        <p>{{ .Content }}</p>
+        {{ range first 3 (where .Data.Pages ".Params.upcoming" true).ByDate }}         
+          {{- partial "block/upcoming-episode.html" . -}}
+        {{ end }}
+      </div>  
+      {{ if ge (where .Data.Pages ".Params.upcoming" true) 1 }}
+        <div class="row float-end">
+          <p><a href="{{ "/upcoming" | absURL }}">See all upcoming episodes</a></p>
+        </div>
+      {{ end }}
+    </div>
+  </section>
 {{ end }}
 
 {{ define "main" }}
-<div class="container" align="center">
-  <div class="row g-2">   
-    {{ $paginator := .Paginate (where .Data.Pages ".Params.upcoming" "!=" true) }}
-    {{- partial "paginator.html" . -}}
-    
-    {{ range $paginator.Pages }}
-      {{- partial "cards/content-card.html" . -}}
-    {{ end }}
+  <div class="container" align="center">
+    <div class="row g-2">   
+      {{ $paginator := .Paginate (where .Data.Pages ".Params.upcoming" "!=" true) }}
+      {{- partial "paginator.html" . -}}
+      
+      {{ range $paginator.Pages }}
+        {{- partial "cards/content-card.html" . -}}
+      {{ end }}
 
-    {{- partial "paginator.html" . -}}
+      {{- partial "paginator.html" . -}}
+    </div>
   </div>
-</div>
 {{ end }}

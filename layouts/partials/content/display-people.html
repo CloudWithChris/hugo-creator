@@ -1,0 +1,14 @@
+{{ $site := .site }}
+{{ $people := .people }}
+{{ $scratch := .scratch }}
+
+{{ with $people }}              
+  {{ range $name := . }}
+    {{ $scratch.Set "person" ($name | urlize) }}
+    {{- range where $site.Pages "Type" "person" -}}
+      {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
+        <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="100" class="rounded-circle z-depth-2" alt="{{ .Title }}" title="{{ .Title }}" /></a>
+      {{ end }}
+    {{- end -}}
+  {{ end }}
+{{ end }}

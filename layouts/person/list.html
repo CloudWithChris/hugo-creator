@@ -1,18 +1,12 @@
 {{ define "top" }}
   <div class="py-5 container">
     <div class="col">
-      <div class="row">        
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ .Title }}</li>
-          </ol>
-        </nav>
+      <div class="row">
+        {{ partial "content/breadcrumbs.html" . }}
       </div>
       <div class="row">    
         {{- partial "block/random-people.html" . -}}    
       </div>
-
       <div class="row text-center">
         {{ .Content }}
       </div> 
@@ -21,17 +15,17 @@
 {{ end }}
 
 {{ define "main" }}
-<div class="container" align="center">
-  <div class="row g-2">   
-    {{ $paginator := .Paginate (where $.Site.RegularPages "Section" "person").ByTitle }}
+  <div class="container" align="center">
+    <div class="row g-2">   
+      {{ $paginator := .Paginate (where $.Site.RegularPages "Section" "person").ByTitle }}
 
-    {{- partial "paginator.html" . -}}
-    
-    {{ range $paginator.Pages }}
-      {{- partial "cards/person-card.html" . -}}
-    {{ end }}
+      {{- partial "paginator.html" . -}}
+      
+      {{ range $paginator.Pages }}
+        {{- partial "cards/person-card.html" . -}}
+      {{ end }}
 
-    {{- partial "paginator.html" . -}}
+      {{- partial "paginator.html" . -}}
+    </div>
   </div>
-</div>
 {{ end }}

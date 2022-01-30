@@ -2,13 +2,7 @@
   <section class="py-5 container" align="center">
     <div class="col">
       <div class="row">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ (.Section | urlize) | absLangURL }}">{{ with .Site.GetPage (printf "/%s" .Section) }}{{ .Title }}{{ end }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ .Title }}</li>
-          </ol>
-        </nav>
+        {{ partial "content/breadcrumbs.html" . }}
       </div>
     </div>
   </section>

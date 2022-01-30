@@ -1,63 +1,52 @@
 {{ define "top" }}
   {{ $site := .Site }}
   {{ $scratch := .Scratch }}
-    <section class="py-5 container" align="center">
-      <div class="col">
+  {{ $title := .Title }}
+  <section class="py-5 container" align="center">
+    <div class="col">
+      <div class="row">
+        {{ partial "content/breadcrumbs.html" . }}
+      </div>
+      <div class="row">
+        <p>
+          {{ partial "content/display-people.html" (dict "people" .Params.hosts "scratch" $scratch "site" $site )}}
+        </p>
+      </div>
+      <div class="row">
+        {{ partial "content/socialshare.html" . }}
+      </div>      
+      <div class="row">
+        <h2>{{ if eq .Params.upcoming true }}Scheduled for {{ else }}Occured on {{ end }}{{ .Date.Format "Mon, Jan 2, 2006" }}</h2>
+      </div>
+      {{ with .Params.tags }}
         <div class="row">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="/">Home</a></li>
-              <li class="breadcrumb-item"><a href="{{ (.Section | urlize) | absLangURL }}">{{ with .Site.GetPage (printf "/%s" .Section) }}{{ .Title }}{{ end }}</a></li>
-              <li class="breadcrumb-item active" aria-current="page">{{ .Title }}</li>
-            </ol>
-          </nav>
+          <p>{{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}</p>
         </div>
-        <div class="row">
-          <p>{{ with .Params.hosts }}              
-            {{ range $name := . }}
-              {{ $scratch.Set "person" ($name | urlize) }}
-              {{- range where $site.Pages "Type" "person" -}}
-                {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
-                      <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="100" class="rounded-circle z-depth-2" alt="{{ .Title }}" title="{{ .Title }}" /></a>
-                {{ end }}
-              {{- end -}}
-            {{ end }}
-          {{ end }}
-          </p>
-        </div>
-
-        <div class="row">
-          {{ partial "content/socialshare.html" . }}
-        </div>
-        
-        <div class="row">
-          <h2>{{ if eq .Params.upcoming true }}Scheduled for {{ else }}Occured on {{ end }}{{ .Date.Format "Mon, Jan 2, 2006" }}</h2>
-        </div>
-
-        {{ with .Params.tags }}
-          <div class="row">
-            <p>{{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}</p>
-          </div>
-        {{ end }}
-
-        {{ with .Params.talkType }}
+      {{ end }}
+      {{ with .Params.talkType }}
         <div class="row">
           <p><span class="badge bg-warning text-dark d-inline pull-right">{{ . | humanize }}</span></p>
         </div>
-        {{ end }}
-        
-        {{- with .Params.youtube -}}
+      {{ end }}
+      {{- with .Params.youtube -}}
         <div class="row youtube embed-responsive embed-responsive-16by9">
-          <iframe class="embed-responsive-item" src="//www.youtube.com/embed/{{ . }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe class="embed-responsive-item" 
+                  src="https://www.youtube.com/embed/{{ . }}" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen title="{{ $title }}">
+          </iframe>
         </div>
-        {{- end -}}
-      </div>
-    </section>
+      {{- end -}}
+    </div>
+  </section>
 {{ end }}
+
 {{ define "main" }}
   <div class="container">
     <h5>{{ .Title }} at {{ .Params.eventName }}</h5>
     <p>{{ .Content }}</p>
-    {{ with .Params.externalLink }}<p>Find out more at <a href="{{ . }}">{{ . }}</a></p>{{ end }}
+    {{ with .Params.externalLink }}
+      <p>Find out more at <a href="{{ . }}">{{ . }}</a></p>
+    {{ end }}
   </div>
 {{ end }}

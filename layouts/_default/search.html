@@ -1,8 +1,27 @@
+{{ define "top" }}
+  <div class="py-5 container">
+    <div class="col">
+      <div class="row">
+        {{ partial "content/breadcrumbs.html" . }}
+      </div>
+      <div class="row float-center">
+        {{ $upcomingTalks := first 3 (where (where $.Site.RegularPages "Section" "talk") ".Params.upcoming" true).ByDate}}
+        {{ $count := len $upcomingTalks }}
+        {{ range $upcomingTalks }}   
+          {{- partial "block/upcoming-talk.html" (dict "count" $count "value" . "site" $.Site ) -}}
+        {{ end }}
+      </div>  
+      <div class="row text-center pt-5">
+        {{ .Content }}
+      </div> 
+    </div>
+  </div>
+{{ end }}
 {{ define "main" }}
 <script src="/js/jquery-3.6.0.min.js"></script>
 <script src="/js/fuse-6.4.6.min.js"></script>
 <script src="/js/jquery-mark-8.11.1.min.js"></script>
-<script src="{{ " js/search.js" | absURL }}"></script>
+<script src="{{ "js/search.js" | absURL }}"></script>
 <div class="container">
   <div id="search-results" class="row g-2"></div>
   <!-- this template is sucked in by search.js and appended to the search-results div above. So editing here will adjust style -->

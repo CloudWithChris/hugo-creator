@@ -1,4 +1,4 @@
-baseURL: "#{hostname}#"
+baseURL: "localhost:1313"
 buildFuture: true
 googleAnalytics: ""
 languageCode: "en-gb"
