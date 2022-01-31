@@ -26,18 +26,6 @@ for subfolder in ${subdirectories[@]}; do
     mkdir "${directory}/${folder_name}"
     mkdir "${directory}/${folder_name}/images"
     cp $f "${directory}/${folder_name}/index.md"
-
-    if [ -d "static/img/${subfolder}/${folder_name}" ]; then
-      echo "Image folder exists"
-      find . -name "./static/img/${subfolder}/${folder_name}/*" -exec echo '{}' "${directory}/${folder_name}/images/*" \;
-    fi
-    
-    echo "Checking static/img/${subfolder}/${folder_name}.*"
-    if  [ -f "static/img/${subfolder}/${folder_name}.*" ]; then
-      echo "Image (individual) exists"
-      find . -name "./static/img/${subfolder}/${folder_name}.*" -exec echo '{}' "${directory}/${folder_name}/images/image.*" \;
-    fi
-
     rm $f
   done
 done
