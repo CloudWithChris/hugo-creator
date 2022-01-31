@@ -1,6 +1,5 @@
 {{ define "top" }}
   {{ $site := .Site }}
-  {{ $scratch := .Scratch }}
   {{ $title := .Title }}
 
   <section class="py-5 container" align="center">
@@ -9,8 +8,8 @@
         {{ partial "content/breadcrumbs.html" . }}
 
         <p>
-          {{ partial "content/display-people.html" (dict "people" .Params.hosts "scratch" $scratch "site" $site )}}
-          {{ partial "content/display-people.html" (dict "people" .Params.guests "scratch" $scratch "site" $site )}}
+          {{ partial "content/display-people.html" (dict "people" .Params.hosts "site" $site )}}
+          {{ partial "content/display-people.html" (dict "people" .Params.guests "site" $site )}}
         </p>
       </div>
 
@@ -84,7 +83,6 @@
 {{ define "bottom" }}
   {{ $site := .Site }}
   {{ $page := .Page }}
-  {{ $scratch := .Scratch }}
 
   <div class="py-5 container" align="center">
     <div class="col">

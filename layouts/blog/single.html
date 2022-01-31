@@ -1,14 +1,13 @@
 {{ define "top" }}
   {{ $site := .Site }}
   {{ $page := .Page }}
-  {{ $scratch := .Scratch }}
 
   <div class="py-5 container" align="center">
     <div class="col">
       <div class="row float-center">
         {{ partial "content/breadcrumbs.html" . }}
         <p>
-          {{ partial "content/display-people.html" (dict "people" .Params.Authors "scratch" $scratch "site" $site )}}
+          {{ partial "content/display-people.html" (dict "people" .Params.Authors "site" $site )}}
         </p>
       </div>
       <div class="row">
@@ -36,7 +35,6 @@
 {{ define "main" }}
   {{ $site := .Site }}
   {{ $page := .Page }}
-  {{ $scratch := .Scratch }}
 
   <div class="container">
     {{ if ge (len .TableOfContents) 50 }}
@@ -58,7 +56,6 @@
 {{ define "bottom" }}
   {{ $site := .Site }}
   {{ $page := .Page }}
-  {{ $scratch := .Scratch }}
 
   <div class="py-5 container" align="center">
     <div class="col">

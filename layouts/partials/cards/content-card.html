@@ -48,39 +48,18 @@
           </p>
         {{ end }}
         <p class="card-text">
+ 
+          {{ with .Params.Authors }}
+            {{ partial "content/display-people-small.html" (dict "people" . "site" $site )}}
+          {{ end }}
 
-          {{ with .Params.Authors }}              
-          {{ range $name := . }}
-            {{ $scratch.Set "person" ($name | urlize) }}
-            {{- range where $site.Pages "Type" "person" -}}
-              {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
-                    <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
-              {{ end }}
-            {{- end -}}
+          {{ with .Params.hosts }}
+            {{ partial "content/display-people-small.html" (dict "people" . "site" $site )}}
           {{ end }}
-        {{ end }}
-          
-        {{ with .Params.hosts }}              
-          {{ range $name := . }}
-            {{ $scratch.Set "person" ($name | urlize) }}
-            {{- range where $site.Pages "Type" "person" -}}
-              {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
-                    <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
-              {{ end }}
-            {{- end -}}
+
+          {{ with .Params.guests }}
+            {{ partial "content/display-people-small.html" (dict "people" . "site" $site )}}
           {{ end }}
-        {{ end }}
-    
-        {{ with .Params.guests }}              
-          {{ range $name := . }}
-            {{ $scratch.Set "person" ($name | urlize) }}
-            {{- range where $site.Pages "Type" "person" -}}
-              {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}     
-                    <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
-              {{ end }}
-            {{- end -}}
-          {{ end }}
-        {{ end }}
 
         {{ if eq .Section "talk" }}
           <small class="text-muted">{{ if eq .Params.upcoming true }}Scheduled for {{ else }}Occured on {{ end }}{{ .Date.Format "Mon, Jan 2, 2006" }}</small></p>
