@@ -1,5 +1,14 @@
 {{- $.Scratch.Add "index" slice -}}
 {{- range .Site.RegularPages -}}
-    {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "categories" .Params.categories "contents" .Plain "permalink" .Permalink "guests" .Params.guests "section" .Section "image" (.Params.image | absURL) "series" .Params.Series "datePublished" .PublishDate "guest" .Params.guest "hosts" .Params.hosts)    -}}
+    {{- if .Params.image -}}
+        {{- $image := .Resources.GetMatch .Params.Image -}}
+        {{- if $image -}}
+            {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "contents" .Plain "permalink" .Permalink "guests" .Params.guests "section" .Section "image" $image.RelPermalink "series" .Params.Series "datePublished" .PublishDate "hosts" .Params.hosts "authors" .Params.authors)    -}}
+        {{- else -}}
+            {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "contents" .Plain "permalink" .Permalink "guests" .Params.guests "section" .Section "image" (.Params.Image | absURL) "series" .Params.Series "datePublished" .PublishDate "hosts" .Params.hosts "authors" .Params.authors)    -}}
+        {{- end -}}
+    {{- else -}}
+        {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "contents" .Plain "permalink" .Permalink "guests" .Params.guests "section" .Section "series" .Params.Series "datePublished" .PublishDate "hosts" .Params.hosts "authors" .Params.authors)    -}}
+    {{- end -}}
 {{- end -}}
 {{- $.Scratch.Get "index" | jsonify -}}
