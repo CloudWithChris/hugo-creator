@@ -4,12 +4,12 @@ Description: "Want to get started with the Azure CLI in Azure Cloud Shell or on 
 PublishDate: "2021-03-10T00:01:00Z"
 Title: "Cloud Drops - Installing, Upgrading and Auto-Upgrading the Azure CLI"
 episode: ""
-image: "img/episodes/cloud-drops-azure-cli.jpg"
+image: "images/cloud-drops-azure-cli.jpg"
 explicit: "no"
 hosts:
 - chrisreddington
 images:
-- "img/episodes/cloud-drops-azure-cli.jpg"
+- "images/cloud-drops-azure-cli.jpg"
 podcast_bytes: "3866624"
 podcast_duration: "03:59.000"
 podcast_file: "Cloud Drop - Install and Upgrade the Azure CLI.mp3"

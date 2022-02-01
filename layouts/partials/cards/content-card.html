@@ -6,19 +6,7 @@
   <div class="row g-0">
     <div class="col-12 col-sm-4">
       <p>
-        {{ if eq .Section "talk" }}
-          {{ if .Params.externalLink }}
-            <a href="{{ .Params.externalLink }}"><img src="{{ .Params.image | absURL }}" class="rounded-circle z-depth-2 align-middle person-image" width="100" title="{{ .Title }}" alt="{{ .Title }}" /></a>
-          {{ else }}
-            <a href="{{ .Permalink }}"><img src="{{ .Params.image | absURL }}" class="rounded-circle z-depth-2 align-middle person-image" width="100" title="{{ .Title }}" alt="{{ .Title }}" /></a>
-          {{ end }}
-        {{ else }}       
-            {{ if eq .Section "episode" }}
-              <a href="{{ .Permalink }}"><img src="{{ .Params.image | absURL }}" class="rounded-circle z-depth-2 align-middle person-image" width="100" title="{{ .Title }}" alt="{{ .Title }}" /></a>
-            {{ else if eq .Section "blog" }}
-              <a href="{{ .Permalink }}"><img src="{{ .Params.image | absURL }}" class="rounded-circle z-depth-2 align-middle person-image" width="100" title="{{ .Title }}" alt="{{ .Title }}" /></a>
-            {{ end }}
-        {{ end }}
+        {{ partial "content/content-image.html" . }}
       </p>
         <p>
           {{ if eq .Section "talk" }}

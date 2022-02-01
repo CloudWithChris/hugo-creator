@@ -4,12 +4,12 @@ Description: "Have you ever wondered how Git works behind the scenes? We'll go a
 PublishDate: "2021-03-24T00:01:00Z"
 Title: "Cloud Drops - How does Git work behind the scenes?"
 episode: ""
-image: "img/episodes/cloud-drops-git-behind-scenes.jpg"
+image: "images/cloud-drops-git-behind-scenes.jpg"
 explicit: "no"
 hosts:
 - chrisreddington
 images:
-- "img/episodes/cloud-drops-git-behind-scenes.jpg"
+- "images/cloud-drops-git-behind-scenes.jpg"
 podcast_bytes: "4899329"
 podcast_duration: "05:03.000"
 podcast_file: "Cloud Drops - How does Git work behind the scenes.mp3"

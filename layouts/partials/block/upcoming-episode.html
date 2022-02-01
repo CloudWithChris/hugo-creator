@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row g-0">
       <div class="col-12 col-sm-3 col-md-2 col-xl-4 text-center">
-        <a href="{{ .Permalink }}"><img src="{{ .Params.image | absURL }}" class="rounded-circle z-depth-2 align-middle" width="100" title="{{ .Title }}" alt="{{ .Title }}" /></a>
+        {{ partial "content/content-image.html" . }}
       </div>
       <div class="col-12 col-sm-9 col-md-10 col-xl-8">
         <div class="card-body episode-card">         

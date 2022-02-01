@@ -4,12 +4,12 @@ Description: "Have you ever considered storing large binary files in your Git re
 PublishDate: "2021-03-23T00:01:00Z"
 Title: "Cloud Drops - Introducing and Setting up Git LFS (Large File Storage)"
 episode: ""
-image: "img/episodes/cloud-drops-introducing-git-lfs.jpg"
+image: "images/cloud-drops-introducing-git-lfs.jpg"
 explicit: "no"
 hosts:
 - chrisreddington
 images:
-- "img/episodes/cloud-drops-introducing-git-lfs.jpg"
+- "images/cloud-drops-introducing-git-lfs.jpg"
 podcast_bytes: "4857856"
 podcast_duration: "05:01.000"
 podcast_file: "Cloud Drop - Introducing and Setting Up Git LFS.mp3"

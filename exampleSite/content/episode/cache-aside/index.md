@@ -4,12 +4,12 @@ Description: "Have you implemented caching within your application and need a be
 PublishDate: "2021-03-12T12:30:00Z"
 Title: 30 - The Cache Aside Pattern (Optimise your caching approach!)
 episode: "30"
-image: img/episodes/cache-aside.jpg
+image: images/cache-aside.jpg
 explicit: "no"
 hosts:
 - chrisreddington
 images:
-- img/episodes/cache-aside.jpg
+- images/cache-aside.jpg
 podcast_bytes: "13717504"
 podcast_duration: "14:13.000"
 podcast_file: 30 - The Cache Aside Pattern.mp3

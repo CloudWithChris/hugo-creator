@@ -7,17 +7,12 @@
   <div class="container">
     <div class="row g-0">
       <div class="col-12 col-sm-3 col-md-2 col-xl-4 text-center">
-        {{ if $value.Params.externalLink }}
-          <p><a href="{{ $value.Params.externalLink }}"><img src="{{ $value.Params.image | absURL }}" class="rounded-circle z-depth-2 align-middle" width="100" title="{{ $value.Title }}" alt="{{ $value.Title }}" /></a></p>
-        {{ else }}
-          <p><a href="{{ $value.Params.externalLink }}"><img src="{{ $value.Params.image | absURL }}" class="rounded-circle z-depth-2 align-middle" width="100" title="{{ $value.Title }}" alt="{{ $value.Title }}" /></a></p>
-        {{ end }}
+        {{ partial "content/content-image.html" $value }}
         <span class="badge bg-warning text-dark d-inline pull-right">{{ $value.Params.talkType | humanize }}</span>
       </div>
       <div class="col-12 col-sm-9 col-md-10 col-xl-8">
         <div class="card-body episode-card">         
           
-        
         {{ if $value.Params.externalLink }}
           <a href="{{ $value.Params.externalLink }}"><h2 class="card-title">{{ $value.Title }}</h3></a>
         {{ else }}

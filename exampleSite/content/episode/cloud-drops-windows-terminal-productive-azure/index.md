@@ -4,12 +4,12 @@ Description: "Windows Terminal is a modern application that allows you to use yo
 PublishDate: "2021-04-03T00:01:00Z"
 Title: "Cloud Drops - How Windows Terminal can make YOU productive with Azure"
 episode: ""
-image: "img/episodes/cloud-drops-windows-terminal-productive-azure.jpg"
+image: "images/cloud-drops-windows-terminal-productive-azure.jpg"
 explicit: "no"
 hosts:
 - chrisreddington
 images:
-- "img/episodes/cloud-drops-windows-terminal-productive-azure.jpg"
+- "images/cloud-drops-windows-terminal-productive-azure.jpg"
 podcast_bytes: "5382144"
 podcast_duration: "05:34.000"
 podcast_file: "Cloud Drop - How windows terminal can make YOU productive with Azure.mp3"

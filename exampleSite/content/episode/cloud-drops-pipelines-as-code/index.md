@@ -4,12 +4,12 @@ Description: "You may have heard about Software Code or Infrastructure as Code. 
 PublishDate: "2021-05-11T00:01:00Z"
 Title: "Cloud Drops - Pipelines as Code"
 episode: ""
-image: "img/episodes/cloud-drops-pipelines-as-code.jpg"
+image: "images/cloud-drops-pipelines-as-code.jpg"
 explicit: "no"
 hosts:
 - chrisreddington
 images:
-- "img/episodes/cloud-drops-pipelines-as-code.jpg"
+- "images/cloud-drops-pipelines-as-code.jpg"
 podcast_bytes: "5812224"
 podcast_duration: "05:59.000"
 podcast_file: "Cloud Drop - Pipelines as Code.mp3"

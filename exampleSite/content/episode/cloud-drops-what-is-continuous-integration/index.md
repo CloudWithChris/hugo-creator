@@ -4,12 +4,12 @@ Description: "Are you now working with source code? Whether that's Application C
 PublishDate: "2021-07-20T00:01:00Z"
 Title: "Cloud Drops - What is Continuous Integration (CI)?"
 episode: ""
-image: "img/episodes/cloud-drops-what-is-continuous-integration.jpg"
+image: "images/cloud-drops-what-is-continuous-integration.jpg"
 explicit: "no"
 hosts:
 - chrisreddington
 images:
-- "img/episodes/cloud-drops-what-is-continuous-integration.jpg"
+- "images/cloud-drops-what-is-continuous-integration.jpg"
 podcast_bytes: "5928854"
 podcast_duration: "06:05.000"
 podcast_file: "What is Continuous Integration.mp3"

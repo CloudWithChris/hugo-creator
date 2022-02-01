@@ -4,12 +4,12 @@ Description: "Have you heard about Azure Event Grid, but not exactly sure what i
 PublishDate: "2021-05-15T00:01:00Z"
 Title: "Cloud Drops - Building an Event-Driven workflow with Event Grid"
 episode: ""
-image: "img/episodes/cloud-drops-event-grid.jpg"
+image: "images/cloud-drops-event-grid.jpg"
 explicit: "no"
 hosts:
 - chrisreddington
 images:
-- "img/episodes/cloud-drops-event-grid.jpg"
+- "images/cloud-drops-event-grid.jpg"
 podcast_bytes: "10139951"
 podcast_duration: "10:31.000"
 podcast_file: "Cloud Drops - Building an event driven workflow with event grid.mp3"

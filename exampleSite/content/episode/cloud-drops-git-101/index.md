@@ -4,12 +4,12 @@ Description: "Have you ever had a scenario where you need to maintain versions o
 PublishDate: "2021-03-30T00:01:00Z"
 Title: "Cloud Drops - Git 101 - Why use Git, and how to get started"
 episode: ""
-image: "img/episodes/cloud-drops-git-101.jpg"
+image: "images/cloud-drops-git-101.jpg"
 explicit: "no"
 hosts:
 - chrisreddington
 images:
-- "img/episodes/cloud-drops-git-101.jpg"
+- "images/cloud-drops-git-101.jpg"
 podcast_bytes: "6201344"
 podcast_duration: "06:25.000"
 podcast_file: "Cloud Drop - Git 101.mp3"
