@@ -17,5 +17,12 @@ tags:               # Used for SEO optimisation and browsing across the site.
 externalLink: ""    # Full URL to override listing links to an external page
 series:             # Array of series (i.e. filenames of the series this is a part of)
 - ""
+
+# Content-specific properties
+eventName: ""       # Name of the organising group / event (e.g. Name of the conference)
+hosts:              # Array of hosts in the episode (i.e. filenames of those people)
+- ""
+talkType: ""        # String displayed on the talk page. Represents the type of talk.
+youtube: ""         # ID of the YouTube video for this content
 ---
-Input your page content here.
+Input your talk description here.

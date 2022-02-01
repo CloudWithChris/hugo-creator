@@ -17,5 +17,13 @@ tags:               # Used for SEO optimisation and browsing across the site.
 externalLink: ""    # Full URL to override listing links to an external page
 series:             # Array of series (i.e. filenames of the series this is a part of)
 - ""
+
+# Content-specific properties
+github: ""          # GitHub profile of the person
+linkedin: ""        # GitHub profile of the person (Segment after linkedin.com/in/...)
+shortBio: ""        # Used for SEO optimisation
+twitter: ""         # Twitter alias of the person, not including an @
+website: ""         # Full URL to the person's website
+youtube: ""         # YouTube alias of the person's channel (Segment after youtube.com/c/....)
 ---
-Input your page content here.
+Input the person's speaker bio here.
