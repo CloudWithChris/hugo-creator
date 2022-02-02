@@ -21,7 +21,7 @@
           <div class="row mt-4">
             <div class="col-md-3">
               <a href="{{ $page.Permalink }}">
-                <img src="{{ $page.Params.image | absURL }}" class="rounded-circle z-depth-2 align-middle" width="100" title="{{ $page.Title }}" alt="{{ $page.Title }}" />
+                <img src="{{ $page.Params.image | relURL }}" class="rounded-circle z-depth-2 align-middle" width="100" title="{{ $page.Title }}" alt="{{ $page.Title }}" />
               </a>
             </div>
             <div class="col-md-9">

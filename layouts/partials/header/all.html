@@ -2,7 +2,7 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-cwc">
     <div class="container">
-        <a class="navbar-brand" href="{{ "/" | absURL }}"><img src="{{ "img/Cloud.png" | absURL }}" alt="{{ .Site.Title }}" title="{{ .Site.Title }}" height="145" /></a>
+        <a class="navbar-brand" href="{{ "/" | relURL }}"><img src="{{ "img/Cloud.png" | relURL }}" alt="{{ .Site.Title }}" title="{{ .Site.Title }}" height="145" /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <i class="fas fa-bars"></i>
         </button>
@@ -14,7 +14,7 @@
                 {{ partial "nav-links.html" (dict "context" . "currentPage" $currentPage) }}
               {{ end }}      
           </ul>          
-          <form class="d-flex" action="{{ "search" | absURL }}">
+          <form class="d-flex" action="{{ "search" | relURL }}">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-query" name="s">
             <button class="btn btn-nav" type="submit">Search</button>
           </form>        
@@ -31,13 +31,13 @@
       {{ with .Site.Params.channels.google }}      
         <a href="{{ . }}"><button type="button" aria-label="Google Podcasts" class="btn btn-social btn-google btn-rounded"><i class="fab fa-google"></i></button></a>
       {{ end }}           
-      <a href="{{ "/episode/index.xml" | absURL }}"><button type="button" aria-label="Podcast RSS feed" class="btn btn-social btn-rss btn-rounded"><i class="fas fa-rss"></i></button></a>
+      <a href="{{ "/episode/index.xml" | relURL }}"><button type="button" aria-label="Podcast RSS feed" class="btn btn-social btn-rss btn-rounded"><i class="fas fa-rss"></i></button></a>
       {{ with .Site.Params.channels.spotify }}          
         <a href="{{ . }}"><button type="button" aria-label="Spotify" class="btn btn-social btn-spotify btn-rounded"><i class="fab fa-spotify"></i></button></a>
       {{ end }}     
       {{ with .Site.Params.Social.YouTube }}     
         <a href="https://www.youtube.com/c/{{ . }}"><button type="button" aria-label="YouTube" class="btn btn-social btn-youtube btn-rounded"><i class="fab fa-youtube"></i></button></a>
       {{ end }}
-      <a href="{{ "/blog/index.xml" | absURL }}"><button type="button" aria-label="Blog RSS feed" class="btn btn-social btn-rss btn-rounded"><i class="fas fa-blog"></i></button></a>
+      <a href="{{ "/blog/index.xml" | relURL }}"><button type="button" aria-label="Blog RSS feed" class="btn btn-social btn-rss btn-rounded"><i class="fas fa-blog"></i></button></a>
   </div>
 </header>

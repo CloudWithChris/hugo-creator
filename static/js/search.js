@@ -169,7 +169,6 @@ function jsUcFirst(string)
 }
 
 function convertToDateOutput(date) {
-  console.log(date);
   var now = new Date();
   var publishedDate = new Date(Date.parse(date));
   if (publishedDate < now){

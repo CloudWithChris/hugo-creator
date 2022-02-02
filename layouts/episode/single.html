@@ -62,7 +62,7 @@
             }
           </script>
           <script src="https://app.podscribe.ai/static/js/embed.js" cookie-consent="strictly-necessary"></script>
-          <script cookie-consent="tracking" src="{{ "js/embed.js" | absURL }}"></script>
+          <script cookie-consent="tracking" src="{{ "js/embed.js" | relURL }}"></script>
         {{ end }}
       {{ else }}
         {{ with .Params.podcast_file }}

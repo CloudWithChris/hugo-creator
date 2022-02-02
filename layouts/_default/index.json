@@ -16,10 +16,10 @@
         {{- if $image -}}
             {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "contents" .Plain "permalink" .Permalink "section" .Section "image" $image.RelPermalink "series" .Params.Series "datePublished" .PublishDate "people" ($.Scratch.Get "people"))    -}}
         {{- else -}}
-            {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "contents" .Plain "permalink" .Permalink "section" .Section "image" (.Params.Image | absURL) "series" .Params.Series "datePublished" .PublishDate "people" ($.Scratch.Get "people"))    -}}
+            {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "contents" .Plain "permalink" .Permalink "section" .Section "image" (.Params.Image | relURL) "series" .Params.Series "datePublished" .PublishDate "people" ($.Scratch.Get "people"))    -}}
         {{- end -}}
     {{- else -}}
         {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "contents" .Plain "permalink" .Permalink "section" .Section "series" .Params.Series "datePublished" .PublishDate "people" ($.Scratch.Get "people"))    -}}
     {{- end -}}
 {{- end -}}
-{{- $.Scratch.Get "index" | jsonify -}}
+{{- $.Scratch.Get "index" | uniq | jsonify -}}

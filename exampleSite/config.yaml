@@ -153,6 +153,14 @@ params:
   - keywords
   - here
 
+  security:
+    csp:
+      scriptsrc: ""
+      imgsrc: ""
+      connectsrc: ""
+      framesrc: ""
+      objectsrc: ""
+
   social:
     facebook: "CloudWithChris"
     github: "chrisreddington/cloudwithchris.com"
