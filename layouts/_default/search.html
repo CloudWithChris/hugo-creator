@@ -41,9 +41,8 @@
               <p class="card-text">${snippet}</p>
               ${ isset tags }<p>${ tags tags } ${tags} ${ end tags }</p> ${ end isset }
               ${ isset series }<p>${ series series } ${tags} ${ end series }</p> ${ end isset }
-              <p>${ isset hosts }${ host hosts } ${ end host } ${ end isset } 
-                ${ isset guests } ${ guest guests } ${ end guest }${ end isset }</p>
-              ${ isset datePublished }<p>${ date datePublished } ${ end date }</p>${ end isset }
+              <p class="card-text">${ isset people }${ people people }${ end people }${ end isset }
+              ${ isset datePublished }${ date datePublished } ${ end date }${ end isset }</p>
           </div>
         </div>
       </div>

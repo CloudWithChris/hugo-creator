@@ -1,4 +1,5 @@
 // Define the configuration options for Fuse Search
+var summaryInclude = 300;
 var fuseOptions = {
   isCaseSensitive: false,
   includeScore: true,
@@ -61,8 +62,17 @@ function populateResults(result){
   // Loop through all of the results of the
   // search query
   $.each(result, function(key,value) {
+    var contents= value.item.contents;
+
     // Load the #search-result-template file definition from the search layout template
     var templateDefinition = $('#search-result-template').html();
+
+    // Initialise variables for this record's snippet
+    var snippet = "";
+
+    if (snippet.length < 1 ) {
+      snippet += contents.substring(0, summaryInclude * 2);
+    }
 
     // Build the HTML output using the render function. Pass
     // in the templateDefinition, and an object of the current
@@ -70,15 +80,15 @@ function populateResults(result){
     var output = render(templateDefinition,
       {
         key:key,
+        snippet:snippet,
         title:value.item.title,
         link:value.item.permalink,
         tags:value.item.tags,
         image:value.item.image,
         section:value.item.section,
         series:value.item.series,
-        guests:value.item.guests,
         datePublished:value.item.datePublished,
-        hosts:value.item.hosts
+        people:value.item.people
       });
     $('#search-results').append(output);
   })
@@ -89,8 +99,11 @@ function populateResults(result){
 // of HTML, which renders the actual results.
 function render(templateString, data) {
   templateString = patternReplacementForIsset(data, templateString);
-  templateString = patternReplacement(/\$\{\s*guest ([a-zA-Z]*) \s*\}(.*)\$\{\s*end guest\s*}/g, data, "guests", templateString, convertToGuestsOutput);
-  templateString = patternReplacement(/\$\{\s*host ([a-zA-Z]*) \s*\}(.*)\$\{\s*end host\s*}/g, data, "hosts", templateString, convertToHostsOutput);
+  templateString = patternReplacement(/\$\{\s*people ([a-zA-Z]*) \s*\}(.*)\$\{\s*end people\s*}/g, data, "people", templateString, convertToPeopleOutput);
+  templateString = patternReplacement(/\$\{\s*series ([a-zA-Z]*) \s*\}(.*)\$\{\s*end series\s*}/g, data, "series", templateString, convertToSeriesOutput);
+  templateString = patternReplacement(/\$\{\s*tags ([a-zA-Z]*) \s*\}(.*)\$\{\s*end tags\s*}/g, data, "tags", templateString, convertToTagsOutput);
+  templateString = patternReplacement(/\$\{\s*section ([a-zA-Z]*) \s*\}(.*)\$\{\s*end section\s*}/g, data, "section", templateString, convertToSectionOutput);
+  templateString = patternReplacement(/\$\{\s*date ([a-zA-Z]*) \s*\}(.*)\$\{\s*end date\s*}/g, data, "datePublished", templateString, convertToDateOutput);
 
   // Now any conditionals removed we can do simple substitution
   var key, find, re;
@@ -125,7 +138,6 @@ function patternReplacement(pattern, data, property, templateString, outputForma
   var matches;
   var tmp = templateString;
   while ((matches = pattern.exec(templateString)) !== null) {
-    console.log(data);
     if (outputFormat){
       tmp = tmp.replace(matches[0], outputFormat(data[property]));
     } else {
@@ -135,30 +147,56 @@ function patternReplacement(pattern, data, property, templateString, outputForma
   return tmp;
 }
 
-function convertToGuestsOutput(arrayOfPeople) {
+function convertToPeopleOutput(arrayOfPeople) {
   var htmlOutput = "";
   if (arrayOfPeople.length > 0) {
     arrayOfPeople.forEach(
       person => {
-        htmlOutput = htmlOutput + '<a href="/guest/'+ convertToUrl(person) +'"><img src="/img/guests/'+ person +'.jpg" width="50" class="rounded-circle z-depth-2" alt="' + person +'" title="'+ person +'" /></a> '
+        htmlOutput = htmlOutput + '<a href="'+ person.url +'"><img src="' + person.image + '" width="50" class="rounded-circle z-depth-2 person-image" alt="' + person.person +'" title="'+ person.person +'" /></a> '
       }
     )
   }
-
   return htmlOutput;
 }
 
-function convertToHostsOutput(arrayOfPeople) {
-  var htmlOutput = "";
-  if (arrayOfPeople && arrayOfPeople.length > 0) {
-    arrayOfPeople.forEach(
-      person => {
-        htmlOutput = htmlOutput + '<a href="/host/'+ convertToUrl(person) +'">'+  person +'</a> '
-      }
-    )
-  }
+function convertToSectionOutput(section) {
+  return '<span class="badge bg-warning text-dark">' + jsUcFirst(section) + '</span></a>';
+}
 
-  return htmlOutput;
+function jsUcFirst(string) 
+{
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function convertToDateOutput(date) {
+  console.log(date);
+  var now = new Date();
+  var publishedDate = new Date(Date.parse(date));
+  if (publishedDate < now){
+    return "<small class=\"text-muted\">Published on "+ publishedDate.toDateString() +"</small>";
+  } else {      
+    return "<small class=\"text-muted\">Scheduled for "+ publishedDate.toDateString() +"</small>";
+  }
+}
+
+function convertToSeriesOutput(arrayOfSeries) {
+  var seriesOutput = "";
+  if (arrayOfSeries && arrayOfSeries.length > 0) {
+    arrayOfSeries.forEach(series => {
+      seriesOutput = seriesOutput + '<a href="/series/'+ convertToUrl(series) +'"><span class="badge bg-secondary">' + series + '</span></a> '
+    });
+    return seriesOutput;
+  }
+}
+
+function convertToTagsOutput(arrayOfTags){
+  var tagsOutput = "";
+  if (arrayOfTags && arrayOfTags.length > 0) {
+    arrayOfTags.forEach(tag => {
+      tagsOutput = tagsOutput + '<a href="/tags/'+ convertToUrl(tag) +'"><span class="badge bg-info text-dark">' + tag + '</span></a> '
+    });
+    return tagsOutput;
+  }
 }
 
 function convertToUrl(text){

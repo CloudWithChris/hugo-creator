@@ -1,14 +1,25 @@
+{{- $site := .Site -}}
 {{- $.Scratch.Add "index" slice -}}
 {{- range .Site.RegularPages -}}
+    {{- $.Scratch.Set "people" slice -}}
+    {{- range .Params.hosts -}}
+        {{- partial "person-json.html" (dict "person" . "site" $site "scratch" $.Scratch) -}}
+    {{- end -}}
+    {{- range .Params.guests -}}
+        {{- partial "person-json.html" (dict "person" . "site" $site "scratch" $.Scratch) -}}
+    {{- end -}}
+    {{- range .Params.authors -}}
+        {{- partial "person-json.html" (dict "person" . "site" $site "scratch" $.Scratch) -}}
+    {{- end -}}
     {{- if .Params.image -}}
         {{- $image := .Resources.GetMatch .Params.Image -}}
         {{- if $image -}}
-            {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "contents" .Plain "permalink" .Permalink "guests" .Params.guests "section" .Section "image" $image.RelPermalink "series" .Params.Series "datePublished" .PublishDate "hosts" .Params.hosts "authors" .Params.authors)    -}}
+            {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "contents" .Plain "permalink" .Permalink "section" .Section "image" $image.RelPermalink "series" .Params.Series "datePublished" .PublishDate "people" ($.Scratch.Get "people"))    -}}
         {{- else -}}
-            {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "contents" .Plain "permalink" .Permalink "guests" .Params.guests "section" .Section "image" (.Params.Image | absURL) "series" .Params.Series "datePublished" .PublishDate "hosts" .Params.hosts "authors" .Params.authors)    -}}
+            {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "contents" .Plain "permalink" .Permalink "section" .Section "image" (.Params.Image | absURL) "series" .Params.Series "datePublished" .PublishDate "people" ($.Scratch.Get "people"))    -}}
         {{- end -}}
     {{- else -}}
-        {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "contents" .Plain "permalink" .Permalink "guests" .Params.guests "section" .Section "series" .Params.Series "datePublished" .PublishDate "hosts" .Params.hosts "authors" .Params.authors)    -}}
+        {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "contents" .Plain "permalink" .Permalink "section" .Section "series" .Params.Series "datePublished" .PublishDate "people" ($.Scratch.Get "people"))    -}}
     {{- end -}}
 {{- end -}}
 {{- $.Scratch.Get "index" | jsonify -}}
