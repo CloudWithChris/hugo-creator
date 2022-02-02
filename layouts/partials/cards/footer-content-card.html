@@ -8,15 +8,15 @@
       <p>
         {{ if eq .Section "talk" }}
           {{ if .Params.externalLink }}
-            <a href="{{ .Params.externalLink }}"><img src="{{ .Params.image | absURL }}" class="rounded-circle z-depth-2 align-middle person-image" width="100" title="{{ .Title }}" alt="{{ .Title }}" /></a>
+            <a href="{{ .Params.externalLink }}"><img src="{{ .Params.image | relURL }}" class="rounded-circle z-depth-2 align-middle person-image" width="100" title="{{ .Title }}" alt="{{ .Title }}" /></a>
           {{ else }}
-            <a href="{{ .Permalink }}"><img src="{{ .Params.image | absURL }}" class="rounded-circle z-depth-2 align-middle person-image" width="100" title="{{ .Title }}" alt="{{ .Title }}" /></a>
+            <a href="{{ .Permalink }}"><img src="{{ .Params.image | relURL }}" class="rounded-circle z-depth-2 align-middle person-image" width="100" title="{{ .Title }}" alt="{{ .Title }}" /></a>
           {{ end }}
         {{ else }}       
             {{ if eq .Section "episode" }}
-              <a href="{{ .Permalink }}"><img src="{{ .Params.image | absURL }}" class="rounded-circle z-depth-2 align-middle person-image" width="100" title="{{ .Title }}" alt="{{ .Title }}" /></a>
+              <a href="{{ .Permalink }}"><img src="{{ .Params.image | relURL }}" class="rounded-circle z-depth-2 align-middle person-image" width="100" title="{{ .Title }}" alt="{{ .Title }}" /></a>
             {{ else if eq .Section "blog" }}
-              <a href="{{ .Permalink }}"><img src="{{ .Params.image | absURL }}" class="rounded-circle z-depth-2 align-middle person-image" width="100" title="{{ .Title }}" alt="{{ .Title }}" /></a>
+              <a href="{{ .Permalink }}"><img src="{{ .Params.image | relURL }}" class="rounded-circle z-depth-2 align-middle person-image" width="100" title="{{ .Title }}" alt="{{ .Title }}" /></a>
             {{ end }}
         {{ end }}
       </p>
@@ -55,7 +55,7 @@
           {{- range where $site.Pages "Type" "person" -}}
             {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
               {{- $scratch.Set "host-exist" "true" -}}     
-                  <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
+                  <a href="{{ .Permalink | relURL}}"><img src="{{ .Params.image | relURL}}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
               {{- $scratch.Set "host-exist" "false" -}}
             {{ end }}
           {{- end -}}
@@ -67,7 +67,7 @@
             {{- range where $site.Pages "Type" "person" -}}
               {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
                 {{- $scratch.Set "host-exist" "true" -}}     
-                    <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
+                    <a href="{{ .Permalink | relURL}}"><img src="{{ .Params.image | relURL}}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
                 {{- $scratch.Set "host-exist" "false" -}}
               {{ end }}
             {{- end -}}
@@ -80,7 +80,7 @@
             {{- range where $site.Pages "Type" "person" -}}
               {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
                 {{- $scratch.Set "guest-exist" "true" -}}     
-                    <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth- person-image2" alt="{{ .Title }}" title="{{ .Title }}" /></a>
+                    <a href="{{ .Permalink | relURL}}"><img src="{{ .Params.image | relURL}}" width="50" class="rounded-circle z-depth- person-image2" alt="{{ .Title }}" title="{{ .Title }}" /></a>
                 {{- $scratch.Set "guest-exist" "false" -}}
               {{ end }}
             {{- end -}}

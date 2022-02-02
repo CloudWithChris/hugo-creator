@@ -1,0 +1,11 @@
+{{ $site := .site }}
+{{ $people := .people }}
+
+{{ with $people }}   
+  {{ range $name := . }}
+    {{ with $site.GetPage (printf "/person/%s" .) }}
+      {{ $image := .Resources.GetMatch .Params.image }}
+      <a href="{{ .Permalink | relURL}}"><img src="{{ $image.RelPermalink }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
+    {{ end }}
+  {{ end }}
+{{ end }}

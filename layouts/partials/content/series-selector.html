@@ -1,0 +1,13 @@
+{{ $page := .page }}
+{{ $site := .site }}
+
+<ul class="list-group">
+  {{ $series := $page.Params.Series }}
+  {{ range where $site.Pages ".Params.series" "intersect" $series }}
+    {{ if eq . $page }}
+      <li class="list-group-item active" aria-current="true">{{ .Title }}</li>
+    {{ else  }}
+      <li class="list-group-item"><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+    {{ end }}
+  {{ end }}
+</ul>

@@ -2,12 +2,7 @@
   <div class="py-5 container">
     <div class="col">
       <div class="row">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ .Title }}</li>
-          </ol>
-        </nav>
+        {{ partial "content/breadcrumbs.html" . }}
       </div>
       <div class="row float-center">
         {{ $upcomingTalks := first 3 (where (where $.Site.RegularPages "Section" "talk") ".Params.upcoming" true).ByDate}}
@@ -22,23 +17,26 @@
     </div>
   </div>
 {{ end }}
+
 {{ define "main" }}
-<div class="container" align="center">
-  <div class="row g-2">   
-    {{ $paginator := .Paginate (where (where $.Site.RegularPages "Section" "talk") ".Params.upcoming" "!=" true) }}
+  <div class="container" align="center">
+    <div class="col">
+      <div class="row g-2">   
+        {{ $paginator := .Paginate (where (where $.Site.RegularPages "Section" "talk") ".Params.upcoming" "!=" true) }}
 
-    {{- partial "paginator.html" . -}}
-    
-    {{ range $index, $value := $paginator.Pages }}
-      {{- partial "cards/content-card.html" . -}}
-      {{ if not (modBool $index 2 )}}  
-        <div class="dropdown-divider"></div>
-       {{ else }}
-        <div class="dropdown-divider d-block d-sm-block d-md-none"></div>
-      {{ end }}
-    {{ end }}
+        {{- partial "paginator.html" . -}}
+        
+        {{ range $index, $value := $paginator.Pages }}
+          {{- partial "cards/content-card.html" . -}}
+          {{ if not (modBool $index 2 )}}  
+            <div class="dropdown-divider"></div>
+          {{ else }}
+            <div class="dropdown-divider d-block d-sm-block d-md-none"></div>
+          {{ end }}
+        {{ end }}
 
-    {{- partial "paginator.html" . -}}
+        {{- partial "paginator.html" . -}}
+      </div>
+    </div>
   </div>
-</div>
 {{ end }}

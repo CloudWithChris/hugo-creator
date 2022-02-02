@@ -7,11 +7,10 @@
   <div class="container">
     <div class="row g-0">
       <div class="col-12 col-sm-3 col-md-2 col-xl-4 text-center">
-          <p><a href="{{ $value.Params.externalLink }}"><img src="{{ $value.Params.image | absURL }}" class="rounded-circle z-depth-2 align-middle" width="100" title="{{ $value.Title }}" alt="{{ $value.Title }}" /></a></p>
+        {{ partial "content/content-image.html" $value }}
       </div>
       <div class="col-12 col-sm-9 col-md-10 col-xl-8">
         <div class="card-body episode-card">         
-          
         
           <a href="{{ $value.Permalink }}"><h2 class="card-title">{{ $value.Title }}</h3></a>
         {{ with $value.Params.eventName }}<h3>{{ . }}</h3>{{ end }}
@@ -26,16 +25,9 @@
           </p>
         {{ end }}
         <p class="card-text">
-          
-          {{ with $value.Params.Authors }}              
-          {{ range $name := . }}
-            {{- range where $site.Pages "Type" "person" -}}
-              {{- if eq .File.TranslationBaseName ($name | urlize) -}} 
-                  <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth-2" alt="{{ .Title }}" title="{{ .Title }}" /></a>
-              {{ end }}
-            {{- end -}}
+          {{ with $value.Params.Authors }}
+            {{ partial "content/display-people-small.html" (dict "people" . "site" $site )}}
           {{ end }}
-        {{ end }}
 
           <small class="text-muted">{{ if eq $value.Params.upcoming true }}Scheduled {{ else }}Published on {{ end }}{{ $value.Date.Format "Mon, Jan 2, 2006" }}</small></p>
         </div>

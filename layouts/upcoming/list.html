@@ -2,44 +2,39 @@
   <section class="py-5 container" align="center">
     <div class="col">
       <div class="row">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ .Title }}</li>
-          </ol>
-        </nav>
+        {{ partial "content/breadcrumbs.html" . }}
       </div>
       <div class="row">
         {{ range first 12 (where $.Site.RegularPages "Section" "guest").ByTitle }}
           <div class="col-md-2">
-            <a href="{{ .Permalink }}"><img src="{{ .Params.image | absURL }}" class="rounded-circle z-depth-2 align-middle" width="125" title="{{ .Title }}" alt="{{ .Title }}" /></a>
+            <a href="{{ .Permalink }}"><img src="{{ .Params.image | relURL }}" class="rounded-circle z-depth-2 align-middle" width="125" title="{{ .Title }}" alt="{{ .Title }}" /></a>
           </div>
         {{ end }}
       </div>
-
       <div class="row text-center">
         {{ .Content }}
       </div> 
     </div>
   </section>
 {{ end }}
+
 {{ define "main" }}
-<div class="container" align="center">
-  <div class="row g-2">   
-    {{ $paginator := .Paginate (where (where $.Site.RegularPages "Section" "episode") ".Params.upcoming" "==" true).ByDate }}
+  <div class="container" align="center">
+    <div class="row g-2">   
+      {{ $paginator := .Paginate (where (where $.Site.RegularPages "Section" "episode") ".Params.upcoming" "==" true).ByDate }}
 
-    {{- partial "paginator.html" . -}}
-    
-    {{ range $index, $value := $paginator.Pages }}
-      {{- partial "cards/content-card.html" . -}}
-      {{ if not (modBool $index 2 )}}  
-        <div class="dropdown-divider"></div>
-       {{ else }}
-        <div class="dropdown-divider d-block d-sm-block d-md-none"></div>
+      {{- partial "paginator.html" . -}}
+      
+      {{ range $index, $value := $paginator.Pages }}
+        {{- partial "cards/content-card.html" . -}}
+        {{ if not (modBool $index 2 )}}  
+          <div class="dropdown-divider"></div>
+        {{ else }}
+          <div class="dropdown-divider d-block d-sm-block d-md-none"></div>
+        {{ end }}
       {{ end }}
-    {{ end }}
 
-    {{- partial "paginator.html" . -}}
+      {{- partial "paginator.html" . -}}
+    </div>
   </div>
-</div>
 {{ end }}

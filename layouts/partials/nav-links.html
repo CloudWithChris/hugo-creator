@@ -12,6 +12,6 @@
       </div>
     </li>
   {{ else }}
-    <li class="nav-item  {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}"><a class="nav-link" href="{{ .URL | absURL }}">{{ .Name }}</a></li>
+    <li class="nav-item  {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}"><a class="nav-link" href="{{ .URL | relURL }}">{{ .Name }}</a></li>
   {{ end }}
 {{ end }}

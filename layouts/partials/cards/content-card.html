@@ -6,19 +6,7 @@
   <div class="row g-0">
     <div class="col-12 col-sm-4">
       <p>
-        {{ if eq .Section "talk" }}
-          {{ if .Params.externalLink }}
-            <a href="{{ .Params.externalLink }}"><img src="{{ .Params.image | absURL }}" class="rounded-circle z-depth-2 align-middle person-image" width="100" title="{{ .Title }}" alt="{{ .Title }}" /></a>
-          {{ else }}
-            <a href="{{ .Permalink }}"><img src="{{ .Params.image | absURL }}" class="rounded-circle z-depth-2 align-middle person-image" width="100" title="{{ .Title }}" alt="{{ .Title }}" /></a>
-          {{ end }}
-        {{ else }}       
-            {{ if eq .Section "episode" }}
-              <a href="{{ .Permalink }}"><img src="{{ .Params.image | absURL }}" class="rounded-circle z-depth-2 align-middle person-image" width="100" title="{{ .Title }}" alt="{{ .Title }}" /></a>
-            {{ else if eq .Section "blog" }}
-              <a href="{{ .Permalink }}"><img src="{{ .Params.image | absURL }}" class="rounded-circle z-depth-2 align-middle person-image" width="100" title="{{ .Title }}" alt="{{ .Title }}" /></a>
-            {{ end }}
-        {{ end }}
+        {{ partial "content/content-image.html" . }}
       </p>
         <p>
           {{ if eq .Section "talk" }}
@@ -48,39 +36,18 @@
           </p>
         {{ end }}
         <p class="card-text">
+ 
+          {{ with .Params.Authors }}
+            {{ partial "content/display-people-small.html" (dict "people" . "site" $site )}}
+          {{ end }}
 
-          {{ with .Params.Authors }}              
-          {{ range $name := . }}
-            {{ $scratch.Set "person" ($name | urlize) }}
-            {{- range where $site.Pages "Type" "person" -}}
-              {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
-                    <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
-              {{ end }}
-            {{- end -}}
+          {{ with .Params.hosts }}
+            {{ partial "content/display-people-small.html" (dict "people" . "site" $site )}}
           {{ end }}
-        {{ end }}
-          
-        {{ with .Params.hosts }}              
-          {{ range $name := . }}
-            {{ $scratch.Set "person" ($name | urlize) }}
-            {{- range where $site.Pages "Type" "person" -}}
-              {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
-                    <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
-              {{ end }}
-            {{- end -}}
+
+          {{ with .Params.guests }}
+            {{ partial "content/display-people-small.html" (dict "people" . "site" $site )}}
           {{ end }}
-        {{ end }}
-    
-        {{ with .Params.guests }}              
-          {{ range $name := . }}
-            {{ $scratch.Set "person" ($name | urlize) }}
-            {{- range where $site.Pages "Type" "person" -}}
-              {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}     
-                    <a href="{{ .Permalink | absURL}}"><img src="{{ .Params.image | absURL}}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
-              {{ end }}
-            {{- end -}}
-          {{ end }}
-        {{ end }}
 
         {{ if eq .Section "talk" }}
           <small class="text-muted">{{ if eq .Params.upcoming true }}Scheduled for {{ else }}Occured on {{ end }}{{ .Date.Format "Mon, Jan 2, 2006" }}</small></p>

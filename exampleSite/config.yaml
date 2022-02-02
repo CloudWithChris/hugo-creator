@@ -1,4 +1,4 @@
-baseURL: "#{hostname}#"
+baseURL: "localhost:1313"
 buildFuture: true
 googleAnalytics: ""
 languageCode: "en-gb"
@@ -152,6 +152,14 @@ params:
   - your
   - keywords
   - here
+
+  security:
+    csp:
+      scriptsrc: ""
+      imgsrc: ""
+      connectsrc: ""
+      framesrc: ""
+      objectsrc: ""
 
   social:
     facebook: "CloudWithChris"

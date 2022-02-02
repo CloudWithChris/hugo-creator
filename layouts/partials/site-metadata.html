@@ -14,6 +14,32 @@
 
 <!-- TODO: Add configurable CSP via Site Params -->
 
+ {{ $scratch := .Scratch }}
+
+{{ with .Site.Params.security.csp }}
+    {{ $scratch.Set "csp" ""}}
+    {{ with .scriptsrc }}
+      {{ $scratch.Add "csp" (printf "script-src %s; " .) }}
+    {{ end }}
+    {{ with .imgsrc }}
+      {{ $scratch.Add "csp" (printf "img-src %s; " .) }}
+    {{ end }}
+    {{ with .connectsrc }}
+      {{ $scratch.Add "csp" (printf "connect-src %s; " .) }}
+    {{ end }}
+    {{ with .framesrc }}
+      {{ $scratch.Add "csp" (printf "frame-src %s; " .) }}
+    {{ end }}
+    {{ with .objectsrc }}
+      {{ $scratch.Add "csp" (printf "object-src %s; " .) }}
+    {{ end }}
+
+    {{ if $scratch.Get "csp" }}
+      {{ (printf "<meta http-equiv=\"Content-Security-Policy\" content=\"%s\">" ($scratch.Get "csp" )| safeHTML) }}
+    {{ end }}
+{{ end }}
+
+
 {{ if not .Params.Description }}
   <meta name="description" content="{{ .Site.Params.description }}" />
   <meta itemprop="description" content="{{ .Site.Params.description }}" />
@@ -38,20 +64,20 @@
 {{ end }}
 
 {{ with .Params.image }} 
-  <meta itemprop="image" content="{{ . | absURL }}" />
-  <meta property="og:image" content="{{ . | absURL }}" /> 
-  <meta name="twitter:image" content="{{ . | absURL }}" />
-  <meta name="twitter:image:src" content="{{ . | absURL }}" /> 
+  <meta itemprop="image" content="{{ . | relURL }}" />
+  <meta property="og:image" content="{{ . | relURL }}" /> 
+  <meta name="twitter:image" content="{{ . | relURL }}" />
+  <meta name="twitter:image:src" content="{{ . | relURL }}" /> 
 {{ else }}
-  <meta itemprop="image" content="{{ .Site.Params.ogimage | absURL }}" />
-  <meta property="og:image" content="{{ .Site.Params.ogimage | absURL }}" />
-  <meta name="twitter:image" content="{{ .Site.Params.ogimage | absURL }}" />
-  <meta name="twitter:image:src" content="{{ .Site.Params.ogimage | absURL }}" /> 
+  <meta itemprop="image" content="{{ .Site.Params.ogimage | relURL }}" />
+  <meta property="og:image" content="{{ .Site.Params.ogimage | relURL }}" />
+  <meta name="twitter:image" content="{{ .Site.Params.ogimage | relURL }}" />
+  <meta name="twitter:image:src" content="{{ .Site.Params.ogimage | relURL }}" /> 
 {{ end }}
 
 <meta property="og:updated_time" content={{ .Lastmod.Format "2006-01-02T15:04:05Z0700" | safeHTML }} />
 
-<link rel="sitemap" type="application/xml" title="Sitemap" href="{{ "sitemap.xml" | absURL}}" /> 
+<link rel="sitemap" type="application/xml" title="Sitemap" href="{{ "sitemap.xml" | relURL}}" /> 
 
 {{ with .OutputFormats.Get "RSS" }}
   <link href="{{ .Permalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
@@ -234,7 +260,7 @@
       "@context": "http://schema.org", 
       "@type": "Person",
       "name": "{{ .Params.Title }}",
-      "image": {{ .Params.image | absURL | htmlUnescape |  safeHTML }},
+      "image": {{ .Params.image | relURL | htmlUnescape |  safeHTML }},
       "url": {{ .Permalink  | htmlUnescape |  safeHTML }},
       "sameAs": {{ .Scratch.Get "sameAs" }}
     }
@@ -252,7 +278,7 @@
         "@type": "ListItem",
         "position": 2,
         "name": "Guests",
-        "item": {{ printf "%s%s" .Site.BaseURL "/guest/" | absURL | htmlUnescape |  safeHTML }}
+        "item": {{ printf "%s%s" .Site.BaseURL "/guest/" | relURL | htmlUnescape |  safeHTML }}
       },{
         "@type": "ListItem",
         "position": 3,
@@ -266,18 +292,18 @@
       "@context": "http://schema.org", 
       "@type": "PodcastEpisode",
       "name": "{{ .Params.Title }}",
-      "image": {{ .Params.image | absURL | htmlUnescape |  safeHTML }},
+      "image": {{ .Params.image | relURL | htmlUnescape |  safeHTML }},
       "url": {{ .Permalink  }},
       "description": "{{ .Params.Description }}",
       "associatedMedia": {
         "@type": "MediaObject",
-        "contentUrl": {{ printf "%s%s" .Site.Params.media_prefix .Params.podcast_file | absURL | htmlUnescape |  safeHTML }}
+        "contentUrl": {{ printf "%s%s" .Site.Params.media_prefix .Params.podcast_file | relURL | htmlUnescape |  safeHTML }}
       },
       {{ if .Params.Series }}
       "partOfSeries": {
         "@type": "PodcastSeries",
         "name": "{{ index (.Params.Series) 0 }}",
-        "url":  {{ printf "%s%s%s" .Site.BaseURL "series/" (urlize (index (.Params.Series) 0)) | absURL | htmlUnescape |  safeHTML }}
+        "url":  {{ printf "%s%s%s" .Site.BaseURL "series/" (urlize (index (.Params.Series) 0)) | relURL | htmlUnescape |  safeHTML }}
       },
       {{ end }}
       "video": {
@@ -286,7 +312,7 @@
         "uploadDate": "{{ .PublishDate.Format "2006-01-02" }}",
         "description": "{{ .Params.Description }}",
         "name": "{{ .Title }}",
-        "thumbnailUrl": {{ .Params.image | absURL | htmlUnescape |  safeHTML }}
+        "thumbnailUrl": {{ .Params.image | relURL | htmlUnescape |  safeHTML }}
       }
     }
   </script>
@@ -303,7 +329,7 @@
         "@type": "ListItem",
         "position": 2,
         "name": "Episodes",
-        "item": {{ printf "%s%s" .Site.BaseURL "/episode/" | absURL | htmlUnescape |  safeHTML }}
+        "item": {{ printf "%s%s" .Site.BaseURL "/episode/" | relURL | htmlUnescape |  safeHTML }}
       },{
         "@type": "ListItem",
         "position": 3,
@@ -327,14 +353,14 @@
       "datePublished": "{{ .Date.Format "2006-01-02" }}",
       "description": {{ .Description }},
       "wordCount": {{ .WordCount }},
-      "image": {{ .Params.image | absURL | htmlUnescape |  safeHTML }},
+      "image": {{ .Params.image | relURL | htmlUnescape |  safeHTML }},
       "url": {{ .Permalink  }},
       "publisher": {
         "@type": "Organization",
         "name": "{{ .Site.Title }}",
         "logo": {
           "@type": "imageObject",
-          "url": {{ "/favicon.ico" | absURL }}
+          "url": {{ "/favicon.ico" | relURL }}
         }
       },    
       {{ with .Params.Tags }}
@@ -356,7 +382,7 @@
         "@type": "ListItem",
         "position": 2,
         "name": "Blogs",
-        "item": {{ printf "%s%s" .Site.BaseURL "/blog/" | absURL | htmlUnescape |  safeHTML }}
+        "item": {{ printf "%s%s" .Site.BaseURL "/blog/" | relURL | htmlUnescape |  safeHTML }}
       },{
         "@type": "ListItem",
         "position": 3,
@@ -415,7 +441,7 @@
         "@type": "ListItem",
         "position": 2,
         "name": "Talks",
-        "item": {{ printf "%s%s" .Site.BaseURL "/talk/" | absURL | htmlUnescape |  safeHTML }}
+        "item": {{ printf "%s%s" .Site.BaseURL "/talk/" | relURL | htmlUnescape |  safeHTML }}
       },{
         "@type": "ListItem",
         "position": 3,
@@ -435,7 +461,7 @@
         {{ printf "%s%s" "https://github.com/" .Site.Params.social.github | htmlUnescape |  safeHTML }}
       ], 
       "name": "{{ .Title }}", 
-      "logo": {{ "/favicon.ico" | absURL }},
+      "logo": {{ "/favicon.ico" | relURL }},
       "potentialAction": {
         "@type": "SearchAction",
         "target": {{ printf "%s%s" .Site.BaseURL "/search?s={search_term_string}" | htmlUnescape |  safeHTML }},

@@ -48,7 +48,7 @@
 
   
 <!-- Cookie Consent by https://www.PrivacyPolicies.com -->
-<script type="text/javascript" src="{{ "js/cookie-consent.js" | absURL }}" charset="UTF-8"></script>
+<script type="text/javascript" src="{{ "js/cookie-consent.js" | relURL }}" charset="UTF-8"></script>
 
 <script type="text/javascript" charset="UTF-8">
 document.addEventListener('DOMContentLoaded', function () {
@@ -92,7 +92,7 @@ cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express",
       ga('send', 'pageview');
     }
     </script>
-    <script type="text/plain" async src="{{ "js/analytics.js" | absURL }}" cookie-consent="tracking"></script>
+    <script type="text/plain" async src="{{ "js/analytics.js" | relURL }}" cookie-consent="tracking"></script>
     {{ end }}
   {{ end }}
 {{- end -}}

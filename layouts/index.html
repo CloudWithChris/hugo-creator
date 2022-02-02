@@ -1,46 +1,48 @@
 {{ define "top" }}
-<section class="py-5 container">
-  <div class="row float-center">
-    {{ range first 3 (where (where $.Site.RegularPages "Section" "episode") ".Params.upcoming" true).ByDate }}         
-      {{- partial "block/upcoming-episode.html" . -}}
-    {{ end }}
-  </div>  
-  <div class="row float-end">
-    <p><a href="{{ "/upcoming" | absURL }}">See all upcoming episodes</a></p>
-  </div>
-</section>
+  <section class="py-5 container">
+    <div class="col">
+      <div class="row float-center">
+        {{ range first 3 (where (where $.Site.RegularPages "Section" "episode") ".Params.upcoming" true).ByDate }}         
+          {{- partial "block/upcoming-episode.html" . -}}
+        {{ end }}
+      </div>  
+      <div class="row float-end">
+        <p><a href="{{ "/upcoming" | relURL }}">See all upcoming episodes</a></p>
+      </div>
+    </div>
+  </section>
 {{ end }}
 
 {{ define "main" }}
-<div class="container" align="center">
-  <div class="row">
-    <div class="col">
-      {{- partial "block/latest-episode.html" . -}}
-    </div>
-  </div>  
-  <div class="dropdown-divider"></div>
-  <div class="container">
-    <div class="row g-2">   
-      {{ $blogs := where (where $.Site.RegularPages "Section" "blog") ".Params.upcoming" "!=" true }}
-      {{ $episodes := after 1 (where (where $.Site.RegularPages "Section" "episode") ".Params.upcoming" "!=" true) }}
-      {{ $talks := where (where $.Site.RegularPages "Section" "talk") ".Params.upcoming" "!=" true }}
-      {{ $all := (union $talks (union $blogs $episodes)).ByDate.Reverse }}
+  <div class="container" align="center">
+    <div class="row">
+      <div class="col">
+        {{- partial "block/latest-episode.html" . -}}
+      </div>
+    </div>  
+    <div class="dropdown-divider"></div>
+    <div class="container">
+      <div class="row g-2">   
+        {{ $blogs := where (where $.Site.RegularPages "Section" "blog") ".Params.upcoming" "!=" true }}
+        {{ $episodes := after 1 (where (where $.Site.RegularPages "Section" "episode") ".Params.upcoming" "!=" true) }}
+        {{ $talks := where (where $.Site.RegularPages "Section" "talk") ".Params.upcoming" "!=" true }}
+        {{ $all := (union $talks (union $blogs $episodes)).ByDate.Reverse }}
 
-      {{ $paginator := .Paginate $all }}
+        {{ $paginator := .Paginate $all }}
 
-      {{- partial "paginator.html" . -}}
-      
-      {{ range $index, $value := $paginator.Pages }}
-        {{- partial "cards/content-card.html" . -}}
-        {{ if not (modBool $index 2 )}}  
-          <div class="dropdown-divider"></div>
-         {{ else }}
-          <div class="dropdown-divider d-block d-sm-block d-md-none"></div>
+        {{- partial "paginator.html" . -}}
+        
+        {{ range $index, $value := $paginator.Pages }}
+          {{- partial "cards/content-card.html" . -}}
+          {{ if not (modBool $index 2 )}}  
+            <div class="dropdown-divider"></div>
+          {{ else }}
+            <div class="dropdown-divider d-block d-sm-block d-md-none"></div>
+          {{ end }}
         {{ end }}
-      {{ end }}
 
-      {{- partial "paginator.html" . -}}
+        {{- partial "paginator.html" . -}}
+      </div>
     </div>
   </div>
-</div>
 {{ end }}
