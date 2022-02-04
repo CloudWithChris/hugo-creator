@@ -62,8 +62,6 @@ menu: # Main Menu
       weight: 3
       url: "/cookie-policy"
 
-
-
 module:
   mounts:
     - source: "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
@@ -119,7 +117,6 @@ params:
     # Note: Do not use markdown in these fields, as they are rendered
     # in an RSS feed.
     feed:
-      copyright: "Copyright 2020 Chris Reddington"
       explicit: "no" # This is set to either yes or no.
       itunes_author: "Chris Reddington"
       itunes_image: "https://www.cloudwithchris.com/img/cloudwithchrislogo.png" # This should be an absolute URL.
