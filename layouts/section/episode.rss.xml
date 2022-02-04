@@ -69,7 +69,7 @@
           <link>{{ .Permalink }}</link>
           <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }} </pubDate>
           <dc:creator>{{ .Site.Params.itunes_author }}</dc:creator>
-          <guid>{{- if isset .Params "guid" -}}{{ .Params.guid }}{{- else -}}{{ .Site.Params.media_prefix }}{{ .Params.podcast_file }}{{- end -}}</guid>
+          <guid>{{- if isset .Params "guid" -}}{{ .Params.guid }}{{- else -}}{{ .Site.Params.content.site.media_prefix }}{{ .Params.podcast_file }}{{- end -}}</guid>
           <itunes:author>
           {{- if isset .Params "hosts" -}}
             {{ $hosts := (.Params.hosts) }}
@@ -114,7 +114,7 @@
           <itunes:image href="{{ . | relURL }}"></itunes:image>
           <googleplay:image href="{{ . | relURL }}"></googleplay:image>
           {{- end -}}
-          <enclosure url="{{ .Site.Params.media_prefix }}{{ .Params.podcast_file }}" {{with .Params.podcast_bytes}}length="{{ . }}"{{ end }} type="audio/mpeg" />
+          <enclosure url="{{ .Site.Params.content.site.media_prefix }}{{ .Params.podcast_file }}" {{with .Params.podcast_bytes}}length="{{ . }}"{{ end }} type="audio/mpeg" />
           {{- with .Params.podcast_duration -}}<itunes:duration>{{ . }}</itunes:duration>{{- end -}}
           {{- with .Params.explicit -}}
           <itunes:explicit>{{ if (or (eq . "yes") (eq . "true")) }}true{{ else }}false{{ end }}</itunes:explicit>

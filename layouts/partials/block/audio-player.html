@@ -1,0 +1,26 @@
+
+{{ $params := .Site.Params }}
+
+{{ if eq .Site.Params.features.audio_player.use "podscribe" }}
+  {{ with .Params.podcast_file }}
+    <div id="podscribe-embed-root"></div>
+    <script type="application/json" data-cwc-selector="episode-data">
+      {
+        "epGuid": "{{ $params.media_prefix }}{{ . }}",
+      }
+    </script>
+    <script src="https://app.podscribe.ai/static/js/embed.js" cookie-consent="strictly-necessary"></script>
+    <script cookie-consent="tracking" src="{{ "js/embed.js" | relURL }}"></script>
+  {{ end }}
+{{ else }}
+  {{ with .Params.podcast_file }}
+    <div align="center">
+      <audio
+          controls
+          src="{{ $params.media_prefix }}{{ . }}">
+              Your browser does not support the <code>audio</code> element.
+              Here is a <a href="{{ $params.media_prefix }}{{ . }}">link to download the audio</a> instead.
+      </audio>
+    </div>
+  {{ end }}
+{{ end }}

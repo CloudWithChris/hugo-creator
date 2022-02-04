@@ -41,10 +41,10 @@
 
 
 {{ if not .Params.Description }}
-  <meta name="description" content="{{ .Site.Params.description }}" />
-  <meta itemprop="description" content="{{ .Site.Params.description }}" />
-  <meta property="og:description" content="{{ .Site.Params.description }}" />
-  <meta name="twitter:description" content="{{ .Site.Params.description }}" />
+  <meta name="description" content="{{ .Site.Params.content.site.description }}" />
+  <meta itemprop="description" content="{{ .Site.Params.content.site.description }}" />
+  <meta property="og:description" content="{{ .Site.Params.content.site.description }}" />
+  <meta name="twitter:description" content="{{ .Site.Params.content.site.description }}" />
 {{ else }}
 <meta name="description" content="{{ .Params.description }}" />
 <meta itemprop="description" content="{{ .Params.description }}" />
@@ -58,7 +58,7 @@
 <meta property="og:url" content="{{ .Permalink }}" />
 
 <meta property="og:locale" content="{{ .Language.Lang }}">
-<meta name="language" content="{{ .Site.Params.language_name }}">
+<meta name="language" content="{{ .Site.Params.content.site.language_name }}">
 {{ range .AllTranslations }}
   <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" title="{{ .Language.LanguageName }}">
 {{ end }}
@@ -69,10 +69,10 @@
   <meta name="twitter:image" content="{{ . | relURL }}" />
   <meta name="twitter:image:src" content="{{ . | relURL }}" /> 
 {{ else }}
-  <meta itemprop="image" content="{{ .Site.Params.ogimage | relURL }}" />
-  <meta property="og:image" content="{{ .Site.Params.ogimage | relURL }}" />
-  <meta name="twitter:image" content="{{ .Site.Params.ogimage | relURL }}" />
-  <meta name="twitter:image:src" content="{{ .Site.Params.ogimage | relURL }}" /> 
+  <meta itemprop="image" content="{{ .Site.Params.content.site.ogimage | relURL }}" />
+  <meta property="og:image" content="{{ .Site.Params.content.site.ogimage | relURL }}" />
+  <meta name="twitter:image" content="{{ .Site.Params.content.site.ogimage | relURL }}" />
+  <meta name="twitter:image:src" content="{{ .Site.Params.content.site.ogimage | relURL }}" /> 
 {{ end }}
 
 <meta property="og:updated_time" content={{ .Lastmod.Format "2006-01-02T15:04:05Z0700" | safeHTML }} />
@@ -114,9 +114,9 @@
   <meta property="og:article:published_time" content={{ .Date.Format "2006-01-02T15:04:05Z0700" | safeHTML }} /> 
   <meta property="article:published_time" content={{ .Date.Format "2006-01-02T15:04:05Z0700" | safeHTML }} />
   
-  <meta property="og:article:author" content="{{humanize .Site.Params.author }}" />
-  <meta property="article:author" content="{{humanize .Site.Params.author }}" /> 
-  <meta name="author" content="{{humanize .Site.Params.author }}" /> 
+  <meta property="og:article:author" content="{{humanize .Site.Params.content.site.author }}" />
+  <meta property="article:author" content="{{humanize .Site.Params.content.site.author }}" /> 
+  <meta name="author" content="{{humanize .Site.Params.content.site.author }}" /> 
   
   {{ with .Params.category }} 
     <meta name="news_keywords" content="{{ index . 0 }}" />
@@ -297,7 +297,7 @@
       "description": "{{ .Params.Description }}",
       "associatedMedia": {
         "@type": "MediaObject",
-        "contentUrl": {{ printf "%s%s" .Site.Params.media_prefix .Params.podcast_file | relURL | htmlUnescape |  safeHTML }}
+        "contentUrl": {{ printf "%s%s" .Site.Params.content.site.media_prefix .Params.podcast_file | relURL | htmlUnescape |  safeHTML }}
       },
       {{ if .Params.Series }}
       "partOfSeries": {
@@ -457,8 +457,8 @@
       "@type": "WebSite", 
       "url": {{ .Permalink }}, 
       "sameAs": [
-        {{ printf "%s%s" "https://twitter.com/" .Site.Params.social.twitter | htmlUnescape |  safeHTML }}, 
-        {{ printf "%s%s" "https://github.com/" .Site.Params.social.github | htmlUnescape |  safeHTML }}
+        {{ printf "%s%s" "https://twitter.com/" .Site.Params.content.social.twitter | htmlUnescape |  safeHTML }}, 
+        {{ printf "%s%s" "https://github.com/" .Site.Params.content.social.github | htmlUnescape |  safeHTML }}
       ], 
       "name": "{{ .Title }}", 
       "logo": {{ "/favicon.ico" | relURL }},
@@ -476,26 +476,17 @@
   <meta name="robots" content="index,follow" /> 
   <meta name="googlebot" content="index,follow" />
   
-  <meta name="twitter:site" content="@{{ .Site.Params.social.twitter }}">
-  <meta name="twitter:creator" content="@{{ .Site.Params.social.twitter }}" />
-  
-  {{ with.Site.Params.facebook }}
-    {{ with .app_id }}
-      <meta property="fb:app_id" content="{{ . }}" />
-    {{ end }}
-    {{ with .admins }}
-      <meta property="fb:admins" content="{{ . }}" />
-    {{ end }}
-  {{ end }}
+  <meta name="twitter:site" content="@{{ .Site.Params.content.social.twitter }}">
+  <meta name="twitter:creator" content="@{{ .Site.Params.content.social.twitter }}" />
   
   <!-- Theme Color -->
   <meta name="theme-color" content="#29aae1" /> 
   <meta name="msapplication-TileColor" content="#29aae1" />
   
   {{ if .Params.Tags }}  
-    <meta name="keywords" content="{{ print (delimit .Params.Tags ", ") ", " (delimit .Site.Params.Keywords ", ") }}" />
+    <meta name="keywords" content="{{ print (delimit .Params.Tags ", ") ", " (delimit .Site.Params.content.site.Keywords ", ") }}" />
   {{ else }}
-    <meta name="keywords" content="{{ print (delimit .Site.Params.Keywords ", ") }}" />
+    <meta name="keywords" content="{{ print (delimit .Site.Params.content.site.Keywords ", ") }}" />
   {{ end }}
   
   <meta name="imagemode" content="force" />

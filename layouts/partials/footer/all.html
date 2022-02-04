@@ -2,23 +2,23 @@
   <nav class="navbar">
     <div class="container">
       <ul class="icons nav">
-        {{ with .Site.Params.Social.YouTube }}
+        {{ with .Site.Params.content.social.YouTube }}
           <li class="nav-item">            
             <a class="nav-link" href="https://www.youtube.com/c/{{ . }}"><button type="button" aria-label="YouTube" class="btn btn-social btn-youtube btn-rounded"><i class="fab fa-youtube"></i></button></a>
           </li>
         {{ end }}
-        {{ with .Site.Params.Social.Twitter }}
+        {{ with .Site.Params.content.social.Twitter }}
           <li class="nav-item">
             <a class="nav-link" href="https://twitter.com/{{ . }}" aria-label="Twitter"><button aria-label="Twitter" type="button" class="btn btn-social btn-twitter btn-rounded"><i class="fab fa-twitter"></i></button></a>
           </li>
         {{ end }}
-        {{ with .Site.Params.Social.Facebook }}
+        {{ with .Site.Params.content.social.Facebook }}
           <li class="nav-item">
             
             <a class="nav-link" href="https://facebook.com/{{ . }}" aria-label="Twitter"><button aria-label="Twitter" type="button" class="btn btn-social btn-facebook btn-rounded"><i class="fab fa-facebook"></i></button></a>
           </li>  
         {{ end }}        
-        {{ with .Site.Params.Social.GitHub }}
+        {{ with .Site.Params.content.social.GitHub }}
           <li class="nav-item">
             <a class="nav-link" href="https://github.com/{{ . }}" aria-label="GitHub"><button type="button" aria-label="GitHub" class="btn btn-social btn-github btn-rounded"><i class="fab fa-github"></i></button></a>
           </li>
