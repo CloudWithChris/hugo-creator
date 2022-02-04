@@ -52,24 +52,26 @@
 
 <script type="text/javascript" charset="UTF-8">
 document.addEventListener('DOMContentLoaded', function () {
-cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express","palette":"light","language":"en","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false,"website_name":"{{ .Site.Title }}","open_preferences_center_selector":"#changePreferences","website_privacy_policy_url":"https://www.cloudwithchris.com/privacy-policy"});
+cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express","palette":"light","language":"en","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false,"website_name":"{{ .Site.Title }}","open_preferences_center_selector":"#changePreferences","website_privacy_policy_url":"{{ .Site.BaseURL }}/privacy-policy"});
 });
 </script>
 
 {{ if not .Site.IsServer }}
+  {{ with .Site.Params.content.features.analytics.microsoftClarity }}
 <script type="text/plain" cookie-consent="tracking">
   (function(c,l,a,r,i,t,y){
     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
     t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
     y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-})(window, document, "clarity", "script", "a32lpsz3a1");
+})(window, document, "clarity", "script", "{{ . }}");
   </script>
+  {{ end }}
 
 <!-- Unnamed script -->
 <!-- google analytics -->
 {{- $pc := .Site.Config.Privacy.GoogleAnalytics -}}
 {{- if not $pc.Disable -}}
-  {{ with .Site.GoogleAnalytics }}
+  {{ with .Site.Params.features.analytics.googleAnalytics }}
     <script type="text/plain" cookie-consent="tracking">
     {{ template "__ga_js_set_doNotTrack" $ }}
     if (!doNotTrack) {

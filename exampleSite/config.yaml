@@ -5,7 +5,6 @@
 baseURL: "localhost:1313" # BaseURL of the website, used in RSS feeds and site rendering
 buildFuture: true         # Include content with publishdate in the future
 enableRobotsTXT: true     # Generate a customized robots.txt
-googleAnalytics: ""       # Google Analytics ID
 languageCode: "en-gb"     # Used as part of the XML generation
 theme: "hugo-creator"     # Name of the theme. Don't change this from hugo-creator.
 themesdir: "../../"       # Path to the themes directory
@@ -167,6 +166,10 @@ params:
       use: "podscribe"  # The optionms are default or podscribe
       podscribe:
         someconfig: "tbc"
+    # Settings related to analytics
+    analytics:
+      googleAnalytics: ""       # Google Analytics ID
+      microsoftClarity: ""
     # Settings related to the comments section
     # embedded within the site.
     comments:
@@ -191,8 +194,8 @@ params:
       connectsrc: ""
       framesrc: ""
       objectsrc: ""
-# Privacy options built in to hugo. These have been configured
-# to comply with GDPR, per the hugo documentation below -
+# Privacy options built in to hugo. The hugo docs explain how to configure this to align with GDPR, so please make sure to ensure this is configured as appropriate for your deployment.
+# -
 # https://gohugo.io/about/hugo-and-gdpr/
 privacy:
   googleAnalytics:
