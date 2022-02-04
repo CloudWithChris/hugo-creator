@@ -89,6 +89,16 @@ module:
     - source: archetypes
       target: archetypes
 
+# This enables the search functionality
+# to work, as it searches over the json file.
+# In effect, this allows the layouts/index.json
+# file to be rendered.
+outputs:
+  home:
+    - "HTML"
+    - "RSS"
+    - "JSON"
+
 # Custom Parameters that drive the site's
 # configuration. This includes custom
 # functionality, such as comments,
