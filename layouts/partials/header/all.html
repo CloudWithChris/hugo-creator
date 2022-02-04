@@ -25,17 +25,17 @@
   <div class="navbar-dark bg-cwc header-area">
     <h1>{{ .Title }}</h1>
     <p>
-      {{ with .Site.Params.channels.apple }}           
+      {{ with .Site.Params.content.channels.apple }}           
         <a href="{{ . }}"><button type="button" aria-label="Apple Podcasts" class="btn btn-social btn-apple btn-rounded"><i class="fab fa-apple"></i></button></a>
       {{ end }}
-      {{ with .Site.Params.channels.google }}      
+      {{ with .Site.Params.content.channels.google }}      
         <a href="{{ . }}"><button type="button" aria-label="Google Podcasts" class="btn btn-social btn-google btn-rounded"><i class="fab fa-google"></i></button></a>
       {{ end }}           
       <a href="{{ "/episode/index.xml" | relURL }}"><button type="button" aria-label="Podcast RSS feed" class="btn btn-social btn-rss btn-rounded"><i class="fas fa-rss"></i></button></a>
-      {{ with .Site.Params.channels.spotify }}          
+      {{ with .Site.Params.content.channels.spotify }}          
         <a href="{{ . }}"><button type="button" aria-label="Spotify" class="btn btn-social btn-spotify btn-rounded"><i class="fab fa-spotify"></i></button></a>
       {{ end }}     
-      {{ with .Site.Params.Social.YouTube }}     
+      {{ with .Site.Params.content.Social.YouTube }}     
         <a href="https://www.youtube.com/c/{{ . }}"><button type="button" aria-label="YouTube" class="btn btn-social btn-youtube btn-rounded"><i class="fab fa-youtube"></i></button></a>
       {{ end }}
       <a href="{{ "/blog/index.xml" | relURL }}"><button type="button" aria-label="Blog RSS feed" class="btn btn-social btn-rss btn-rounded"><i class="fas fa-blog"></i></button></a>
