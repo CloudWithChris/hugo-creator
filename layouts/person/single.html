@@ -35,8 +35,8 @@
 {{ define "main" }}
   <div class="container">
     <div class="row g-2">
-      {{ $upcomingGuestEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "==" true) ".Params.guests" "intersect" (slice $.File.BaseFileName) }}
-      {{ $upcomingHostEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "==" true) ".Params.hosts" "intersect" (slice $.File.BaseFileName) }}
+      {{ $upcomingGuestEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "==" true) ".Params.guests" "intersect" (slice $.File.ContentBaseName) }}
+      {{ $upcomingHostEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "==" true) ".Params.hosts" "intersect" (slice $.File.ContentBaseName) }}
       {{ $upcomingEpisodes := union $upcomingHostEpisodes $upcomingGuestEpisodes}}
 
       {{ if gt (len $upcomingEpisodes) 0}}
@@ -47,8 +47,8 @@
       {{ end}}
 
 
-      {{ $pastGuestEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "!=" true) ".Params.guests" "intersect" (slice $.File.BaseFileName) }}
-      {{ $pastHostEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "!=" true) ".Params.hosts" "intersect" (slice $.File.BaseFileName) }}
+      {{ $pastGuestEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "!=" true) ".Params.guests" "intersect" (slice $.File.ContentBaseName) }}
+      {{ $pastHostEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "!=" true) ".Params.hosts" "intersect" (slice $.File.ContentBaseName) }}
       {{ $pastEpisodes:= union $pastGuestEpisodes $pastHostEpisodes }}
 
       {{ if gt (len $pastEpisodes) 0}}
