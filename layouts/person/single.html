@@ -38,9 +38,6 @@
       {{ $upcomingGuestEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "==" true) ".Params.guests" "intersect" (slice $.File.BaseFileName) }}
       {{ $upcomingHostEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "==" true) ".Params.hosts" "intersect" (slice $.File.BaseFileName) }}
       {{ $upcomingEpisodes := union $upcomingHostEpisodes $upcomingGuestEpisodes}}
-      {{ $pastGuestEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "!=" true) ".Params.guests" "intersect" (slice $.File.BaseFileName) }}
-      {{ $pastHostEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "!=" true) ".Params.hosts" "intersect" (slice $.File.BaseFileName) }}
-      {{ $pastEpisodes:= union $pastGuestEpisodes $pastHostEpisodes }}
 
       {{ if gt (len $upcomingEpisodes) 0}}
         <h2>Upcoming Episodes</h2>
@@ -48,6 +45,11 @@
           {{- partial "cards/content-card.html" . -}}
         {{ end }}
       {{ end}}
+
+
+      {{ $pastGuestEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "!=" true) ".Params.guests" "intersect" (slice $.File.BaseFileName) }}
+      {{ $pastHostEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "!=" true) ".Params.hosts" "intersect" (slice $.File.BaseFileName) }}
+      {{ $pastEpisodes:= union $pastGuestEpisodes $pastHostEpisodes }}
 
       {{ if gt (len $pastEpisodes) 0}}
         <h2>Past Episodes</h2>
