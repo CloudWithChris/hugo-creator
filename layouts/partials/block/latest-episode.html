@@ -7,30 +7,16 @@
 
     <h1><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
 
-    {{ with .Params.hosts }}              
-      {{ range $name := . }}
-        {{ $scratch.Set "person" ($name | urlize) }}
-        {{- range where $site.Pages "Type" "host" -}}
-          {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
-            {{- $scratch.Set "host-exist" "true" -}}     
-                <a href="{{ .Permalink | relURL}}"><img src="{{ .Params.image | relURL}}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
-            {{- $scratch.Set "host-exist" "false" -}}
-          {{ end }}
-        {{- end -}}
-      {{ end }}
+    {{ with .Params.Authors }}
+      {{ partial "content/display-people-small.html" (dict "people" . "site" $site )}}
     {{ end }}
 
-    {{ with .Params.guests }}              
-      {{ range $name := . }}
-        {{ $scratch.Set "person" ($name | urlize) }}
-        {{- range where $site.Pages "Type" "guest" -}}
-          {{- if eq .File.TranslationBaseName ($scratch.Get "person") -}}
-            {{- $scratch.Set "guest-exist" "true" -}}     
-                <a href="{{ .Permalink | relURL}}"><img src="{{ .Params.image | relURL}}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
-            {{- $scratch.Set "guest-exist" "false" -}}
-          {{ end }}
-        {{- end -}}
-      {{ end }}
+    {{ with .Params.hosts }}
+      {{ partial "content/display-people-small.html" (dict "people" . "site" $site )}}
+    {{ end }}
+
+    {{ with .Params.guests }}
+      {{ partial "content/display-people-small.html" (dict "people" . "site" $site )}}
     {{ end }}
 
     <h2>Published on {{ .PublishDate.Format "Mon, Jan 2, 2006" }}</h2>
