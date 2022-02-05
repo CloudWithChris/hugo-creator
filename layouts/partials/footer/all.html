@@ -1,40 +1,54 @@
 <footer class="mt-auto">
   <nav class="navbar">
     <div class="container">
-      <ul class="icons nav">
-        {{ with .Site.Params.content.social.YouTube }}
-          <li class="nav-item">            
-            <a class="nav-link" href="https://www.youtube.com/c/{{ . }}"><button type="button" aria-label="YouTube" class="btn btn-social btn-youtube btn-rounded"><i class="fab fa-youtube"></i></button></a>
-          </li>
-        {{ end }}
-        {{ with .Site.Params.content.social.Twitter }}
-          <li class="nav-item">
-            <a class="nav-link" href="https://twitter.com/{{ . }}" aria-label="Twitter"><button aria-label="Twitter" type="button" class="btn btn-social btn-twitter btn-rounded"><i class="fab fa-twitter"></i></button></a>
-          </li>
-        {{ end }}
-        {{ with .Site.Params.content.social.Facebook }}
-          <li class="nav-item">
-            
-            <a class="nav-link" href="https://facebook.com/{{ . }}" aria-label="Twitter"><button aria-label="Twitter" type="button" class="btn btn-social btn-facebook btn-rounded"><i class="fab fa-facebook"></i></button></a>
-          </li>  
-        {{ end }}        
-        {{ with .Site.Params.content.social.GitHub }}
-          <li class="nav-item">
-            <a class="nav-link" href="https://github.com/{{ . }}" aria-label="GitHub"><button type="button" aria-label="GitHub" class="btn btn-social btn-github btn-rounded"><i class="fab fa-github"></i></button></a>
-          </li>
-        {{ end }}
-      </ul>
-      <div class="d-flex justify-content-center copyright-notice text-wrap">
-        <p>&copy; {{ .Site.Params.content.site.copyright.established | markdownify }} - {{ dateFormat "2006" now }} {{ .Site.Params.content.site.copyright.notice | markdownify }}</p>
-      </div>
-      <div class="d-flex">
-        <ul class="nav">
-          <li class="nav-item"><a class="nav-link" href="#" id="changePreferences">Cookie Preferences</a></li>
-          {{ $currentPage := . }}
-            {{ range .Site.Menus.footer }}
-              {{ partial "nav-links.html" (dict "context" . "currentPage" $currentPage) }}
+      <div class="row justify-content-md-center">
+        <div class="col-12 d-flex justify-content-center">
+          <div class="row">
+            <ul class="nav">
+              <li class="nav-item"><a class="nav-link" href="#" id="changePreferences">Cookie Preferences</a></li>
+              {{ $currentPage := . }}
+                {{ range .Site.Menus.footer }}
+                  {{ partial "nav-links.html" (dict "context" . "currentPage" $currentPage) }}
+                {{ end }}
+            </ul>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="row spacer"></div>
+        </div>
+        <div class="col-12 col-md-6">
+          <ul class="icons nav">
+            {{ with .Site.Params.content.social.YouTube }}
+              <li class="nav-item">            
+                <a class="nav-link" href="https://www.youtube.com/c/{{ . }}"><button type="button" aria-label="YouTube" class="btn btn-social btn-youtube btn-rounded"><i class="fab fa-youtube"></i></button></a>
+              </li>
             {{ end }}
-        </ul>
+            {{ with .Site.Params.content.social.Twitter }}
+              <li class="nav-item">
+                <a class="nav-link" href="https://twitter.com/{{ . }}" aria-label="Twitter"><button aria-label="Twitter" type="button" class="btn btn-social btn-twitter btn-rounded"><i class="fab fa-twitter"></i></button></a>
+              </li>
+            {{ end }}
+            {{ with .Site.Params.content.social.Facebook }}
+              <li class="nav-item">
+                
+                <a class="nav-link" href="https://facebook.com/{{ . }}" aria-label="Twitter"><button aria-label="Twitter" type="button" class="btn btn-social btn-facebook btn-rounded"><i class="fab fa-facebook"></i></button></a>
+              </li>  
+            {{ end }}        
+            {{ with .Site.Params.content.social.GitHub }}
+              <li class="nav-item">
+                <a class="nav-link" href="https://github.com/{{ . }}" aria-label="GitHub"><button type="button" aria-label="GitHub" class="btn btn-social btn-github btn-rounded"><i class="fab fa-github"></i></button></a>
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="row justify-content-center copyright-notice text-wrap">
+            <p>&copy; {{ .Site.Params.content.site.copyright.established | markdownify }} - {{ dateFormat "2006" now }} {{ .Site.Params.content.site.copyright.notice | markdownify }}</p>
+          </div>
+          <div class="row justify-content-center copyright-notice text-wrap">
+            <p>{{ .Site.Params.content.site.copyright.additional_information | markdownify }}</p>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
