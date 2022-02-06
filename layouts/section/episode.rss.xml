@@ -1,3 +1,4 @@
+{{ $site := .Site }}
 <rss version="2.0"
      xmlns:content="http://purl.org/rss/1.0/modules/content/"
      xmlns:wfw="http://wellformedweb.org/CommentAPI/"
@@ -18,7 +19,7 @@
     <sy:updatePeriod>hourly</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
     <language>{{ .Site.Params.content.feed.language | default .Site.LanguageCode }}</language>
-    <copyright>&copy; {{ .Site.Params.content.site.copyright.established | markdownify }} - {{ dateFormat "2006" now }} {{ .Site.Params.content.site.copyright.notice | markdownify }}</copyright>
+    <copyright>Copyright {{ .Site.Params.content.site.copyright.established | markdownify | plainify }} - {{ dateFormat "2006" now }} {{ .Site.Params.content.site.copyright.notice | markdownify | plainify }}</copyright>
     {{ with .Site.Params.content.feed.itunes_subtitle }}<itunes:subtitle>{{ . }}</itunes:subtitle>{{ end }}
     <itunes:author>{{ .Site.Params.content.feed.itunes_author }}</itunes:author>
     <itunes:type>episodic</itunes:type>
@@ -59,28 +60,27 @@
           <dc:creator>{{ .Site.Params.feed.itunes_author }}</dc:creator>
           <guid>{{- if isset .Params "guid" -}}{{ .Params.guid }}{{- else -}}{{ .Site.Params.content.site.media_prefix }}{{ .Params.podcast_file }}{{- end -}}</guid>
           <itunes:author>
-          {{- if isset .Params "hosts" -}}
-            {{ $hosts := (.Params.hosts) }}
-            {{ $len := (len $hosts) }}
-            {{ range $index, $element := $hosts }}
-              {{ range where (where $.Site.Pages "Type" "host" ) ".File.BaseFileName" "=" . }}
-                {{- if eq $len 1 -}}
-                  {{ .Title }}
-                {{- else -}}
-                  {{- if eq (add $index 1) $len }}
-                    and {{ .Title }}
-                  {{- else -}}
-                    {{- if eq $len 2 -}}
-                      {{ printf "%s " .Title }}
-                    {{- else -}}
-                      {{ printf "%s, " .Title }}
-                    {{- end -}}
-                  {{- end -}}
-                {{- end -}}
-              {{ end }}
+          {{- $scratch := .Scratch -}}
+          {{- $scratch.Set "people" slice -}}
+          {{- with .Params.hosts -}}
+            {{- range . -}}
+              {{- with $.Site.GetPage (printf "/person/%s" .) -}}
+                {{- $scratch.Add "people" (slice .Title) -}}
+              {{- end -}}
             {{- end -}}
+          {{- end -}}
+          {{- with .Params.guests -}}
+            {{- range . -}}
+              {{- with $.Site.GetPage (printf "/person/%s" .) -}}
+                {{- $scratch.Add "people" (slice .Title) -}}
+              {{- end -}}
+            {{- end -}}
+          {{- end -}}
+
+          {{ if gt (len (.Scratch.Get "people")) 0 }}
+            {{- delimit (.Scratch.Get "people") ", " " and " -}}
           {{- else -}}
-            {{ .Site.Params.content.feed.itunes_author }}
+            {{- $site.Params.content.feed.itunes_author -}}
           {{- end -}}
           </itunes:author>
           {{ with .Params.episode }}
