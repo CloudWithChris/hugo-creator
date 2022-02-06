@@ -182,6 +182,10 @@ params:
         reactions_enabled: 1
         emit_metadata: 0
         theme: "light"
+    cta:
+      subscribe_twitter: 
+        use: true
+      subscribe_youtube: "UC6KrOsGhSVJBszv_AwbcMxA"
   # Settings relating to site security. This mainly
   # comprises of Content Security Policies.
   security:

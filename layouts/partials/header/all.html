@@ -1,5 +1,19 @@
 
 <header>
+  <div class="container-fluid bg-cwc">
+    <div class="col-10">
+      <div class="row justify-content-end">
+        
+        <a class="twitter-follow-button"
+  href="https://twitter.com/{{ .Site.Params.Content.social.twitter }}"
+  data-size="large">
+Follow @{{ .Site.Params.Content.social.twitter }}</a>
+        {{ with .Site.Params.features.cta.subscribe_youtube }}
+          <div class="g-ytsubscribe" data-channelid="{{ . }}" data-layout="default" data-count="default"></div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
   <nav class="navbar navbar-expand-lg navbar-dark bg-cwc">
     <div class="container">
         <a class="navbar-brand" href="{{ "/" | relURL }}"><img src="{{ .Site.Params.content.site.logo | relURL }}" alt="{{ .Site.Title }}" title="{{ .Site.Title }}" height="145" /></a>

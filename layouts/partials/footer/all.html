@@ -60,9 +60,16 @@
 
   <script src="{{$js.RelPermalink}}" cookie-consent="strictly-necessary" defer></script>
 
-  
+<!-- Needed to load a YouTube button to subscribe at top of page -->
+<script type="text/javascript" src="{{ "js/youtube-button.js" | relURL }}" cookie-consent="strictly-necessary"></script>
+
+<!-- Needed to load a Twitter button to subscribe at top of page -->
+<script async src="{{ "js/twitter-button.js" | relURL }}" charset="utf-8" cookie-consent="strictly-necessary"></script>
+
 <!-- Cookie Consent by https://www.PrivacyPolicies.com -->
 <script type="text/javascript" src="{{ "js/cookie-consent.js" | relURL }}" charset="UTF-8"></script>
+
+
 
 <script type="text/javascript" charset="UTF-8">
 document.addEventListener('DOMContentLoaded', function () {
