@@ -261,9 +261,9 @@
       "@context": "http://schema.org", 
       "@type": "Person",
       "name": "{{ .Params.Title }}",
-      "image": {{ .Params.image | absURL | htmlUnescape |  safeHTML }},
-      "url": {{ .Permalink  | htmlUnescape |  safeHTML }},
-      "sameAs": {{ .Scratch.Get "sameAs" }}
+      "image": "{{ .Params.image | absURL | htmlUnescape |  safeHTML }}",
+      "url": "{{ .Permalink  | htmlUnescape |  safeHTML }}",
+      "sameAs": "{{ .Scratch.Get "sameAs" }}"
     }
   </script>
   <script type="application/ld+json">
@@ -274,16 +274,16 @@
         "@type": "ListItem",
         "position": 1,
         "name": "{{ .Site.Title }}",
-        "item": {{ .Site.BaseURL}}
+        "item": "{{ .Site.BaseURL}}"
       },{
         "@type": "ListItem",
         "position": 2,
         "name": "Guests",
-        "item": {{ printf "%s%s" .Site.BaseURL "/talk/" | absURL | htmlUnescape |  safeHTML }}
+        "item": "{{ "/talk" | absURL | htmlUnescape |  safeHTML }}"
       },{
         "@type": "ListItem",
         "position": 3,
-        "name": {{ .Title }}
+        "name": "{{ .Title }}"
       }]
     }
     </script>
@@ -293,47 +293,52 @@
       "@context": "http://schema.org", 
       "@type": "PodcastEpisode",
       "name": "{{ .Params.Title }}",
-      "image": {{ .Params.image | absURL | htmlUnescape |  safeHTML }},
+      "image": "{{ .Params.image | absURL | htmlUnescape |  safeHTML }}",
       "author": [
         {{- range .Params.hosts -}}
           {{- $person := $site.GetPage (printf "/person/%s" .) -}}
           {
             "@type": "Person",
-            "name": {{ $person.Title }},
-            "image": {{ printf "%s%s" $site.BaseURL $person.Params.image | absURL | htmlUnescape |  safeHTML }},
-            "url": {{ $person.Permalink }}
+            "name": "{{ $person.Title }}",
+            "image": "{{ $person.Params.image | absURL | htmlUnescape |  safeHTML }}",
+            "url": "{{ $person.Permalink }}"
           },
         {{- end -}}
         {{- range .Params.guests -}}
           {{- $person := $site.GetPage (printf "/person/%s" .) -}}
           {
             "@type": "Person",
-            "name": {{ $person.Title }},
-            "image": {{ printf "%s%s" $site.BaseURL $person.Params.image | absURL | htmlUnescape |  safeHTML }},
-            "url": {{ $person.Permalink }}
+            "name": "{{ $person.Title }}",
+            "image": "{{ $person.Params.image | absURL | htmlUnescape |  safeHTML }}",
+            "url": "{{ $person.Permalink }}"
           },
         {{- end -}}
       ],
-      "url": {{ .Permalink  }},
+      "url": "{{ .Permalink  }}",
       "description": "{{ .Params.Description }}",
       "associatedMedia": {
         "@type": "MediaObject",
-        "contentUrl": {{ printf "%s%s" .Site.Params.content.site.media_prefix .Params.podcast_file | absURL | htmlUnescape |  safeHTML }}
+        "contentUrl": "{{ printf "%s%s" .Site.Params.content.site.media_prefix .Params.podcast_file | absURL | htmlUnescape |  safeHTML }}"
       },
       {{ if .Params.Series }}
-      "partOfSeries": {
-        "@type": "PodcastSeries",
-        "name": "{{ index (.Params.Series) 0 }}",
-        "url":  {{ printf "%s%s%s" .Site.BaseURL "series/" (urlize (index (.Params.Series) 0)) | absURL | htmlUnescape |  safeHTML }}
-      },
+      "partOfSeries": [
+        {{- range .Params.series -}}
+          {{- $series := $site.GetPage (printf "/series/%s" .) -}}
+          {
+            "@type": "PodcastSeries",
+            "name": "{{ $series.Title }}",
+            "url": "{{ $series.Permalink }}"
+          },
+        {{- end -}}
+      ],
       {{ end }}
       "video": {
         "@type": "VideoObject",
-        "contentUrl": {{ printf "%s%s" "https://youtu.be/" .Params.Youtube | htmlUnescape |  safeHTML }},
+        "contentUrl": "{{ printf "%s%s" "https://youtu.be/" .Params.Youtube | htmlUnescape |  safeHTML }}",
         "uploadDate": "{{ .PublishDate.Format "2006-01-02" }}",
         "description": "{{ .Params.Description }}",
         "name": "{{ .Title }}",
-        "thumbnailUrl": {{ .Params.image | absURL | htmlUnescape |  safeHTML }}
+        "thumbnailUrl": "{{ .Params.image | absURL | htmlUnescape |  safeHTML }}"
       }
     }
   </script>
@@ -345,16 +350,16 @@
         "@type": "ListItem",
         "position": 1,
         "name": "{{ .Site.Title }}",
-        "item": {{ .Site.BaseURL}}
+        "item": "{{ .Site.BaseURL }}"
       },{
         "@type": "ListItem",
         "position": 2,
         "name": "Episodes",
-        "item": {{ printf "%s%s" .Site.BaseURL "/episode/" | absURL | htmlUnescape |  safeHTML }}
+        "item": "{{ "/episode/" | absURL | htmlUnescape |  safeHTML }}"
       },{
         "@type": "ListItem",
         "position": 3,
-        "name": {{ .Title }}
+        "name": "{{ .Title }}"
       }]
     }
     </script>
@@ -372,23 +377,23 @@
           {{- $person := $site.GetPage (printf "/person/%s" .) -}}
           {
             "@type": "Person",
-            "name": {{ $person.Title }},
-            "image": {{ printf "%s%s" $site.BaseURL $person.Params.image | absURL | htmlUnescape |  safeHTML }},
-            "url": {{ $person.Permalink }}
+            "name": "{{ $person.Title }}",
+            "image": "{{ $person.Params.image | absURL | htmlUnescape |  safeHTML }}",
+            "url": "{{ $person.Permalink }}"
           }
         {{- end -}}
       ],
       "datePublished": "{{ .Date.Format "2006-01-02" }}",
       "description": {{ .Description }},
       "wordCount": {{ .WordCount }},
-      "image": {{ .Params.image | absURL | htmlUnescape |  safeHTML }},
-      "url": {{ .Permalink  }},
+      "image": "{{ .Params.image | absURL | htmlUnescape |  safeHTML }}",
+      "url": "{{ .Permalink  }}",
       "publisher": {
         "@type": "Organization",
         "name": "{{ .Site.Title }}",
         "logo": {
           "@type": "imageObject",
-          "url": {{ "/favicon.ico" | absURL }}
+          "url": "{{ "/favicon.ico" | absURL }}"
         }
       },    
       {{ with .Params.Tags }}
@@ -410,7 +415,7 @@
         "@type": "ListItem",
         "position": 2,
         "name": "Blogs",
-        "item": {{ printf "%s%s" .Site.BaseURL "/blog/" | absURL | htmlUnescape |  safeHTML }},
+        "item": "{{ "/blog/" | absURL | htmlUnescape |  safeHTML }}",
       },{
         "@type": "ListItem",
         "position": 3,
@@ -432,9 +437,9 @@
           {{- $person := $site.GetPage (printf "/person/%s" .) -}}
           {
             "@type": "Person",
-            "name": {{ $person.Title }},
-            "image": {{ printf "%s%s" $site.BaseURL $person.Params.image | absURL | htmlUnescape |  safeHTML }},
-            "url": {{ $person.Permalink }}
+            "name": "{{ $person.Title }}",
+            "image": "{{ $person.Params.image | absURL | htmlUnescape |  safeHTML }}",
+            "url": "{{ $person.Permalink }}"
           }
         {{- end -}}
       ],     
@@ -456,7 +461,7 @@
       "startDate": "{{ .Date.Format "2006-01-02" }}",
       "endDate": "{{ .Date.Format "2006-01-02" }}",
       {{ with .Params.Tags }}
-        "keywords": {{ delimit . ", " }}
+        "keywords": "{{ delimit . ", " }}"
       {{ end }}
     }
   </script>
@@ -469,16 +474,16 @@
         "@type": "ListItem",
         "position": 1,
         "name": "{{ .Site.Title }}",
-        "item": {{ .Site.BaseURL}}
+        "item": "{{ .Site.BaseURL}}"
       },{
         "@type": "ListItem",
         "position": 2,
         "name": "Talks",
-        "item": {{ printf "%s%s" .Site.BaseURL "/talk/" | absURL | htmlUnescape |  safeHTML }}
+        "item": "{{ printf "%s%s" .Site.BaseURL "/talk/" | absURL | htmlUnescape |  safeHTML }}"
       },{
         "@type": "ListItem",
         "position": 3,
-        "name": {{ .Title }}
+        "name": "{{ .Title }}"
       }]
     }
     </script>
@@ -490,14 +495,14 @@
       "@type": "WebSite", 
       "url": {{ .Permalink }}, 
       "sameAs": [
-        {{ printf "%s%s" "https://twitter.com/" .Site.Params.content.social.twitter | htmlUnescape |  safeHTML }}, 
-        {{ printf "%s%s" "https://github.com/" .Site.Params.content.social.github | htmlUnescape |  safeHTML }}
+        "{{ printf "%s%s" "https://twitter.com/" .Site.Params.content.social.twitter | htmlUnescape |  safeHTML }}", 
+        "{{ printf "%s%s" "https://github.com/" .Site.Params.content.social.github | htmlUnescape |  safeHTML }}"
       ], 
       "name": "{{ .Title }}", 
-      "logo": {{ "/favicon.ico" | absURL }},
+      "logo": "{{ "/favicon.ico" | absURL }}",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": {{ printf "%s%s" .Site.BaseURL "/search?s={search_term_string}" | htmlUnescape |  safeHTML }},
+        "target": {{ "/search?s={search_term_string}" | htmlUnescape |  safeHTML }},
         "query-input": "required name=search_term_string"
       }
     }
