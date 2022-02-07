@@ -261,8 +261,8 @@
       "@context": "http://schema.org", 
       "@type": "Person",
       "name": "{{ .Params.Title }}",
-      "image": "{{ .Params.image | absURL }}",
-      "url": "{{ .Permalink  }}",
+      "image": "{{ .Params.image | absURL | jsonify | safeJS }}",
+      "url": "{{ .Permalink  | jsonify | safeJS }}",
       "sameAs": "{{ .Scratch.Get "sameAs" }}"
     }
   </script>
@@ -279,7 +279,7 @@
         "@type": "ListItem",
         "position": 2,
         "name": "Guests",
-        "item": "{{ "/talk" | absURL }}"
+        "item": "{{ "/talk" | absURL | jsonify | safeJS }}"
       },{
         "@type": "ListItem",
         "position": 3,
@@ -293,14 +293,14 @@
       "@context": "http://schema.org", 
       "@type": "PodcastEpisode",
       "name": "{{ .Params.Title }}",
-      "image": "{{ .Params.image | absURL }}",
+      "image": "{{ .Params.image | absURL | jsonify | safeJS }}",
       "author": [
         {{- range .Params.hosts -}}
           {{- $person := $site.GetPage (printf "/person/%s" .) -}}
           {
             "@type": "Person",
             "name": "{{ $person.Title }}",
-            "image": "{{ $person.Params.image | absURL }}",
+            "image": "{{ $person.Params.image | absURL | jsonify | safeJS }}",
             "url": "{{ $person.Permalink }}"
           },
         {{- end -}}
@@ -309,7 +309,7 @@
           {
             "@type": "Person",
             "name": "{{ $person.Title }}",
-            "image": "{{ $person.Params.image | absURL }}",
+            "image": "{{ $person.Params.image | absURL | jsonify | safeJS }}",
             "url": "{{ $person.Permalink }}"
           },
         {{- end -}}
@@ -318,7 +318,7 @@
       "description": "{{ .Params.Description }}",
       "associatedMedia": {
         "@type": "MediaObject",
-        "contentUrl": "{{ printf "%s%s" .Site.Params.content.site.media_prefix .Params.podcast_file | absURL }}"
+        "contentUrl": "{{ printf "%s%s" .Site.Params.content.site.media_prefix .Params.podcast_file | absURL | jsonify | safeJS }}"
       },
       {{ if .Params.Series }}
       "partOfSeries": [
@@ -334,11 +334,11 @@
       {{ end }}
       "video": {
         "@type": "VideoObject",
-        "contentUrl": "{{ printf "%s%s" "https://youtu.be/" .Params.Youtube }}",
+        "contentUrl": "{{ printf "%s%s" "https://youtu.be/" .Params.Youtube | jsonify | safeJS }}",
         "uploadDate": "{{ .PublishDate.Format "2006-01-02" }}",
         "description": "{{ .Params.Description }}",
         "name": "{{ .Title }}",
-        "thumbnailUrl": "{{ .Params.image | absURL }}"
+        "thumbnailUrl": "{{ .Params.image | absURL | jsonify | safeJS }}"
       }
     }
   </script>
@@ -355,7 +355,7 @@
         "@type": "ListItem",
         "position": 2,
         "name": "Episodes",
-        "item": "{{ "/episode/" | absURL }}"
+        "item": "{{ "/episode/" | absURL | jsonify | safeJS }}"
       },{
         "@type": "ListItem",
         "position": 3,
@@ -378,7 +378,7 @@
           {
             "@type": "Person",
             "name": "{{ $person.Title }}",
-            "image": "{{ $person.Params.image | absURL }}",
+            "image": "{{ $person.Params.image | absURL | jsonify | safeJS }}",
             "url": "{{ $person.Permalink }}"
           }
         {{- end -}}
@@ -386,7 +386,7 @@
       "datePublished": "{{ .Date.Format "2006-01-02" }}",
       "description": {{ .Description }},
       "wordCount": {{ .WordCount }},
-      "image": "{{ .Params.image | absURL }}",
+      "image": "{{ .Params.image | absURL | jsonify | safeJS }}",
       "url": "{{ .Permalink  }}",
       "publisher": {
         "@type": "Organization",
@@ -415,7 +415,7 @@
         "@type": "ListItem",
         "position": 2,
         "name": "Blogs",
-        "item": "{{ "/blog/" | absURL }}",
+        "item": "{{ "/blog/" | absURL | jsonify | safeJS }}",
       },{
         "@type": "ListItem",
         "position": 3,
@@ -438,7 +438,7 @@
           {
             "@type": "Person",
             "name": "{{ $person.Title }}",
-            "image": "{{ $person.Params.image | absURL }}",
+            "image": "{{ $person.Params.image | absURL | jsonify | safeJS }}",
             "url": "{{ $person.Permalink }}"
           }
         {{- end -}}
@@ -455,7 +455,7 @@
       "url": {{ .Permalink  }},
       {{ with .Params.externalLink }}
       "sameAs": [
-        {{ .  }}
+        {{ . | jsonify | safeJS  }}
       ],
       {{ end }}
       "startDate": "{{ .Date.Format "2006-01-02" }}",
@@ -479,7 +479,7 @@
         "@type": "ListItem",
         "position": 2,
         "name": "Talks",
-        "item": "{{ printf "%s%s" .Site.BaseURL "/talk/" | absURL }}"
+        "item": "{{ printf "%s%s" .Site.BaseURL "/talk/" | absURL | jsonify | safeJS }}"
       },{
         "@type": "ListItem",
         "position": 3,
@@ -495,14 +495,14 @@
       "@type": "WebSite", 
       "url": {{ .Permalink }}, 
       "sameAs": [
-        "{{ printf "%s%s" "https://twitter.com/" .Site.Params.content.social.twitter }}", 
-        "{{ printf "%s%s" "https://github.com/" .Site.Params.content.social.github }}"
+        "{{ printf "%s%s" "https://twitter.com/" .Site.Params.content.social.twitter | jsonify | safeJS }}", 
+        "{{ printf "%s%s" "https://github.com/" .Site.Params.content.social.github | jsonify | safeJS }}"
       ], 
       "name": "{{ .Title }}", 
       "logo": "{{ "/favicon.ico" | absURL }}",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": {{ "/search?s={search_term_string}" }},
+        "target": {{ "/search?s={search_term_string}" | jsonify | safeJS }},
         "query-input": "required name=search_term_string"
       }
     }
