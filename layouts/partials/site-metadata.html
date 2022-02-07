@@ -278,8 +278,8 @@
       },{
         "@type": "ListItem",
         "position": 2,
-        "name": "Guests",
-        "item": {{ "/talk" | absURL | htmlUnescape |  safeHTML | safeJS }}
+        "name": "People",
+        "item": {{ "/people" | absURL | htmlUnescape |  safeHTML | safeJS }}
       },{
         "@type": "ListItem",
         "position": 3,
@@ -429,7 +429,7 @@
       "@context": "http://schema.org", 
       "@type": "Event",
       "name": {{ .Title }},
-      "description": "{{ .Params.Description }}",
+      "description": {{ .Params.Description }},
       "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
       "eventStatus": "https://schema.org/EventScheduled",
       "performer": [
@@ -450,7 +450,7 @@
       "image": "{{ .Params.content.site.ogimage }}",
       "location": {
         "@type": "VirtualLocation",
-        "url": "{{ .Permalink }}"
+        "url": {{ .Permalink }}
       },
       "url": {{ .Permalink  }},
       {{ with .Params.externalLink }}
@@ -474,7 +474,7 @@
         "@type": "ListItem",
         "position": 1,
         "name": "{{ .Site.Title }}",
-        "item": "{{ .Site.BaseURL}}"
+        "item": {{ .Site.BaseURL}}
       },{
         "@type": "ListItem",
         "position": 2,
