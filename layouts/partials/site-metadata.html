@@ -502,7 +502,7 @@
       "logo": {{ "/favicon.ico" | absURL }},
       "potentialAction": {
         "@type": "SearchAction",
-        "target": {{ "/search?s={search_term_string}" | htmlUnescape |  safeHTML | safeJS }},
+        "target": "{{ "/search?s={search_term_string}" | htmlUnescape |  safeHTML | safeJS }}"",
         "query-input": "required name=search_term_string"
       }
     }
