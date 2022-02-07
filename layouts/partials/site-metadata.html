@@ -495,8 +495,8 @@
       "@type": "WebSite", 
       "url": {{ .Permalink }}, 
       "sameAs": [
-        {{ printf "%s%s" "https://twitter.com/" .Site.Params.content.social.twitter | htmlUnescape |  safeHTML | safeJS }}, 
-        {{ printf "%s%s" "https://github.com/" .Site.Params.content.social.github | htmlUnescape |  safeHTML | safeJS }}
+        "{{ printf "%s%s" "https://twitter.com/" .Site.Params.content.social.twitter | htmlUnescape |  safeHTML | safeJS }}", 
+        "{{ printf "%s%s" "https://github.com/" .Site.Params.content.social.github | htmlUnescape |  safeHTML | safeJS }}"
       ], 
       "name": {{ .Title }}, 
       "logo": {{ "/favicon.ico" | absURL }},
