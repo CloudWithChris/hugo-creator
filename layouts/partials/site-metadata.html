@@ -262,7 +262,7 @@
       "@type": "Person",
       "name": "{{ .Params.Title }}",
       "image": {{ .Params.image | absURL | htmlUnescape |  safeHTML | safeJS }},
-      "url": {{ .Permalink  | htmlUnescape |  safeHTML | safeJS }},
+      "url": {{ .Permalink }},
       "sameAs": "{{ .Scratch.Get "sameAs" }}"
     }
   </script>
@@ -301,7 +301,7 @@
             "@type": "Person",
             "name": "{{ $person.Title }}",
             "image": {{ $person.Params.image | absURL | htmlUnescape |  safeHTML | safeJS }},
-            "url": "{{ $person.Permalink }}"
+            "url": {{ $person.Permalink }}
           },
         {{- end -}}
         {{- range .Params.guests -}}
@@ -310,7 +310,7 @@
             "@type": "Person",
             "name": "{{ $person.Title }}",
             "image": {{ $person.Params.image | absURL | htmlUnescape |  safeHTML | safeJS }},
-            "url": "{{ $person.Permalink }}"
+            "url": {{ $person.Permalink }}
           },
         {{- end -}}
       ],
@@ -368,7 +368,7 @@
     { 
       "@context": "http://schema.org", 
       "@type": "BlogPosting",
-      "name": "{{ .Params.Title }}",
+      "name": "{{ .Title }}",
       "mainEntityOfPage": "True",
       "dateModified": "{{ .Lastmod.Format "2006-01-02" }}",
       "headline": {{ .Title }},
@@ -378,8 +378,8 @@
           {
             "@type": "Person",
             "name": "{{ $person.Title }}",
-            "image": {{ $person.Params.image | absURL | htmlUnescape |  safeHTML | safeJS }},
-            "url": "{{ $person.Permalink }}"
+            "image": "{{ $person.Params.image | absURL | htmlUnescape |  safeHTML | safeJS }}",
+            "url": {{ $person.Permalink }}
           }
         {{- end -}}
       ],
@@ -439,7 +439,7 @@
             "@type": "Person",
             "name": "{{ $person.Title }}",
             "image": {{ $person.Params.image | absURL | htmlUnescape |  safeHTML | safeJS }},
-            "url": "{{ $person.Permalink }}"
+            "url": {{ $person.Permalink }}
           }
         {{- end -}}
       ],     
