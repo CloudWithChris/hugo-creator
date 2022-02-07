@@ -314,7 +314,7 @@
           },
         {{- end -}}
       ],
-      "url": "{{ .Permalink  }}",
+      "url": {{ .Permalink  }},
       "description": "{{ .Params.Description }}",
       "associatedMedia": {
         "@type": "MediaObject",
@@ -337,7 +337,7 @@
         "contentUrl": {{ printf "%s%s" "https://youtu.be/" .Params.Youtube | htmlUnescape |  safeHTML | safeJS }},
         "uploadDate": "{{ .PublishDate.Format "2006-01-02" }}",
         "description": "{{ .Params.Description }}",
-        "name": "{{ .Title }}",
+        "name": {{ .Title }},
         "thumbnailUrl": {{ .Params.image | absURL | htmlUnescape |  safeHTML | safeJS }}
       }
     }
@@ -368,7 +368,7 @@
     { 
       "@context": "http://schema.org", 
       "@type": "BlogPosting",
-      "name": "{{ .Title }}",
+      "name": {{ .Title }},
       "mainEntityOfPage": "True",
       "dateModified": "{{ .Lastmod.Format "2006-01-02" }}",
       "headline": {{ .Title }},
@@ -387,7 +387,7 @@
       "description": {{ .Description }},
       "wordCount": {{ .WordCount }},
       "image": {{ .Params.image | absURL | htmlUnescape |  safeHTML | safeJS }},
-      "url": "{{ .Permalink  }}",
+      "url": {{ .Permalink  }},
       "publisher": {
         "@type": "Organization",
         "name": "{{ .Site.Title }}",
@@ -428,7 +428,7 @@
     { 
       "@context": "http://schema.org", 
       "@type": "Event",
-      "name": "{{ .Title }}",
+      "name": {{ .Title }},
       "description": "{{ .Params.Description }}",
       "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
       "eventStatus": "https://schema.org/EventScheduled",
@@ -498,7 +498,7 @@
         {{ printf "%s%s" "https://twitter.com/" .Site.Params.content.social.twitter | htmlUnescape |  safeHTML | safeJS }}, 
         {{ printf "%s%s" "https://github.com/" .Site.Params.content.social.github | htmlUnescape |  safeHTML | safeJS }}
       ], 
-      "name": "{{ .Title }}", 
+      "name": {{ .Title }}, 
       "logo": "{{ "/favicon.ico" | absURL }}",
       "potentialAction": {
         "@type": "SearchAction",
