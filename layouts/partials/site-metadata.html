@@ -263,7 +263,7 @@
       "name": "{{ .Params.Title }}",
       "image": {{ .Params.image | absURL | htmlUnescape |  safeHTML | safeJS }},
       "url": {{ .Permalink }},
-      "sameAs": "{{ .Scratch.Get "sameAs" }}"
+      "sameAs": {{ .Scratch.Get "sameAs" }}
     }
   </script>
   <script type="application/ld+json">
@@ -274,7 +274,7 @@
         "@type": "ListItem",
         "position": 1,
         "name": "{{ .Site.Title }}",
-        "item": "{{ .Site.BaseURL }}"
+        "item": {{ .Site.BaseURL }}
       },{
         "@type": "ListItem",
         "position": 2,
@@ -350,7 +350,7 @@
         "@type": "ListItem",
         "position": 1,
         "name": "{{ .Site.Title }}",
-        "item": "{{ .Site.BaseURL }}"
+        "item": {{ .Site.BaseURL }}
       },{
         "@type": "ListItem",
         "position": 2,
@@ -499,7 +499,7 @@
         {{ printf "%s%s" "https://github.com/" .Site.Params.content.social.github | htmlUnescape |  safeHTML | safeJS }}
       ], 
       "name": {{ .Title }}, 
-      "logo": "{{ "/favicon.ico" | absURL }}",
+      "logo": {{ "/favicon.ico" | absURL }},
       "potentialAction": {
         "@type": "SearchAction",
         "target": {{ "/search?s={search_term_string}" | htmlUnescape |  safeHTML | safeJS }},
