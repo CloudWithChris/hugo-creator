@@ -372,8 +372,8 @@
           {{- $person := $site.GetPage (printf "/person/%s" .) -}}
           {
             "@type": "Person",
-            "name": {{ $person.Title }}
-            "image": {{ printf "%s%s" $site.BaseURL $person.Params.image | absURL | htmlUnescape |  safeHTML }}
+            "name": {{ $person.Title }},
+            "image": {{ printf "%s%s" $site.BaseURL $person.Params.image | absURL | htmlUnescape |  safeHTML }},
             "url": {{ $person.Permalink }}
           }
         {{- end -}}
@@ -410,7 +410,7 @@
         "@type": "ListItem",
         "position": 2,
         "name": "Blogs",
-        "item": {{ printf "%s%s" .Site.BaseURL "/blog/" | absURL | htmlUnescape |  safeHTML }}
+        "item": {{ printf "%s%s" .Site.BaseURL "/blog/" | absURL | htmlUnescape |  safeHTML }},
       },{
         "@type": "ListItem",
         "position": 3,
@@ -432,8 +432,8 @@
           {{- $person := $site.GetPage (printf "/person/%s" .) -}}
           {
             "@type": "Person",
-            "name": {{ $person.Title }}
-            "image": {{ printf "%s%s" $site.BaseURL $person.Params.image | absURL | htmlUnescape |  safeHTML }}
+            "name": {{ $person.Title }},
+            "image": {{ printf "%s%s" $site.BaseURL $person.Params.image | absURL | htmlUnescape |  safeHTML }},
             "url": {{ $person.Permalink }}
           }
         {{- end -}}
