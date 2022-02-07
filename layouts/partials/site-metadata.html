@@ -299,19 +299,19 @@
           {{- $person := $site.GetPage (printf "/person/%s" .) -}}
           {
             "@type": "Person",
-            "name": {{ $person.Title }}
-            "image": {{ printf "%s%s" $site.BaseURL $person.Params.image | absURL | htmlUnescape |  safeHTML }}
+            "name": {{ $person.Title }},
+            "image": {{ printf "%s%s" $site.BaseURL $person.Params.image | absURL | htmlUnescape |  safeHTML }},
             "url": {{ $person.Permalink }}
-          }
+          },
         {{- end -}}
         {{- range .Params.guests -}}
           {{- $person := $site.GetPage (printf "/person/%s" .) -}}
           {
             "@type": "Person",
-            "name": {{ $person.Title }}
-            "image": {{ printf "%s%s" $site.BaseURL $person.Params.image | absURL | htmlUnescape |  safeHTML }}
+            "name": {{ $person.Title }},
+            "image": {{ printf "%s%s" $site.BaseURL $person.Params.image | absURL | htmlUnescape |  safeHTML }},
             "url": {{ $person.Permalink }}
-          }
+          },
         {{- end -}}
       ]
       "url": {{ .Permalink  }},
