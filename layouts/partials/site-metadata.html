@@ -309,7 +309,7 @@
           {
             "@type": "Person",
             "name": "{{ $person.Title }}",
-            "image": {{ $person.Params.image | absURL | htmlUnescape |  safeHTML | safeJS }},
+            "image": {{ $person.Params.image | absURL }},
             "url": {{ $person.Permalink }}
           },
         {{- end -}}
@@ -381,7 +381,7 @@
             "image": {{ $person.Params.image | absURL }},
             "url": {{ $person.Permalink }}
           }
-        {{- end -}}
+        {{- end -}} 
       ],
       "datePublished": "{{ .Date.Format "2006-01-02" }}",
       "description": {{ .Description }},
