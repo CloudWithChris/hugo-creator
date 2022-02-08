@@ -316,30 +316,44 @@
       ],
       "url": {{ .Permalink  }},
       "description": "{{ .Params.Description }}",
-      "associatedMedia": {
-        "@type": "MediaObject",
-        "contentUrl": {{ printf "%s%s" .Site.Params.content.site.media_prefix .Params.podcast_file | absURL }}
-      },
-      {{ if .Params.Series }}
-      "partOfSeries": [
-        {{- range .Params.series -}}
-          {{- $series := $site.GetPage (printf "/series/%s" .) -}}
+      "associatedMedia": [
+        {{ with .Params.podcast_file }}
           {
-            "@type": "PodcastSeries",
-            "name": "{{ $series.Title }}",
-            "url": "{{ $series.Permalink }}"
+            "@type": "MediaObject",
+            "contentUrl": {{ printf "%s%s" $site.Params.content.site.media_prefix . | absURL }}
           },
-        {{- end -}}
+        {{ end }}
+
+        {{ with .Params.youtube }}
+          {
+            "@type": "VideoObject",
+            "contentUrl": {{ printf "%s%s" "https://youtu.be/" . | absURL }}
+          },
+        {{ end }}
       ],
+      {{ with .Params.Series }}
+        {{ $counter := 0 }}
+        {{ with . }}
+          {{ range $key, $value := . }}
+            {{ with $value }}
+              {{ $counter = add $counter 1 }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+        
+        {{ if gt $counter 0 }}
+          "partOfSeries": [
+          {{- range . -}}
+            {{- $series := $site.GetPage (printf "/series/%s" (. | urlize)) -}}
+            {
+              "@type": "PodcastSeries",
+              "name": "{{ $series.Title }}",
+              "url": {{ $series.Permalink }}
+            },
+          {{- end -}}
+        ],
+        {{ end }}
       {{ end }}
-      "video": {
-        "@type": "VideoObject",
-        "contentUrl": {{ printf "%s%s" "https://youtu.be/" .Params.Youtube | absURL }},
-        "uploadDate": "{{ .PublishDate.Format "2006-01-02" }}",
-        "description": "{{ .Params.Description }}",
-        "name": {{ .Title }},
-        "thumbnailUrl": {{ .Params.image | absURL }}
-      }
     }
   </script>
   <script type="application/ld+json">
