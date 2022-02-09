@@ -288,6 +288,7 @@
     }
     </script>
   {{ else if (and (eq .Type "episode") (eq .IsPage true)) }}
+  {{- $episode := . }}
   <script defer type="application/ld+json">
     { 
       "@context": "http://schema.org", 
@@ -327,7 +328,12 @@
         {{ with .Params.youtube }}
           {
             "@type": "VideoObject",
-            "contentUrl": {{ printf "%s%s" "https://youtu.be/" . | absURL }}
+            "contentUrl": {{ printf "%s%s" "https://youtu.be/" . | absURL }},
+            "name": "{{ $episode.Title }}",
+            "thumbnailUrl": {{ $episode.Params.image | absURL }},
+            "description": "{{ $episode.Params.Description }}",
+            "uploadDate": "{{ $episode.Date.Format "2006-01-02" }}",
+            
           },
         {{ end }}
       ],
