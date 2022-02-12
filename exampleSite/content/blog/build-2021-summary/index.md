@@ -7,6 +7,7 @@ image: img/cloudwithchrislogo.png
 date: "2021-05-28T12:00:00Z"
 images:
 - img/cloudwithchrislogo.png
+banner: "images/conference.jpg"
 tags:
 - Blogging
 title: My Microsoft //Build 2021 Highlights

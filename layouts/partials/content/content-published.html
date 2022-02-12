@@ -1,0 +1,10 @@
+{{ $site := .site }}
+{{ $people := .people }}
+
+{{ with $people }}   
+  {{ range $name := . }}
+    {{ with $site.GetPage (printf "/person/%s" .) }}
+      <h2>Published by <a href="{{ .Permalink | relURL}}">{{ .Title }}</a> on {{ .PublishDate.Format "Mon, Jan 2, 2006" }}</h2>
+    {{ end }}
+  {{ end }}
+{{ end }}

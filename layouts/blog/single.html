@@ -2,32 +2,43 @@
   {{ $site := .Site }}
   {{ $page := .Page }}
 
-  <div class="py-5 container" align="center">
+  {{ $blog := . }}
+
+  <div class="container">
     <div class="col">
-      <div class="row float-center">
+      <div class="row pt-5 ">
         {{ partial "content/breadcrumbs.html" . }}
-        <p>
+      </div>
+      <div class="row py-3">
+          {{ with .Params.banner }}
+            {{- partial "content/banner.html" $blog -}}
+          {{ end }}
+      </div>
+      <div class="row py-3 text-center">
           {{ partial "content/display-people.html" (dict "people" .Params.Authors "site" $site )}}
-        </p>
       </div>
-      <div class="row">
+      <div class="row py-2 text-center">
+        {{ partial "content/content-published.html" (dict "people" .Params.Authors "site" $site )}}
+      </div>
+      <div class="row py-2 text-center">
         {{ partial "content/socialshare.html" . }}
-      </div>
-      <div class="row d-flex align-items-center justify-content-center">
-        <h2>Published on {{ .PublishDate.Format "Mon, Jan 2, 2006" }}</h2>
       </div>
       
       {{ with .Params.tags }}
-        <p>{{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}</p>
+        <div class="row py-2 text-center">
+          <p>{{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}</p>
+        </div>
       {{ end }}
 
       {{ with .Params.Series }}
-        <p>
-          <p>{{ partial "content/series.html" (dict "taxo" "series" "value" . "site" $.Site ) }}</p>
-        </p>
+      <div class="row py-2 text-center">
+        {{ partial "content/series.html" (dict "taxo" "series" "value" . "site" $.Site ) }}
+      </div>
       {{ end }}
       
-      {{ partial "content/series-selector.html" (dict "site" $.Site "page" $page ) }}
+      <div class="row py-2 text-center">
+        {{ partial "content/series-selector.html" (dict "site" $.Site "page" $page ) }}
+      </div>
     </div>
   </div>
 {{ end }}

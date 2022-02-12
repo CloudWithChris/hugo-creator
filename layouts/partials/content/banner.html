@@ -1,0 +1,7 @@
+{{ $image := .Resources.GetMatch .Params.Banner }}
+
+{{ if $image }}
+  <img src="{{ $image.RelPermalink }}" class="img-fluid" alt="{{ .Title }}" title="{{ .Title }}" />
+{{ else }}
+  <img src="{{ .Params.Image | relURL }}" class="img-fluid" alt="{{ .Title }}" title="{{ .Title }}" />
+{{ end }}
