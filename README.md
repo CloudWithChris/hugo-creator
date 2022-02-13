@@ -8,7 +8,7 @@ Hugo Creator is a theme for the Hugo Static Site Generator. It is intended for c
 
 ### Example site
 
-![Example screenshot of the Hugo Creator Theme](https://github.com/chrisreddington/hugo-creator/raw/main/screenshot.png "Example screenshot of the Hugo Creator Theme")
+![Example screenshot of the Hugo Creator Theme](https://raw.githubusercontent.com/cloudwithchris/hugo-creator/main/images/screenshot.png "Example screenshot of the Hugo Creator Theme")
 
 Demo → [hugo-creator.cloudwithchris.com](https://hugo-creator.cloudwithchris.com)
 
@@ -30,7 +30,7 @@ You can also specify which branch, tag or commit that you would like to referenc
 
 Visual Studio Code provides a simple experience for managing your submodule dependency versions. The screenshot below shows this working for [Cloud With Chris](https://www.cloudwithchris.com).
 
-![Example showing Cloud With Chris repo and Hugo Creator Git Repositories in Visual Studio Code. There is a tag version for the hugo-creator repository, which can easily be changed in the UI.](https://github.com/chrisreddington/hugo-creator/raw/main/images/vscode-submodules.png "Example showing Cloud With Chris repo and Hugo Creator Git Repositories in Visual Studio Code. There is a tag version for the hugo-creator repository, which can easily be changed in the UI.")
+![Example showing Cloud With Chris repo and Hugo Creator Git Repositories in Visual Studio Code. There is a tag version for the hugo-creator repository, which can easily be changed in the UI.](https://raw.githubusercontent.com/cloudwithchris/hugo-creator/main/images/vscode-submodules.png "Example showing Cloud With Chris repo and Hugo Creator Git Repositories in Visual Studio Code. There is a tag version for the hugo-creator repository, which can easily be changed in the UI.")
 
 ## Usage
 
