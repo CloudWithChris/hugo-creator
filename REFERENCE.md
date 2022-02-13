@@ -1,4 +1,5 @@
 # Reference
+
 Hugo Creator is a theme for the Hugo Static Site Generator. It is intended for content creators of all varieties. Whether you're a blogger, podcaster or YouTuber - The theme should hopefully meet your needs!
 
 This guide is intended for those that wish to use the theme, giving additional guidance to configure it to your specific scenario. If the theme doesn't meet that, then why not consider [making a contribution](contributing.md)?
@@ -6,27 +7,26 @@ This guide is intended for those that wish to use the theme, giving additional g
 - [Reference](#reference)
   - [Site Config Settings](#site-config-settings)
     - [Core Site Configuration](#core-site-configuration)
-    - [Site Rendering Options](#site-rendering-options)
-    - [Site Configuration](#site-configuration)
-    - [Site Required Settings](#site-required-settings)
+    - [Menu Configuration](#menu-configuration)
+    - [Module Configuration](#module-configuration)
+    - [Outputs](#outputs)
+    - [Site Configuration Parameters](#site-configuration-parameters)
+      - [Content](#content)
+      - [Features](#features)
+      - [Security](#security)
     - [Privacy Settings](#privacy-settings)
+    - [Taxonomy Settings](#taxonomy-settings)
   - [Archetypes](#archetypes)
-    + [Community](#community)
-      - [Community Frontmatter Details](#community-frontmatter-details)
-    + [Event](#event)
-      - [Event Frontmatter Details](#event-frontmatter-details)
-      - [Event Activity Frontmatter Details](#event-activity-frontmatter-details)
-      - [Event Sponsor Frontmatter Details](#event-sponsor-frontmatter-details)
-      - [Single Event Sites](#single-event-sites)
-      - [Multi Event Sites](#multi-event-sites)
-    + [Group](#group)
-      - [Group Frontmatter Details](#group-frontmatter-details)
-      - [Group Organizer Frontmatter Details](#group-organizer-frontmatter-details)
-      - [Group Sponsor Frontmatter Details](#group-sponsor-frontmatter-details)
-      - [Single Group Sites](#single-group-sites)
-      - [Multi Group Sites](#multi-group-sites)
-    + [Speaker](#speaker)
-      - [Speaker Frontmatter Details](#speaker-frontmatter-details)
+    - [Blog](#blog)
+      - [Blog Frontmatter Details](#blog-frontmatter-details)
+    - [Episode](#episode)
+      - [Episode frontmatter details](#episode-frontmatter-details)
+    - [Person](#person)
+      - [Person Frontmatter Details](#person-frontmatter-details)
+    - [Series](#series)
+      - [Series Frontmatter Details](#series-frontmatter-details)
+    - [Talk](#talk)
+      - [Talk Frontmatter Details](#talk-frontmatter-details)
 
 ## Site Config Settings
 
