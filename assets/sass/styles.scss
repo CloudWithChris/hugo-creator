@@ -98,6 +98,29 @@ div.tags a:last-child:after {
   content: "";
 }
 
+.banner {
+  padding: 0;
+  border: none;
+}
+
+.background {
+  position: relative;
+  z-index: 1;
+}
+
+.background:before {
+  background: $accent-color;
+  min-height: 25%;
+  opacity: 60%; 
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 .row {
   display: flex;
 }

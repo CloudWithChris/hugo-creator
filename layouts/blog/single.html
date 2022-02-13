@@ -4,53 +4,62 @@
 
   {{ $blog := . }}
 
-  <div class="container">
+  <div class="container mb-3">
     <div class="col">
-      <div class="row pt-5 ">
+      <div class="row pt-3 ">
         {{ partial "content/breadcrumbs.html" . }}
       </div>
-      <div class="row py-3">
-          {{ with .Params.banner }}
-            {{- partial "content/banner.html" $blog -}}
-          {{ end }}
-      </div>
-      <div class="row">
-        <div class="d-flex align-items-center mb-4">
-          <h1>{{ .Title }}</h1>
-          <span></span>
-          
-          {{ partial "content/socialshare.html" . }}
-        </div>
 
-      </div>
-      <div class="row">
-        <div class="d-flex align-items-center mb-4 text-muted">
-          {{ partial "content/display-people-small.html" (dict "people" .Params.Authors "site" $site )}}
-          <span class="d-flex align-items-center ml-3" title="{{ .PublishDate.Format "January 2, 2006" }}">
-            <i class="fa-solid fa-calendar"></i>
-            {{ .PublishDate.Format "January 2, 2006" }}
-          </span>
-          {{ with .Params.Series }}
-          <span class="d-flex align-items-center ml-3">
-            <i class="fa-solid fa-layer-group"></i>
-            {{ partial "content/series-new.html" (dict "taxo" "series" "value" . "site" $.Site ) }}
-          </span>
-          {{ end }}
-        </div>      
-      </div>
-      <div class="row">
-        <div class="d-flex align-items-center mb-4 text-muted tags">
-          {{ with .Params.tags }}
-            {{ partial "content/tags-new.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}
-          {{ end }}
+      {{ with .Params.banner }}
+        <div class="row mb-3">
+          {{- partial "content/banner.html" $blog -}}
+        </div>
+      {{ end }}
+
+      {{ if (not (.Params.banner))  }}
+      <div class="row mb-3">
+        <div class="d-flex">
+          <div class="me-auto">
+            <h1>{{ .Title }}</h1>
+          </div>
+          <div>{{ partial "content/socialshare.html" . }}</div>
         </div>
       </div>
+      {{ end }}
 
-      <p>{{ .Params.Description }}</p>
+      <div class="row mb-3">
+        <div class="d-flex">
+          <div>
+            <p>
+              {{ partial "content/display-people-small.html" (dict "people" .Params.Authors "site" $site )}}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="d-flex ms-1">
+          {{ partial "content/published.html" . }}
+        </div>
+      </div>
+      {{ with .Params.Series }}
+        <div class="row mb-3">
+          <div class="d-flex ms-1">
+              {{ partial "content/series-new.html" (dict "taxo" "series" "value" . "site" $.Site ) }}
+          </div>
+        </div>    
+      {{ end }}
+      {{ with .Params.tags }}
+        <div class="row mb-3">
+          <div class="align-self-center">
+            <div class="d-flex ms-1 tags">
+              {{ partial "content/tags-new.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}
+            </div>
+          </div>
+        </div>
+      {{ end }}
+
+      <p class="ms-1">{{ .Params.Description | markdownify }}</p>
       
-      <div class="row py-2 text-center">
-        {{ partial "content/series-selector.html" (dict "site" $.Site "page" $page ) }}
-      </div>
     </div>
   </div>
 {{ end }}

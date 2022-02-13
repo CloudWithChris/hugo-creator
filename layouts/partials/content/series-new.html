@@ -1,8 +1,12 @@
 {{ $taxo := .taxo }}
 {{ $site := .site }}
 
-{{ range $value := .value }}
-  {{ with $site.GetPage (printf "/%s/%s" $taxo ($value | urlize)) }}
-    <a href="{{ .Permalink  }}">{{ $value | humanize }}</a>
-  {{- end -}}
-{{ end }}
+<i class="fa-solid fa-folder me-2"></i>
+
+<span class="align-items-center">
+  {{ range $value := .value }}
+    {{ with $site.GetPage (printf "/%s/%s" $taxo ($value | urlize)) }}
+      <a href="{{ .Permalink  }}" class="d-flex align-items-center text-muted text-decoration-none">{{ $value | humanize }}</a>
+    {{- end -}}
+  {{ end }}
+</span>
