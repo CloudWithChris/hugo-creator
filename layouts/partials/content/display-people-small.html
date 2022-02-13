@@ -5,7 +5,10 @@
   {{ range $name := . }}
     {{ with $site.GetPage (printf "/person/%s" .) }}
       {{ $image := .Resources.GetMatch .Params.image }}
-      <a href="{{ .Permalink | relURL}}"><img src="{{ $image.RelPermalink }}" width="50" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
+      <a href="{{ .Permalink | relURL}}" class="d-flex align-items-center text-muted text-decoration-none">
+        <img src="{{ $image.RelPermalink }}" width="50" class="mr-2 rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" />
+        <span>{{ .Title }}</span>
+      </a>
     {{ end }}
   {{ end }}
 {{ end }}

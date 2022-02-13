@@ -87,6 +87,17 @@ main a:hover {
   text-decoration: none;
 }
 
+div.tags {
+  font-weight: 600;
+}
+
+div.tags a:after {
+  content: ", ";
+}   
+div.tags a:last-child:after {
+  content: "";
+}
+
 .row {
   display: flex;
 }

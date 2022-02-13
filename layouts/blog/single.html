@@ -14,27 +14,39 @@
             {{- partial "content/banner.html" $blog -}}
           {{ end }}
       </div>
-      <div class="row py-3 text-center">
-          {{ partial "content/display-people.html" (dict "people" .Params.Authors "site" $site )}}
-      </div>
-      <div class="row py-2 text-center">
-        {{ partial "content/content-published.html" (dict "people" .Params.Authors "site" $site )}}
-      </div>
-      <div class="row py-2 text-center">
-        {{ partial "content/socialshare.html" . }}
-      </div>
-      
-      {{ with .Params.tags }}
-        <div class="row py-2 text-center">
-          <p>{{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}</p>
+      <div class="row">
+        <div class="d-flex align-items-center mb-4">
+          <h1>{{ .Title }}</h1>
+          <span></span>
+          
+          {{ partial "content/socialshare.html" . }}
         </div>
-      {{ end }}
 
-      {{ with .Params.Series }}
-      <div class="row py-2 text-center">
-        {{ partial "content/series.html" (dict "taxo" "series" "value" . "site" $.Site ) }}
       </div>
-      {{ end }}
+      <div class="row">
+        <div class="d-flex align-items-center mb-4 text-muted">
+          {{ partial "content/display-people-small.html" (dict "people" .Params.Authors "site" $site )}}
+          <span class="d-flex align-items-center ml-3" title="{{ .PublishDate.Format "January 2, 2006" }}">
+            <i class="fa-solid fa-calendar"></i>
+            {{ .PublishDate.Format "January 2, 2006" }}
+          </span>
+          {{ with .Params.Series }}
+          <span class="d-flex align-items-center ml-3">
+            <i class="fa-solid fa-layer-group"></i>
+            {{ partial "content/series-new.html" (dict "taxo" "series" "value" . "site" $.Site ) }}
+          </span>
+          {{ end }}
+        </div>      
+      </div>
+      <div class="row">
+        <div class="d-flex align-items-center mb-4 text-muted tags">
+          {{ with .Params.tags }}
+            {{ partial "content/tags-new.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}
+          {{ end }}
+        </div>
+      </div>
+
+      <p>{{ .Params.Description }}</p>
       
       <div class="row py-2 text-center">
         {{ partial "content/series-selector.html" (dict "site" $.Site "page" $page ) }}
