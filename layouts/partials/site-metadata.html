@@ -47,10 +47,10 @@
   <meta property="og:description" content="{{ .Site.Params.content.site.description }}" />
   <meta name="twitter:description" content="{{ .Site.Params.content.site.description }}" />
 {{ else }}
-<meta name="description" content="{{ .Params.description }}" />
-<meta itemprop="description" content="{{ .Params.description }}" />
-<meta property="og:description" content="{{ .Params.description }}" />
-<meta name="twitter:description" content="{{ .Params.description }}" />
+<meta name="description" content="{{ .Params.description | plainify }}" />
+<meta itemprop="description" content="{{ .Params.description | plainify }}" />
+<meta property="og:description" content="{{ .Params.description | plainify }}" />
+<meta name="twitter:description" content="{{ .Params.description | plainify }}" />
 {{ end }}
 
 <base href="{{ .Permalink }}">
@@ -316,7 +316,7 @@
         {{- end -}}
       ],
       "url": {{ .Permalink  }},
-      "description": "{{ .Params.Description }}",
+      "description": "{{ .Params.Description | plainify }}",
       "associatedMedia": [
         {{ with .Params.podcast_file }}
           {
@@ -331,7 +331,7 @@
             "contentUrl": {{ printf "%s%s" "https://youtu.be/" . | absURL }},
             "name": "{{ $episode.Title }}",
             "thumbnailUrl": {{ $episode.Params.image | absURL }},
-            "description": "{{ $episode.Params.Description }}",
+            "description": "{{ $episode.Params.Description | plainify }}",
             "uploadDate": "{{ $episode.Date.Format "2006-01-02" }}",
             
           },
@@ -389,6 +389,7 @@
       "@context": "http://schema.org", 
       "@type": "BlogPosting",
       "name": {{ .Title }},
+      "description": {{ .Params.Description | plainify }},
       "mainEntityOfPage": "True",
       "dateModified": "{{ .Lastmod.Format "2006-01-02" }}",
       "headline": {{ .Title }},
@@ -400,11 +401,10 @@
             "name": "{{ $person.Title }}",
             "image": {{ $person.Params.image | absURL }},
             "url": {{ $person.Permalink }}
-          }
+          },
         {{- end -}} 
       ],
       "datePublished": "{{ .Date.Format "2006-01-02" }}",
-      "description": {{ .Description }},
       "wordCount": {{ .WordCount }},
       "image": {{ .Params.image | absURL }},
       "url": {{ .Permalink  }},
@@ -449,7 +449,7 @@
       "@context": "http://schema.org", 
       "@type": "Event",
       "name": {{ .Title }},
-      "description": {{ .Params.Description }},
+      "description": {{ .Params.Description | plainify }},
       "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
       "eventStatus": "https://schema.org/EventScheduled",
       "performer": [
