@@ -40,6 +40,11 @@ footer a {
   color: #FFFFFF;
 }
 
+.carousel .item img {
+  max-height: 250px;
+  min-width: auto;
+}
+
 .flex {  
   display: flex;
   flex-direction: column;

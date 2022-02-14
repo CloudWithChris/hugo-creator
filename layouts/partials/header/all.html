@@ -1,6 +1,14 @@
 
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-cwc">
+  <div class="d-flex align-items-center">
+    <div class="p-2 bd-highlight">Flex item</div>
+    <div class="p-2 bd-highlight">Flex item</div>
+    <div class="ms-auto p-2 bd-highlight">
+      <div class="g-ytsubscribe" data-channel="CloudWithChris" data-layout="default" data-count="default"
+      ></div>
+    </div>
+  </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-cwc py-4">
     <div class="container">
         <a class="navbar-brand" href="{{ "/" | relURL }}"><img src="{{ .Site.Params.content.site.logo | relURL }}" alt="{{ .Site.Title }}" title="{{ .Site.Title }}" height="145" /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,27 +24,52 @@
           </ul>          
           <form class="d-flex" action="{{ "search" | relURL }}">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-query" name="s">
-            <button class="btn btn-nav" type="submit">Search</button>
+            <button class="btn btn-nav" type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i> Search</button>
           </form>        
         </div>
     </div>
   </nav>
-  
-  <div class="navbar-dark bg-cwc header-area">
-    <p>
-      {{ with .Site.Params.content.channels.apple }}           
-        <a href="{{ . }}"><button type="button" aria-label="Apple Podcasts" class="btn btn-social btn-apple btn-rounded"><i class="fab fa-apple"></i></button></a>
-      {{ end }}
-      {{ with .Site.Params.content.channels.google }}      
-        <a href="{{ . }}"><button type="button" aria-label="Google Podcasts" class="btn btn-social btn-google btn-rounded"><i class="fab fa-google"></i></button></a>
-      {{ end }}           
-      <a href="{{ "/episode/index.xml" | relURL }}"><button type="button" aria-label="Podcast RSS feed" class="btn btn-social btn-rss btn-rounded"><i class="fas fa-rss"></i></button></a>
-      {{ with .Site.Params.content.channels.spotify }}          
-        <a href="{{ . }}"><button type="button" aria-label="Spotify" class="btn btn-social btn-spotify btn-rounded"><i class="fab fa-spotify"></i></button></a>
-      {{ end }}     
-      {{ with .Site.Params.content.Social.YouTube }}     
-        <a href="https://www.youtube.com/c/{{ . }}"><button type="button" aria-label="YouTube" class="btn btn-social btn-youtube btn-rounded"><i class="fab fa-youtube"></i></button></a>
-      {{ end }}
-      <a href="{{ "/blog/index.xml" | relURL }}"><button type="button" aria-label="Blog RSS feed" class="btn btn-social btn-rss btn-rounded"><i class="fas fa-blog"></i></button></a>
+
+  {{ $featuredContent := where .Site.Pages "Params.featured" ">" 0 }}
+  {{ $featuredContentCount := len $featuredContent }}
+  {{ if (and .IsHome (gt $featuredContentCount 0)) }}
+  <div class="row">
+    <div id="featuredContent" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        {{ range $index, $value := $featuredContent }}
+          <button type="button" data-bs-target="#featuredContent" data-bs-slide-to="{{ $index }}" {{ if (eq $index 0) }}class="active"{{ end }} aria-current="true" aria-label="{{ $value.Title}}"></button>
+        {{ end }}
+      </div>
+      <div class="carousel-inner">
+        {{ range $index, $value := $featuredContent }}
+          <div class="carousel-item {{ if (eq $index 0) }}active{{ end }}">
+            {{ $image := .Resources.GetMatch .Params.Banner }}
+            {{ if $image }}
+              {{ template "carouselImage" dict "currentItem" .Page "url" ($image.RelPermalink | relURL) "index" $index }}
+            {{ else }}
+              {{ template "carouselImage" dict "currentItem" .Page "url" (.Params.Image | relURL) "index" $index }}
+            {{ end }}
+          </div>
+        {{ end }}
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#featuredContent" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#featuredContent" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
   </div>
+  {{ end }}
 </header>
+
+{{ define "carouselImage" }}
+<a href="{{ .currentItem.Permalink }}"><img src="{{ .url }}" class="d-block w-100" alt="{{ .Title }}">
+<div class="carousel-caption d-none d-md-block">
+  <h5>{{ .currentItem.Title }}</h5>
+  <p>{{ .currentItem.Params.Description }}</p>
+</div></a>
+{{ end }}
