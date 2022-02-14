@@ -1,5 +1,6 @@
 {{ define "top" }}
 {{ $site := .Site }}
+{{ $episode := . }}
   <div class="container mb-3">
     <div class="col">
       <div class="row pt-3 ">
@@ -8,7 +9,7 @@
 
       {{ with .Params.banner }}
         <div class="row mb-3">
-          {{- partial "content/banner.html" . -}}
+          {{- partial "content/banner.html" $episode -}}
         </div>
       {{ end }}
 
@@ -63,10 +64,25 @@
 
 {{ define "main" }}
 
+{{ $title := .Title }}
   <div class="container">
-    <p>{{ .Content }}</p>
-    <div class="dropdown-divider"></div>
-    {{ partial "block/audio-player.html" . }}
+    {{- with .Params.youtube -}}
+      <div class="row my-3">
+        <h2>Watch on YouTube</h2>
+      </div>
+      <div class="row mb-3">
+        <div class="ratio ratio-16x9">
+          <iframe src="https://www.youtube.com/embed/{{ . }}" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen title="{{ $title }}">
+          </iframe>
+        </div>
+      </div>
+    {{- end -}}
+      
+    <div class="row mb-3">
+      {{ partial "block/audio-player.html" . }}
+    </div>
   </div>
 {{ end }}
 

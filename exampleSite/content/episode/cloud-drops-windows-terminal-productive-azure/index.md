@@ -10,6 +10,7 @@ hosts:
 - chrisreddington
 images:
 - "images/cloud-drops-windows-terminal-productive-azure.jpg"
+banner: "images/banner.jpg"
 podcast_bytes: "5382144"
 podcast_duration: "05:34.000"
 podcast_file: "Cloud Drop - How windows terminal can make YOU productive with Azure.mp3"
