@@ -1,39 +1,68 @@
 {{ define "top" }}
   {{ $site := .Site }}
-  {{ $page := .Page }}
+  {{ $page := . }}
 
-  <div class="py-5 container" align="center">
+  <div class="container mb-3">
     <div class="col">
-      <div class="row float-center">
+      <div class="row pt-3 ">
         {{ partial "content/breadcrumbs.html" . }}
-        <p>
-          {{ partial "content/display-people.html" (dict "people" .Params.Authors "site" $site )}}
-        </p>
       </div>
-      <div class="row">
-        {{ partial "content/socialshare.html" . }}
-      </div>
-      <div class="row d-flex align-items-center justify-content-center">
-        <h2>Published on {{ .PublishDate.Format "Mon, Jan 2, 2006" }}</h2>
-      </div>
-      
-      {{ with .Params.tags }}
-        <p>{{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}</p>
+
+      {{ with .Params.banner }}
+        <div class="row mb-3">
+          {{- partial "content/banner.html" $page -}}
+        </div>
       {{ end }}
 
-      {{ with .Params.Series }}
-        <p>
-          <p>{{ partial "content/series.html" (dict "taxo" "series" "value" . "site" $.Site ) }}</p>
-        </p>
+      {{ if (not (.Params.banner))  }}
+      <div class="row mb-3">
+        <div class="d-flex">
+          <div class="me-auto">
+            <h1>{{ .Title }}</h1>
+          </div>
+          <div>{{ partial "content/socialshare.html" . }}</div>
+        </div>
+      </div>
       {{ end }}
+
+      <div class="row mb-3">
+        <div class="d-flex">
+          <div>
+            <p>
+              {{ partial "content/display-people-small.html" (dict "people" .Params.Authors "site" $site )}}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="d-flex ms-1">
+          {{ partial "content/published.html" . }}
+        </div>
+      </div>
+      {{ with .Params.Series }}
+        <div class="row mb-3">
+          <div class="d-flex ms-1">
+              {{ partial "content/series-new.html" (dict "taxo" "series" "value" . "site" $.Site ) }}
+          </div>
+        </div>    
+      {{ end }}
+      {{ with .Params.tags }}
+        <div class="row mb-3">
+          <div class="align-self-center">
+            <div class="d-flex ms-1 tags">
+              {{ partial "content/tags-new.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}
+            </div>
+          </div>
+        </div>
+      {{ end }}
+
+      <p class="ms-1">{{ .Params.Description | markdownify }}</p>
       
-      {{ partial "content/series-selector.html" (dict "site" $.Site "page" $page ) }}
     </div>
   </div>
 {{ end }}
 
 {{ define "main" }}
-  {{ $site := .Site }}
   {{ $page := .Page }}
 
   <div class="container">
@@ -55,7 +84,6 @@
 
 {{ define "bottom" }}
   {{ $site := .Site }}
-  {{ $page := .Page }}
 
   <div class="py-5 container" align="center">
     <div class="col">

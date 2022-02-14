@@ -10,6 +10,7 @@ hosts:
 - chrisreddington
 images:
 - "images/cloud-drops-windows-terminal-productive-azure.jpg"
+banner: "images/banner.jpg"
 podcast_bytes: "5382144"
 podcast_duration: "05:34.000"
 podcast_file: "Cloud Drop - How windows terminal can make YOU productive with Azure.mp3"
@@ -23,5 +24,6 @@ tags:
 - DevOps
 - Productivity
 youtube: W2LUQbd1VzU
+featured: 2
 ---
 Windows Terminal is a modern application that allows you to use your command-line of choice, whether that is the Windows Command Prompt, PowerShell, PowerShell Core, Windows Subsystem for Linux  or the Azure Cloud Shell. This Cloud Drop shows you how to install Windows Terminal, and some tips/tricks in making you productive in Azure!

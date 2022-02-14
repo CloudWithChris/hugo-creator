@@ -40,6 +40,11 @@ footer a {
   color: #FFFFFF;
 }
 
+.carousel .item img {
+  max-height: 250px;
+  min-width: auto;
+}
+
 .flex {  
   display: flex;
   flex-direction: column;
@@ -85,6 +90,40 @@ main a {
 main a:hover {
   color: $footer-color;
   text-decoration: none;
+}
+
+div.tags {
+  font-weight: 600;
+}
+
+div.tags a:after {
+  content: ", ";
+}   
+div.tags a:last-child:after {
+  content: "";
+}
+
+.banner {
+  padding: 0;
+  border: none;
+}
+
+.background {
+  position: relative;
+  z-index: 1;
+}
+
+.background:before {
+  background: $accent-color;
+  min-height: 25%;
+  opacity: 60%; 
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .row {

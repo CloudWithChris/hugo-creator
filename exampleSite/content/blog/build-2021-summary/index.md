@@ -7,9 +7,11 @@ image: img/cloudwithchrislogo.png
 date: "2021-05-28T12:00:00Z"
 images:
 - img/cloudwithchrislogo.png
+banner: "images/conference.jpg"
 tags:
 - Blogging
 title: My Microsoft //Build 2021 Highlights
+featured: 1
 ---
 If you follow the news around Microsoft, you've probably found it very hard to miss the fact that the Microsoft //Build conference happened this week. Microsoft //Build is their annual developer-focused conference, where they typically announce new features, updates and share their strategy as they evolve technologies.
 
