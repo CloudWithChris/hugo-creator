@@ -13,11 +13,8 @@
       <div class="col-12 col-sm-9 col-md-10 col-xl-8">
         <div class="card-body episode-card">         
           
-        {{ if $value.Params.externalLink }}
-          <a href="{{ $value.Params.externalLink }}"><h2 class="card-title">{{ $value.Title }}</h3></a>
-        {{ else }}
-          <a href="{{ $value.Permalink }}"><h2 class="card-title">{{ $value.Title }}</h3></a>
-        {{ end }}
+          
+        <a href="{{ $value.Permalink }}"><h2 class="card-title">{{ $value.Title }}</h3></a>
         {{ with $value.Params.eventName }}<h3>{{ . }}</h3>{{ end }}
         <p class="card-text">{{ $value.Content | truncate 300}}</p>
         

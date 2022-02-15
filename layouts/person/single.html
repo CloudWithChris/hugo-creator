@@ -1,34 +1,67 @@
 {{ define "top" }}
-  <section class="py-5 container" align="center">
+{{ $site := .Site }}
+{{ $episode := . }}
+  <div class="container mb-3">
     <div class="col">
-      <div class="row">
+      <div class="row pt-3 ">
         {{ partial "content/breadcrumbs.html" . }}
       </div>
+
+      {{ with .Params.banner }}
+        <div class="row mb-3">
+          {{- partial "content/banner.html" $episode -}}
+        </div>
+      {{ end }}
+
+      {{ if (not (.Params.banner))  }}
+      <div class="row mb-3">
+        <div class="d-flex align-items-center">
+          <div class="me-auto">
+            <h1>{{ .Title }}</h1>
+          </div>
+          <div class="pe-3">            
+            {{ $image := .Resources.GetMatch .Params.image }}
+            <a href="{{ .Permalink | relURL}}"><img src="{{ $image.RelPermalink }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+
+      <div class="row mb-3">
+        <span>
+          {{ with .Params.Github }}
+            <a href="https://github.com/{{ . }}" aria-label="GitHub"><button type="button" aria-label="GitHub" class="btn btn-social btn-github btn-rounded"><i class="fab fa-github"></i></button></a>
+          {{ end }}
+          {{ with .Params.Linkedin }}
+            <a href="https://www.linkedin.com/in/{{ . }}" aria-label="LinkedIn"><button aria-label="LinkedIn" type="button" class="btn btn-social btn-linkedin btn-rounded"><i class="fab fa-linkedin"></i></button></a>
+          {{ end }}
+          {{ with .Params.Twitch }}
+            <a href="https://twitch.tv/{{ . }}" aria-label="Twitch"><button type="button" aria-label="Twitch" class="btn btn-social btn-twitch btn-rounded"><i class="fab fa-twitch"></i></button></a>
+          {{ end }}
+          {{ with .Params.Twitter }}
+            <a href="https://twitter.com/{{ . }}" aria-label="Twitter"><button aria-label="Twitter" type="button" class="btn btn-social btn-twitter btn-rounded"><i class="fab fa-twitter"></i></button></a>
+          {{ end }}
+          {{ with .Params.Website }}
+            <a href="{{ . }}" aria-label="Website"><button aria-label="Website" type="button" class="btn btn-social btn-website btn-rounded"><i class="fas fa-link"></i></button></a>
+          {{ end }}
+          {{ with .Params.YouTube }}
+            <a href="https://www.youtube.com/c/{{ . }}"><button type="button" aria-label="YouTube" class="btn btn-social btn-youtube btn-rounded"><i class="fab fa-youtube"></i></button></a>
+          {{ end }}
+        </span>
+      </div>
+      {{ with .Params.tags }}
+        <div class="row mb-3">
+          <div class="align-self-center">
+            <div class="d-flex ms-1 tags">
+              {{ partial "content/tags-new.html" (dict "taxo" "tags" "value" . "site" $site ) }}
+            </div>
+          </div>
+        </div>
+      {{ end }}
+
+      <p class="ms-3">{{ .Content }}</p>
+      
     </div>
-  </section>
-  <div class="container" align="center">
-    <img src="{{ .Resources.GetMatch .Params.image }}" width="150" class="rounded-circle z-depth-2" alt="{{ .Title }}" title="{{ .Title }}" />
-    <p>
-      {{ with .Params.Github }}
-        <a href="https://github.com/{{ . }}" aria-label="GitHub"><button type="button" aria-label="GitHub" class="btn btn-social btn-github btn-rounded"><i class="fab fa-github"></i></button></a>
-      {{ end }}
-      {{ with .Params.Linkedin }}
-        <a href="https://www.linkedin.com/in/{{ . }}" aria-label="LinkedIn"><button aria-label="LinkedIn" type="button" class="btn btn-social btn-linkedin btn-rounded"><i class="fab fa-linkedin"></i></button></a>
-      {{ end }}
-      {{ with .Params.Twitch }}
-        <a href="https://twitch.tv/{{ . }}" aria-label="Twitch"><button type="button" aria-label="Twitch" class="btn btn-social btn-twitch btn-rounded"><i class="fab fa-twitch"></i></button></a>
-      {{ end }}
-      {{ with .Params.Twitter }}
-        <a href="https://twitter.com/{{ . }}" aria-label="Twitter"><button aria-label="Twitter" type="button" class="btn btn-social btn-twitter btn-rounded"><i class="fab fa-twitter"></i></button></a>
-      {{ end }}
-      {{ with .Params.Website }}
-        <a href="{{ . }}" aria-label="Website"><button aria-label="Website" type="button" class="btn btn-social btn-website btn-rounded"><i class="fas fa-link"></i></button></a>
-      {{ end }}
-      {{ with .Params.YouTube }}
-        <a href="https://www.youtube.com/c/{{ . }}"><button type="button" aria-label="YouTube" class="btn btn-social btn-youtube btn-rounded"><i class="fab fa-youtube"></i></button></a>
-      {{ end }}
-    </p>
-    <p>{{ .Content }}</p>
   </div>
 {{ end }}
 

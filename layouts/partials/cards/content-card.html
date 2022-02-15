@@ -2,59 +2,56 @@
 {{ $site := .Site }}
 {{ $scratch := .Scratch }}
 
-<div class="col-md-6 col-12">    
-  <div class="row g-0">
-    <div class="col-12 col-sm-4">
-      <p>
-        {{ partial "content/content-image.html" . }}
-      </p>
-        <p>
-          {{ if eq .Section "talk" }}
-            <span class="badge bg-warning text-dark d-inline pull-right">{{ .Params.talkType | humanize }}</span>
-          {{ else }}
-            <span class="badge bg-warning text-dark d-inline pull-right">{{ .Type | humanize }}</span>
-          {{ end }}
-        </p>
-    </div>
-    <div class="col-12 col-sm-8">
-      <div class="card-body episode-card">
-        
-        {{ if .Params.externalLink }}
-          <a href="{{ .Params.externalLink }}"><h3 class="card-title">{{ .Title }}</h3></a>
+<div class="col-md-6">
+  <div class="row mb-3">
+    <div class="d-flex align-items-center mb-3">
+      <div class="pe-3">              
+        {{ $image := .Resources.GetMatch .Params.image }}         
+        {{ if $image }}
+          <a href="{{ .Permalink | relURL}}"><img src="{{ $image.RelPermalink }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
         {{ else }}
-          <a href="{{ .Permalink }}"><h3 class="card-title">{{ .Title }}</h3></a>
-        {{ end }}
-
-        <p class="card-text">{{ .Content | truncate 300}}</p>
-        
-        {{ with .Params.tags }}
-          <p>{{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}</p>
-        {{ end }}
-        {{ with .Params.Series }}
-          <p>
-            <p>{{ partial "content/series.html" (dict "taxo" "series" "value" . "site" $.Site ) }}</p>
-          </p>
-        {{ end }}
-        <p class="card-text">
- 
-          {{ with .Params.Authors }}
-            {{ partial "content/display-people-small.html" (dict "people" . "site" $site )}}
-          {{ end }}
-
-          {{ with .Params.hosts }}
-            {{ partial "content/display-people-small.html" (dict "people" . "site" $site )}}
-          {{ end }}
-
-          {{ with .Params.guests }}
-            {{ partial "content/display-people-small.html" (dict "people" . "site" $site )}}
-          {{ end }}
-
-        {{ if eq .Section "talk" }}
-          <small class="text-muted">{{ if eq .Params.upcoming true }}Scheduled for {{ else }}Occured on {{ end }}{{ .Date.Format "Mon, Jan 2, 2006" }}</small></p>
-        {{ else }}
-          <small class="text-muted">{{ if eq .Params.upcoming true }}Scheduled for {{ else }}Published on {{ end }}{{ .PublishDate.Format "Mon, Jan 2, 2006" }}</small></p>
+          <a href="{{ .Permalink | relURL}}"><img src="{{ .Params.Image | relURL }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
         {{ end }}
       </div>
+      <div class="me-auto">
+      </div>
     </div>
+    <div class="row mb-3 text-start">
+      <a href="{{ .Permalink }}"><h3>{{ .Title }}</h3></a>
+    </div>
+
+    {{ if eq .Type "blog" }}
+      <div class="row mb-3">
+        <div class="d-flex flex-row">
+          {{ partial "content/display-people-listing.html" (dict "people" .Params.Authors "site" $site )}}
+        </div>
+      </div>
+    {{ end }}
+
+
+    <div class="row mb-3 text-start">
+      <p>{{ .Params.Description }}</p>
+    </div>
+    <div class="row mb-3">
+      <div class="d-flex">
+        {{ partial "content/published.html" . }}
+      </div>
+    </div>
+    {{ with .Params.Series }}
+      <div class="row mb-3">
+        <div class="d-flex">
+            {{ partial "content/series-new.html" (dict "taxo" "series" "value" . "site" $.Site ) }}
+        </div>
+      </div>    
+    {{ end }}
+    {{ with .Params.tags }}
+      <div class="row mb-3">
+        <div class="align-self-center text-start">
+          <div class="d-flex tags">
+            {{ partial "content/tags-new.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}
+          </div>
+        </div>
+      </div>
+    {{ end }}
   </div>
 </div>

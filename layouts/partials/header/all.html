@@ -1,4 +1,3 @@
-
 <header>
   <div class="d-flex align-items-center">
     <div class="p-2 bd-highlight">Flex item</div>
@@ -30,46 +29,4 @@
         </div>
     </div>
   </nav>
-
-  {{ $featuredContent := where .Site.Pages "Params.featured" ">" 0 }}
-  {{ $featuredContentCount := len $featuredContent }}
-  {{ if (and .IsHome (gt $featuredContentCount 0)) }}
-  <div class="row">
-    <div id="featuredContent" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        {{ range $index, $value := $featuredContent }}
-          <button type="button" data-bs-target="#featuredContent" data-bs-slide-to="{{ $index }}" {{ if (eq $index 0) }}class="active"{{ end }} aria-current="true" aria-label="{{ $value.Title}}"></button>
-        {{ end }}
-      </div>
-      <div class="carousel-inner">
-        {{ range $index, $value := $featuredContent }}
-          <div class="carousel-item {{ if (eq $index 0) }}active{{ end }}">
-            {{ $image := .Resources.GetMatch .Params.Banner }}
-            {{ if $image }}
-              {{ template "carouselImage" dict "currentItem" .Page "url" ($image.RelPermalink | relURL) "index" $index }}
-            {{ else }}
-              {{ template "carouselImage" dict "currentItem" .Page "url" (.Params.Image | relURL) "index" $index }}
-            {{ end }}
-          </div>
-        {{ end }}
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#featuredContent" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#featuredContent" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-  </div>
-  {{ end }}
 </header>
-
-{{ define "carouselImage" }}
-<a href="{{ .currentItem.Permalink }}"><img src="{{ .url }}" class="d-block w-100" alt="{{ .Title }}">
-<div class="carousel-caption d-none d-md-block">
-  <h5>{{ .currentItem.Title }}</h5>
-  <p>{{ .currentItem.Params.Description }}</p>
-</div></a>
-{{ end }}
