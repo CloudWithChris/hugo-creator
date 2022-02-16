@@ -49,11 +49,23 @@
 
 
 {{ define "carouselImage" }}
-<a href="{{ .currentItem.Permalink }}"><img src="{{ .url }}" class="d-block w-100" alt="{{ .Title }}">
-<div class="carousel-caption d-none d-md-block">
-  <h5>{{ .currentItem.Title }}</h5>
-  <p>{{ .currentItem.Params.Description }}</p>
-</div></a>
+
+<a href="{{ .currentItem.Permalink }}">
+  <img src="{{ .url }}" class="img-fluid" alt="{{ .currentPage.Title }}" title="{{ .currentPage.Title }}" />
+<div class="text-white row align-items-end card-img-overlay">
+  <div class="d-flex background">
+    <div class="me-auto align-self-center">
+      <h1 class="card-title">
+        {{ .currentItem.Title }}
+      </h1>
+      <p>
+        {{ .currentItem.Params.Description | markdownify }}
+      </p>
+    </div>
+  </div>
+</div>
+</a>
+
 {{ end }}
 
 {{ define "main" }}
