@@ -26,11 +26,11 @@
 
       <p>{{ .Content }}</p>
 
-      <div class="row">
+      <div class="d-flex">
         {{ $upcomingTalks := first 3 (shuffle (where $.Site.RegularPages "Section" "blog")) }}
           {{ $count := len $upcomingTalks }}
           {{ range $upcomingTalks }}
-            {{- partial "block/random-blog.html" (dict "count" $count "value" . "site" $.Site ) -}}
+            {{- partial "block/upcoming-content.html" . -}}
           {{ end }}
       </div>
     </div>

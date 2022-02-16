@@ -8,7 +8,7 @@
         {{ $upcomingTalks := first 3 (where (where $.Site.RegularPages "Section" "talk") ".Params.upcoming" true).ByDate}}
         {{ $count := len $upcomingTalks }}
         {{ range $upcomingTalks }}   
-          {{- partial "block/upcoming-talk.html" (dict "count" $count "value" . "site" $.Site ) -}}
+          {{- partial "block/upcoming-content.html" (dict "count" $count "value" . "site" $.Site ) -}}
         {{ end }}
       </div>  
       <div class="row text-center pt-5">

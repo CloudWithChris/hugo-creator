@@ -1,0 +1,54 @@
+
+{{ $site := .Site }}
+{{ $scratch := .Scratch }}
+
+<div class="flex-fill">
+  <div class="row mb-3">
+    <div class="pe-3">              
+      {{ $image := .Resources.GetMatch .Params.image }}         
+      {{ if $image }}
+        <a href="{{ .Permalink | relURL}}"><img src="{{ $image.RelPermalink }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
+      {{ else }}
+        <a href="{{ .Permalink | relURL}}"><img src="{{ .Params.Image | relURL }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
+      {{ end }}
+    </div>
+    <div class="me-auto">
+    </div>
+  </div>
+  <div class="row mb-3 text-start">
+    <a href="{{ .Permalink }}"><h3>{{ .Title }}</h3></a>
+  </div>
+  {{ if eq .Type "blog" }}
+      <div class="row mb-3">
+        <div class="d-flex flex-row">
+          {{ partial "content/display-people-listing.html" (dict "people" .Params.Authors "site" $site )}}
+        </div>
+      </div>
+    {{ end }}
+
+    {{ if eq .Type "episode" }}
+      <div class="row mb-3">
+        <div class="d-flex flex-row">
+          {{ partial "content/display-people-listing.html" (dict "people" .Params.Hosts "site" $site )}}
+          {{ partial "content/display-people-listing.html" (dict "people" .Params.Guests "site" $site )}}
+        </div>
+      </div>
+    {{ end }}
+
+    {{ if eq .Type "talk" }}
+      <div class="row mb-3">
+        <div class="d-flex flex-row">
+          {{ partial "content/display-people-listing.html" (dict "people" .Params.Hosts "site" $site )}}
+        </div>
+      </div>
+    {{ end }}
+
+    <div class="row mb-3 text-start">
+      <p>{{ .Params.Description }}</p>
+    </div>
+    <div class="row mb-3">
+      <div class="d-flex">
+        {{ partial "content/published.html" . }}
+      </div>
+    </div>
+</div>

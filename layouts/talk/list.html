@@ -26,11 +26,11 @@
 
       <p>{{ .Content }}</p>
 
-      <div class="row">
+      <div class="d-flex">
         {{ $upcomingTalks := first 3 (where (where $.Site.RegularPages "Section" "talk") ".Params.upcoming" true).ByDate}}
         {{ $count := len $upcomingTalks }}
         {{ range $upcomingTalks }}   
-          {{- partial "block/upcoming-talk.html" (dict "count" $count "value" . "site" $.Site ) -}}
+          {{- partial "block/upcoming-content.html" . -}}
         {{ end }}
       </div>
     </div>

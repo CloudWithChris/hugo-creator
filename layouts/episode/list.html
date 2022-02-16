@@ -62,7 +62,7 @@
       <div class="row float-center">
         <h2 align="center">Coming Up...</h2>
         {{ range first 3 (where (where $.Site.RegularPages "Section" "episode") ".Params.upcoming" true).ByDate }}         
-          {{- partial "block/upcoming-episode.html" . -}}
+          {{- partial "block/upcoming-content.html" . -}}
         {{ end }}
       </div>  
     </section>

@@ -35,9 +35,9 @@
         </div>
       {{ end }}
 
-      <div class="row float-center {{ if eq $featuredContentCount 0 }}pt-3{{ end }}">
+      <div class="d-flex {{ if eq $featuredContentCount 0 }}pt-3{{ end }}">
         {{ range first 3 (where (where $.Site.RegularPages "Section" "episode") ".Params.upcoming" true).ByDate }}         
-          {{- partial "block/upcoming-episode.html" . -}}
+          {{- partial "block/upcoming-content.html" . -}}
         {{ end }}
       </div>  
       <div class="row float-end">
