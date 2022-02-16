@@ -24,7 +24,9 @@
       </div>
       {{ end }}
 
-      <p>{{ .Content }}</p>
+      {{ with .Params.Description}}
+        <p>{{ . | markdownify }}</p>
+      {{ end }}
     </div>
   </div>
 {{ end }}
