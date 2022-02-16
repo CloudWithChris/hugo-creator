@@ -6,7 +6,7 @@
 <div class="col-lg-{{ div 12 $count }} col-sm-12">
   <div class="flex row mb-3">
     <div class="pe-3">              
-      {{ $image := .Resources.GetMatch $content.Params.image }}         
+      {{ $image := $content.Resources.GetMatch $content.Params.image }}         
       {{ if $image }}
         <a href="{{ .Permalink | relURL}}"><img src="{{ $image.RelPermalink }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
       {{ else }}
