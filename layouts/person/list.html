@@ -1,30 +1,31 @@
 {{ define "top" }}
 {{ $site := .Site }}
-{{ $episode := . }}
+{{ $page := . }}
   <div class="container mb-3">
-    <div class="col">
+    <div class="col"> 
       <div class="row pt-3 ">
         {{ partial "content/breadcrumbs.html" . }}
       </div>
 
       {{ with .Params.banner }}
         <div class="row mb-3">
-          {{- partial "content/banner.html" $episode -}}
+          {{- partial "content/banner.html" $page -}}
         </div>
       {{ end }}
 
       {{ if (not (.Params.banner))  }}
       <div class="row mb-3">
-        <div class="d-flex align-items-center">
-          <div class="me-auto">
+        <div class="d-flex">
+          <div class="me-auto align-self-center">
             <h1>{{ .Title }}</h1>
           </div>
-        </div>
-        <div class="row mb-3">
-          <p>{{ .Content }}</p>
+          <div>{{ partial "content/socialshare.html" . }}</div>
         </div>
       </div>
       {{ end }}
+      <div class="row mb-3">
+        <p>{{ .Content }}</p>
+      </div>
     </div>
   </div>
 {{ end }}
