@@ -9,9 +9,9 @@
         {{ $image := .Resources.GetMatch .Params.image }}
         <a href="{{ .Permalink | relURL}}"><img src="{{ $image.RelPermalink }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
       </div>
-      <div class="me-auto">
+      <div class="me-auto text-left">
         <a href="{{ .Permalink }}"><h3>{{ .Title }}</h3></a>
-        <span class="text-left">
+        <span>
         {{ with .Params.Github }}
           <a href="https://github.com/{{ . }}" aria-label="GitHub"><button type="button" aria-label="GitHub" class="btn btn-social btn-github btn-rounded"><i class="fab fa-github"></i></button></a>
         {{ end }}
