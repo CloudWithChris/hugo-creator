@@ -29,7 +29,7 @@
         <div class="d-flex">
           <div>
             <p>
-              {{ partial "content/display-people-small.html" (dict "people" .Params.hosts "site" $site )}}
+              {{ partial "content/people.html" (dict "people" .Params.hosts "site" $site "size" 50 )}}
             </p>
           </div>
         </div>
@@ -56,7 +56,7 @@
       {{ with .Params.Series }}
         <div class="row mb-3">
           <div class="d-flex ms-1">
-              {{ partial "content/series-new.html" (dict "taxo" "series" "value" . "site" $.Site ) }}
+              {{ partial "content/series.html" (dict "taxo" "series" "value" . "site" $.Site ) }}
           </div>
         </div>    
       {{ end }}
@@ -64,7 +64,7 @@
         <div class="row mb-3">
           <div class="align-self-center">
             <div class="d-flex ms-1 tags">
-              {{ partial "content/tags-new.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}
+              {{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}
             </div>
           </div>
         </div>

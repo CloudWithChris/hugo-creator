@@ -1,6 +1,5 @@
 
 {{ $site := .Site }}
-{{ $scratch := .Scratch }}
 {{ $content := . }}
 
 <div class="col-md-6">
@@ -46,30 +45,22 @@
       <a href="{{ .Permalink }}"><h3>{{ .Title }}</h3></a>
     </div>
 
-    {{ if eq .Type "blog" }}
-      <div class="row mb-3">
-        <div class="d-flex flex-row">
-          {{ partial "content/display-people-listing.html" (dict "people" .Params.Authors "site" $site )}}
-        </div>
-      </div>
-    {{ end }}
+    <div class="row mb-3">
+      <div class="d-flex flex-row">
+        {{ if eq .Type "blog" }}
+          {{ partial "content/people.html" (dict "people" .Params.Authors "site" $site "size" 50 )}}
+        {{ end }}
 
-    {{ if eq .Type "episode" }}
-      <div class="row mb-3">
-        <div class="d-flex flex-row">
-          {{ partial "content/display-people-listing.html" (dict "people" .Params.Hosts "site" $site )}}
-          {{ partial "content/display-people-listing.html" (dict "people" .Params.Guests "site" $site )}}
-        </div>
-      </div>
-    {{ end }}
+        {{ if eq .Type "episode" }}
+          {{ partial "content/people.html" (dict "people" .Params.Hosts "site" $site "size" 50 )}}
+          {{ partial "content/people.html" (dict "people" .Params.Guests "site" $site "size" 50 )}}
+        {{ end }}
 
-    {{ if eq .Type "talk" }}
-      <div class="row mb-3">
-        <div class="d-flex flex-row">
-          {{ partial "content/display-people-listing.html" (dict "people" .Params.Hosts "site" $site )}}
-        </div>
+        {{ if eq .Type "talk" }}
+          {{ partial "content/people.html" (dict "people" .Params.Hosts "site" $site "size" 50 )}}
+        {{ end }}
       </div>
-    {{ end }}
+    </div>
 
     <div class="row mb-3 text-start">
       <p>{{ .Params.Description }}</p>
@@ -82,7 +73,7 @@
     {{ with .Params.Series }}
       <div class="row mb-3">
         <div class="d-flex">
-            {{ partial "content/series-new.html" (dict "taxo" "series" "value" . "site" $.Site ) }}
+            {{ partial "content/series.html" (dict "taxo" "series" "value" . "site" $.Site ) }}
         </div>
       </div>    
     {{ end }}
@@ -90,7 +81,7 @@
       <div class="row mb-3">
         <div class="align-self-center text-start">
           <div class="d-flex tags">
-            {{ partial "content/tags-new.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}
+            {{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}
           </div>
         </div>
       </div>

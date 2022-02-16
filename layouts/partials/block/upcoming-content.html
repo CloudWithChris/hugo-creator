@@ -48,7 +48,7 @@
   {{ if eq $content.Type "blog" }}
       <div class="row mb-3">
         <div class="d-flex flex-row">
-          {{ partial "content/display-people-listing.html" (dict "people" $content.Params.Authors "site" $site )}}
+          {{ partial "content/people.html" (dict "people" $content.Params.Authors "site" $site "size" 50 )}}
         </div>
       </div>
     {{ end }}
@@ -56,8 +56,8 @@
     {{ if eq $content.Type "episode" }}
       <div class="row mb-3">
         <div class="d-flex flex-row">
-          {{ partial "content/display-people-listing.html" (dict "people" $content.Params.Hosts "site" $site )}}
-          {{ partial "content/display-people-listing.html" (dict "people" $content.Params.Guests "site" $site )}}
+          {{ partial "content/people.html" (dict "people" $content.Params.Hosts "site" $site "size" 50 )}}
+          {{ partial "content/people.html" (dict "people" $content.Params.Guests "site" $site "size" 50 )}}
         </div>
       </div>
     {{ end }}
@@ -65,7 +65,7 @@
     {{ if eq $content.Type "talk" }}
       <div class="row mb-3">
         <div class="d-flex flex-row">
-          {{ partial "content/display-people-listing.html" (dict "people" $content.Params.Hosts "site" $site )}}
+          {{ partial "content/people.html" (dict "people" $content.Params.Hosts "site" $site "size" 50 )}}
         </div>
       </div>
     {{ end }}

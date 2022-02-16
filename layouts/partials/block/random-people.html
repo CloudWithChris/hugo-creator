@@ -1,7 +1,7 @@
 <div class="row">
   {{ range first 12 (shuffle (where $.Site.RegularPages "Section" "person")) }}
     <div class="col-2">
-      {{ partial "content/content-image.html" . }}
+      {{ partial "content/circular-image.html" . }}
     </div>
   {{ end }}
 </div>
