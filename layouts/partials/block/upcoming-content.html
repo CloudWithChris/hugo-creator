@@ -5,13 +5,21 @@
 
 <div class="col-lg-{{ div 12 $count }} col-sm-12">
   <div class="flex row mb-3">
-    <div class="pe-3">              
-      {{ $image := $content.Resources.GetMatch $content.Params.image }}         
-      {{ if $image }}
-        <a href="{{ .Permalink | relURL}}"><img src="{{ $image.RelPermalink }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
+    <div class="pe-3">  
+      {{ with $content.Params.Banner }}     
+        {{ $banner := $content.Resources.GetMatch $content.Params.banner }}
+        <a href="{{ $content.Permalink | relURL}}"><img class="img-fluid" src="{{ $banner.RelPermalink }}" alt="{{ $content.Title }}" title="{{ $content.Title }}" /></a>
       {{ else }}
-        <a href="{{ .Permalink | relURL}}"><img src="{{ $content.Params.Image | relURL }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
+        {{ $image := $content.Resources.GetMatch $content.Params.image }}    
+        <div class="text-center"> 
+          {{ if $image }}
+            <a href="{{ $content.Permalink | relURL}}"><img src="{{ $image.RelPermalink }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ $content.Title }}" title="{{ $content.Title }}" /></a>
+          {{ else }}
+            <a href="{{ $content.Permalink | relURL}}"><img src="{{ $content.Params.Image | relURL }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ $content.Title }}" title="{{ $content.Title }}" /></a>
+          {{ end }}
+        </div>
       {{ end }}
+      
     </div>
     <div class="me-auto">
     </div>
