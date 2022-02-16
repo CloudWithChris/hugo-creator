@@ -1,14 +1,34 @@
 {{ define "top" }}
-<section class="py-5 container">
-  <div class="row">
-    {{ partial "content/breadcrumbs.html" . }}
-  </div>
+{{ $site := .Site }}
+{{ $page := . }}
+  <div class="container mb-3">
+    <div class="col">
+      <div class="row pt-3 ">
+        {{ partial "content/breadcrumbs.html" . }}
+      </div>
 
-  <div class="row text-center">
-    {{ .Content }}
-  </div> 
-</section>
+      {{ with .Params.banner }}
+        <div class="row mb-3">
+          {{- partial "content/banner.html" $page -}}
+        </div>
+      {{ end }}
+
+      {{ if (not (.Params.banner))  }}
+      <div class="row mb-3">
+        <div class="d-flex">
+          <div class="me-auto">
+            <h1><i class="fa-solid fa-tags"></i> {{ .Title }}</h1>
+          </div>
+          <div>{{ partial "content/socialshare.html" . }}</div>
+        </div>
+      </div>
+      {{ end }}
+
+      <p>{{ .Content }}</p>
+    </div>
+  </div>
 {{ end }}
+
 {{ define "main" }}
 <div class="container" align="center">
   <div class="row g-2">      

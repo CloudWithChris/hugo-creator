@@ -109,11 +109,28 @@ cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express",
     }
     </script>
     <script type="text/plain" async src="{{ "js/analytics.js" | relURL }}" cookie-consent="tracking"></script>
-    <script type="text/plain" src="https://apis.google.com/js/platform.js" cookie-consent="tracking"></script>
     {{ end }}
   {{ end }}
 {{- end -}}
 <!-- end of Google Analytics-->
+
+<script type="text/plain" src="https://apis.google.com/js/platform.js" cookie-consent="functionality"></script>
+<script type="text/plain"  cookie-consent="functionality">window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));</script>
 <!-- end of Unnamed script-->
 
 <noscript>Cookie Consent by <a href="https://www.PrivacyPolicies.com/cookie-consent/" rel="nofollow noopener">PrivacyPolicies.com</a></noscript>

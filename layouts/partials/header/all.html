@@ -1,11 +1,22 @@
+{{ $site := .Site }}
+
 <header>
-  <div class="d-flex align-items-center">
-    <div class="p-2 bd-highlight">Flex item</div>
-    <div class="p-2 bd-highlight">Flex item</div>
-    <div class="ms-auto p-2 bd-highlight">
-      <div class="g-ytsubscribe" data-channel="CloudWithChris" data-layout="default" data-count="default"
-      ></div>
-    </div>
+  <div class="d-flex flex-row-reverse align-items-center">
+    {{ with .Site.Params.features.cta.subscribe_twitter }}
+      {{ if eq .enabled true }}
+        <div class="p-2">
+          <a class="twitter-follow-button" href="https://twitter.com/{{ $site.Params.Content.social.twitter }}" data-show-screen-name="false">
+            Follow @{{ $site.Params.Content.social.twitter }}
+          </a>
+        </div>
+      {{ end }}
+    {{ end }}
+    {{ with .Site.Params.features.cta.subscribe_youtube }}
+      {{ if eq .enabled true }}
+        <div class="p-2 g-ytsubscribe" data-channelid="{{ .channel }}" data-layout="default" data-count="default"></div>
+      {{ end }}
+    {{ end }}</div>
+  </div>
   </div>
   <nav class="navbar navbar-expand-lg navbar-dark bg-cwc py-4">
     <div class="container">

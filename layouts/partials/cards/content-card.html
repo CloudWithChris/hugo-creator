@@ -28,6 +28,22 @@
       </div>
     {{ end }}
 
+    {{ if eq .Type "episode" }}
+      <div class="row mb-3">
+        <div class="d-flex flex-row">
+          {{ partial "content/display-people-listing.html" (dict "people" .Params.Hosts "site" $site )}}
+          {{ partial "content/display-people-listing.html" (dict "people" .Params.Guests "site" $site )}}
+        </div>
+      </div>
+    {{ end }}
+
+    {{ if eq .Type "talk" }}
+      <div class="row mb-3">
+        <div class="d-flex flex-row">
+          {{ partial "content/display-people-listing.html" (dict "people" .Params.Hosts "site" $site )}}
+        </div>
+      </div>
+    {{ end }}
 
     <div class="row mb-3 text-start">
       <p>{{ .Params.Description }}</p>
