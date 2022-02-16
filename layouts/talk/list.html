@@ -31,7 +31,7 @@
         {{ $query := first 3 (where (where $.Site.RegularPages "Section" "talk") ".Params.upcoming" true).ByDate }}
         {{ $count := len $query }} 
         {{ range $query }}
-          {{- partial "block/upcoming-content.html" (dict "count" $count "content" . "site" $site) -}}
+          {{- partial "component/upcoming-content.html" (dict "count" $count "content" . "site" $site) -}}
         {{ end }}
       </div>
     </div>

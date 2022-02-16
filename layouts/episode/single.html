@@ -81,7 +81,7 @@
     {{- end -}}
       
     <div class="row mb-3">
-      {{ partial "block/audio-player.html" . }}
+      {{ partial "component/audio-player.html" . }}
     </div>
   </div>
 {{ end }}
@@ -93,7 +93,7 @@
   <div class="py-5 container" align="center">
     <div class="col">
       <div class="row">
-        {{ partial "block/comments.html" (dict "site" $site) }}
+        {{ partial "component/comments.html" (dict "site" $site) }}
       </div>
       <div class="row float-center">
         {{ $related := .Site.RegularPages.Related . | first 4 }}

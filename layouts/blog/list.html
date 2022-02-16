@@ -30,7 +30,7 @@
         {{ $query := first 3 (shuffle (where $.Site.RegularPages "Section" "blog")) }}
         {{ $count := len $query }} 
         {{ range $query }}
-          {{- partial "block/upcoming-content.html" (dict "count" $count "content" . "site" $site) -}}
+          {{- partial "component/upcoming-content.html" (dict "count" $count "content" . "site" $site) -}}
         {{ end }}
       </div>
     </div>

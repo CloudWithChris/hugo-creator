@@ -2,7 +2,7 @@
 <html prefix="og: http://ogp.me/ns#" lang="{{ .Language }}">
     {{- partial "site-metadata.html" . -}}
     <body class="d-flex flex-column min-vh-100">
-        {{- partial "header/all.html" . -}}
+        {{- partialCached "header/all.html" . -}}
             <main class="d-flex flex-column flex-fill">
                 {{- block "top" . }}{{- end }}
                 <div class="bg-main flex-fill">

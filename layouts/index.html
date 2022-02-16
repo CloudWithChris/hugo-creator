@@ -41,7 +41,7 @@
         {{ $site := .Site }}
         
         {{ range $query }}         
-          {{- partial "block/upcoming-content.html" (dict "count" $count "content" . "site" $site) -}}
+          {{- partial "component/upcoming-content.html" (dict "count" $count "content" . "site" $site) -}}
         {{ end }}
       </div>  
       <div class="row float-end">
