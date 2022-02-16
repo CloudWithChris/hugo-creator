@@ -11,7 +11,7 @@
       </div>
       <div class="me-auto">
         <a href="{{ .Permalink }}"><h3>{{ .Title }}</h3></a>
-        <span>
+        <span class="text-left">
         {{ with .Params.Github }}
           <a href="https://github.com/{{ . }}" aria-label="GitHub"><button type="button" aria-label="GitHub" class="btn btn-social btn-github btn-rounded"><i class="fab fa-github"></i></button></a>
         {{ end }}
@@ -35,7 +35,7 @@
     </div>
     <div class="episode-card">
       <div class="row mb-3">
-        <p class="card-text">{{ .Params.Description }}</p>
+        <p class="card-text">{{ .Params.Description | markdownify }}</p>
       </div>
     </div>
   </div>
