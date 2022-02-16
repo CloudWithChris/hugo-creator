@@ -61,8 +61,13 @@
     <section class="py-5 container">
       <div class="row float-center">
         <h2 align="center">Coming Up...</h2>
-        {{ range first 3 (where (where $.Site.RegularPages "Section" "episode") ".Params.upcoming" true).ByDate }}         
-          {{- partial "block/upcoming-content.html" . -}}
+        
+        {{ $query := first 3 (where (where $.Site.RegularPages "Section" "episode") ".Params.upcoming" true).ByDate }}
+        
+        {{ $site := .Site }}
+        {{ $count := len $query }} 
+        {{ range $query }}
+          {{- partial "block/upcoming-content.html" (dict "count" $count "content" . "site" $site) -}}
         {{ end }}
       </div>  
     </section>

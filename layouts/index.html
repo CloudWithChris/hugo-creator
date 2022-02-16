@@ -35,9 +35,13 @@
         </div>
       {{ end }}
 
-      <div class="d-flex {{ if eq $featuredContentCount 0 }}pt-3{{ end }}">
-        {{ range first 3 (where (where $.Site.RegularPages "Section" "episode") ".Params.upcoming" true).ByDate }}         
-          {{- partial "block/upcoming-content.html" . -}}
+      <div class="row {{ if eq $featuredContentCount 0 }}pt-3{{ end }}">
+        {{ $query := first 3 (where (where $.Site.RegularPages "Section" "episode") ".Params.upcoming" true).ByDate }}
+        {{ $count := len $query }}
+        {{ $site := .Site }}
+        
+        {{ range $query }}         
+          {{- partial "block/upcoming-content.html" (dict "count" $count "content" . "site" $site) -}}
         {{ end }}
       </div>  
       <div class="row float-end">
