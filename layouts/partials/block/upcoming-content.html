@@ -8,7 +8,11 @@
     <div class="pe-3">  
       {{ with $content.Params.Banner }}     
         {{ $banner := $content.Resources.GetMatch $content.Params.banner }}
-        <a href="{{ $content.Permalink | relURL}}"><img class="img-fluid" src="{{ $banner.RelPermalink }}" alt="{{ $content.Title }}" title="{{ $content.Title }}" /></a>
+        {{ if $banner }}
+          <a href="{{ $content.Permalink | relURL}}"><img class="img-fluid" src="{{ $banner.RelPermalink }}" alt="{{ $content.Title }}" title="{{ $content.Title }}" /></a>
+        {{ else }}
+          <a href="{{ $content.Permalink | relURL}}"><img class="img-fluid" src="{{ $content.Params.Banner | relURL }}" alt="{{ $content.Title }}" title="{{ $content.Title }}" /></a>
+        {{ end }}
       {{ else }}
         {{ $image := $content.Resources.GetMatch $content.Params.image }}    
         <div class="text-center"> 
