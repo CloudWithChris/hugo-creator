@@ -2,8 +2,8 @@
 {{ $site := .Site }}
 {{ $scratch := .Scratch }}
 
-<div class="flex-fill">
-  <div class="row mb-3">
+<div class="col">
+  <div class="flex row mb-3">
     <div class="pe-3">              
       {{ $image := .Resources.GetMatch .Params.image }}         
       {{ if $image }}
