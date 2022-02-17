@@ -57,12 +57,12 @@
 {{ $content := .currentItem }}
 {{ $banner := .currentItem.Resources.GetMatch $content.Params.banner }}
 
+<a href="{{ $content.Permalink | relURL }}">
 {{ if $banner }}
   {{ $tiny := ($banner.Resize "480x webp") }}
   {{ $small := ($banner.Resize "768x webp") }}
   {{ $medium := ($banner.Resize "1024x webp") }}
   {{ $large := ($banner.Resize "1366x webp") }}
-  <a href="{{ $content.Permalink | relURL }}">
     <img class="img-fluid"
           loading="lazy"
           srcset="
@@ -77,14 +77,12 @@
           1366px"
           alt="{{ $content.Title }}" 
           title="{{ $content.Title }}" />
-  </a>
 {{ else }}
   {{ $banner := resources.GetMatch ($content.Params.Banner | relURL) }}
   {{ $tiny := ($banner.Resize "480x webp") }}
   {{ $small := ($banner.Resize "768x webp") }}
   {{ $medium := ($banner.Resize "1024x webp") }}
   {{ $large := ($banner.Resize "1366x webp") }}
-  <a href="{{ $content.Permalink | relURL }}">
     <img class="img-fluid"
           srcset="
               {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
