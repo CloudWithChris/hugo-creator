@@ -14,10 +14,10 @@
               {{- with $medium.RelPermalink -}}, {{.}} 1024w{{- end -}}
               {{- with $large.RelPermalink -}}, {{.}} 1366w{{- end -}}" 
           src="{{ $banner.RelPermalink }}" 
-          sizes="(max-width: 600px) 480px,
-                 ((max-width: 800px) 768w,
-                 ((max-width: 1050px) 1024w,
-                 1366px"
+          sizes="(max-width: 600px) 500px,
+                 (max-width: 800px) 500px,
+                 (max-width: 1050px) 500px,
+                 1024px"
           alt="{{ $content.Title }}" 
           title="{{ $content.Title }}" />
   </a>
@@ -35,10 +35,10 @@
               {{- with $medium.RelPermalink -}}, {{.}} 1024w{{- end -}}
               {{- with $large.RelPermalink -}}, {{.}} 1366w{{- end -}}" 
           src="{{ $banner.RelPermalink }}" 
-          sizes="(max-width: 600px) 480px,
-                 ((max-width: 800px) 768w,
-                 ((max-width: 1050px) 1024w,
-                 1366px"
+          sizes="(max-width: 600px) 500px,
+                 (max-width: 800px) 500px,
+                 (max-width: 1050px) 500px,
+                 1024px"
           alt="{{ $content.Title }}" 
           title="{{ $content.Title }}" />
   </a>
