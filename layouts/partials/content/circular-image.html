@@ -21,7 +21,7 @@
           title="{{ $content.Title }}" />
   </a>
 {{ else }}
-  {{ $image := resources.GetMatch ($content.Params.Image | relURL) }}
+  {{ $image := resources.GetMatch ($content.Site.Params.content.site.ogimage | relURL) }}
   {{ $tiny := ($image.Resize "480x") }}
   {{ $small := ($image.Resize "768x") }}
   {{ $medium := ($image.Resize "1024x") }}
