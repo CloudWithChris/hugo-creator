@@ -3,7 +3,43 @@ $breadcrumb-divider: quote(">");
 
 @import "custom_variables";
 
-@import "bootstrap/bootstrap.scss";
+
+// Custom.scss
+// Option B: Include parts of Bootstrap
+
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "bootstrap/functions";
+
+// 2. Include any default variable overrides here
+
+// 3. Include remainder of required Bootstrap stylesheets
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap/utilities";
+
+// 4. Include any optional Bootstrap components as you like
+@import "bootstrap/root";
+@import "bootstrap/containers";
+@import "bootstrap/grid";
+@import "bootstrap/reboot";
+@import "bootstrap/type";
+@import "bootstrap/images";
+@import "bootstrap/breadcrumb";
+@import "bootstrap/navbar";
+@import "bootstrap/carousel";
+@import "bootstrap/buttons";
+@import "bootstrap/card";
+@import "bootstrap/nav";
+@import "bootstrap/pagination";
+@import "bootstrap/forms";
+@import "bootstrap/dropdown";
+@import "bootstrap/utilities/api";
+@import "bootstrap/helpers";
+@import "bootstrap/transitions";
+
+// 5. Add additional custom code here
+
+//@import "bootstrap/bootstrap.scss";
 
 // icons
 @import "fontawesome/fontawesome.scss";
