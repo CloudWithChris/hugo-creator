@@ -40,16 +40,6 @@ footer a {
   color: #FFFFFF;
 }
 
-.carousel .item img {
-  max-height: 250px;
-  min-width: auto;
-}
-
-.flex {  
-  display: flex;
-  flex-direction: column;
-}
-
 .icons {
   font-size: 25px;
 }
@@ -74,14 +64,6 @@ footer a {
   padding-top: 5px;
 }
 
-.bg-main img {
-  max-width: 100%;
-}
-
-.copyright-notice {
-  color: #FFFFFF;
-}
-
 main a {
   color: #0C62A8;
   text-decoration: none;
@@ -101,11 +83,6 @@ div.tags a:after {
 }   
 div.tags a:last-child:after {
   content: "";
-}
-
-.banner {
-  padding: 0;
-  border: none;
 }
 
 .background {
@@ -514,12 +491,4 @@ div.tags a:last-child:after {
   display: block;
   margin-left: auto;
   margin-right: auto;
-}
-
-.card-text img {
-  height: 500%;
-}
-
-.spacer {
-  margin-top: 15px; /* define margin as you see fit */
 }

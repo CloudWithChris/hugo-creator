@@ -7,7 +7,7 @@
 {{ end }}
 
 {{ define "bannerImage" }}
-  <div class="banner card  text-white">
+  <div class="border-0 p-0 card  text-white">
         
     {{ $banner := .currentPage.Resources.GetMatch .currentPage.Params.banner }}
     {{ if $banner }}

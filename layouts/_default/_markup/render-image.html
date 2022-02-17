@@ -1,8 +1,8 @@
 {{ if .Title }}
   <figure class="figure text-center">
-    <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" loading="lazy">
+    <img class="img-fluid" src="{{ .Destination | safeURL }}" alt="{{ .Text }}" loading="lazy">
     <figcaption class="figure-caption">{{ .Title }}</figcaption>
   </figure>
 {{ else }}
-  <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" loading="lazy">
+  <img class="img-fluid" src="{{ .Destination | safeURL }}" alt="{{ .Text }}" loading="lazy">
 {{ end }}

@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="row mb-3 text-start">
-    <a href="{{ .Permalink }}"><h3>{{ $content.Title }}</h3></a>
+    <a href="{{ $content.Permalink }}"><h3>{{ $content.Title }}</h3></a>
   </div>
   {{ if eq $content.Type "blog" }}
       <div class="row mb-3">
