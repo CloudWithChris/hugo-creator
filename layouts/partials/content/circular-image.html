@@ -1,9 +1,41 @@
-{{ $image := .Resources.GetMatch .Params.Image }}
-{{ $url := cond (isset .Params "externallink") .Params.ExternalLink .Permalink}}
-
+{{ $content := .content }}
+{{ $width := .width }}
+{{ $image := $content.Resources.GetMatch $content.Params.Image }}
+{{ $url := cond (isset $content.Params "externallink") $content.Params.ExternalLink .Permalink}}
 
 {{ if $image }}
-  <a href="{{ $url | relURL }}"><img src="{{ $image.RelPermalink }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
+  {{ $tiny := ($image.Resize "480x") }}
+  {{ $small := ($image.Resize "768x") }}
+  {{ $medium := ($image.Resize "1024x") }}
+  {{ $large := ($image.Resize "1366x") }}
+  <a href="{{ $url | relURL }}">
+    <img class="rounded-circle z-depth-2 person-image"
+          width="{{ $width }}"
+          srcset="
+              {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
+              {{- with $small.RelPermalink -}}, {{.}} 768w{{- end -}}
+              {{- with $medium.RelPermalink -}}, {{.}} 1024w{{- end -}}
+              {{- with $large.RelPermalink -}}, {{.}} 1366w{{- end -}}" 
+          src="{{ $image.RelPermalink }}"
+          alt="{{ $content.Title }}" 
+          title="{{ $content.Title }}" />
+  </a>
 {{ else }}
-  <a href="{{ $url | relURL }}"><img src="{{ .Params.Image | relURL }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
+  {{ $image := resources.GetMatch (printf "%s" ($content.Params.Image | relURL)) }}
+  {{ $tiny := ($image.Resize "480x") }}
+  {{ $small := ($image.Resize "768x") }}
+  {{ $medium := ($image.Resize "1024x") }}
+  {{ $large := ($image.Resize "1366x") }}
+  <a href="{{ $url | relURL }}">
+    <img class="rounded-circle z-depth-2 person-image"
+          width="{{ $width }}"
+          srcset="
+              {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
+              {{- with $small.RelPermalink -}}, {{.}} 768w{{- end -}}
+              {{- with $medium.RelPermalink -}}, {{.}} 1024w{{- end -}}
+              {{- with $large.RelPermalink -}}, {{.}} 1366w{{- end -}}" 
+          src="{{ $image.RelPermalink }}" 
+          alt="{{ $content.Title }}" 
+          title="{{ $content.Title }}" />
+  </a>
 {{ end }}

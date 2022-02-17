@@ -20,7 +20,24 @@
   </div>
   <nav class="navbar navbar-expand-lg navbar-dark bg-cwc py-4">
     <div class="container">
-        <a class="navbar-brand" href="{{ "/" | relURL }}"><img src="{{ .Site.Params.content.site.logo | relURL }}" alt="{{ .Site.Title }}" title="{{ .Site.Title }}" height="145" /></a>
+        <a class="navbar-brand" href="{{ "/" | relURL }}">
+
+  {{ $banner := resources.GetMatch (.Site.Params.content.site.logo | relURL) }}
+  {{ $tiny := ($banner.Resize "480x") }}
+  {{ $small := ($banner.Resize "768x") }}
+  {{ $medium := ($banner.Resize "1024x") }}
+  {{ $large := ($banner.Resize "1366x") }}
+    <img class="img-fluid"
+          srcset="
+              {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
+              {{- with $small.RelPermalink -}}, {{.}} 768w{{- end -}}
+              {{- with $medium.RelPermalink -}}, {{.}} 1024w{{- end -}}
+              {{- with $large.RelPermalink -}}, {{.}} 1366w{{- end -}}" 
+          src="{{ $banner.RelPermalink }}" 
+          alt="{{ .Site.Title }}" 
+          width="200"
+          title="{{ .Site.Title }}" />
+  </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <i class="fas fa-bars"></i>
         </button>

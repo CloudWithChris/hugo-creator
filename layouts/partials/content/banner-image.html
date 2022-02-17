@@ -1,0 +1,37 @@
+{{ $content := . }}
+{{ $banner := .Resources.GetMatch $content.Params.banner }}
+
+{{ if $banner }}
+  {{ $tiny := ($banner.Resize "480x") }}
+  {{ $small := ($banner.Resize "768x") }}
+  {{ $medium := ($banner.Resize "1024x") }}
+  {{ $large := ($banner.Resize "1366x") }}
+  <a href="{{ $content.Permalink | relURL }}">
+    <img class="img-fluid"
+          srcset="
+              {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
+              {{- with $small.RelPermalink -}}, {{.}} 768w{{- end -}}
+              {{- with $medium.RelPermalink -}}, {{.}} 1024w{{- end -}}
+              {{- with $large.RelPermalink -}}, {{.}} 1366w{{- end -}}" 
+          src="{{ $banner.RelPermalink }}" 
+          alt="{{ $content.Title }}" 
+          title="{{ $content.Title }}" />
+  </a>
+{{ else }}
+  {{ $banner := resources.GetMatch ($content.Params.Banner | relURL) }}
+  {{ $tiny := ($banner.Resize "480x") }}
+  {{ $small := ($banner.Resize "768x") }}
+  {{ $medium := ($banner.Resize "1024x") }}
+  {{ $large := ($banner.Resize "1366x") }}
+  <a href="{{ $content.Permalink | relURL }}">
+    <img class="img-fluid"
+          srcset="
+              {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
+              {{- with $small.RelPermalink -}}, {{.}} 768w{{- end -}}
+              {{- with $medium.RelPermalink -}}, {{.}} 1024w{{- end -}}
+              {{- with $large.RelPermalink -}}, {{.}} 1366w{{- end -}}" 
+          src="{{ $banner.RelPermalink }}" 
+          alt="{{ $content.Title }}" 
+          title="{{ $content.Title }}" />
+  </a>
+{{ end }}
