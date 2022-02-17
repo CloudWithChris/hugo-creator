@@ -8,6 +8,7 @@
   {{ $large := ($banner.Resize "1366x webp") }}
   <a href="{{ $content.Permalink | relURL }}">
     <img class="img-fluid"
+          loading="lazy"
           srcset="
               {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
               {{- with $small.RelPermalink -}}, {{.}} 768w{{- end -}}
@@ -29,6 +30,7 @@
   {{ $large := ($banner.Resize "1366x webp") }}
   <a href="{{ $content.Permalink | relURL }}">
     <img class="img-fluid"
+          loading="lazy"
           srcset="
               {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
               {{- with $small.RelPermalink -}}, {{.}} 768w{{- end -}}

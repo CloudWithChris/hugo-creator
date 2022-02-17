@@ -10,6 +10,7 @@
   {{ $large := ($image.Resize "1366x webp") }}
   <a href="{{ $url | relURL }}">
     <img class="rounded-circle z-depth-2 person-image"
+          loading="lazy"
           width="{{ $width }}"
           srcset="
               {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
@@ -32,6 +33,7 @@
   {{ $large := ($image.Resize "1366x webp") }}
   <a href="{{ $url | relURL }}">
     <img class="rounded-circle z-depth-2 person-image"
+          loading="lazy"
           width="{{ $width }}"
           srcset="
               {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
