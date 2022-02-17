@@ -6,38 +6,7 @@
 <div class="col-lg-{{ div 12 $count }} col-sm-12">
   <div class="flex row mb-3">
     <div class="pe-3">  
-      {{ with $content.Params.Banner }}     
-        {{ $banner := $content.Resources.GetMatch $content.Params.banner }}
-        {{ if $banner }}
-        {{ $tiny := ($banner.Resize "480x") }}
-        {{ $small := ($banner.Resize "768x") }}
-        {{ $medium := ($banner.Resize "1024x") }}
-        {{ $large := ($banner.Resize "1366x") }}
-        <a href="{{ $content.Permalink | relURL}}">
-          <img class="img-fluid"
-                srcset="
-                    {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
-                    {{- with $small.RelPermalink -}}, {{.}} 768w{{- end -}}
-                    {{- with $medium.RelPermalink -}}, {{.}} 1024w{{- end -}}
-                    {{- with $large.RelPermalink -}}, {{.}} 1366w{{- end -}}" 
-                src="{{ $banner.RelPermalink }}" 
-                alt="{{ $content.Title }}" 
-                title="{{ $content.Title }}" />
-        </a>
-        {{ else }}
-          <a href="{{ $content.Permalink | relURL}}"><img class="img-fluid" src="{{ $content.Params.Banner | relURL }}" alt="{{ $content.Title }}" title="{{ $content.Title }}" /></a>
-        {{ end }}
-      {{ else }}
-        {{ $image := $content.Resources.GetMatch $content.Params.image }}    
-        <div class="text-center"> 
-          {{ if $image }}
-            <a href="{{ $content.Permalink | relURL}}"><img src="{{ $image.RelPermalink }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ $content.Title }}" title="{{ $content.Title }}" /></a>
-          {{ else }}
-            <a href="{{ $content.Permalink | relURL}}"><img src="{{ $content.Params.Image | relURL }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ $content.Title }}" title="{{ $content.Title }}" /></a>
-          {{ end }}
-        </div>
-      {{ end }}
-      
+      {{ partial "content/image.html" (dict "content" $content "width" 100) }}
     </div>
     <div class="me-auto">
     </div>
