@@ -13,7 +13,7 @@ const BASE_CACHE_FILES = [
 const OFFLINE_CACHE_FILES = [
   '/sass/main.min.css',
   '/script.js',
-  '/offline/index.html',
+  '/404.html',
 ];
 
 const NOT_FOUND_CACHE_FILES = [
