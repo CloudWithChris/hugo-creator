@@ -1,9 +1,0 @@
-{{ $image := .Resources.GetMatch .Params.Image }}
-{{ $url := cond (isset .Params "externallink") .Params.ExternalLink .Permalink}}
-
-
-{{ if $image }}
-  <a href="{{ $url | relURL }}"><img src="{{ $image.RelPermalink }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
-{{ else }}
-  <a href="{{ $url | relURL }}"><img src="{{ .Params.Image | relURL }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
-{{ end }}

@@ -2,21 +2,23 @@
 {{ $site := .Site }}
 {{ $scratch := .Scratch }}
 
-<div class="col-md-6">    
-  <div class="row g-0">
-    <div class="col-md-2">
-      {{ partial "content/content-image.html" . }}
+<div class="col-md-6">
+  <div class="row mb-2">
+    <div class="d-flex align-items-center mb-2">
+      <div class="pe-3">            
+        {{ $image := .Resources.GetMatch .Params.image }}
+        <a href="{{ .Permalink | relURL}}"><img src="{{ $image.RelPermalink }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
+      </div>
+      <div class="me-auto text-left">
+        <a href="{{ .Permalink }}"><h3>{{ .Title }}</h3></a>
+        <span>
+          {{ partial "content/socialprofiles.html" . }}
+      </span>
+      </div>
     </div>
-    <div class="col-md-10">
-      <div class="card-body episode-card">
-        
-        <a href="{{ .Permalink }}"><h3 class="card-title">{{ .Title }}</h3></a>
-
-        <p class="card-text">{{ .Content | truncate 300}}</p>
-        
-        {{ with .Params.tags }}
-          <p>{{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}</p>
-        {{ end }}
+    <div class="episode-card">
+      <div class="row mb-3">
+        <p class="card-text">{{ .Params.Description | markdownify }}</p>
       </div>
     </div>
   </div>

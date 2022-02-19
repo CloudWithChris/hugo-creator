@@ -1,8 +1,8 @@
 ---
 Date: "2032-01-01T09:30:00Z"
-Description: "In this video, Chris provides another update on Cloud with Chris, updates on what's coming soon and the Azure, Azure DevOps and GitHub news!"
+Description: "Overwhelmed at keeping up to date with Azure? Or how about keeping a pulse on the Latest GitHub news, Azure DevOps and more? In this episode, Chris provides a summary of updates on the latest Azure DevOps News, GitHub updates and new announcements in Azure. And if that wasn't enough, he also gives a roundup of the latest on Cloud With Chris - including episodes, blog posts, open source projects and community work! Let Chris do the hard work keeping you on top of everything! Grab some snacks. Grab a drink. Come along and tune in for a relaxed and informative learning session!"
 PublishDate: "2032-01-01T09:30:00Z"
-Title: "V999 - Weekly Technology Vlog #999"
+Title: "Cloud Tech Roundup - February 2022"
 episode: V999
 image: img/cloudwithchrislogo.png
 explicit: "no"
@@ -25,4 +25,4 @@ tags:
 youtube: "nkT9cUiO6Ek"
 upcoming: true
 ---
-In this video, Chris provides another update on Cloud with Chris, updates on what's coming soon and the Azure, Azure DevOps and GitHub news!
+Overwhelmed at keeping up to date with Azure? Or how about keeping a pulse on the Latest GitHub news, Azure DevOps and more? In this episode, Chris provides a summary of updates on the latest Azure DevOps News, GitHub updates and new announcements in Azure. And if that wasn't enough, he also gives a roundup of the latest on Cloud With Chris - including episodes, blog posts, open source projects and community work! Let Chris do the hard work keeping you on top of everything! Grab some snacks. Grab a drink. Come along and tune in for a relaxed and informative learning session!

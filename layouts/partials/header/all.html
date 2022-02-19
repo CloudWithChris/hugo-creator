@@ -1,16 +1,25 @@
-
+{{ $site := .Site }}
 <header>
-  <div class="d-flex align-items-center">
-    <div class="p-2 bd-highlight">Flex item</div>
-    <div class="p-2 bd-highlight">Flex item</div>
-    <div class="ms-auto p-2 bd-highlight">
-      <div class="g-ytsubscribe" data-channel="CloudWithChris" data-layout="default" data-count="default"
-      ></div>
-    </div>
-  </div>
   <nav class="navbar navbar-expand-lg navbar-dark bg-cwc py-4">
     <div class="container">
-        <a class="navbar-brand" href="{{ "/" | relURL }}"><img src="{{ .Site.Params.content.site.logo | relURL }}" alt="{{ .Site.Title }}" title="{{ .Site.Title }}" height="145" /></a>
+        <a class="navbar-brand" href="{{ "/" | relURL }}">
+
+  {{ $banner := resources.GetMatch (.Site.Params.content.site.logo | relURL) }}
+  {{ $tiny := ($banner.Resize "480x") }}
+  {{ $small := ($banner.Resize "768x") }}
+  {{ $medium := ($banner.Resize "1024x") }}
+  {{ $large := ($banner.Resize "1366x") }}
+    <img class="img-fluid"
+          srcset="
+              {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
+              {{- with $small.RelPermalink -}}, {{.}} 768w{{- end -}}
+              {{- with $medium.RelPermalink -}}, {{.}} 1024w{{- end -}}
+              {{- with $large.RelPermalink -}}, {{.}} 1366w{{- end -}}" 
+          src="{{ $banner.RelPermalink }}" 
+          alt="{{ .Site.Title }}" 
+          width="200"
+          title="{{ .Site.Title }}" />
+  </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <i class="fas fa-bars"></i>
         </button>
@@ -31,45 +40,76 @@
     </div>
   </nav>
 
-  {{ $featuredContent := where .Site.Pages "Params.featured" ">" 0 }}
-  {{ $featuredContentCount := len $featuredContent }}
-  {{ if (and .IsHome (gt $featuredContentCount 0)) }}
-  <div class="row">
-    <div id="featuredContent" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        {{ range $index, $value := $featuredContent }}
-          <button type="button" data-bs-target="#featuredContent" data-bs-slide-to="{{ $index }}" {{ if (eq $index 0) }}class="active"{{ end }} aria-current="true" aria-label="{{ $value.Title}}"></button>
-        {{ end }}
-      </div>
-      <div class="carousel-inner">
-        {{ range $index, $value := $featuredContent }}
-          <div class="carousel-item {{ if (eq $index 0) }}active{{ end }}">
-            {{ $image := .Resources.GetMatch .Params.Banner }}
-            {{ if $image }}
-              {{ template "carouselImage" dict "currentItem" .Page "url" ($image.RelPermalink | relURL) "index" $index }}
-            {{ else }}
-              {{ template "carouselImage" dict "currentItem" .Page "url" (.Params.Image | relURL) "index" $index }}
-            {{ end }}
+  {{ if .Site.Params.features.socialbox }}
+    <div class="social-box">
+      <div class="container py-2">
+        <div class="row justify-content-center">
+          {{ with .Site.Params.content.social.discord }}
+            <div class="col-1 col-xs-1 text-center mx-2">
+              <a href="https://discord.gg/{{ . }}">
+                <div class="box align-items-center justify-content-center d-flex">
+                  <i class="fa-brands fa-discord"></i>
+                </div>
+              </a>
+            </div>
+          {{ end }}
+          {{ with .Site.Params.content.social.github }}
+            <div class="col-1 col-xs-1 text-center mx-2">
+              <a href="https://github.com/{{ . }}">
+                <div class="box box align-items-center justify-content-center d-flex">
+                  <i class="fa-brands fa-github"></i>
+                </div>
+              </a>
+            </div>	
+          {{ end }}
+          {{ with .Site.Params.content.social.linkedin }}
+            <div class="col-1 col-xs-1 text-center mx-2">
+              <a href="https://linkedin.com/in/{{ . }}">
+                <div class="box box align-items-center justify-content-center d-flex">
+                  <i class="fa-brands fa-linkedin"></i>
+                </div>
+              </a>
+            </div>	
+          {{ end }}
+          {{ with .Site.Params.content.social.tiktok }}
+            <div class="col-1 col-xs-1 text-center mx-2">
+              <a href="https://www.tiktok.com/@{{ . }}">
+                <div class="box box align-items-center justify-content-center d-flex">
+                  <i class="fa-brands fa-tiktok"></i>
+                </div>
+              </a>
+            </div>	
+          {{ end }}
+          {{ with .Site.Params.content.social.twitch }}
+            <div class="col-1 col-xs-1 text-center mx-2">
+              <a href="https://twitch.tv/{{ . }}">
+                <div class="box box align-items-center justify-content-center d-flex">
+                  <i class="fa-brands fa-twitch"></i>
+                </div>
+              </a>
+            </div>
+          {{ end }}
+          {{ with .Site.Params.content.social.twitter }}
+            <div class="col-1 col-xs-1 text-center mx-2">
+              <a href="https://twitter.com/{{ . }}">
+                <div class="box box align-items-center justify-content-center d-flex">
+                  <i class="fa-brands fa-twitter"></i>
+                </div>
+              </a>
+            </div>	
+          {{ end }}
+          {{ with .Site.Params.content.social.youtube }}
+            <div class="col-1 col-xs-1 text-center mx-2">
+              <a href="https://youtube.com/{{ . }}">
+                <div class="box box align-items-center justify-content-center d-flex">
+                  <i class="fa-brands fa-youtube"></i>
+                </div>
+              </a>
+            </div> 
+          {{ end }}
           </div>
-        {{ end }}
+        </div>		
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#featuredContent" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#featuredContent" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </div>
-  </div>
   {{ end }}
 </header>
-
-{{ define "carouselImage" }}
-<a href="{{ .currentItem.Permalink }}"><img src="{{ .url }}" class="d-block w-100" alt="{{ .Title }}">
-<div class="carousel-caption d-none d-md-block">
-  <h5>{{ .currentItem.Title }}</h5>
-  <p>{{ .currentItem.Params.Description }}</p>
-</div></a>
-{{ end }}

@@ -9,7 +9,7 @@
 
       {{ with .Params.banner }}
         <div class="row mb-3">
-          {{- partial "content/banner.html" $episode -}}
+          {{- partial "component/banner.html" $episode -}}
         </div>
       {{ end }}
 
@@ -28,8 +28,8 @@
         <div class="d-flex">
           <div>
             <p>
-              {{ partial "content/display-people-small.html" (dict "people" .Params.Hosts "site" .Site )}}
-              {{ partial "content/display-people-small.html" (dict "people" .Params.Guests "site" .Site )}}
+              {{ partial "content/people.html" (dict "people" .Params.Hosts "site" .Site "size" 50 )}}
+              {{ partial "content/people.html" (dict "people" .Params.Guests "site" .Site "size" 50 )}}
             </p>
           </div>
         </div>
@@ -42,7 +42,7 @@
       {{ with .Params.Series }}
         <div class="row mb-3">
           <div class="d-flex ms-1">
-              {{ partial "content/series-new.html" (dict "taxo" "series" "value" . "site" $site ) }}
+              {{ partial "content/series.html" (dict "taxo" "series" "value" . "site" $site ) }}
           </div>
         </div>    
       {{ end }}
@@ -50,7 +50,7 @@
         <div class="row mb-3">
           <div class="align-self-center">
             <div class="d-flex ms-1 tags">
-              {{ partial "content/tags-new.html" (dict "taxo" "tags" "value" . "site" $site ) }}
+              {{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $site ) }}
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@
     {{- end -}}
       
     <div class="row mb-3">
-      {{ partial "block/audio-player.html" . }}
+      {{ partial "component/audio-player.html" . }}
     </div>
   </div>
 {{ end }}
@@ -93,7 +93,7 @@
   <div class="py-5 container" align="center">
     <div class="col">
       <div class="row">
-        {{ partial "block/comments.html" (dict "site" $site) }}
+        {{ partial "component/comments.html" (dict "site" $site) }}
       </div>
       <div class="row float-center">
         {{ $related := .Site.RegularPages.Related . | first 4 }}
@@ -101,7 +101,7 @@
             <h3>Related</h3>
             <p></p>
             {{ range . }}
-              {{- partial "cards/footer-content-card.html" . -}}
+              {{- partial "cards/content-card.html" . -}}
             {{ end }}
         {{ end }} 
       </div>

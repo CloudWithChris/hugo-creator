@@ -1,9 +1,47 @@
 {{ define "top" }}
-  <section class="py-5 container">
-    <div class="col">
-      <div class="row float-center">
-        {{ range first 3 (where (where $.Site.RegularPages "Section" "episode") ".Params.upcoming" true).ByDate }}         
-          {{- partial "block/upcoming-episode.html" . -}}
+  <section class="container">
+    <div class="col">      
+      {{ $featuredContent := where .Site.Pages "Params.featured" ">" 0 }}
+      {{ $featuredContentCount := len $featuredContent }}
+      {{ if gt $featuredContentCount 0 }}
+        <div class="row my-3">
+          <div id="featuredContent" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              {{ range $index, $value := $featuredContent }}
+                <button type="button" data-bs-target="#featuredContent" data-bs-slide-to="{{ $index }}" {{ if (eq $index 0) }}class="active"{{ end }} aria-current="true" aria-label="{{ $value.Title}}"></button>
+              {{ end }}
+            </div>
+            <div class="carousel-inner">
+              {{ range $index, $value := $featuredContent }}
+                <div class="carousel-item {{ if (eq $index 0) }}active{{ end }}">
+                  {{ $image := .Resources.GetMatch .Params.Banner }}
+                  {{ if $image }}
+                    {{ template "carouselImage" dict "currentItem" .Page "url" ($image.RelPermalink | relURL) "index" $index }}
+                  {{ else }}
+                    {{ template "carouselImage" dict "currentItem" .Page "url" (.Params.Image | relURL) "index" $index }}
+                  {{ end }}
+                </div>
+              {{ end }}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#featuredContent" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#featuredContent" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      {{ end }}
+
+      <div class="row {{ if eq $featuredContentCount 0 }}pt-3{{ end }}">
+        {{ $query := first 3 (where (where $.Site.RegularPages "Section" "episode") ".Params.upcoming" true).ByDate }}
+        {{ $count := len $query }}
+        {{ $site := .Site }}
+        
+        {{ range $query }}         
+          {{- partial "component/upcoming-content.html" (dict "count" $count "content" . "site" $site) -}}
         {{ end }}
       </div>  
       <div class="row float-end">
@@ -13,24 +51,80 @@
   </section>
 {{ end }}
 
+
+{{ define "carouselImage" }}
+
+{{ $content := .currentItem }}
+{{ $banner := .currentItem.Resources.GetMatch $content.Params.banner }}
+
+<a href="{{ $content.Permalink | relURL }}">
+{{ if $banner }}
+  {{ $tiny := ($banner.Resize "480x webp") }}
+  {{ $small := ($banner.Resize "768x webp") }}
+  {{ $medium := ($banner.Resize "1024x webp") }}
+  {{ $large := ($banner.Resize "1366x webp") }}
+    <img class="img-fluid"
+          loading="lazy"
+          srcset="
+              {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
+              {{- with $small.RelPermalink -}}, {{.}} 768w{{- end -}}
+              {{- with $medium.RelPermalink -}}, {{.}} 1024w{{- end -}}
+              {{- with $large.RelPermalink -}}, {{.}} 1366w{{- end -}}" 
+          src="{{ $banner.RelPermalink }}" 
+          sizes="(max-width: 600px) 480px,
+          (max-width: 800px) 768px,
+          (max-width: 1050px) 1024px,
+          1366px"
+          alt="{{ $content.Title }}" 
+          title="{{ $content.Title }}" />
+{{ else }}
+  {{ $banner := resources.GetMatch ($content.Params.Banner | relURL) }}
+  {{ $tiny := ($banner.Resize "480x webp") }}
+  {{ $small := ($banner.Resize "768x webp") }}
+  {{ $medium := ($banner.Resize "1024x webp") }}
+  {{ $large := ($banner.Resize "1366x webp") }}
+    <img class="img-fluid"
+          srcset="
+              {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
+              {{- with $small.RelPermalink -}}, {{.}} 768w{{- end -}}
+              {{- with $medium.RelPermalink -}}, {{.}} 1024w{{- end -}}
+              {{- with $large.RelPermalink -}}, {{.}} 1366w{{- end -}}" 
+          src="{{ $banner.RelPermalink }}" 
+          sizes="(max-width: 600px) 480px,
+                 (max-width: 800px) 768px,
+                 (max-width: 1050px) 1024px,
+                 1366px"
+          alt="{{ $content.Title }}" 
+          title="{{ $content.Title }}" />
+  </a>
+{{ end }}
+
+<div class="text-white row align-items-end card-img-overlay">
+  <div class="d-flex background">
+    <div class="me-auto align-self-center">
+      <h1 class="card-title">
+        {{ .currentItem.Title }}
+      </h1>
+      <p class="d-none d-lg-block">
+        {{ .currentItem.Params.Description | markdownify }}
+      </p>
+    </div>
+  </div>
+</div>
+</a>
+
+{{ end }}
+
 {{ define "main" }}
   <div class="container" align="center">
-    <div class="row">
-      <div class="col">
-        {{- partial "block/latest-episode.html" . -}}
-      </div>
-    </div>  
-    <div class="dropdown-divider"></div>
     <div class="container">
       <div class="row g-2">   
         {{ $blogs := where (where $.Site.RegularPages "Section" "blog") ".Params.upcoming" "!=" true }}
-        {{ $episodes := after 1 (where (where $.Site.RegularPages "Section" "episode") ".Params.upcoming" "!=" true) }}
+        {{ $episodes := (where (where $.Site.RegularPages "Section" "episode") ".Params.upcoming" "!=" true) }}
         {{ $talks := where (where $.Site.RegularPages "Section" "talk") ".Params.upcoming" "!=" true }}
         {{ $all := (union $talks (union $blogs $episodes)).ByDate.Reverse }}
 
         {{ $paginator := .Paginate $all }}
-
-        {{- partial "paginator.html" . -}}
         
         {{ range $index, $value := $paginator.Pages }}
           {{- partial "cards/content-card.html" . -}}

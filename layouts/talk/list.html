@@ -1,19 +1,39 @@
 {{ define "top" }}
-  <div class="py-5 container">
+{{ $site := .Site }}
+{{ $episode := . }}
+  <div class="container mb-3">
     <div class="col">
-      <div class="row">
+      <div class="row pt-3 ">
         {{ partial "content/breadcrumbs.html" . }}
       </div>
-      <div class="row float-center">
-        {{ $upcomingTalks := first 3 (where (where $.Site.RegularPages "Section" "talk") ".Params.upcoming" true).ByDate}}
-        {{ $count := len $upcomingTalks }}
-        {{ range $upcomingTalks }}   
-          {{- partial "block/upcoming-talk.html" (dict "count" $count "value" . "site" $.Site ) -}}
+
+      {{ with .Params.banner }}
+        <div class="row mb-3">
+          {{- partial "component/banner.html" $episode -}}
+        </div>
+      {{ end }}
+
+      {{ if (not (.Params.banner))  }}
+      <div class="row mb-3">
+        <div class="d-flex">
+          <div class="me-auto">
+            <h1>{{ .Title }}</h1>
+          </div>
+          <div>{{ partial "content/socialshare.html" . }}</div>
+        </div>
+      </div>
+      {{ end }}
+
+      <p>{{ .Content }}</p>
+
+      <div class="row">
+        
+        {{ $query := first 3 (where (where $.Site.RegularPages "Section" "talk") ".Params.upcoming" true).ByDate }}
+        {{ $count := len $query }} 
+        {{ range $query }}
+          {{- partial "component/upcoming-content.html" (dict "count" $count "content" . "site" $site) -}}
         {{ end }}
-      </div>  
-      <div class="row text-center pt-5">
-        {{ .Content }}
-      </div> 
+      </div>
     </div>
   </div>
 {{ end }}

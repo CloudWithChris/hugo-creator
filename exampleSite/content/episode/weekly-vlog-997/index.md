@@ -1,13 +1,14 @@
 ---
 Date: "2031-12-17T09:30:00Z"
-Description: "In this video, Chris provides another update on Cloud with Chris, updates on what's coming soon and the Azure, Azure DevOps and GitHub news!"
+Description: "In this session, Chris is joined by Chris Ayers! Chris gives insight on how you start implementing feature flags, You'll be leaving this session wanting to separate your releases from your deployments! You will have an understanding of What feature flags are, The types of feature flags, Best practices around feature flags, Implementing feature flags using, Feature Toggles, Azure Application Configuration and Launch Darkly."
 PublishDate: "2031-12-17T09:30:00Z"
-Title: "V997 - Weekly Technology Vlog #997"
+Title: "Feature Flags - The Art of the IF and Deployment"
 episode: V997
 image: img/cloudwithchrislogo.png
 explicit: "no"
 guests: []
 hosts:
+- chrisreddington
 - chrisreddington
 images:
 - img/default-social.png
@@ -24,5 +25,6 @@ tags:
 - Blogging
 youtube: "nkT9cUiO6Ek"
 upcoming: true
+banner: images/banner.jpg
 ---
-In this video, Chris provides another update on Cloud with Chris, updates on what's coming soon and the Azure, Azure DevOps and GitHub news!
+In this session, Chris is joined by Chris Ayers! Chris gives insight on how you start implementing feature flags, You'll be leaving this session wanting to separate your releases from your deployments! You will have an understanding of What feature flags are, The types of feature flags, Best practices around feature flags, Implementing feature flags using, Feature Toggles, Azure Application Configuration and Launch Darkly.

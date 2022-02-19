@@ -1,21 +1,36 @@
 {{ define "top" }}
-  <section class="py-5 container" align="center">
+{{ $site := .Site }}
+{{ $episode := . }}
+  <div class="container mb-3">
     <div class="col">
-      <div class="row">
+      <div class="row pt-3 ">
         {{ partial "content/breadcrumbs.html" . }}
       </div>
-      <div class="row">
-        {{ range first 12 (where $.Site.RegularPages "Section" "guest").ByTitle }}
-          <div class="col-md-2">
-            <a href="{{ .Permalink }}"><img src="{{ .Params.image | relURL }}" class="rounded-circle z-depth-2 align-middle" width="125" title="{{ .Title }}" alt="{{ .Title }}" /></a>
+
+      {{ with .Params.banner }}
+        <div class="row mb-3">
+          {{- partial "component/banner.html" $episode -}}
+        </div>
+      {{ end }}
+
+      {{ if (not (.Params.banner))  }}
+      <div class="row mb-3">
+        <div class="d-flex">
+          <div class="me-auto">
+            <h1>{{ .Title }}</h1>
           </div>
-        {{ end }}
+          <div>{{ partial "content/socialshare.html" . }}</div>
+        </div>
       </div>
-      <div class="row text-center">
-        {{ .Content }}
-      </div> 
+      {{ end }}
+
+      <p>{{ .Content }}</p>
+
+      <div class="row">
+        {{- partial "component/random-people.html" . -}} 
+      </div>
     </div>
-  </section>
+  </div>
 {{ end }}
 
 {{ define "main" }}

@@ -1,0 +1,8 @@
+{{ $content := .content }}
+{{ $width := .width }}
+
+{{ with $content.Params.Banner }}   
+  {{ partial "content/banner-image.html" $content }}
+{{ else }}
+  {{ partial "content/circular-image.html" (dict "content" $content "width" $width) }}
+{{ end }}

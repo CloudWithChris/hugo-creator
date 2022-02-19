@@ -4,11 +4,12 @@
       <div class="row">
         {{ partial "content/breadcrumbs.html" . }}
       </div>
-      <div class="row float-center">
-        {{ $upcomingTalks := first 3 (where (where $.Site.RegularPages "Section" "talk") ".Params.upcoming" true).ByDate}}
-        {{ $count := len $upcomingTalks }}
-        {{ range $upcomingTalks }}   
-          {{- partial "block/upcoming-talk.html" (dict "count" $count "value" . "site" $.Site ) -}}
+      <div class="row">
+        {{ $query := first 3 (where (where .Site.RegularPages "Section" "talk") ".Params.upcoming" true).ByDate }}
+        {{ $count:= len $query }}
+        {{ $site := .Site }}
+        {{ range $query }}
+          {{- partial "component/upcoming-content.html" (dict "count" $count "content" . "site" $site) -}}
         {{ end }}
       </div>  
       <div class="row text-center pt-5">

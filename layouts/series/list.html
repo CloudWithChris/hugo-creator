@@ -1,22 +1,40 @@
 {{ define "top" }}
-  <section class="py-5 container">
+{{ $site := .Site }}
+{{ $episode := . }}
+  <div class="container mb-3">
     <div class="col">
-      <div class="row">
+      <div class="row pt-3 ">
         {{ partial "content/breadcrumbs.html" . }}
       </div>
-      <div class="row float-center text-center">
-        <p>{{ .Content }}</p>
-        {{ range first 3 (where .Data.Pages ".Params.upcoming" true).ByDate }}         
-          {{- partial "block/upcoming-episode.html" . -}}
-        {{ end }}
-      </div>  
-      {{ if ge (where .Data.Pages ".Params.upcoming" true) 1 }}
-        <div class="row float-end">
-          <p><a href="{{ "/upcoming" | relURL }}">See all upcoming episodes</a></p>
+
+      {{ with .Params.banner }}
+        <div class="row mb-3">
+          {{- partial "component/banner.html" $episode -}}
+        </div>
+      {{ end }}
+
+      {{ if (not (.Params.banner))  }}
+        <div class="row mb-3">
+          <div class="d-flex align-items-center">
+            <div class="me-auto">
+              <h1><i class="fa-solid fa-folder"></i> {{ .Title }}</h1>
+            </div>
+            <div class="pe-3">   
+              {{ $image := .Resources.GetMatch .Params.image }}         
+              {{ if $image }}
+                <a href="{{ .Permalink | relURL}}"><img src="{{ $image.RelPermalink }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
+              {{ else }}
+                <a href="{{ .Permalink | relURL}}"><img src="{{ .Params.Image | relURL }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
+              {{ end }}
+            </div>
+          </div>
         </div>
       {{ end }}
     </div>
-  </section>
+    <div class="row mb-3">
+      <p>{{ .Content }}</p>
+    </div>
+  </div>
 {{ end }}
 
 {{ define "main" }}

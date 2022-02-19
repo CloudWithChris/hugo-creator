@@ -13,9 +13,6 @@
             </ul>
           </div>
         </div>
-        <div class="col-12">
-          <div class="row spacer"></div>
-        </div>
         <div class="col-12 col-md-6">
           <ul class="icons nav">
             {{ with .Site.Params.content.social.YouTube }}
@@ -42,10 +39,10 @@
           </ul>
         </div>
         <div class="col-12 col-md-6">
-          <div class="row justify-content-center copyright-notice text-wrap">
+          <div class="row justify-content-center text-white text-wrap">
             <p>&copy; {{ .Site.Params.content.site.copyright.established | markdownify }} - {{ dateFormat "2006" now }} {{ .Site.Params.content.site.copyright.notice | markdownify }}</p>
           </div>
-          <div class="row justify-content-center copyright-notice text-wrap">
+          <div class="row justify-content-center text-white text-wrap">
             <p>{{ .Site.Params.content.site.copyright.additional_information | markdownify }}</p>
           </div>
         </div>
@@ -109,12 +106,10 @@ cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express",
     }
     </script>
     <script type="text/plain" async src="{{ "js/analytics.js" | relURL }}" cookie-consent="tracking"></script>
-    <script type="text/plain" src="https://apis.google.com/js/platform.js" cookie-consent="tracking"></script>
     {{ end }}
   {{ end }}
 {{- end -}}
 <!-- end of Google Analytics-->
-<!-- end of Unnamed script-->
 
 <noscript>Cookie Consent by <a href="https://www.PrivacyPolicies.com/cookie-consent/" rel="nofollow noopener">PrivacyPolicies.com</a></noscript>
 <!-- End Cookie Consent -->

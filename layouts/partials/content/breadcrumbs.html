@@ -6,20 +6,16 @@
 
 <!-- templates -->
 {{ define "breadcrumb" }}
+
   {{ if .currentPage.Parent }}
     {{ template "breadcrumb" dict "currentPage" .currentPage.Parent }}
   {{ end }}
-
-  {{ $currentPage := .currentPage }}
-
-  {{ with .currentPage }}
-    {{ with .File }}
-    <li class="breadcrumb-item active">
-      {{ $currentPage.Title }}
+    {{ if ne .id .File.UniqueID }}
+      <li class="breadcrumb-item active">
+        {{ .currentPage.Title }}
     {{ else }}
-    <li class="breadcrumb-item">
-      <a href="{{ $currentPage.Permalink }}">{{ $currentPage.Title }}</a>
+      <li class="breadcrumb-item">
+        <a href="{{ .currentPage.Permalink }}">{{ .currentPage.Title }}</a>
     {{ end }}
-  {{ end }}
-    </li>
+  </li>
 {{ end }}
