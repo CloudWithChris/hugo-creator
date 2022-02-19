@@ -27,6 +27,29 @@ blockquote {
   color: #FFFFFF;
 }
 
+.social-box {
+  background-color: $compliment-color;
+}
+
+.social-box .box {
+  background: $accent-color;
+  border-radius: 50px; 
+  cursor: pointer;
+  transition: all 0.5s ease-out;
+  height: 50px;
+  width: 50px;
+}
+
+.social-box .box:hover{
+ box-shadow: 0 0 6px #bf3322;
+}
+
+.social-box a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+
 code {
   color: #B12074;
 }

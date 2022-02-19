@@ -8,13 +8,8 @@
 
 {{ define "bannerImage" }}
   <div class="border-0 p-0 card  text-white">
-        
-    {{ $banner := .currentPage.Resources.GetMatch .currentPage.Params.banner }}
-    {{ if $banner }}
-      <a href="{{ .currentPage.Permalink | relURL}}"><img class="img-fluid" src="{{ $banner.RelPermalink }}" alt="{{ .currentPage.Title }}" title="{{ .currentPage.Title }}" /></a>
-    {{ else }}
-      <a href="{{ .currentPage.Permalink | relURL}}"><img class="img-fluid" src="{{ .currentPage.Params.Banner | relURL }}" alt="{{ .currentPage.Title }}" title="{{ .currentPage.Title }}" /></a>
-    {{ end }}
+
+     {{ partial "content/banner-image.html" .currentPage }}
 
     <div class="row align-items-end card-img-overlay">
       <div class="d-flex background">

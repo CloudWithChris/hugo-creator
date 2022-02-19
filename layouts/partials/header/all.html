@@ -1,23 +1,5 @@
 {{ $site := .Site }}
-
 <header>
-  <div class="d-flex flex-row-reverse align-items-center">
-    {{ with .Site.Params.features.cta.subscribe_twitter }}
-      {{ if eq .enabled true }}
-        <div class="p-2">
-          <a class="twitter-follow-button" href="https://twitter.com/{{ $site.Params.Content.social.twitter }}" data-show-screen-name="false">
-            Follow @{{ $site.Params.Content.social.twitter }}
-          </a>
-        </div>
-      {{ end }}
-    {{ end }}
-    {{ with .Site.Params.features.cta.subscribe_youtube }}
-      {{ if eq .enabled true }}
-        <div class="p-2 g-ytsubscribe" data-channelid="{{ .channel }}" data-layout="default" data-count="default"></div>
-      {{ end }}
-    {{ end }}</div>
-  </div>
-  </div>
   <nav class="navbar navbar-expand-lg navbar-dark bg-cwc py-4">
     <div class="container">
         <a class="navbar-brand" href="{{ "/" | relURL }}">
@@ -57,4 +39,77 @@
         </div>
     </div>
   </nav>
+
+  {{ if .Site.Params.features.socialbox }}
+    <div class="social-box">
+      <div class="container py-2">
+        <div class="row justify-content-center">
+          {{ with .Site.Params.content.social.discord }}
+            <div class="col-1 col-xs-1 text-center mx-2">
+              <a href="https://discord.gg/{{ . }}">
+                <div class="box align-items-center justify-content-center d-flex">
+                  <i class="fa-brands fa-discord"></i>
+                </div>
+              </a>
+            </div>
+          {{ end }}
+          {{ with .Site.Params.content.social.github }}
+            <div class="col-1 col-xs-1 text-center mx-2">
+              <a href="https://github.com/{{ . }}">
+                <div class="box box align-items-center justify-content-center d-flex">
+                  <i class="fa-brands fa-github"></i>
+                </div>
+              </a>
+            </div>	
+          {{ end }}
+          {{ with .Site.Params.content.social.linkedin }}
+            <div class="col-1 col-xs-1 text-center mx-2">
+              <a href="https://linkedin.com/in/{{ . }}">
+                <div class="box box align-items-center justify-content-center d-flex">
+                  <i class="fa-brands fa-linkedin"></i>
+                </div>
+              </a>
+            </div>	
+          {{ end }}
+          {{ with .Site.Params.content.social.tiktok }}
+            <div class="col-1 col-xs-1 text-center mx-2">
+              <a href="https://www.tiktok.com/@{{ . }}">
+                <div class="box box align-items-center justify-content-center d-flex">
+                  <i class="fa-brands fa-tiktok"></i>
+                </div>
+              </a>
+            </div>	
+          {{ end }}
+          {{ with .Site.Params.content.social.twitch }}
+            <div class="col-1 col-xs-1 text-center mx-2">
+              <a href="https://twitch.tv/{{ . }}">
+                <div class="box box align-items-center justify-content-center d-flex">
+                  <i class="fa-brands fa-twitch"></i>
+                </div>
+              </a>
+            </div>
+          {{ end }}
+          {{ with .Site.Params.content.social.twitter }}
+            <div class="col-1 col-xs-1 text-center mx-2">
+              <a href="https://twitter.com/{{ . }}">
+                <div class="box box align-items-center justify-content-center d-flex">
+                  <i class="fa-brands fa-twitter"></i>
+                </div>
+              </a>
+            </div>	
+          {{ end }}
+          {{ with .Site.Params.content.social.youtube }}
+            <div class="col-1 col-xs-1 text-center mx-2">
+              <a href="https://youtube.com/{{ . }}">
+                <div class="box box align-items-center justify-content-center d-flex">
+                  <i class="fa-brands fa-youtube"></i>
+                </div>
+              </a>
+            </div> 
+          {{ end }}
+          </div>
+        </div>		
+      </div>
+    </div>
+  {{ end }}
 </header>

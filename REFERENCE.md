@@ -192,11 +192,14 @@ params:
       media_prefix: "https://podcasts.cloudwithchris.com/" # Media_Prefix is used when referencing podcast audio files. The media files in individual episodes will be concatenated after the media_prefix above.
       ogimage: "/img/cloudwithchrislogo.png" # Used within RSS feeds.
     social:
-      facebook: "CloudWithChris"
-      github: "chrisreddington/cloudwithchris.com"
-      twitter: "reddobowen"
+      discord: "" # Your discord invite 
+      facebook: "" # Your Facebook Page
+      github: "" # Your GitHub Profile or repo
+      linkedin: "" # Your linkedin profile e.g. linkedin.com/in/<YourSlugHere>
+      tiktok: "cloudwithchris" # Your tiktok profile e.g. tiktok.com/@<YourSlugHere>
+      twitter: "CloudWithChris" # Your twitter handle
       twitter_domain: "cloudwithchris.com" # This domain shows in twitter cards as "View on `twitter_domain`"
-      youtube: "CloudWithChris"
+      youtube: "CloudWithChris" # Your youtube channel name
   # Parameters relating to site features and functionality
   features:
     # Settings relating to audio players embedded 
@@ -221,6 +224,8 @@ params:
         reactions_enabled: 1
         emit_metadata: 0
         theme: "light"
+    # Settings related to the Social bar at top of site
+    socialbox: true
   # Settings relating to site security. This mainly
   # comprises of Content Security Policies.
   security:
@@ -496,13 +501,21 @@ features:
       reactions_enabled: 1
       emit_metadata: 0
       theme: "light"
+    # Settings related to the Call To Action bar at top of site
+    cta:
+      subscribe_twitter: 
+        enabled: true
+      subscribe_youtube: 
+        enabled: true
+        channel: "UC6KrOsGhSVJBszv_AwbcMxA"
 ```
 
 | Field Name   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Example                                                                                                                                                                                                                                                                                                 |
 |--------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | audio_player | Yes      | Settings related to audio players embedded within the site.  Details on subproperties:  **use** controls which player is used. Options are default or podscribe. **podscribe** contains a configuration blog which relates to the podscribe configuration.                                                                                                                                                                                                                                                                                                                                                                                                                             | audio_player:   use: "podscribe"  # The optionms are default or podscribe   podscribe:     someconfig: "tbc"                                                                                                                                                                                            |
 | analytics    | No       | Configuration settings to associate your Google Analytics / Microsoft Clarity telemetry.  Details on subproperties:  **googleAnalytics** is the Tracking ID of your Google Analytics **microsoftClarity** is the tracking code provided in the Setup experience of Microsoft Clarity (e.g. the last string in the Clarity tracking codeblock)                                                                                                                                                                                                                                                                                                                                          | # Settings related to analytics analytics:   googleAnalytics: ""       # Google Analytics ID   microsoftClarity: ""                                                                                                                                                                                     |
-| comments     | Yes      | Configuration settings relating to the comments system that is configured on the site.  Details on subproperties:  * **giscus** has several subproperties   * **repository** is the name as displayed on GitHub, e.g. CloudWithChris/cloudwithchris.com   * **repository_id** is the ID of the repository.   * **category** is the Category where you would like discussion threads to be posted   * **category_id** is the ID of the category noted above   * **mapping** is what the GitHub discussion will be titled   * **reactions_enabled** - 1 means enabled, 0 means disabled   * **emit_metadata** to be referenced via Giscus docs   * **theme** - Options are light or dark | # Settings related to the comments section # embedded within the site. comments:   giscus:     repository: ""     repository_id: ""     category: "Content Discussion"     category_id: "DIC_kwDODmTrrM4B-kuQ"     mapping: "pathname"     reactions_enabled: 1     emit_metadata: 0     theme: "light" |
+| comments     | Yes      | Configuration settings relating to the comments system that is configured on the site.  Details on subproperties:  * **giscus** has several subproperties   * **repository** is the name as displayed on GitHub, e.g. CloudWithChris/cloudwithchris.com   * **repository_id** is the ID of the repository.   * **category** is the Category where you would like discussion threads to be posted   * **category_id** is the ID of the category noted above   * **mapping** is what the GitHub discussion will be titled   * **reactions_enabled** - 1 means enabled, 0 means disabled   * **emit_metadata** to be referenced via Giscus docs   * **theme** - Options are light or dark | # Settings related to the comments section # embedded within the site. comments:   giscus:     repository: ""     repository_id: ""     category: "Content Discussion"     category_id: "DIC_kwDODmTrrM4B-kuQ"     mapping: "pathname"     reactions_enabled: 1     emit_metadata: 0     theme: "light" |                                                                                                                                                                                     |
+| cta     | Yes      | Configuration of the call to action section at the top of the site (i.e. social buttons to display) | # Settings related to the Call To Action bar at top of site cta: subscribe_twitter:  enabled: true subscribe_youtube:  enabled: true channel: "UC6KrOsGhSVJBszv_AwbcMxA" |
 
 #### Security
 
@@ -592,6 +605,7 @@ tags:                       # Used for SEO optimisation and browsing across the 
 - ""
 
 # Site-wide [optional properties]
+banner: ""                  # Optional, but strongly recommended to give a professional feel
 externalLink: ""            # Full URL to override listing links to an external page
 series:                     # Array of series (i.e. filenames of the series this is a part of)
 - ""
@@ -630,6 +644,7 @@ tags:                       # Used for SEO optimisation and browsing across the 
 - ""
 
 # Site-wide [optional properties]
+banner: ""                  # Optional, but strongly recommended to give a professional feel
 externalLink: ""            # Full URL to override listing links to an external page
 series:                     # Array of series (i.e. filenames of the series this is a part of)
 - ""
@@ -714,6 +729,7 @@ publishDate: ""     # TODO: Differentiate between date
 date: ""            # TODO: Differentiate between PublishDate
 
 # Site-wide [required properties]
+banner: ""          # Optional, but strongly recommended to give a professional feel
 image: ""           # Displayed when referenced in listing pages
 images:             # An array of images used in Social Sharing
 - ""
@@ -751,6 +767,7 @@ tags:               # Used for SEO optimisation and browsing across the site.
 - ""
 
 # Site-wide [optional properties]
+banner: ""          # Optional, but strongly recommended to give a professional feel
 externalLink: ""    # Full URL to override listing links to an external page
 series:             # Array of series (i.e. filenames of the series this is a part of)
 - ""
