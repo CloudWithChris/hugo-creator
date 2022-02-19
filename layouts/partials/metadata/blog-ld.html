@@ -1,0 +1,57 @@
+{{ $content := . }}
+{{ $site := .Site }}
+<script defer type="application/ld+json">
+  { 
+    "@context": "http://schema.org", 
+    "@type": "BlogPosting",
+    "name": {{ .Title }},
+    "description": {{ .Params.Description | plainify }},
+    "mainEntityOfPage": {{ .Permalink }},
+    "dateModified": "{{ .Lastmod.Format "2006-01-02" }}",
+    "headline": {{ .Title }},
+    "author": [
+      {{- range .Params.Authors -}}
+        {{- $person := $site.GetPage (printf "/person/%s" .) -}}
+        {
+          "@type": "Person",
+          "name": "{{ $person.Title }}",
+          "image": {{ $person.Params.image | absURL }},
+          "url": {{ $person.Permalink }}
+        },
+      {{- end -}} 
+    ],
+    "datePublished": "{{ .Date.Format "2006-01-02" }}",
+    "wordCount": {{ .WordCount }},
+    "image": [
+      {{ with .Params.Banner }}
+        {{ $banner := $content.Resources.GetMatch . }}
+        {{ if $banner }}
+          {{ $banner.Permalink }}
+        {{ else }}
+          {{ $banner := resources.GetMatch ($content.Params.Banner | relURL) }}
+          {{ $banner.Permalink }}
+        {{ end }}
+      {{ else }}
+        {{ $image := $content.Resources.GetMatch $content.Params.Image }}
+        {{ if $image }}
+        {{ $image.Permalink }}
+        {{ else }}
+        {{ $image := resources.GetMatch ($content.Site.Params.content.site.ogimage | relURL) }}
+        {{ $image.Permalink }}
+        {{ end }}
+      {{ end }}
+      ],
+    "url": {{ .Permalink  }},
+    "publisher": {
+      "@type": "Organization",
+      "name": "{{ .Site.Title }}",
+      "logo": {
+        "@type": "imageObject",
+        "url": {{ "/favicon.ico" | absURL }}
+      }
+    },    
+    {{ with .Params.Tags }}
+      "keywords": {{ delimit . ", " }}
+    {{ end }}
+  }
+</script>

@@ -1,0 +1,30 @@
+{{ $scratch := .Scratch }}
+
+{{ with .Params.Website }}
+  {{ $scratch.Add "sameAs" (slice .) }}
+{{ end }}
+{{ with .Params.GitHub }}
+  {{ $scratch.Add "sameAs" (slice (printf "%s%s" "https://github.com/" . )) }}
+{{ end }}
+{{ with .Params.Twitter }}
+  {{ $scratch.Add "sameAs" (slice (printf "%s%s" "https://twitter.com/" . )) }}
+{{ end }}
+{{ with .Params.LinkedIn }}
+  {{ $scratch.Add "sameAs" (slice (printf "%s%s" "https://linkedin.com/in/" . )) }}
+{{ end }}
+{{ with .Params.YouTube }}
+  {{ $scratch.Add "sameAs" (slice (printf "%s%s" "https://youtube.com/" . )) }}
+{{ end }}
+{{ with .Params.Twitch }}
+  {{ $scratch.Add "sameAs" (slice (printf "%s%s" "https://twitch.tv/" . )) }}
+{{ end }}
+
+<script defer type="application/ld+json">
+{ 
+  "@context": "http://schema.org", 
+  "@type": "Person",
+  "name": "{{ .Params.Title }}",
+  "url": {{ .Permalink }},
+  "sameAs": {{ .Scratch.Get "sameAs" }}
+}
+</script>

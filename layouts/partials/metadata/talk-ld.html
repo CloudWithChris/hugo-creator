@@ -1,0 +1,42 @@
+{{ $site := .Site }}
+<script defer type="application/ld+json">
+{ 
+  "@context": "http://schema.org", 
+  "@type": "Event",
+  "name": {{ .Title }},
+  "description": {{ .Params.Description | plainify }},
+  "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "performer": [
+    {{- range .Params.hosts -}}
+      {{- $person := $site.GetPage (printf "/person/%s" .) -}}
+      {
+        "@type": "Person",
+        "name": "{{ $person.Title }}",
+        "image": {{ $person.Params.image | absURL }},
+        "url": {{ $person.Permalink }}
+      }
+    {{- end -}}
+  ],     
+  "organizer": {
+    "@type": "Organization",
+    "name": "{{ .Params.eventName }}"
+  },
+  "image": "{{ .Params.content.site.ogimage }}",
+  "location": {
+    "@type": "VirtualLocation",
+    "url": {{ .Permalink }}
+  },
+  "url": {{ .Permalink  }},
+  {{ with .Params.externalLink }}
+  "sameAs": [
+    {{ .  }}
+  ],
+  {{ end }}
+  "startDate": "{{ .Date.Format "2006-01-02" }}",
+  "endDate": "{{ .Date.Format "2006-01-02" }}",
+  {{ with .Params.Tags }}
+    "keywords": "{{ delimit . ", " }}"
+  {{ end }}
+}
+</script>
