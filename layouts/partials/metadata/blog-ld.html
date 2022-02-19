@@ -15,7 +15,7 @@
         {
           "@type": "Person",
           "name": "{{ $person.Title }}",
-          "image": {{ $person.Params.image | absURL }},
+          "image": {{ partial "metadata/image-ld.html" $person }},
           "url": {{ $person.Permalink }}
         },
       {{- end -}} 
@@ -23,23 +23,7 @@
     "datePublished": "{{ .Date.Format "2006-01-02" }}",
     "wordCount": {{ .WordCount }},
     "image": [
-      {{ with .Params.Banner }}
-        {{ $banner := $content.Resources.GetMatch . }}
-        {{ if $banner }}
-          {{ $banner.Permalink }}
-        {{ else }}
-          {{ $banner := resources.GetMatch ($content.Params.Banner | relURL) }}
-          {{ $banner.Permalink }}
-        {{ end }}
-      {{ else }}
-        {{ $image := $content.Resources.GetMatch $content.Params.Image }}
-        {{ if $image }}
-        {{ $image.Permalink }}
-        {{ else }}
-        {{ $image := resources.GetMatch ($content.Site.Params.content.site.ogimage | relURL) }}
-        {{ $image.Permalink }}
-        {{ end }}
-      {{ end }}
+        {{ partial "metadata/image-ld.html" . }}
       ],
     "url": {{ .Permalink  }},
     "publisher": {

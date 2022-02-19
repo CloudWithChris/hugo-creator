@@ -3,7 +3,7 @@
     "@context": "https://schema.org",
     "@type": "Organization",
     "url": {{- .Site.Home.Permalink -}},
-    "logo": {{- .Site.Params.content.site.ogimage | absURL -}}
+    "logo": {{ partial "metadata/image-ld.html" . }}
   }
 </script>
 

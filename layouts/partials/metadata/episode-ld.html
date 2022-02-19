@@ -6,14 +6,14 @@
     "@context": "http://schema.org", 
     "@type": "PodcastEpisode",
     "name": "{{ .Params.Title }}",
-    "image": {{ .Params.image | absURL }},
+    "image": {{ partial "metadata/image-ld.html" . }},
     "author": [
       {{- range .Params.hosts -}}
         {{- $person := $site.GetPage (printf "/person/%s" .) -}}
         {
           "@type": "Person",
           "name": "{{ $person.Title }}",
-          "image": {{ $person.Params.image | absURL }},
+          "image": {{ partial "metadata/image-ld.html" $person }},
           "url": {{ $person.Permalink }}
         },
       {{- end -}}
@@ -22,7 +22,7 @@
         {
           "@type": "Person",
           "name": "{{ $person.Title }}",
-          "image": {{ $person.Params.image | absURL }},
+          "image": {{ partial "metadata/image-ld.html" $person }},
           "url": {{ $person.Permalink }}
         },
       {{- end -}}
@@ -90,23 +90,7 @@
       "url": {{ .Permalink }}
       },
     "image": [
-      {{ with .Params.Banner }}
-        {{ $banner := $content.Resources.GetMatch . }}
-        {{ if $banner }}
-          {{ $banner.Permalink }}
-        {{ else }}
-          {{ $banner := resources.GetMatch ($content.Params.Banner | relURL) }}
-          {{ $banner.Permalink }}
-        {{ end }}
-      {{ else }}
-       {{ $image := $content.Resources.GetMatch $content.Params.Image }}
-       {{ if $image }}
-        {{ $image.Permalink }}
-       {{ else }}
-        {{ $image := resources.GetMatch ($content.Site.Params.content.site.ogimage | relURL) }}
-        {{ $image.Permalink }}
-       {{ end }}
-      {{ end }}
+      {{ partial "metadata/image-ld.html" . }}
      ],
     "description": "{{ .Params.Description | plainify }}",
     "performer": [
@@ -115,7 +99,7 @@
       {
         "@type": "Person",
         "name": "{{ $person.Title }}",
-        "image": {{ $person.Params.image | absURL }},
+        "image": {{ partial "metadata/image-ld.html" $person }},
         "url": {{ $person.Permalink }}
       },
     {{- end -}}
@@ -124,7 +108,7 @@
       {
         "@type": "Person",
         "name": "{{ $person.Title }}",
-        "image": {{ $person.Params.image | absURL }},
+        "image": {{ partial "metadata/image-ld.html" $person }},
         "url": {{ $person.Permalink }}
       },
     {{- end -}}

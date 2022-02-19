@@ -13,7 +13,7 @@
       {
         "@type": "Person",
         "name": "{{ $person.Title }}",
-        "image": {{ $person.Params.image | absURL }},
+        "image": {{ partial "metadata/image-ld.html" $person }},
         "url": {{ $person.Permalink }}
       }
     {{- end -}}
@@ -22,7 +22,7 @@
     "@type": "Organization",
     "name": "{{ .Params.eventName }}"
   },
-  "image": "{{ .Params.content.site.ogimage }}",
+  "image": {{ partial "metadata/image-ld.html" . }},
   "location": {
     "@type": "VirtualLocation",
     "url": {{ .Permalink }}

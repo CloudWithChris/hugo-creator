@@ -24,6 +24,7 @@
   "@context": "http://schema.org", 
   "@type": "Person",
   "name": "{{ .Params.Title }}",
+  "image": {{ partial "metadata/image-ld.html" . }},
   "url": {{ .Permalink }},
   "sameAs": {{ .Scratch.Get "sameAs" }}
 }
