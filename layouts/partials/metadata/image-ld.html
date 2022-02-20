@@ -4,8 +4,7 @@
   {{- if $banner -}}
     {{- $banner.Permalink -}}
   {{- else -}}
-    {{- $banner := resources.GetMatch ($content.Params.Banner | absURL) -}}
-    {{- $banner.Permalink -}}
+    {{- (resources.GetMatch $content.Params.Banner).Permalink -}}
   {{- end -}}
 {{- else -}}
   {{- if .Params.Image -}}
