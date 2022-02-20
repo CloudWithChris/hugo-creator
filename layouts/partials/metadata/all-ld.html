@@ -22,7 +22,7 @@
       "@type": "SearchAction",
       "target": {
         "@type": "EntryPoint",
-        "urlTemplate": {{ printf "%s%s" .Site.BaseURL "search?q={search_term_string}" | absURL }}
+        "urlTemplate": {{ printf "%s/%s" .Site.BaseURL "search?q={search_term_string}" | absURL }}
       },
       "query-input": "required name=search_term_string"
     }
