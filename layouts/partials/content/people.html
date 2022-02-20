@@ -2,20 +2,23 @@
 {{ $people := .people }}
 {{ $size := .size }}
 
-{{ with $people }}   
-  {{ range $name := . }}
+{{ with $people }}
+  {{ range . }}
+    {{ $person := . }}
     {{ with $site.GetPage (printf "/person/%s" .) }}
       {{ $image := .Resources.GetMatch .Params.image }}
-      <a href="{{ .Permalink | relURL}}" class="text-muted text-decoration-none me-5">
-        <div class="d-flex align-items-center flex-row">
-          <div>
-            <img src="{{ $image.RelPermalink }}" width="{{ $size }}" class="me-2 rounded-circle" alt="{{ .Title }}" title="{{ .Title }}" />
+      <div class="col-auto">
+        <a href="{{ .Permalink | relURL}}" class="text-muted text-decoration-none me-5">
+          <div class="row me-2">
+            <div class="col col-xs-2">
+              <img src="{{ $image.RelPermalink }}" width="{{ $size }}" class="float-start rounded-circle" alt="{{ .Title }}" title="{{ .Title }}" />
+            </div>
+            <div class="col-auto align-self-center">
+              {{ .Title }}
+            </div>
           </div>
-          <div>
-            <span>{{ .Title }}</span>
-          </div>
-        </div>
-      </a>
+        </a>
+      </div>
     {{ end }}
   {{ end }}
 {{ end }}
