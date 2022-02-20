@@ -39,3 +39,6 @@ Please describe the tests, and the test cases/configuration used. Provide docume
 - [ ] I have added tests that prove my fix is effective or that my feature works
 - [ ] New and existing unit tests pass locally with my changes
 - [ ] Any dependent changes have been merged and published in downstream modules
+- This change is:
+  - [ ] Not updating Site/Page Metadata/Frontmatter
+  - [ ] Updating Site/Page Metadata/Frontmatter and the JSON-LD site_metadata partial has been reviewed for correctness

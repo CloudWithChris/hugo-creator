@@ -1,0 +1,124 @@
+{{ $site := .Site }}
+{{ $content := . }}
+
+<script defer type="application/ld+json">
+  { 
+    "@context": "http://schema.org", 
+    "@type": "PodcastEpisode",
+    "name": "{{ .Params.Title }}",
+    "image": {{ partial "metadata/image-ld.html" . }},
+    "author": [
+      {{- range .Params.hosts -}}
+        {{- $person := $site.GetPage (printf "/person/%s" .) -}}
+        {
+          "@type": "Person",
+          "name": "{{ $person.Title }}",
+          "image": {{ partial "metadata/image-ld.html" $person }},
+          "url": {{ $person.Permalink }}
+        },
+      {{- end -}}
+      {{- range .Params.guests -}}
+        {{- $person := $site.GetPage (printf "/person/%s" .) -}}
+        {
+          "@type": "Person",
+          "name": "{{ $person.Title }}",
+          "image": {{ partial "metadata/image-ld.html" $person }},
+          "url": {{ $person.Permalink }}
+        },
+      {{- end -}}
+    ],
+    "url": {{ .Permalink  }},
+    "description": "{{ .Params.Description | plainify }}",
+    "associatedMedia": [
+      {{ with .Params.podcast_file }}
+        {
+          "@type": "MediaObject",
+          "contentUrl": {{ printf "%s%s" $site.Params.content.site.media_prefix . | absURL }}
+        },
+      {{ end }}
+
+      {{ with .Params.youtube }}
+        {
+          "@type": "VideoObject",
+          "contentUrl": {{ printf "%s%s" "https://youtu.be/" . | absURL }},
+          "name": "{{ $content.Title }}",
+          "thumbnailUrl": {{ $content.Params.image | absURL }},
+          "description": "{{ $content.Params.Description | plainify }}",
+          "uploadDate": "{{ $content.Date.Format "2006-01-02" }}",
+          
+        },
+      {{ end }}
+    ],
+    {{ with .Params.Series }}
+      {{ $counter := 0 }}
+      {{ with . }}
+        {{ range $key, $value := . }}
+          {{ with $value }}
+            {{ $counter = add $counter 1 }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+      
+      {{ if gt $counter 0 }}
+        "partOfSeries": [
+        {{- range . -}}
+          {{- $series := $site.GetPage (printf "/series/%s" (. | urlize)) -}}
+          {
+            "@type": "PodcastSeries",
+            "name": "{{ $series.Title }}",
+            "url": {{ $series.Permalink }}
+          },
+        {{- end -}}
+      ],
+      {{ end }}
+    {{ end }}
+  }
+</script>
+
+{{ if .Params.upcoming }}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "{{ .Title }}",
+    "startDate": "{{ .Date.Format "2006-01-02" }}",
+    "endDate": "{{ .Date.Format "2006-01-02" }}",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+    "location": {
+      "@type": "VirtualLocation",
+      "url": {{ .Permalink }}
+      },
+    "image": [
+      {{ partial "metadata/image-ld.html" . }}
+     ],
+    "description": "{{ .Params.Description | plainify }}",
+    "performer": [
+      {{- range .Params.hosts -}}
+      {{- $person := $site.GetPage (printf "/person/%s" .) -}}
+      {
+        "@type": "Person",
+        "name": "{{ $person.Title }}",
+        "image": {{ partial "metadata/image-ld.html" $person }},
+        "url": {{ $person.Permalink }}
+      },
+    {{- end -}}
+    {{- range .Params.guests -}}
+      {{- $person := $site.GetPage (printf "/person/%s" .) -}}
+      {
+        "@type": "Person",
+        "name": "{{ $person.Title }}",
+        "image": {{ partial "metadata/image-ld.html" $person }},
+        "url": {{ $person.Permalink }}
+      },
+    {{- end -}}
+    ],
+    "organizer": {
+      "@type": "Organization",
+      "name": "{{ .Site.Title }}",
+      "url": {{ .Site.Home.Permalink }},
+      "logo": {{- .Site.Params.content.site.ogimage | absURL -}}
+    }
+  }
+</script>
+{{ end }}

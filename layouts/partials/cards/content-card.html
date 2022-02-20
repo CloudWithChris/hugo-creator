@@ -12,11 +12,10 @@
       </div>
     </div>
     <div class="row mb-3 text-start">
-      <a href="{{ $content.Permalink }}"><h3>{{ .Title }}</h3></a>
+      <a href="{{ .Permalink }}"><h3>{{ .Title }}</h3></a>
     </div>
 
-    <div class="row mb-3">
-      <div class="d-flex flex-row">
+    <div class="row justify-content-start">
         {{ if eq .Type "blog" }}
           {{ partial "content/people.html" (dict "people" .Params.Authors "site" $site "size" 50 )}}
         {{ end }}
@@ -29,7 +28,6 @@
         {{ if eq .Type "talk" }}
           {{ partial "content/people.html" (dict "people" .Params.Hosts "site" $site "size" 50 )}}
         {{ end }}
-      </div>
     </div>
 
     <div class="row mb-3 text-start">

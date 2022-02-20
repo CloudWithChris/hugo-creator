@@ -111,5 +111,21 @@ cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express",
 {{- end -}}
 <!-- end of Google Analytics-->
 
+<script type="text/plain" cookie-consent="functionality">
+if('serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .register('/sw.js', { scope: '/' })
+    .then(function(registration) {
+      //console.log('Service Worker Registered');
+    });
+
+  navigator.serviceWorker
+    .ready
+    .then(function(registration) {
+      //console.log('Service Worker Ready');
+    });
+}
+</script>
+
 <noscript>Cookie Consent by <a href="https://www.PrivacyPolicies.com/cookie-consent/" rel="nofollow noopener">PrivacyPolicies.com</a></noscript>
 <!-- End Cookie Consent -->
