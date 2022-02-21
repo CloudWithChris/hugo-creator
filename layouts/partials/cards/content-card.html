@@ -26,7 +26,7 @@
         {{ end }}
 
         {{ if eq .Type "talk" }}
-          {{ partial "content/people.html" (dict "people" .Params.Hosts "site" $site "size" 50 )}}
+          {{ partial "content/people.html" (dict "people" .Params.Speakers "site" $site "size" 50 )}}
         {{ end }}
     </div>
 

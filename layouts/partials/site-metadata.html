@@ -36,6 +36,7 @@
   <meta name="url" content="{{ .Permalink }}" />
   <meta name="twitter:url" content="{{ .Permalink }}" /> 
   <meta property="og:url" content="{{ .Permalink }}" />
+  <meta name="twitter:card" content="summary_large_image">
   <!-- language metadata -->
   <meta property="og:locale" content="{{ .Language.Lang }}">
   <meta name="language" content="{{ .Site.Params.content.site.language_name }}">
@@ -149,6 +150,9 @@
     {{ partial "metadata/paginator.html" (dict "paginator" (.Paginate (where .Pages ".Params.Upcoming" "!=" true)) "content" . )}}
     {{ if eq .IsPage true }}
       {{ partial "metadata/episode-ld.html" . }}
+      {{ with .Params.Youtube }}
+        <meta property="og:video" content="{{ printf "%s%s" "https://youtu.be/" . | absURL }}" />
+      {{ end }}
     {{ end }}
   {{ else if eq .Section "person" }} 
     {{ partial "metadata/paginator.html" (dict "paginator" (.Paginate (where .Pages ".Params.Upcoming" "!=" true).ByTitle) "content" . )}}
@@ -159,6 +163,9 @@
     {{ partial "metadata/paginator.html" (dict "paginator" (.Paginate (where .Pages ".Params.Upcoming" "!=" true)) "content" . )}}
     {{ if eq .IsPage true }}
       {{ partial "metadata/talk-ld.html" . }}
+      {{ with .Params.Youtube }}
+        <meta property="og:video" content="{{ printf "%s%s" "https://youtu.be/" . | absURL }}" />
+      {{ end }}
     {{ end }}
   {{ else if eq .Section "series" }} 
     {{ partial "metadata/paginator.html" (dict "paginator" (.Paginate (where .Pages ".Params.Upcoming" "!=" true)) "content" . )}}

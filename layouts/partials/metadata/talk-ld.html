@@ -1,42 +1,98 @@
-{{ $site := .Site }}
+{{- $site := .Site -}}
 <script defer type="application/ld+json">
 { 
   "@context": "http://schema.org", 
   "@type": "Event",
-  "name": {{ .Title }},
-  "description": {{ .Params.Description | plainify }},
-  "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
+  "name": {{- .Title -}},
+  "description": {{- .Params.Description | plainify -}},
   "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode":   
+  {{- if.Params.event -}}
+    {{- if eq (lower .Params.event.attendanceType) "hybrid" -}}
+      "https://schema.org/MixedEventAttendanceMode",
+    {{- else if eq (lower .Params.event.attendanceType) "virtual" -}}
+    "https://schema.org/OnlineEventAttendanceMode",
+    {{- else if eq (lower .Params.event.attendanceType) "physical" -}}
+    "https://schema.org/OfflineEventAttendanceMode",
+    {{- end -}}
+  {{- else -}}
+    "https://schema.org/MixedEventAttendanceMode",
+  {{- end -}}
   "performer": [
-    {{- range .Params.hosts -}}
+    {{- range .Params.speakers -}}
       {{- $person := $site.GetPage (printf "/person/%s" .) -}}
       {
         "@type": "Person",
-        "name": "{{ $person.Title }}",
-        "image": {{ partial "metadata/image-ld.html" $person }},
-        "url": {{ $person.Permalink }}
-      }
+        "name": "{{- $person.Title -}}",
+        "image": {{- partial "metadata/image-ld.html" $person -}},
+        "url": {{- $person.Permalink -}}
+      },
     {{- end -}}
-  ],     
+  ],
+  {{- if and (isset .Params.event "organizername") (isset .Params.event "url") -}}     
   "organizer": {
     "@type": "Organization",
-    "name": "{{ .Params.eventName }}"
+    "name": "{{- .Params.event.organizerName -}}"
+    "url": "{{- .Params.event.url -}}"
   },
-  "image": {{ partial "metadata/image-ld.html" . }},
+  {{- end -}}
+  "image": {{- partial "metadata/image-ld.html" . -}},
+  "offers": {
+    "@type": "Offer",
+    {{ if .Date.Before now }} 
+      "availability": "https://schema.org/SoldOut",
+    {{ else }}
+      {{ if and (isset .Params.event "available") (not .Params.Event.available) }}
+        "availability": "https://schema.org/SoldOut",
+      {{ else }}
+        "availability": "https://schema.org/InStock",
+      {{ end }}
+    {{ end }}
+    {{ if and .Params.event.cost .Params.event.costCurrency }}
+    "price": "{{ .Params.event.cost }}",
+    "priceCurrency": "{{ .Params.event.costCurrency }}"
+    {{ else }}
+    "price": "0.00",
+    "priceCurrency": "GBP"
+    {{ end }}
+  },
+  {{- if eq (lower .Params.event.attendanceType) "hybrid" -}}
+  "location": [
+    {
+      "@type": "VirtualLocation",
+      "url": {{- .Params.event.eventUrl -}}
+    },
+    {
+      "@type": "text",
+      "text": {{- .Params.event.location -}}
+    }
+  ],
+  {{- else if eq (lower .Params.event.attendanceType) "physical" -}}
+  "location": 
+  {
+    "@type": "text",
+    "text": {{- .Params.event.location -}}
+  },
+  {{- else -}}
   "location": {
     "@type": "VirtualLocation",
-    "url": {{ .Permalink }}
+    "url": {{- .Params.event.eventUrl -}}
   },
-  "url": {{ .Permalink  }},
-  {{ with .Params.externalLink }}
+  {{- end -}}
+  "url": {{- .Permalink  -}},
+  {{- if or (isset .Params.event "eventurl") (isset .Params.event "organizerurl") -}}
   "sameAs": [
-    {{ .  }}
+    {{- if .Params.event.eventUrl -}}
+      {{- .Params.event.eventUrl  -}}
+    {{- else -}}
+      {{- .Params.event.organizerUrl  -}}
+    {{- end -}}
   ],
-  {{ end }}
-  "startDate": "{{ .Date.Format "2006-01-02" }}",
-  "endDate": "{{ .Date.Format "2006-01-02" }}",
-  {{ with .Params.Tags }}
-    "keywords": "{{ delimit . ", " }}"
-  {{ end }}
+  {{- end -}}
+  "startDate": "{{- .Date.Format "2006-01-02" -}}",
+  "endDate": "{{- .Date.Format "2006-01-02" -}}",
+  {{- with .Params.Tags -}}
+    "keywords": "{{- delimit . ", " -}}"
+  {{- end -}}
 }
 </script>
