@@ -112,7 +112,7 @@ jobs:
           pushd $SITE_FOLDER_PATH/public
           sudo gem install html-proofer
           htmlproofer -v
-          htmlproofer --allow-hash-href --http-status-ignore "999" --url-ignore "/https://github.com/,/https://twitter.com/,https://fonts.googleapis.com"
+          htmlproofer --allow-hash-href --disable-external "true"
   lighthouse:
     needs: matrixBuild
     name: "Lighthouse Eval"
@@ -152,6 +152,7 @@ jobs:
             repo-token: ${{ secrets.GITHUB_TOKEN }}
             # Provide either site-dir or url
             url: ${{ steps.netlify.outputs.url }}
+            scan-timeout: '600000'
 
       - name: Upload report artifact
         uses: actions/upload-artifact@v2
