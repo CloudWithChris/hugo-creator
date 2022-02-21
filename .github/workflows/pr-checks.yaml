@@ -112,7 +112,7 @@ jobs:
           pushd $SITE_FOLDER_PATH/public
           sudo gem install html-proofer
           htmlproofer -v
-          htmlproofer --allow-hash-href --disable-external "true"
+          htmlproofer --allow-hash-href --disable-external true
   lighthouse:
     needs: matrixBuild
     name: "Lighthouse Eval"
