@@ -14,9 +14,11 @@
     "https://schema.org/OnlineEventAttendanceMode",
     {{- else if eq (lower .Params.event.attendanceType) "physical" -}}
     "https://schema.org/OfflineEventAttendanceMode",
-    {{- end -}}
+    {{- else -}}
+    "https://schema.org/OnlineEventAttendanceMode",
+    {{ end }}
   {{- else -}}
-    "https://schema.org/MixedEventAttendanceMode",
+    "https://schema.org/OnlineEventAttendanceMode",
   {{- end -}}
   "performer": [
     {{- range .Params.speakers -}}
