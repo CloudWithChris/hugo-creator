@@ -20,7 +20,7 @@ blockquote {
 }
 
 .MuiTypography-colorInherit {
-  color: #0C62A8 !important;
+  color: $mainlink-color !important;
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -88,7 +88,7 @@ footer a {
 }
 
 main a {
-  color: #0C62A8;
+  color: $mainlink-color;
   text-decoration: none;
 }
 
