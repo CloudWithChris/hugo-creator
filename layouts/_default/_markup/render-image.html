@@ -1,8 +1,32 @@
 {{ if .Title }}
   <figure class="figure text-center">
-    <img class="img-fluid" src="{{ .Destination | safeURL }}" alt="{{ .Text }}" loading="lazy">
+    {{ template "image" (dict "context" . "page" .Page) }}
     <figcaption class="figure-caption">{{ .Title }}</figcaption>
   </figure>
 {{ else }}
-  <img class="img-fluid" src="{{ .Destination | safeURL }}" alt="{{ .Text }}" loading="lazy">
+  {{ template "image" (dict "context" . "page" .Page)  }}
+{{ end }}
+
+
+{{ define "image" }}
+{{ $context := .context }}
+{{ $page := .page }}
+{{ $image := $page.Resources.GetMatch $context.Destination }}
+{{ $tiny := ($image.Resize "480x webp") }}
+{{ $small := ($image.Resize "768x webp") }}
+{{ $medium := ($image.Resize "1024x webp") }}
+{{ $large := ($image.Resize "1366x webp") }}
+<img class="img-fluid" loading="lazy"
+    srcset="
+    {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
+    {{- with $small.RelPermalink -}}, {{.}} 768w{{- end -}}
+    {{- with $medium.RelPermalink -}}, {{.}} 1024w{{- end -}}
+    {{- with $large.RelPermalink -}}, {{.}} 1366w{{- end -}}" 
+    src="{{ $image.RelPermalink }}" 
+    sizes="(max-width: 600px) 480px,
+          (max-width: 800px) 768px,
+          (max-width: 1050px) 1024px,
+          1366px"
+    alt="{{ $context.Text }}" 
+    title="{{ $context.Text }}" />
 {{ end }}
