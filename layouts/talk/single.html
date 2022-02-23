@@ -34,22 +34,22 @@
           </div>
         </div>
       </div>
-      <div class="row mb-3">
-        <div class="d-flex ms-1">
-          <div>
-              <i class="fa-solid fa-comment me-2"></i> {{ .Params.TalkType }}, {{ .Params.eventName }}
+      {{ if and .Params.event.organizerUrl .Params.event.organizerName}}
+        <div class="row mb-3">
+          <div class="d-flex ms-1">
+            {{ partial "content/event-details.html" . }}
           </div>
         </div>
-      </div>
+      {{ end }}
       <div class="row mb-3">
         <div class="d-flex ms-1">
           {{ partial "content/published.html" . }}
         </div>
       </div>
-      {{ with .Params.externalLink }}
+      {{ with .Params.event.eventUrl }}
       <div class="row mb-3">
         <div class="d-flex ms-1">
-          <i class="fa-solid fa-link me-2"></i> <a href="{{ . }}">See details</a>
+          <i class="fa-solid fa-link me-2"></i> <a href="{{ . }}">See event details</a>
         </div>
       </div>
       {{ end }}
@@ -76,8 +76,9 @@
   </div>
 {{ end }}
 
+
 {{ define "main" }}
-{{ $title := .Title }}
+  {{ $title := .Title }}
   <div class="container">
     {{- with .Params.youtube -}}
       <div class="row my-3">
@@ -92,5 +93,4 @@
         </div>
       </div>
     {{- end -}}
-  </div>
 {{ end }}
