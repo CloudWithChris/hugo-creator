@@ -58,7 +58,7 @@
       {{ if gt (len $upcomingEpisodes) 0}}
         <h2>Upcoming Episodes</h2>
         {{- range $upcomingEpisodes.ByDate -}}
-          {{- partial "cards/content-card.html" . -}}
+          {{- partial "cards/content-card.html" (dict "content" .) -}}
         {{ end }}
       {{ end}}
 
@@ -70,7 +70,7 @@
       {{ if gt (len $pastEpisodes) 0}}
         <h2>Past Episodes</h2>
         {{- range $pastEpisodes -}}
-          {{- partial "cards/content-card.html" . -}}
+          {{- partial "cards/content-card.html" (dict "content" .) -}}
         {{ end }}
       {{ end}}
     </div>

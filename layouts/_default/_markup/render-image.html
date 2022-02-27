@@ -1,8 +1,36 @@
 {{ if .Title }}
   <figure class="figure text-center">
-    <img class="img-fluid" src="{{ .Destination | safeURL }}" alt="{{ .Text }}" loading="lazy">
+    {{ template "imageTemplate" dict "page" .Page "title" .Title "destination" .Destination "tiny" "480" "small" "768" "medium" "1024"  "large" "1366" }}
     <figcaption class="figure-caption">{{ .Title }}</figcaption>
   </figure>
 {{ else }}
-  <img class="img-fluid" src="{{ .Destination | safeURL }}" alt="{{ .Text }}" loading="lazy">
+  {{ template "imageTemplate" dict "page" .Page "title" .Title "destination" .Destination "tiny" "480" "small" "768" "medium" "1024"  "large" "1366" }}
+{{ end }}
+
+{{ define "imageTemplate" }}
+  {{ $image := .page.Resources.GetMatch .destination }}
+  {{ $tiny := ($image.Resize (printf "%sx webp" .tiny)) }}
+  {{ $tinySize := .tiny }}
+  {{ $small := ($image.Resize (printf "%sx webp" .small)) }}
+  {{ $smallSize := .small }}
+  {{ $medium := ($image.Resize (printf "%sx webp" .medium)) }}
+  {{ $mediumSize := .medium }}
+  {{ $large := ($image.Resize (printf "%sx webp" .large)) }}
+  {{ $largeSize := .large }}
+  <img class="img-fluid"
+        loading="lazy"
+        width="{{ $large.Width }}"
+        height="{{ $large.Height }}"
+        srcset="
+            {{- with $tiny.RelPermalink -}}{{.}} {{ $tinySize }}w{{- end -}}
+            {{- with $small.RelPermalink -}}, {{.}} {{ $smallSize }}w{{- end -}}
+            {{- with $medium.RelPermalink -}}, {{.}} {{ $mediumSize }}w{{- end -}}
+            {{- with $large.RelPermalink -}}, {{.}} {{ $largeSize }}w{{- end -}}" 
+        src="{{ $image.RelPermalink }}" 
+        sizes="(max-width: {{ add (int $tinySize) 100 }}px) {{ $tinySize }}px,
+              (max-width: {{ add (int $smallSize) 100 }}px) {{ $smallSize }}px,
+              (max-width: {{ add (int $mediumSize) 100 }}px) {{ $mediumSize }}px,
+              {{ $largeSize }}px"
+        alt="{{ .title }}" 
+        title="{{ .title }}" />
 {{ end }}

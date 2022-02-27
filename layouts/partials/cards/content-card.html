@@ -1,59 +1,60 @@
 
-{{ $site := .Site }}
-{{ $content := . }}
+{{ $content := .content }}
+{{ $site := $content.Site }}
+{{ $lazy := .lazy | default true }}
 
-{{ $url := cond (and (isset .Params "externallink") (ne .Params.externalLink "")) (.Params.externalLink) (.Permalink | relURL) }}
+{{ $url := cond (and (isset $content.Params "externallink") (ne $content.Params.externalLink "")) ($content.Params.externalLink) ($content.Permalink | relURL) }}
 
 <div class="col-md-6">
   <div class="row mb-3">
     <div class="d-flex align-items-center mb-3">
       <div class="pe-3">
-        {{ partial "content/image.html" (dict "content" $content "size" "medium") }}
+        {{ partial "content/image.html" (dict "content" $content "size" "medium" "lazy" $lazy) }}
       </div>
       <div class="me-auto">
       </div>
     </div>
     <div class="row mb-3 text-start">
-      <a href="{{ $url }}"><h3>{{ .Title }}</h3></a>
+      <a href="{{ $url }}"><h3>{{ $content.Title }} ( {{ $lazy }}</h3></a>
     </div>
 
     <div class="row justify-content-start">
         {{ if eq .Type "blog" }}
-          {{ partial "content/people.html" (dict "people" .Params.Authors "site" $site "size" 50 )}}
+          {{ partial "content/people.html" (dict "people" $content.Params.Authors "site" $site "size" 50 )}}
         {{ end }}
 
         {{ if eq .Type "episode" }}
-          {{ partial "content/people.html" (dict "people" .Params.Hosts "site" $site "size" 50 )}}
-          {{ partial "content/people.html" (dict "people" .Params.Guests "site" $site "size" 50 )}}
+          {{ partial "content/people.html" (dict "people" $content.Params.Hosts "site" $site "size" 50 )}}
+          {{ partial "content/people.html" (dict "people" $content.Params.Guests "site" $site "size" 50 )}}
         {{ end }}
 
         {{ if eq .Type "talk" }}
-          {{ partial "content/people.html" (dict "people" .Params.Speakers "site" $site "size" 50 )}}
+          {{ partial "content/people.html" (dict "people" $content.Params.Speakers "site" $site "size" 50 )}}
         {{ end }}
     </div>
 
     <div class="row mb-3 text-start">
-      <p>{{ .Params.Description | markdownify }}</p>
+      <p>{{ $content.Params.Description | markdownify }}</p>
     </div>
-    {{ if or .Params.Date .Params.DatePublished }}
+    {{ if or $content.Params.Date $content.Params.DatePublished }}
       <div class="row mb-3">
         <div class="d-flex">
           {{ partial "content/published.html" . }}
         </div>
       </div>
     {{ end }}
-    {{ with .Params.Series }}
+    {{ with $content.Params.Series }}
       <div class="row mb-3">
         <div class="d-flex">
-            {{ partial "content/series.html" (dict "taxo" "series" "value" . "site" $.Site ) }}
+            {{ partial "content/series.html" (dict "taxo" "series" "value" . "site" $content.Site ) }}
         </div>
       </div>    
     {{ end }}
-    {{ with .Params.tags }}
+    {{ with $content.Params.tags }}
       <div class="row mb-3">
         <div class="align-self-center text-start">
           <div class="d-flex tags">
-            {{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}
+            {{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $content.Site ) }}
           </div>
         </div>
       </div>

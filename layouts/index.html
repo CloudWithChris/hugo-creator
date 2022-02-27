@@ -56,7 +56,7 @@
 
 {{ $content := .currentItem }}
 
-{{ partial "content/banner-image.html" (dict "content" $content "size" "large") }}
+{{ partial "content/banner-image.html" (dict "content" $content "size" "large" "lazy" false) }}
 
 <div class="text-white row align-items-end card-img-overlay">
   <div class="d-flex background">
@@ -86,7 +86,7 @@
         {{ $paginator := .Paginate $all }}
         
         {{ range $index, $value := $paginator.Pages }}
-          {{- partial "cards/content-card.html" . -}}
+          {{- partial "cards/content-card.html" (dict "content" .) -}}
           {{ if not (modBool $index 2 )}}  
             <div class="dropdown-divider"></div>
           {{ else }}
