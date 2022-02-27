@@ -1,4 +1,6 @@
 {{ $content := . }}
+
+{{ $url := cond (and (isset .Params "externallink") (ne .Params.externalLink "")) (.Params.externalLink) (.Permalink | relURL) }}
 {{ $banner := .Resources.GetMatch $content.Params.banner }}
 
 {{ if $banner }}
@@ -6,7 +8,7 @@
   {{ $small := ($banner.Resize "768x webp") }}
   {{ $medium := ($banner.Resize "1024x webp") }}
   {{ $large := ($banner.Resize "1366x webp") }}
-  <a href="{{ $content.Permalink | relURL }}">
+  <a href="{{ $url }}">
     <img class="img-fluid"
           loading="lazy"
           srcset="
@@ -28,7 +30,7 @@
   {{ $small := ($banner.Resize "768x webp") }}
   {{ $medium := ($banner.Resize "1024x webp") }}
   {{ $large := ($banner.Resize "1366x webp") }}
-  <a href="{{ $content.Permalink | relURL }}">
+  <a href="{{ $url }}">
     <img class="img-fluid"
           loading="lazy"
           srcset="

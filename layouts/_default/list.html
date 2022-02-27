@@ -1,0 +1,62 @@
+{{ define "top" }}
+{{ $site := .Site }}
+{{ $episode := . }}
+  <div class="container mb-3">
+    <div class="col">
+      <div class="row pt-3 ">
+        {{ partial "content/breadcrumbs.html" . }}
+      </div>
+
+      {{ with .Params.banner }}
+        <div class="row mb-3">
+          {{- partial "component/banner.html" $episode -}}
+        </div>
+      {{ end }}
+
+      {{ if (not (.Params.banner))  }}
+      <div class="row mb-3">
+        <div class="d-flex">
+          <div class="me-auto">
+            <h1>{{ .Title }}</h1>
+          </div>
+          <div>{{ partial "content/socialshare.html" . }}</div>
+        </div>
+      </div>
+      {{ end }}
+
+      <p>{{ .Content }}</p>
+
+      <div class="row">
+        
+        {{ $query := first 3 (where (where $.Site.RegularPages "Section" "talk") ".Params.upcoming" true).ByDate }}
+        {{ $count := len $query }} 
+        {{ range $query }}
+          {{- partial "component/upcoming-content.html" (dict "count" $count "content" . "site" $site) -}}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{ end }}
+
+{{ define "main" }}
+  <div class="container" align="center">
+    <div class="col">
+      <div class="row g-2">   
+        {{ $paginator := .Paginate (where .Pages ".Params.upcoming" "!=" true) }}
+
+        {{- partial "paginator.html" . -}}
+        
+        {{ range $index, $value := $paginator.Pages }}
+          {{- partial "cards/content-card.html" . -}}
+          {{ if not (modBool $index 2 )}}  
+            <div class="dropdown-divider"></div>
+          {{ else }}
+            <div class="dropdown-divider d-block d-sm-block d-md-none"></div>
+          {{ end }}
+        {{ end }}
+
+        {{- partial "paginator.html" . -}}
+      </div>
+    </div>
+  </div>
+{{ end }}

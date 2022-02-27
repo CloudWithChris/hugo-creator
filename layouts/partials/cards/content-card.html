@@ -2,6 +2,8 @@
 {{ $site := .Site }}
 {{ $content := . }}
 
+{{ $url := cond (and (isset .Params "externallink") (ne .Params.externalLink "")) (.Params.externalLink) (.Permalink | relURL) }}
+
 <div class="col-md-6">
   <div class="row mb-3">
     <div class="d-flex align-items-center mb-3">
@@ -12,7 +14,7 @@
       </div>
     </div>
     <div class="row mb-3 text-start">
-      <a href="{{ .Permalink }}"><h3>{{ .Title }}</h3></a>
+      <a href="{{ $url }}"><h3>{{ .Title }}</h3></a>
     </div>
 
     <div class="row justify-content-start">
@@ -31,13 +33,15 @@
     </div>
 
     <div class="row mb-3 text-start">
-      <p>{{ .Params.Description }}</p>
+      <p>{{ .Params.Description | markdownify }}</p>
     </div>
-    <div class="row mb-3">
-      <div class="d-flex">
-        {{ partial "content/published.html" . }}
+    {{ if or .Params.Date .Params.DatePublished }}
+      <div class="row mb-3">
+        <div class="d-flex">
+          {{ partial "content/published.html" . }}
+        </div>
       </div>
-    </div>
+    {{ end }}
     {{ with .Params.Series }}
       <div class="row mb-3">
         <div class="d-flex">
