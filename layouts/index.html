@@ -62,7 +62,7 @@
   {{ $lazy = false }}
 {{ end }}
 
-{{ partial "content/banner-image.html" (dict "content" $content "size" "large" "lazy" false) }}
+{{ partial "content/banner-image.html" (dict "content" $content "size" "large" "lazy" $lazy) }}
 
 <div class="text-white row align-items-end card-img-overlay">
   <div class="d-flex background">
