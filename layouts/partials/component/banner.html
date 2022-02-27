@@ -9,7 +9,7 @@
 {{ define "bannerImage" }}
   <div class="border-0 p-0 card  text-white">
 
-     {{ partial "content/banner-image.html" .currentPage }}
+     {{ partial "content/banner-image.html" (dict "content " .currentPage) }}
 
     <div class="row align-items-end card-img-overlay">
       <div class="d-flex background">

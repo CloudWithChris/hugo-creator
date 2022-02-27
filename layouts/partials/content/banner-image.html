@@ -1,48 +1,48 @@
-{{ $content := . }}
+{{ $content := .content }}
+{{ $size := .size }}
 
-{{ $url := cond (and (isset .Params "externallink") (ne .Params.externalLink "")) (.Params.externalLink) (.Permalink | relURL) }}
-{{ $banner := .Resources.GetMatch $content.Params.banner }}
+{{ $banner := $content.Resources.GetMatch $content.Params.banner }}
 
-{{ if $banner }}
-  {{ $tiny := ($banner.Resize "480x webp") }}
-  {{ $small := ($banner.Resize "768x webp") }}
-  {{ $medium := ($banner.Resize "1024x webp") }}
-  {{ $large := ($banner.Resize "1366x webp") }}
-  <a href="{{ $url }}">
-    <img class="img-fluid"
-          loading="lazy"
-          srcset="
-              {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
-              {{- with $small.RelPermalink -}}, {{.}} 768w{{- end -}}
-              {{- with $medium.RelPermalink -}}, {{.}} 1024w{{- end -}}
-              {{- with $large.RelPermalink -}}, {{.}} 1366w{{- end -}}" 
-          src="{{ $banner.RelPermalink }}" 
-          sizes="(max-width: 600px) 480px,
-                 (max-width: 800px) 768px,
-                 (max-width: 1050px) 1024px,
-                 1366px"
-          alt="{{ $content.Title }}" 
-          title="{{ $content.Title }}" />
-  </a>
+  {{ if not $banner }}
+    {{ $banner = resources.GetMatch ($content.Params.Banner | relURL) }}
+  {{ end }}
+
+
+{{ if eq $size "small" }}
+  {{ template "bannerRender" dict "content" .content "tiny" "160" "small" "256" "medium" "342"  "large" "456" "banner" $banner }}
+{{ else if eq $size "medium" }}
+  {{ template "bannerRender" dict "content" .content "tiny" "240" "small" "384" "medium" "512"  "large" "683" "banner" $banner }} 
 {{ else }}
-  {{ $banner := resources.GetMatch ($content.Params.Banner | relURL) }}
-  {{ $tiny := ($banner.Resize "480x webp") }}
-  {{ $small := ($banner.Resize "768x webp") }}
-  {{ $medium := ($banner.Resize "1024x webp") }}
-  {{ $large := ($banner.Resize "1366x webp") }}
+  {{ template "bannerRender" dict "content" .content "tiny" "480" "small" "768" "medium" "1024"  "large" "1366" "banner" $banner }}
+{{ end }}
+
+{{ define "bannerRender"}}
+  {{ $content := .content }}
+  {{ $banner := .banner }}
+
+  {{ $url := cond (and (isset $content.Params "externallink") (ne $content.Params.externalLink "")) ($content.Params.externalLink) ($content.Permalink | relURL) }}
+  
+  {{ $tiny := ($banner.Resize (printf "%sx webp" .tiny)) }}
+  {{ $tinySize := .tiny }}
+  {{ $small := ($banner.Resize (printf "%sx webp" .small)) }}
+  {{ $smallSize := .small }}
+  {{ $medium := ($banner.Resize (printf "%sx webp" .medium)) }}
+  {{ $mediumSize := .medium }}
+  {{ $large := ($banner.Resize (printf "%sx webp" .large)) }}
+  {{ $largeSize := .large }}
   <a href="{{ $url }}">
     <img class="img-fluid"
           loading="lazy"
           srcset="
-              {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
-              {{- with $small.RelPermalink -}}, {{.}} 768w{{- end -}}
-              {{- with $medium.RelPermalink -}}, {{.}} 1024w{{- end -}}
-              {{- with $large.RelPermalink -}}, {{.}} 1366w{{- end -}}" 
-          src="{{ $banner.RelPermalink }}"
-          sizes="(max-width: 600px) 480px,
-                 (max-width: 800px) 768px,
-                 (max-width: 1050px) 1024px,
-                 1366px"
+              {{- with $tiny.RelPermalink -}}{{.}} {{ $tinySize }}w{{- end -}}
+              {{- with $small.RelPermalink -}}, {{.}} {{ $smallSize }}w{{- end -}}
+              {{- with $medium.RelPermalink -}}, {{.}} {{ $mediumSize }}w{{- end -}}
+              {{- with $large.RelPermalink -}}, {{.}} {{ $largeSize }}w{{- end -}}" 
+          src="{{ $banner.RelPermalink }}" 
+          sizes="(max-width: {{ add (int $tinySize) 100 }}px) {{ $tinySize }}px,
+                (max-width: {{ add (int $smallSize) 100 }}px) {{ $smallSize }}px,
+                (max-width: {{ add (int $mediumSize) 100 }}px) {{ $mediumSize }}px,
+                {{ $largeSize }}px"
           alt="{{ $content.Title }}" 
           title="{{ $content.Title }}" />
   </a>
