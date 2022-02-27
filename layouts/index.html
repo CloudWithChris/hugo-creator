@@ -55,49 +55,8 @@
 {{ define "carouselImage" }}
 
 {{ $content := .currentItem }}
-{{ $banner := .currentItem.Resources.GetMatch $content.Params.banner }}
 
-<a href="{{ $content.Permalink | relURL }}">
-{{ if $banner }}
-  {{ $tiny := ($banner.Resize "480x webp") }}
-  {{ $small := ($banner.Resize "768x webp") }}
-  {{ $medium := ($banner.Resize "1024x webp") }}
-  {{ $large := ($banner.Resize "1366x webp") }}
-    <img class="img-fluid"
-          loading="lazy"
-          srcset="
-              {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
-              {{- with $small.RelPermalink -}}, {{.}} 768w{{- end -}}
-              {{- with $medium.RelPermalink -}}, {{.}} 1024w{{- end -}}
-              {{- with $large.RelPermalink -}}, {{.}} 1366w{{- end -}}" 
-          src="{{ $banner.RelPermalink }}" 
-          sizes="(max-width: 600px) 480px,
-          (max-width: 800px) 768px,
-          (max-width: 1050px) 1024px,
-          1366px"
-          alt="{{ $content.Title }}" 
-          title="{{ $content.Title }}" />
-{{ else }}
-  {{ $banner := resources.GetMatch ($content.Params.Banner | relURL) }}
-  {{ $tiny := ($banner.Resize "480x webp") }}
-  {{ $small := ($banner.Resize "768x webp") }}
-  {{ $medium := ($banner.Resize "1024x webp") }}
-  {{ $large := ($banner.Resize "1366x webp") }}
-    <img class="img-fluid"
-          srcset="
-              {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
-              {{- with $small.RelPermalink -}}, {{.}} 768w{{- end -}}
-              {{- with $medium.RelPermalink -}}, {{.}} 1024w{{- end -}}
-              {{- with $large.RelPermalink -}}, {{.}} 1366w{{- end -}}" 
-          src="{{ $banner.RelPermalink }}" 
-          sizes="(max-width: 600px) 480px,
-                 (max-width: 800px) 768px,
-                 (max-width: 1050px) 1024px,
-                 1366px"
-          alt="{{ $content.Title }}" 
-          title="{{ $content.Title }}" />
-  </a>
-{{ end }}
+{{ partial "content/banner-image.html" (dict "content" $content "size" "large") }}
 
 <div class="text-white row align-items-end card-img-overlay">
   <div class="d-flex background">
