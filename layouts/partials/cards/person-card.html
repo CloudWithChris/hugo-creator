@@ -10,7 +10,7 @@
         <a href="{{ .Permalink | relURL}}"><img src="{{ $image.RelPermalink }}" width="100" class="rounded-circle z-depth-2 person-image" alt="{{ .Title }}" title="{{ .Title }}" /></a>
       </div>
       <div class="me-auto text-left">
-        <a href="{{ .Permalink }}"><h3>{{ .Title }}</h3></a>
+        <a href="{{ .Permalink }}"><h2>{{ .Title }}</h2></a>
         <span>
           {{ partial "content/socialprofiles.html" . }}
       </span>

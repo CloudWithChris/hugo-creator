@@ -9,7 +9,10 @@
         "epGuid": "{{ $params.content.site.media_prefix }}{{ . }}",
       }
     </script>
-    <script src="https://app.podscribe.ai/static/js/embed.js" cookie-consent="strictly-necessary"></script>
+    {{ $podscribe := resources.Get "./js/embed.js" }}
+    {{ $podscribeJs := slice $podscribe | resources.Concat "js/podscribe-bundle.js" | resources.Minify | fingerprint }}
+
+    <script type="text/plain" async src="{{ $podscribeJs.RelPermalink }}" cookie-consent="strictly-necessary" defer></script>
   {{ end }}
 {{ else }}
   {{ with .Params.podcast_file }}

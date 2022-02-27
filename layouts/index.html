@@ -56,6 +56,12 @@
 
 {{ $content := .currentItem }}
 
+{{ $lazy := true }}
+
+{{ if eq .index 0 }}
+  {{ $lazy = false }}
+{{ end }}
+
 {{ partial "content/banner-image.html" (dict "content" $content "size" "large" "lazy" false) }}
 
 <div class="text-white row align-items-end card-img-overlay">

@@ -49,6 +49,8 @@
               {{- with $medium.RelPermalink -}}, {{.}} {{ $mediumSize }}w{{- end -}}
               {{- with $large.RelPermalink -}}, {{.}} {{ $largeSize }}w{{- end -}}" 
           src="{{ $image.RelPermalink }}" 
+          width="{{ $large.Width }}"
+          height="{{ $large.Height }}"
           sizes="(max-width: {{ add (int $tinySize) 100 }}px) {{ $tinySize }}px,
                 (max-width: {{ add (int $smallSize) 100 }}px) {{ $smallSize }}px,
                 (max-width: {{ add (int $mediumSize) 100 }}px) {{ $mediumSize }}px,

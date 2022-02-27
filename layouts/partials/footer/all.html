@@ -52,15 +52,20 @@
 </footer>
 <!-- JavaScript and dependencies -->
 
-  {{ $bootstrap := resources.Get "js/bootstrap.bundle.min.js" }}
-  {{ $js := slice $bootstrap | resources.Concat "js/bundle.js" | resources.Minify }}
+<!-- Bootstrap Dependencies -->
+{{ $scripts := getJSON "./assets/js/bootstrap-deps.json" }}  
+  {{ $.Scratch.Set "bootstrapDeps" slice }}
+  {{ range $scripts.scripts }}    
+    {{ $.Scratch.Add "bootstrapDeps" (resources.Get . ) }}
+  {{ end }}
 
-  <script src="{{$js.RelPermalink}}" cookie-consent="strictly-necessary" defer></script>
+{{ $bootstrapJs := .Scratch.Get "bootstrapDeps" | resources.Concat "js/bootstrap.js" | resources.Minify | fingerprint }}
+<script src="{{ $bootstrapJs.Permalink }}"  cookie-consent="strictly-necessary" defer></script>
 
+{{ $consent := resources.Get "./js/cookie-consent.js" }}
+{{ $consentJs := slice $consent | resources.Concat "js/consent-bundle.js" | resources.Minify | fingerprint }}
+<script src="{{$consentJs.RelPermalink}}" cookie-consent="strictly-necessary" defer></script>
   
-<!-- Cookie Consent by https://www.PrivacyPolicies.com -->
-<script type="text/javascript" src="{{ "js/cookie-consent.js" | relURL }}" charset="UTF-8"></script>
-
 <script type="text/javascript" charset="UTF-8">
 document.addEventListener('DOMContentLoaded', function () {
 cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express","palette":"light","language":"en","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false,"website_name":"{{ .Site.Title }}","open_preferences_center_selector":"#changePreferences","website_privacy_policy_url":"{{ .Site.BaseURL }}/privacy-policy"});
@@ -105,7 +110,10 @@ cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express",
       ga('send', 'pageview');
     }
     </script>
-    <script type="text/plain" async src="{{ "js/analytics.js" | relURL }}" cookie-consent="tracking"></script>
+    {{ $analytics := resources.Get "./js/analytics.js" }}
+    {{ $analyticsJs := slice $analytics | resources.Concat "js/analytics-bundle.js" | resources.Minify | fingerprint }}
+
+    <script type="text/plain" async src="{{ $analyticsJs.RelPermalink }}" cookie-consent="tracking" defer></script>
     {{ end }}
   {{ end }}
 {{- end -}}
