@@ -166,10 +166,10 @@ params:
       twitter_domain: "cloudwithchris.com" # This domain shows in twitter cards as "View on `twitter_domain`"
       youtube: "CloudWithChris"
     theme:
-      accentcolor: "#FF0000"
-      complimentcolor: "#FFFFFF"
-      footercolor: "#FF0000"
-      mainlinkcolor: "#000000"
+      accentcolor: "#157DB9"
+      complimentcolor: "#CFDCE1"
+      footercolor: "#157DB9"
+      mainlinkcolor: "#0C62A8"
   # Parameters relating to site features and functionality
   features:
     # Settings relating to audio players embedded 
