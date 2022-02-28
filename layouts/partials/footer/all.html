@@ -53,7 +53,7 @@
 <!-- JavaScript and dependencies -->
 
 <!-- Bootstrap Dependencies -->
-{{ $scripts := .Site.Data.bootstrapdeps  }}  
+{{ $scripts := .Site.Data.bootstrapdeps  }} 
   {{ $.Scratch.Set "bootstrapDeps" slice }}
   {{ range $scripts.scripts }}    
     {{ $.Scratch.Add "bootstrapDeps" (resources.Get . ) }}

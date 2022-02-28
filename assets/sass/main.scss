@@ -1,8 +1,25 @@
 $fa-font-path: "/webfonts";
 $breadcrumb-divider: quote(">");
 
-@import "custom_variables";
+$mainlink-color: {{ .Site.Params.content.theme.mainlinkcolor | default "#0C62A8" }};
+$accent-color: {{ .Site.Params.content.theme.accentcolor | default "#157DB9" }};
+$footer-color: {{ .Site.Params.content.theme.footercolor | default "#157DB9" }};
+$compliment-color: {{ .Site.Params.content.theme.complimentcolor | default "#CFDCE1" }};
 
+$theme-colors: (
+  "primary":    #FFFFFF,
+  "secondary":  #FFFFFF,
+  "success":    #FFFFFF,
+  "info":       #FFFFFF,
+  "warning":    #FFFFFF,
+  "danger":     #FFFFFF,
+  "light":      #FFFFFF,
+  "dark":       #FFFFFF
+);
+
+$blockquote-border-color: $accent-color;
+$blockquote-border-width: 5px;
+$blockquote-font-size: 15px;
 
 // Custom.scss
 // Option B: Include parts of Bootstrap
