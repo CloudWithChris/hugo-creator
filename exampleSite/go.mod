@@ -5,4 +5,4 @@ module github.com/cloudwithchris/hugo-creator/exampleSite
 
 go 1.17
 
-require github.com/cloudwithchris/hugo-creator v0.0.25 // indirect
+require github.com/cloudwithchris/hugo-creator v0.0.26 // indirect
