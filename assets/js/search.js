@@ -62,17 +62,9 @@ function populateResults(result){
   // Loop through all of the results of the
   // search query
   $.each(result, function(key,value) {
-    var contents= value.item.contents;
 
     // Load the #search-result-template file definition from the search layout template
     var templateDefinition = $('#search-result-template').html();
-
-    // Initialise variables for this record's snippet
-    var snippet = "";
-
-    if (snippet.length < 1 ) {
-      snippet += contents.substring(0, summaryInclude * 2);
-    }
 
     // Build the HTML output using the render function. Pass
     // in the templateDefinition, and an object of the current
@@ -80,7 +72,7 @@ function populateResults(result){
     var output = render(templateDefinition,
       {
         key:key,
-        snippet:snippet,
+        snippet:value.item.contents,
         title:value.item.title,
         link:value.item.permalink,
         tags:value.item.tags,
@@ -99,6 +91,8 @@ function populateResults(result){
 // of HTML, which renders the actual results.
 function render(templateString, data) {
   templateString = patternReplacementForIsset(data, templateString);
+  templateString = patternReplacement(/\$\{\s*image ([a-zA-Z]*) \s*\}(.*)\$\{\s*end image\s*}/g, data, "image", templateString, convertToCircularImageOutput);
+  templateString = patternReplacement(/\$\{\s*banner ([a-zA-Z]*) \s*\}(.*)\$\{\s*end banner\s*}/g, data, "banner", templateString, convertToBannerOutput);
   templateString = patternReplacement(/\$\{\s*people ([a-zA-Z]*) \s*\}(.*)\$\{\s*end people\s*}/g, data, "people", templateString, convertToPeopleOutput);
   templateString = patternReplacement(/\$\{\s*series ([a-zA-Z]*) \s*\}(.*)\$\{\s*end series\s*}/g, data, "series", templateString, convertToSeriesOutput);
   templateString = patternReplacement(/\$\{\s*tags ([a-zA-Z]*) \s*\}(.*)\$\{\s*end tags\s*}/g, data, "tags", templateString, convertToTagsOutput);
@@ -147,6 +141,14 @@ function patternReplacement(pattern, data, property, templateString, outputForma
   return tmp;
 }
 
+function convertToBannerOutput(image) {
+  return '<img src="'+image+'"  />';
+}
+
+function convertToCircularImageOutput(image) {
+  return '<img src="'+image+'" />';
+}
+
 function convertToPeopleOutput(arrayOfPeople) {
   var htmlOutput = "";
   if (arrayOfPeople.length > 0) {
@@ -182,7 +184,7 @@ function convertToSeriesOutput(arrayOfSeries) {
   var seriesOutput = "";
   if (arrayOfSeries && arrayOfSeries.length > 0) {
     arrayOfSeries.forEach(series => {
-      seriesOutput = seriesOutput + '<a href="/series/'+ convertToUrl(series) +'"><span class="badge bg-secondary">' + series + '</span></a> '
+      seriesOutput = seriesOutput + '<a href="/series/'+ convertToUrl(series) +'">' + series + '</a> '
     });
     return seriesOutput;
   }
@@ -192,7 +194,13 @@ function convertToTagsOutput(arrayOfTags){
   var tagsOutput = "";
   if (arrayOfTags && arrayOfTags.length > 0) {
     arrayOfTags.forEach(tag => {
-      tagsOutput = tagsOutput + '<a href="/tags/'+ convertToUrl(tag) +'"><span class="badge bg-info text-dark">' + tag + '</span></a> '
+      tagsOutput = tagsOutput + '<a class="tag" href="/tags/'+ convertToUrl(tag) +'">' + tag + '</a>'
+
+      if (arrayOfTags.indexOf(tag) != (arrayOfTags.length - 1))
+      {
+        tagsOutput = tagsOutput + ',&nbsp;'
+      }
+
     });
     return tagsOutput;
   }
