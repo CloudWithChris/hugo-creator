@@ -88,7 +88,7 @@
           <h3>Related</h3>
           <p></p>
           {{ range . }}
-            {{- partial "cards/content-card.html" . -}}
+            {{- partial "cards/content-card.html" (dict "content" .) -}}
           {{ end }}
         {{ end }}      
       </div>

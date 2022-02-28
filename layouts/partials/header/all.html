@@ -5,19 +5,20 @@
         <a class="navbar-brand" href="{{ "/" | relURL }}">
 
   {{ $banner := resources.GetMatch (.Site.Params.content.site.logo | relURL) }}
-  {{ $tiny := ($banner.Resize "480x") }}
-  {{ $small := ($banner.Resize "768x") }}
-  {{ $medium := ($banner.Resize "1024x") }}
-  {{ $large := ($banner.Resize "1366x") }}
+  {{ $tiny := ($banner.Resize "50x webp") }}
+  {{ $small := ($banner.Resize "100x webp") }}
+  {{ $medium := ($banner.Resize "150x webp") }}
+  {{ $large := ($banner.Resize "200x webp") }}
     <img class="img-fluid"
           srcset="
-              {{- with $tiny.RelPermalink -}}{{.}} 480w{{- end -}}
-              {{- with $small.RelPermalink -}}, {{.}} 768w{{- end -}}
-              {{- with $medium.RelPermalink -}}, {{.}} 1024w{{- end -}}
-              {{- with $large.RelPermalink -}}, {{.}} 1366w{{- end -}}" 
+              {{- with $tiny.RelPermalink -}}{{.}} 50w{{- end -}}
+              {{- with $small.RelPermalink -}}, {{.}} 100w{{- end -}}
+              {{- with $medium.RelPermalink -}}, {{.}} 150w{{- end -}}
+              {{- with $large.RelPermalink -}}, {{.}} 200w{{- end -}}" 
           src="{{ $banner.RelPermalink }}" 
           alt="{{ .Site.Title }}" 
-          width="200"
+          width="{{ $large.Width }}"
+          height="{{ $large.Height }}"
           title="{{ .Site.Title }}" />
   </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,7 +47,7 @@
         <div class="row justify-content-center">
           {{ with .Site.Params.content.social.discord }}
             <div class="col-1 col-xs-1 text-center mx-2">
-              <a href="https://discord.gg/{{ . }}">
+              <a href="https://discord.gg/{{ . }}" aria-label="Discord">
                 <div class="box align-items-center justify-content-center d-flex">
                   <i class="fa-brands fa-discord"></i>
                 </div>
@@ -55,7 +56,7 @@
           {{ end }}
           {{ with .Site.Params.content.social.github }}
             <div class="col-1 col-xs-1 text-center mx-2">
-              <a href="https://github.com/{{ . }}">
+              <a href="https://github.com/{{ . }}" aria-label="GitHub">
                 <div class="box box align-items-center justify-content-center d-flex">
                   <i class="fa-brands fa-github"></i>
                 </div>
@@ -64,7 +65,7 @@
           {{ end }}
           {{ with .Site.Params.content.social.linkedin }}
             <div class="col-1 col-xs-1 text-center mx-2">
-              <a href="https://linkedin.com/in/{{ . }}">
+              <a href="https://linkedin.com/in/{{ . }}" aria-label="LinkedIn">
                 <div class="box box align-items-center justify-content-center d-flex">
                   <i class="fa-brands fa-linkedin"></i>
                 </div>
@@ -73,7 +74,7 @@
           {{ end }}
           {{ with .Site.Params.content.social.tiktok }}
             <div class="col-1 col-xs-1 text-center mx-2">
-              <a href="https://www.tiktok.com/@{{ . }}">
+              <a href="https://www.tiktok.com/@{{ . }}" aria-label="TikTok">
                 <div class="box box align-items-center justify-content-center d-flex">
                   <i class="fa-brands fa-tiktok"></i>
                 </div>
@@ -82,7 +83,7 @@
           {{ end }}
           {{ with .Site.Params.content.social.twitch }}
             <div class="col-1 col-xs-1 text-center mx-2">
-              <a href="https://twitch.tv/{{ . }}">
+              <a href="https://twitch.tv/{{ . }}" aria-label="Twitch">
                 <div class="box box align-items-center justify-content-center d-flex">
                   <i class="fa-brands fa-twitch"></i>
                 </div>
@@ -91,7 +92,7 @@
           {{ end }}
           {{ with .Site.Params.content.social.twitter }}
             <div class="col-1 col-xs-1 text-center mx-2">
-              <a href="https://twitter.com/{{ . }}">
+              <a href="https://twitter.com/{{ . }}" aria-label="Twitter">
                 <div class="box box align-items-center justify-content-center d-flex">
                   <i class="fa-brands fa-twitter"></i>
                 </div>
@@ -100,7 +101,7 @@
           {{ end }}
           {{ with .Site.Params.content.social.youtube }}
             <div class="col-1 col-xs-1 text-center mx-2">
-              <a href="https://youtube.com/{{ . }}">
+              <a href="https://youtube.com/{{ . }}" aria-label="YouTube">
                 <div class="box box align-items-center justify-content-center d-flex">
                   <i class="fa-brands fa-youtube"></i>
                 </div>

@@ -44,7 +44,7 @@
       {{- partial "paginator.html" . -}}
       
       {{ range $paginator.Pages }}
-        {{- partial "cards/content-card.html" . -}}
+        {{- partial "cards/content-card.html" (dict "content" .) -}}
       {{ end }}
 
       {{- partial "paginator.html" . -}}

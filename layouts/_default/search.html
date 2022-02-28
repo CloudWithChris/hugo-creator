@@ -19,10 +19,6 @@
   </div>
 {{ end }}
 {{ define "main" }}
-<script src="/js/jquery-3.6.0.min.js"></script>
-<script src="/js/fuse-6.4.6.min.js"></script>
-<script src="/js/jquery-mark-8.11.1.min.js"></script>
-<script src="{{ "js/search.js" | relURL }}"></script>
 <div class="container">
   <div id="search-query" class="row g-2"></div>
   <div id="search-results" class="row g-2"></div>
@@ -38,7 +34,7 @@
           </div>
           <div class="col-12 col-sm-8">
             <div class="card-body episode-card">
-              <a href="${link}"><h3 class="card-title">${title}</h3></a>
+              <a href="${link}"><h2 class="card-title">${title}</h2></a>
               <p class="card-text">${snippet}</p>
               ${ isset tags }<p>${ tags tags } ${tags} ${ end tags }</p> ${ end isset }
               ${ isset series }<p>${ series series } ${tags} ${ end series }</p> ${ end isset }
@@ -49,4 +45,12 @@
       </div>
     </script>
 </div>
+{{ $scripts := getJSON "./assets/js/search-deps.json" }}  
+  {{ $.Scratch.Set "searchDeps" slice }}
+  {{ range $scripts.scripts }}    
+    {{ $.Scratch.Add "searchDeps" (resources.Get . ) }}
+  {{ end }}
+
+{{ $searchJs := .Scratch.Get "searchDeps" | resources.Concat "js/search.js" | resources.Minify | fingerprint }}
+<script src="{{ $searchJs.Permalink }}"  cookie-consent="strictly-necessary" defer></script>
 {{ end }}
