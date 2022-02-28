@@ -93,8 +93,8 @@
   <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/favicon-180.png">
 
   <!-- Bootstrap CSS -->
-  {{ $style := resources.Get "sass/main.scss" | toCSS | minify }}
-  <link rel="stylesheet" href="{{ $style.RelPermalink }}" media="screen">
+  {{ $style := resources.Get "sass/main.scss" | resources.ExecuteAsTemplate "style.main.scss" . | toCSS | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}" media="screen">
   <link rel="preload" crossorigin href="/webfonts/fa-solid-900.woff2" as="font">
   <link rel="preload" crossorigin href="/webfonts/fa-brands-400.woff2" as="font">
 
