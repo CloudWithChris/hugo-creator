@@ -1,51 +1,76 @@
 {{ define "top" }}
   <section class="container">
-    <div class="col">      
-      {{ $featuredContent := where .Site.Pages "Params.featured" ">" 0 }}
-      {{ $featuredContentCount := len $featuredContent }}
-      {{ if gt $featuredContentCount 0 }}
-        <div class="row my-3">
-          <div id="featuredContent" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-              {{ range $index, $value := $featuredContent }}
-                <button type="button" data-bs-target="#featuredContent" data-bs-slide-to="{{ $index }}" {{ if (eq $index 0) }}class="active"{{ end }} aria-current="true" aria-label="{{ $value.Title}}"></button>
-              {{ end }}
+    <div class="row my-3">
+      <div class="col-md-8 col-sm-12">
+        {{ $featuredContent := where .Site.Pages "Params.featured" ">" 0 }}
+        {{ $featuredContentCount := len $featuredContent }}
+        {{ if gt $featuredContentCount 0 }}
+          <div class="row">
+            <div id="featuredContent" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                {{ range $index, $value := $featuredContent }}
+                  <button type="button" data-bs-target="#featuredContent" data-bs-slide-to="{{ $index }}" {{ if (eq $index 0) }}class="active"{{ end }} aria-current="true" aria-label="{{ $value.Title}}"></button>
+                {{ end }}
+              </div>
+              <div class="carousel-inner">
+                {{ range $index, $value := $featuredContent }}
+                  <div class="carousel-item {{ if (eq $index 0) }}active{{ end }}">
+                    {{ $image := .Resources.GetMatch .Params.Banner }}
+                    {{ if $image }}
+                      {{ template "carouselImage" dict "currentItem" .Page "url" ($image.RelPermalink | relURL) "index" $index }}
+                    {{ else }}
+                      {{ template "carouselImage" dict "currentItem" .Page "url" (.Params.Image | relURL) "index" $index }}
+                    {{ end }}
+                  </div>
+                {{ end }}
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#featuredContent" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#featuredContent" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
             </div>
-            <div class="carousel-inner">
-              {{ range $index, $value := $featuredContent }}
-                <div class="carousel-item {{ if (eq $index 0) }}active{{ end }}">
-                  {{ $image := .Resources.GetMatch .Params.Banner }}
-                  {{ if $image }}
-                    {{ template "carouselImage" dict "currentItem" .Page "url" ($image.RelPermalink | relURL) "index" $index }}
-                  {{ else }}
-                    {{ template "carouselImage" dict "currentItem" .Page "url" (.Params.Image | relURL) "index" $index }}
-                  {{ end }}
-                </div>
-              {{ end }}
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#featuredContent" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#featuredContent" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
           </div>
-        </div>
-      {{ end }}
-
-      <div class="row {{ if eq $featuredContentCount 0 }}pt-3{{ end }}">
-        {{ $query := first 3 (where (where $.Site.RegularPages "Section" "episode") ".Params.upcoming" true).ByDate }}
-        {{ $count := len $query }}
-        {{ $site := .Site }}
-        
-        {{ range $query }}         
-          {{- partial "component/upcoming-content.html" (dict "count" $count "content" . "site" $site) -}}
         {{ end }}
-      </div>  
-      <div class="row float-end">
-        <p><a href="{{ "/upcoming" | relURL }}">See all upcoming episodes</a></p>
+      </div>
+      <div class="col-4">
+        {{ $comingUp := (where .Site.RegularPages ".Params.upcoming" "==" true).ByDate | first 4 }}
+        {{ range $comingUp }}
+
+        {{ $image := .Resources.GetMatch .Params.image }}
+
+        {{ if not $image }}
+          {{ $image = resources.GetMatch (.Params.Image | relURL) }}
+        {{ end }}
+
+
+          <div class="row h-25">
+            <div class="card bg-cwc text-white">
+              <div class="card-body">
+                <h1 class="fs-6 card-title">{{ .Title }}</h1>
+                <p class="card-text">{{ .Type | humanize }}</p>
+                <p class="card-text">
+                  <i class="fa-solid fa-calendar me-2"></i>
+                  {{ .Date.Format "January 2, 2006" }}
+                </p>
+              </div>
+            </div>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+        Test
+      </div>
+      <div class="col-4">
+        Test
+      </div>
+      <div class="col-4">
+        TEst
       </div>
     </div>
   </section>
