@@ -36,42 +36,48 @@
           </div>
         {{ end }}
       </div>
-      <div class="col-4">
+      <div class="col-md-4 col-sm-12">
         {{ $comingUp := (where .Site.RegularPages ".Params.upcoming" "==" true).ByDate | first 4 }}
         {{ range $comingUp }}
-
-        {{ $image := .Resources.GetMatch .Params.image }}
-
-        {{ if not $image }}
-          {{ $image = resources.GetMatch (.Params.Image | relURL) }}
-        {{ end }}
-
-
           <div class="row h-25">
-            <div class="card bg-cwc text-white">
+            <a href="{{ .Permalink }}" class="card bg-cwc text-white">
               <div class="card-body">
                 <h1 class="fs-6 card-title">{{ .Title }}</h1>
-                <p class="card-text">{{ .Type | humanize }}</p>
-                <p class="card-text">
-                  <i class="fa-solid fa-calendar me-2"></i>
-                  {{ .Date.Format "January 2, 2006" }}
-                </p>
+                <div class="d-flex">
+                  <div class="flex-fill">
+                    {{ partial "content/type" . }}
+                  </div>
+                  <div class="flex-fill">
+                    <i class="fa-solid fa-calendar me-2"></i>
+                    {{ .Date.Format "January 2, 2006" }}
+                  </div>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
         {{ end }}
       </div>
     </div>
     <div class="row">
-      <div class="col-4">
-        Test
+      <h1>Popular Posts</h1>
+    </div>
+    <div class="row">
+      {{ $comingUp := (where .Site.RegularPages ".Type" "==" "blog").ByDate.Reverse | first 3 }}
+      {{ range $comingUp }}
+      <div class="col-md-4 col-sm-12">
+        <a href="{{ .Permalink }}" class="card bg-cwc text-white">
+          <div class="card-body">
+            <h2 class="fs-6 card-title">{{ .Title }}</h2>
+            <div class="d-flex">
+              <div class="flex-fill">
+                <i class="fa-solid fa-calendar me-2"></i>
+                {{ .Date.Format "January 2, 2006" }}
+              </div>
+            </div>
+          </div>
+        </a>
       </div>
-      <div class="col-4">
-        Test
-      </div>
-      <div class="col-4">
-        TEst
-      </div>
+      {{ end }}
     </div>
   </section>
 {{ end }}
@@ -101,7 +107,6 @@
     </div>
   </div>
 </div>
-</a>
 
 {{ end }}
 
