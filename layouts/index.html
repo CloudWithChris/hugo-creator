@@ -1,7 +1,7 @@
 {{ define "top" }}
   <section class="container">
     <div class="row my-3">
-      <div class="col-md-8 col-sm-12">
+      <div class="col-lg-8 col-sm-12 px-0 px-lg-3">
         {{ $featuredContent := where .Site.Pages "Params.featured" ">" 0 }}
         {{ $featuredContentCount := len $featuredContent }}
         {{ if gt $featuredContentCount 0 }}
@@ -36,10 +36,11 @@
           </div>
         {{ end }}
       </div>
-      <div class="col-md-4 col-sm-12">
+      <div class="col-lg-4 col-sm-12 d-flex flex-column justify-content-between">
+        <h1>Coming up</h1>
         {{ $comingUp := (where .Site.RegularPages ".Params.upcoming" "==" true).ByDate | first 4 }}
-        {{ range $comingUp }}
-          <div class="row h-25">
+        {{ range $index, $value := $comingUp }}
+          <div class="row gy-1 my-1 {{ if (ge $index 3) }} d-none d-xl-block{{ end }}">
             <a href="{{ .Permalink }}" class="card bg-cwc text-white">
               <div class="card-body">
                 <h1 class="fs-6 card-title">{{ .Title }}</h1>
@@ -59,24 +60,27 @@
       </div>
     </div>
     <div class="row">
-      <h1>Popular Posts</h1>
+      <h1>Popular</h1>
     </div>
     <div class="row">
-      {{ $comingUp := (where .Site.RegularPages ".Type" "==" "blog").ByDate.Reverse | first 3 }}
-      {{ range $comingUp }}
-      <div class="col-md-4 col-sm-12">
-        <a href="{{ .Permalink }}" class="card bg-cwc text-white">
-          <div class="card-body">
-            <h2 class="fs-6 card-title">{{ .Title }}</h2>
-            <div class="d-flex">
-              <div class="flex-fill">
-                <i class="fa-solid fa-calendar me-2"></i>
-                {{ .Date.Format "January 2, 2006" }}
+      {{ $popular := $.Site.Data.popular | first 3 }}
+      {{ range where $.Site.RegularPages "RelPermalink" "in" $popular }}
+        <div class="px-0 px-lg-2 mh-100 h-100 col-lg-4 col-sm-12 my-2">
+          <a href="{{ .Permalink }}" class="card bg-cwc text-white">
+            <div class="card-body">
+              <h2 class="fs-6 card-title">{{ .Title }}</h2>
+              <div class="d-flex">
+                <div class="flex-fill">
+                  {{ partial "content/type" . }}
+                </div>
+                <div class="flex-fill">
+                  <i class="fa-solid fa-calendar me-2"></i>
+                  {{ .Date.Format "January 2, 2006" }}
+                </div>
               </div>
             </div>
-          </div>
-        </a>
-      </div>
+          </a>
+        </div>
       {{ end }}
     </div>
   </section>
