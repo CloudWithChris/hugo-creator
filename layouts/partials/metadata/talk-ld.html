@@ -31,16 +31,26 @@
       },
     {{- end -}}
   ],
-  {{- if and (isset .Params.event "organizername") (isset .Params.event "url") -}}     
+  {{- if and (isset .Params.event "organizername") -}}     
   "organizer": {
     "@type": "Organization",
-    "name": "{{- .Params.event.organizerName -}}"
-    "url": "{{- .Params.event.url -}}"
+    "name": "{{- .Params.event.organizerName -}}",
+    {{ with .Params.event.organizerUrl }}
+      "url": "{{- . -}}"
+    {{ else }}
+      {{ with .Params.event.eventUrl }}
+        "url": "{{- . -}}"
+      {{ else }}
+        "url": "{{- .Permalink -}}"
+      {{ end }}
+    {{ end }}
   },
   {{- end -}}
   "image": {{- partial "metadata/image-ld.html" . -}},
   "offers": {
     "@type": "Offer",
+    "validFrom": "{{- .PublishDate.Format "2006-01-02" -}}",
+    "url": {{- .Permalink  -}},
     {{ if .Date.Before now }} 
       "availability": "https://schema.org/SoldOut",
     {{ else }}

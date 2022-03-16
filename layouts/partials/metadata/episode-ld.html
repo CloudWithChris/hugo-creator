@@ -85,6 +85,27 @@
     "endDate": "{{ .Date.Format "2006-01-02" }}",
     "eventStatus": "https://schema.org/EventScheduled",
     "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+    "offers": {
+      "@type": "Offer",
+      "validFrom": "{{- .PublishDate.Format "2006-01-02" -}}",
+      "url": {{- .Permalink  -}},
+      {{ if .Date.Before now }} 
+        "availability": "https://schema.org/SoldOut",
+      {{ else }}
+        {{ if and (isset .Params.event "available") (not .Params.Event.available) }}
+          "availability": "https://schema.org/SoldOut",
+        {{ else }}
+          "availability": "https://schema.org/InStock",
+        {{ end }}
+      {{ end }}
+      {{ if and .Params.event.cost .Params.event.costCurrency }}
+      "price": "{{ .Params.event.cost }}",
+      "priceCurrency": "{{ .Params.event.costCurrency }}"
+      {{ else }}
+      "price": "0.00",
+      "priceCurrency": "GBP"
+      {{ end }}
+    },
     "location": {
       "@type": "VirtualLocation",
       "url": {{ .Permalink }}
