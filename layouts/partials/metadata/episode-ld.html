@@ -30,14 +30,14 @@
     "url": {{- .Permalink  -}},
     "description": "{{- .Params.Description | plainify -}}",
     "associatedMedia": [
-      {{- with .Params.podcast_file -}}
+      {{ with .Params.podcast_file }}
         {
           "@type": "MediaObject",
           "contentUrl": {{- printf "%s%s" $site.Params.content.site.media_prefix . | absURL -}}
         },
-      {{- end -}}
+      {{ end }}
 
-      {{- with .Params.youtube -}}
+      {{ with .Params.youtube }}
         {
           "@type": "VideoObject",
           "contentUrl": {{- printf "%s%s" "https://youtu.be/" . | absURL -}},
@@ -47,35 +47,35 @@
           "uploadDate": "{{- $content.Date.Format "2006-01-02" -}}",
           
         },
-      {{- end -}}
+      {{ end }}
     ],
-    {{- with .Params.Series -}}
+    {{ with .Params.Series }}
       {{- $counter := 0 -}}
-      {{- with . -}}
+      {{ with . }}
         {{- range $key, $value := . -}}
-          {{- with $value -}}
+          {{ with $value }}
             {{- $counter = add $counter 1 -}}
-          {{- end -}}
-        {{- end -}}
-      {{- end -}}
+          {{ end }}
+        {{ end }}
+      {{ end }}
       
-      {{- if gt $counter 0 -}}
+      {{ if gt $counter 0 }}
         "partOfSeries": [
-        {{- range . -}}
+        {{ range . }}
           {{- $series := $site.GetPage (printf "/series/%s" (. | urlize)) -}}
           {
             "@type": "PodcastSeries",
             "name": "{{- $series.Title -}}",
             "url": {{- $series.Permalink -}}
           },
-        {{- end -}}
+        {{ end }}
       ],
-      {{- end -}}
-    {{- end -}}
+      {{ end }}
+    {{ end }}
   }
 </script>
 
-{{- if .Params.upcoming -}}
+{{ if .Params.upcoming }}
 <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -142,4 +142,4 @@
     }
   }
 </script>
-{{- end -}}
+{{ end }}

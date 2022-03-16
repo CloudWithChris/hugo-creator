@@ -35,15 +35,15 @@
   "organizer": {
     "@type": "Organization",
     "name": "{{- .Params.event.organizerName -}}",
-    {{- with .Params.event.organizerUrl -}}
+    {{ with .Params.event.organizerUrl }}
       "url": {{- . -}}
-    {{- else -}}
-      {{- with .Params.event.eventUrl -}}
+    {{ else }}
+      {{ with .Params.event.eventUrl }}
         "url": {{- . -}}
-      {{- else -}}
+      {{ else }}
         "url": {{- .Permalink -}}
-      {{- end -}}
-    {{- end -}}
+      {{ end }}
+    {{ end }}
   },
   {{ end }}
   "image": {{- partial "metadata/image-ld.html" . -}},
@@ -54,11 +54,11 @@
     {{ if .Date.Before now }} 
       "availability": "https://schema.org/SoldOut",
     {{ else }}
-      {{- if and (isset .Params.event "available") (not .Params.Event.available) -}}
+      {{ if and (isset .Params.event "available") (not .Params.Event.available) }}
         "availability": "https://schema.org/SoldOut",
-      {{- else -}}
+      {{ else }}
         "availability": "https://schema.org/InStock",
-      {{- end -}}
+      {{ end }}
     {{ end }}
     {{ if and .Params.event.cost .Params.event.costCurrency }}
     "price": "{{- .Params.event.cost -}}",
@@ -94,17 +94,17 @@
   "url": {{- .Permalink  -}},
   {{ if or (isset .Params.event "eventurl") (isset .Params.event "organizerurl") }}
   "sameAs": [
-    {{- if .Params.event.eventUrl -}}
+    {{ if .Params.event.eventUrl -}}
       {{- .Params.event.eventUrl  -}}
-    {{- else -}}
+    {{ else }}
       {{- .Params.event.organizerUrl  -}}
-    {{- end -}}
+    {{ end }}
   ],
   {{ end }}
   "startDate": "{{- .Date.Format "2006-01-02" -}}",
   "endDate": "{{- .Date.Format "2006-01-02" -}}",
-  {{- with .Params.Tags -}}
+  {{ with .Params.Tags }}
     "keywords": "{{- delimit . ", " -}}"
-  {{- end -}}
+  {{ end }}
 }
 </script>
