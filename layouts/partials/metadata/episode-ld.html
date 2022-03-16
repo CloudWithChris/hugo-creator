@@ -89,22 +89,22 @@
       "@type": "Offer",
       "validFrom": "{{- .PublishDate.Format "2006-01-02" -}}",
       "url": {{- .Permalink  -}},
-      {{- if .Date.Before now -}} 
+      {{ if .Date.Before now }} 
         "availability": "https://schema.org/SoldOut",
-      {{- else -}}
-        {{- if and (isset .Params.event "available") (not .Params.Event.available) -}}
+      {{ else }}
+        {{ if and (isset .Params.event "available") (not .Params.Event.available) }}
           "availability": "https://schema.org/SoldOut",
-        {{- else -}}
+        {{ else }}
           "availability": "https://schema.org/InStock",
-        {{- end -}}
-      {{- end -}}
-      {{- if and .Params.event.cost .Params.event.costCurrency -}}
+        {{ end }}
+      {{ end }}
+      {{ if and .Params.event.cost .Params.event.costCurrency }}
       "price": "{{- .Params.event.cost -}}",
       "priceCurrency": "{{- .Params.event.costCurrency -}}"
-      {{- else -}}
+      {{ else }}
       "price": "0.00",
       "priceCurrency": "GBP"
-      {{- end -}}
+      {{ end }}
     },
     "location": {
       "@type": "VirtualLocation",
