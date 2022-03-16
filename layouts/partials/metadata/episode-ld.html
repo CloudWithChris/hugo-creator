@@ -1,145 +1,145 @@
-{{ $site := .Site }}
-{{ $content := . }}
+{{- $site := .Site -}}
+{{- $content := . -}}
 
 <script defer type="application/ld+json">
   { 
     "@context": "http://schema.org", 
     "@type": "PodcastEpisode",
-    "name": "{{ .Params.Title }}",
-    "image": {{ partial "metadata/image-ld.html" . }},
+    "name": "{{- .Params.Title -}}",
+    "image": {{- partial "metadata/image-ld.html" . -}},
     "author": [
       {{- range .Params.hosts -}}
         {{- $person := $site.GetPage (printf "/person/%s" .) -}}
         {
           "@type": "Person",
-          "name": "{{ $person.Title }}",
-          "image": {{ partial "metadata/image-ld.html" $person }},
-          "url": {{ $person.Permalink }}
+          "name": "{{- $person.Title -}}",
+          "image": {{- partial "metadata/image-ld.html" $person -}},
+          "url": {{- $person.Permalink -}}
         },
       {{- end -}}
       {{- range .Params.guests -}}
         {{- $person := $site.GetPage (printf "/person/%s" .) -}}
         {
           "@type": "Person",
-          "name": "{{ $person.Title }}",
-          "image": {{ partial "metadata/image-ld.html" $person }},
-          "url": {{ $person.Permalink }}
+          "name": "{{- $person.Title -}}",
+          "image": {{- partial "metadata/image-ld.html" $person -}},
+          "url": {{- $person.Permalink -}}
         },
       {{- end -}}
     ],
-    "url": {{ .Permalink  }},
-    "description": "{{ .Params.Description | plainify }}",
+    "url": {{- .Permalink  -}},
+    "description": "{{- .Params.Description | plainify -}}",
     "associatedMedia": [
-      {{ with .Params.podcast_file }}
+      {{- with .Params.podcast_file -}}
         {
           "@type": "MediaObject",
-          "contentUrl": {{ printf "%s%s" $site.Params.content.site.media_prefix . | absURL }}
+          "contentUrl": {{- printf "%s%s" $site.Params.content.site.media_prefix . | absURL -}}
         },
-      {{ end }}
+      {{- end -}}
 
-      {{ with .Params.youtube }}
+      {{- with .Params.youtube -}}
         {
           "@type": "VideoObject",
-          "contentUrl": {{ printf "%s%s" "https://youtu.be/" . | absURL }},
-          "name": "{{ $content.Title }}",
-          "thumbnailUrl": {{ $content.Params.image | absURL }},
-          "description": "{{ $content.Params.Description | plainify }}",
-          "uploadDate": "{{ $content.Date.Format "2006-01-02" }}",
+          "contentUrl": {{- printf "%s%s" "https://youtu.be/" . | absURL -}},
+          "name": "{{- $content.Title -}}",
+          "thumbnailUrl": {{- $content.Params.image | absURL -}},
+          "description": "{{- $content.Params.Description | plainify -}}",
+          "uploadDate": "{{- $content.Date.Format "2006-01-02" -}}",
           
         },
-      {{ end }}
+      {{- end -}}
     ],
-    {{ with .Params.Series }}
-      {{ $counter := 0 }}
-      {{ with . }}
-        {{ range $key, $value := . }}
-          {{ with $value }}
-            {{ $counter = add $counter 1 }}
-          {{ end }}
-        {{ end }}
-      {{ end }}
+    {{- with .Params.Series -}}
+      {{- $counter := 0 -}}
+      {{- with . -}}
+        {{- range $key, $value := . -}}
+          {{- with $value -}}
+            {{- $counter = add $counter 1 -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
       
-      {{ if gt $counter 0 }}
+      {{- if gt $counter 0 -}}
         "partOfSeries": [
         {{- range . -}}
           {{- $series := $site.GetPage (printf "/series/%s" (. | urlize)) -}}
           {
             "@type": "PodcastSeries",
-            "name": "{{ $series.Title }}",
-            "url": {{ $series.Permalink }}
+            "name": "{{- $series.Title -}}",
+            "url": {{- $series.Permalink -}}
           },
         {{- end -}}
       ],
-      {{ end }}
-    {{ end }}
+      {{- end -}}
+    {{- end -}}
   }
 </script>
 
-{{ if .Params.upcoming }}
+{{- if .Params.upcoming -}}
 <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Event",
-    "name": "{{ .Title }}",
-    "startDate": "{{ .Date.Format "2006-01-02" }}",
-    "endDate": "{{ .Date.Format "2006-01-02" }}",
+    "name": "{{- .Title -}}",
+    "startDate": "{{- .Date.Format "2006-01-02" -}}",
+    "endDate": "{{- .Date.Format "2006-01-02" -}}",
     "eventStatus": "https://schema.org/EventScheduled",
     "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
     "offers": {
       "@type": "Offer",
       "validFrom": "{{- .PublishDate.Format "2006-01-02" -}}",
       "url": {{- .Permalink  -}},
-      {{ if .Date.Before now }} 
+      {{- if .Date.Before now -}} 
         "availability": "https://schema.org/SoldOut",
-      {{ else }}
-        {{ if and (isset .Params.event "available") (not .Params.Event.available) }}
+      {{- else -}}
+        {{- if and (isset .Params.event "available") (not .Params.Event.available) -}}
           "availability": "https://schema.org/SoldOut",
-        {{ else }}
+        {{- else -}}
           "availability": "https://schema.org/InStock",
-        {{ end }}
-      {{ end }}
-      {{ if and .Params.event.cost .Params.event.costCurrency }}
-      "price": "{{ .Params.event.cost }}",
-      "priceCurrency": "{{ .Params.event.costCurrency }}"
-      {{ else }}
+        {{- end -}}
+      {{- end -}}
+      {{- if and .Params.event.cost .Params.event.costCurrency -}}
+      "price": "{{- .Params.event.cost -}}",
+      "priceCurrency": "{{- .Params.event.costCurrency -}}"
+      {{- else -}}
       "price": "0.00",
       "priceCurrency": "GBP"
-      {{ end }}
+      {{- end -}}
     },
     "location": {
       "@type": "VirtualLocation",
-      "url": {{ .Permalink }}
+      "url": {{- .Permalink -}}
       },
     "image": [
-      {{ partial "metadata/image-ld.html" . }}
+      {{- partial "metadata/image-ld.html" . -}}
      ],
-    "description": "{{ .Params.Description | plainify }}",
+    "description": "{{- .Params.Description | plainify -}}",
     "performer": [
       {{- range .Params.hosts -}}
       {{- $person := $site.GetPage (printf "/person/%s" .) -}}
       {
         "@type": "Person",
-        "name": "{{ $person.Title }}",
-        "image": {{ partial "metadata/image-ld.html" $person }},
-        "url": {{ $person.Permalink }}
+        "name": "{{- $person.Title -}}",
+        "image": {{- partial "metadata/image-ld.html" $person -}},
+        "url": {{- $person.Permalink -}}
       },
     {{- end -}}
     {{- range .Params.guests -}}
       {{- $person := $site.GetPage (printf "/person/%s" .) -}}
       {
         "@type": "Person",
-        "name": "{{ $person.Title }}",
-        "image": {{ partial "metadata/image-ld.html" $person }},
-        "url": {{ $person.Permalink }}
+        "name": "{{- $person.Title -}}",
+        "image": {{- partial "metadata/image-ld.html" $person -}},
+        "url": {{- $person.Permalink -}}
       },
     {{- end -}}
     ],
     "organizer": {
       "@type": "Organization",
-      "name": "{{ .Site.Title }}",
-      "url": {{ .Site.Home.Permalink }},
+      "name": "{{- .Site.Title -}}",
+      "url": {{- .Site.Home.Permalink -}},
       "logo": {{- .Site.Params.content.site.ogimage | absURL -}}
     }
   }
 </script>
-{{ end }}
+{{- end -}}

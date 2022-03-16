@@ -16,7 +16,7 @@
     "https://schema.org/OfflineEventAttendanceMode",
     {{- else -}}
     "https://schema.org/OnlineEventAttendanceMode",
-    {{ end }}
+    {{- end -}}
   {{- else -}}
     "https://schema.org/OnlineEventAttendanceMode",
   {{- end -}}
@@ -31,19 +31,19 @@
       },
     {{- end -}}
   ],
-  {{- if and (isset .Params.event "organizername") -}}     
+  {{- if and (isset .Params.event "organizername") -}}
   "organizer": {
     "@type": "Organization",
     "name": "{{- .Params.event.organizerName -}}",
-    {{ with .Params.event.organizerUrl }}
+    {{- with .Params.event.organizerUrl -}}
       "url": "{{- . -}}"
-    {{ else }}
-      {{ with .Params.event.eventUrl }}
+    {{- else -}}
+      {{- with .Params.event.eventUrl -}}
         "url": "{{- . -}}"
-      {{ else }}
+      {{- else -}}
         "url": "{{- .Permalink -}}"
-      {{ end }}
-    {{ end }}
+      {{- end -}}
+    {{- end -}}
   },
   {{- end -}}
   "image": {{- partial "metadata/image-ld.html" . -}},
@@ -51,22 +51,22 @@
     "@type": "Offer",
     "validFrom": "{{- .PublishDate.Format "2006-01-02" -}}",
     "url": {{- .Permalink  -}},
-    {{ if .Date.Before now }} 
+    {{- if .Date.Before now -}} 
       "availability": "https://schema.org/SoldOut",
-    {{ else }}
-      {{ if and (isset .Params.event "available") (not .Params.Event.available) }}
+    {{- else -}}
+      {{- if and (isset .Params.event "available") (not .Params.Event.available) -}}
         "availability": "https://schema.org/SoldOut",
-      {{ else }}
+      {{- else -}}
         "availability": "https://schema.org/InStock",
-      {{ end }}
-    {{ end }}
-    {{ if and .Params.event.cost .Params.event.costCurrency }}
-    "price": "{{ .Params.event.cost }}",
-    "priceCurrency": "{{ .Params.event.costCurrency }}"
-    {{ else }}
+      {{- end -}}
+    {{- end -}}
+    {{- if and .Params.event.cost .Params.event.costCurrency -}}
+    "price": "{{- .Params.event.cost -}}",
+    "priceCurrency": "{{- .Params.event.costCurrency -}}"
+    {{- else -}}
     "price": "0.00",
     "priceCurrency": "GBP"
-    {{ end }}
+    {{- end -}}
   },
   {{- if eq (lower .Params.event.attendanceType) "hybrid" -}}
   "location": [
