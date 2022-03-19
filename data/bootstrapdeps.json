@@ -4,7 +4,6 @@
     "js/dom/event-handler.js",
     "js/dom/manipulator.js",
     "js/dom/selector-engine.js",
-    "js/popper.js",
     "js/base-component.js",
     "js/carousel.js",
     "js/collapse.js",
