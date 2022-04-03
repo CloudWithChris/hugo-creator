@@ -4,12 +4,12 @@
 
   <div class="container mb-3">
     <div class="col">
-      <div class="row pt-3 ">
+      <div class="row pt-3 id="section-breadcrumbs">
         {{ partial "content/breadcrumbs.html" . }}
       </div>
 
       {{ with .Params.banner }}
-        <div class="row mb-3">
+        <div class="row mb-3" id="section-banner">
           {{- partial "component/banner.html" $page -}}
         </div>
       {{ end }}
@@ -17,17 +17,17 @@
       {{ if (not (.Params.banner))  }}
       <div class="row mb-3">
         <div class="d-flex">
-          <div class="me-auto align-self-center">
+          <div class="me-auto align-self-center" id="section-title">
             <h1>{{ .Title }}</h1>
           </div>
-          <div>{{ partial "content/socialshare.html" . }}</div>
+          <div id="section-socialshare">{{ partial "content/socialshare.html" . }}</div>
         </div>
       </div>
       {{ end }}
 
       <div class="row mb-3">
         <div class="d-flex">
-          <div>
+          <div id="section-people">
             <p>
               {{ partial "content/people.html" (dict "people" .Params.hosts "site" $site "size" 50 )}}
             </p>
@@ -36,26 +36,26 @@
       </div>
       {{ if and .Params.event.organizerUrl .Params.event.organizerName}}
         <div class="row mb-3">
-          <div class="d-flex ms-1">
+          <div class="d-flex ms-1" id="section-event-organizer">
             {{ partial "content/event-details.html" . }}
           </div>
         </div>
       {{ end }}
       <div class="row mb-3">
-        <div class="d-flex ms-1">
+        <div class="d-flex ms-1" id="section-published">
           {{ partial "content/published.html" . }}
         </div>
       </div>
       {{ with .Params.event.eventUrl }}
       <div class="row mb-3">
-        <div class="d-flex ms-1">
+        <div class="d-flex ms-1" id="section-event-url">
           <i class="fa-solid fa-link me-2"></i> <a href="{{ . }}">See event details</a>
         </div>
       </div>
       {{ end }}
       {{ with .Params.Series }}
         <div class="row mb-3">
-          <div class="d-flex ms-1">
+          <div class="d-flex ms-1" id="section-series>
               {{ partial "content/series.html" (dict "taxo" "series" "value" . "site" $.Site ) }}
           </div>
         </div>    
@@ -63,14 +63,14 @@
       {{ with .Params.tags }}
         <div class="row mb-3">
           <div class="align-self-center">
-            <div class="d-flex ms-1 tags">
+            <div class="d-flex ms-1 tags" id="section-tags">
               {{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $.Site ) }}
             </div>
           </div>
         </div>
       {{ end }}
 
-      <p class="ms-1">{{ .Params.Description | markdownify }}</p>
+      <p class="ms-1" id="section-description">{{ .Params.Description | markdownify }}</p>
       
     </div>
   </div>
@@ -85,7 +85,7 @@
         <h2>Watch on YouTube</h2>
       </div>
       <div class="row mb-3">
-        <div class="ratio ratio-16x9">
+        <div class="ratio ratio-16x9" id="section-youtube">
           <iframe src="https://www.youtube.com/embed/{{ . }}" 
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen title="{{ $title }}">

@@ -26,13 +26,13 @@
         </button>
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto">
+          <ul class="navbar-nav ms-auto" id="nav-main">
             {{ $currentPage := . }}
               {{ range .Site.Menus.main }}
                 {{ partial "nav-links.html" (dict "context" . "currentPage" $currentPage) }}
               {{ end }}      
           </ul>          
-          <form class="d-flex" action="{{ "search" | relURL }}">
+          <form id="form-search" class="d-flex" action="{{ "search" | relURL }}">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-query" name="s">
             <button class="btn btn-nav" type="submit">
               <i class="fa-solid fa-magnifying-glass"></i> Search</button>

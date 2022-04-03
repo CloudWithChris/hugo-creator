@@ -3,12 +3,12 @@
 {{ $episode := . }}
   <div class="container mb-3">
     <div class="col">
-      <div class="row pt-3 ">
+      <div class="row pt-3 id="section-breadcrumbs">
         {{ partial "content/breadcrumbs.html" . }}
       </div>
 
       {{ with .Params.banner }}
-        <div class="row mb-3">
+        <div class="row mb-3" id="section-banner">
           {{- partial "component/banner.html" $episode -}}
         </div>
       {{ end }}
@@ -16,7 +16,7 @@
       {{ if (not (.Params.banner))  }}
       <div class="row mb-3">
         <div class="d-flex align-items-center">
-          <div class="me-auto">
+          <div class="me-auto" id="section-title">
             <h1>{{ .Title }}</h1>
           </div>
           <div class="pe-3">            
@@ -28,21 +28,21 @@
       {{ end }}
 
       <div class="row mb-3">
-        <span>
+        <span id="section-socials">
           {{ partial "content/socialprofiles.html" . }}
         </span>
       </div>
       {{ with .Params.tags }}
         <div class="row mb-3">
           <div class="align-self-center">
-            <div class="d-flex ms-1 tags">
+            <div class="d-flex ms-1 tags" id="section-tags">
               {{ partial "content/tags.html" (dict "taxo" "tags" "value" . "site" $site ) }}
             </div>
           </div>
         </div>
       {{ end }}
 
-      <p class="ms-3">{{ .Content }}</p>
+      <p class="ms-3" id="section-biography">{{ .Content }}</p>
       
     </div>
   </div>
@@ -50,7 +50,7 @@
 
 {{ define "main" }}
   <div class="container">
-    <div class="row g-2">
+    <div class="row g-2" id="section-main">
       {{ $upcomingGuestEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "==" true) ".Params.guests" "intersect" (slice $.File.ContentBaseName) }}
       {{ $upcomingHostEpisodes:= where (where (where .Site.RegularPages "Type" "in" "episode") ".Params.upcoming" "==" true) ".Params.hosts" "intersect" (slice $.File.ContentBaseName) }}
       {{ $upcomingEpisodes := union $upcomingHostEpisodes $upcomingGuestEpisodes}}

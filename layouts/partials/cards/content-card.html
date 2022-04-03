@@ -3,9 +3,12 @@
 {{ $site := $content.Site }}
 {{ $lazy := .lazy | default true }}
 
+{{ $numItems := .numItems | default 2 }}
+{{ $width := div 12 $numItems  | default 6 }}
+
 {{ $url := cond (and (isset $content.Params "externallink") (ne $content.Params.externalLink "")) ($content.Params.externalLink) ($content.Permalink | relURL) }}
 
-<div class="col-md-6">
+<div class="col-md-{{ $width }}">
   <div class="row mb-3">
     <div class="d-flex align-items-center mb-3">
       <div class="pe-3">
