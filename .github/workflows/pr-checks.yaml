@@ -3,7 +3,7 @@ on: pull_request
 
 env:
   THEME_NAME: hugo-creator
-  LATEST_HUGO_VERSION: 0.93.0
+  LATEST_HUGO_VERSION: 0.97.3
   SITE_FOLDER_PATH: exampleSite
 
 jobs:
@@ -28,8 +28,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [12, 14, 16]
-        hugo: [0.76.5, 0.92.0, 0.92.1, 0.93.0]
+        node: [16]
+        hugo: [0.76.5, 0.95.0, 0.96.0, 0.97.3]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
