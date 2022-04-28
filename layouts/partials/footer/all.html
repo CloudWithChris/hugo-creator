@@ -129,16 +129,6 @@ cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express",
           gtag('config', '{{ . }}'), { 'anonymize_ip': {{- $pc.AnonymizeIP -}} });
         }
       }
-
-      {{- define "__ga_js_set_doNotTrack" -}}{{/* This is also used in the async version. */}}
-      {{- $pc := $site.Config.Privacy.GoogleAnalytics -}}
-      {{- if not $pc.RespectDoNotTrack -}}
-      var doNotTrack = false;
-      {{- else -}}
-      var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-      var doNotTrack = (dnt == "1" || dnt == "yes");
-      {{- end -}}
-      {{- end -}}
       </script>
     {{ end }}
   {{- end -}}
@@ -163,3 +153,13 @@ if('serviceWorker' in navigator) {
 
 <noscript>Cookie Consent by <a href="https://www.PrivacyPolicies.com/cookie-consent/" rel="nofollow noopener">PrivacyPolicies.com</a></noscript>
 <!-- End Cookie Consent -->
+
+{{- define "__ga_js_set_doNotTrack" -}}{{/* This is also used in the async version. */}}
+{{- $pc := $site.Config.Privacy.GoogleAnalytics -}}
+{{- if not $pc.RespectDoNotTrack -}}
+var doNotTrack = false;
+{{- else -}}
+var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+var doNotTrack = (dnt == "1" || dnt == "yes");
+{{- end -}}
+{{- end -}}
