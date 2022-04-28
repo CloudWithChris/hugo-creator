@@ -124,7 +124,7 @@ cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express",
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', '{{ . }}'), { 'anonymize_ip': {{- $pc.AnonymizeIP -}} });
+          gtag('config', '{{ . }}', { 'anonymize_ip': {{- $pc.AnonymizeIP -}} });
         }
       }
       </script>
