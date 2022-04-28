@@ -1,4 +1,6 @@
+{{ with .Params.podcast_file }}
 <h2>Listen to the Audio</h2>
+{{ end }}
 {{ $params := .Site.Params }}
 
 {{ if eq .Site.Params.features.audio_player.use "podscribe" }}

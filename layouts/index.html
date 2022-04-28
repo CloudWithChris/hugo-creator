@@ -103,7 +103,7 @@
   <div class="d-flex background">
     <div class="me-auto align-self-center">
       <h1 class="card-title">
-        {{ .currentItem.Title }}
+        <a href="{{ .currentItem.Permalink }}" class="text-white">{{ .currentItem.Title }}</a>
       </h1>
       <p class="d-none d-lg-block">
         {{ .currentItem.Params.Description | markdownify }}

@@ -2,6 +2,10 @@ html, body {
   height: 100%;
 }
 
+.card-img-overlay {
+  top: auto !important;
+}
+
 blockquote {
   padding: ($spacer / 2) $spacer ($spacer / 100);
   margin-bottom: $spacer;
