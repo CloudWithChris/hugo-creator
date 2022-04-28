@@ -86,7 +86,7 @@ cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express",
   <!-- google analytics -->
   {{- $pc := .Site.Config.Privacy.GoogleAnalytics -}}
   {{- if not $pc.Disable -}}
-    {{ with .Site.Params.features.analytics.googleUniversalAnalytics }}
+    {{ with .Site.Params.features.analytics.googleAnalyticsUniversal }}
       <script type="text/plain" cookie-consent="tracking">
       {{ template "__ga_js_set_doNotTrack" $ }}
       if (!doNotTrack) {
@@ -116,7 +116,7 @@ cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express",
       <script type="text/plain" async src="{{ $analyticsJs.RelPermalink }}" cookie-consent="tracking" defer></script>
     {{ end }}
 
-    {{ with .Site.Params.features.analytics.googleUniversal }}
+    {{ with .Site.Params.features.analytics.googleAnalytics4 }}
       <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}" type="text/plain" cookie-consent="tracking"></script>
       <script type="text/plain" cookie-consent="tracking">
         {{ template "__ga_js_set_doNotTrack" $ }}
