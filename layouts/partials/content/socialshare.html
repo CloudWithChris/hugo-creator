@@ -1,10 +1,10 @@
 {{ $title := .Title }}
-{{ $url := printf "%s" .Permalink }}
+{{ $url := printf "%s" (.Permalink | absURL) }}
 {{ $body := print $title ", by " .Site.Title "\n" .Params.description "\n\n" $url "\n" }}
 
 <ul class="icons nav list-inline mx-auto justify-content-center">
   <li>
-    <a href="https://twitter.com/intent/tweet?hashtags=CloudWithChris&amp;url={{ .Permalink }}&amp;text={{ .Title }}" target="_blank" rel="noopener" aria-label="Share on Twitter" class="share-btn twitter">
+    <a href="https://twitter.com/intent/tweet?hashtags=CloudWithChris&amp;url={{ $url }}&amp;text={{ .Title }}" target="_blank" rel="noopener" aria-label="Share on Twitter" class="share-btn twitter">
       <button aria-label="Twitter" type="button" class="btn btn-social btn-twitter btn-rounded"><i class="fab fa-twitter"></i></button>
     </a>
   </li>&nbsp;
