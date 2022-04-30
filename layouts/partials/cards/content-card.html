@@ -22,16 +22,14 @@
     </div>
 
     <div class="row justify-content-start">
-        {{ if eq .Type "blog" }}
+        {{ if eq $content.Type "blog" }}
           {{ partial "content/people.html" (dict "people" $content.Params.Authors "site" $site "size" 50 )}}
         {{ end }}
-
-        {{ if eq .Type "episode" }}
+        {{ if eq $content.Type "episode" }}
           {{ partial "content/people.html" (dict "people" $content.Params.Hosts "site" $site "size" 50 )}}
           {{ partial "content/people.html" (dict "people" $content.Params.Guests "site" $site "size" 50 )}}
         {{ end }}
-
-        {{ if eq .Type "talk" }}
+        {{ if eq $content.Type "talk" }}
           {{ partial "content/people.html" (dict "people" $content.Params.Speakers "site" $site "size" 50 )}}
         {{ end }}
     </div>
@@ -39,6 +37,12 @@
     <div class="row mb-3 text-start">
       <p>{{ $content.Params.Description | markdownify }}</p>
     </div>
+
+    <div class="row text-start">
+      <p>{{ partial "content/type" $content }}</p>
+    </div>  
+
+
     {{ if or $content.Params.Date $content.Params.DatePublished }}
       <div class="row mb-3">
         <div class="d-flex">

@@ -25,14 +25,8 @@
       </div>
       {{ end }}
 
-      <div class="row mb-3">
-        <div class="d-flex">
-          <div id="section-people">
-            <p>
-              {{ partial "content/people.html" (dict "people" .Params.hosts "site" $site "size" 50 )}}
-            </p>
-          </div>
-        </div>
+      <div class="row mb-3 justify-content-start">
+        {{ partial "content/people.html" (dict "people" .Params.hosts "site" $site "size" 50 )}}
       </div>
       {{ if and .Params.event.organizerUrl .Params.event.organizerName}}
         <div class="row mb-3">

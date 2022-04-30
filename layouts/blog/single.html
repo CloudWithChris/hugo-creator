@@ -25,12 +25,8 @@
       </div>
       {{ end }}
 
-      <div class="row mb-3">
-        <div class="d-flex">
-          <div id="section-people">
-              {{ partial "content/people.html" (dict "people" .Params.Authors "site" $site "size" 50 )}}
-          </div>
-        </div>
+      <div class="row mb-3 justify-content-start">
+        {{ partial "content/people.html" (dict "people" .Params.Authors "site" $site "size" 50 )}}
       </div>
       <div class="row mb-3">
         <div class="d-flex ms-1" id="section-published">

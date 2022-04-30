@@ -24,15 +24,9 @@
       </div>
       {{ end }}
 
-      <div class="row mb-3">
-        <div class="d-flex">
-          <div id="section-people">
-            <p>
-              {{ partial "content/people.html" (dict "people" .Params.Hosts "site" .Site "size" 50 )}}
-              {{ partial "content/people.html" (dict "people" .Params.Guests "site" .Site "size" 50 )}}
-            </p>
-          </div>
-        </div>
+      <div class="row mb-3 justify-content-start">
+        {{ partial "content/people.html" (dict "people" .Params.Hosts "site" .Site "size" 50 )}}
+        {{ partial "content/people.html" (dict "people" .Params.Guests "site" .Site "size" 50 )}}
       </div>
       <div class="row mb-3">
         <div class="d-flex ms-1" id="section-published">
