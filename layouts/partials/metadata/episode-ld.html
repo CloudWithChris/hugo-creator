@@ -1,6 +1,17 @@
 {{- $site := .Site -}}
 {{- $content := . -}}
 
+{{ $guestLen := 0 }}
+{{ $hostLen := 0 }}
+
+{{ with $content.Params.guests }}
+  {{ $guestLen := len . }}
+{{ end }}
+
+{{ with $content.Params.hosts }}
+  {{ $hostLen := len . }}
+{{ end }}
+
 <script defer type="application/ld+json" id="meta-episode">
   { 
     "@context": "http://schema.org", 
@@ -127,7 +138,6 @@
         "url": {{- $person.Permalink -}}
       }{{- if ne (add $index 1) $hostLen -}},{{- end -}}
     {{- end -}}
-    {{- $guestLen := (len .Params.guests) -}}
     {{- range $index, $value := .Params.guests -}}
       {{- $person := $site.GetPage (printf "/person/%s" .) -}}
       {
