@@ -59,17 +59,18 @@
         {{ end }}
       {{ end }}
       
+      {{ $seriesLen := (len .) }}
       {{ if gt $counter 0 }}
         "partOfSeries": [
-        {{ range . }}
-          {{- $series := $site.GetPage (printf "/series/%s" (. | urlize)) -}}
+        {{ range $index, $value := . }}
+          {{- $series := $site.GetPage (printf "/series/%s" ($value | urlize)) -}}
           {
             "@type": "PodcastSeries",
             "name": "{{- $series.Title -}}",
             "url": {{- $series.Permalink -}}
-          },
+          }{{- if ne (add $index 1) $seriesLen -}},{{- end -}}
         {{ end }}
-      ],
+      ]
       {{ end }}
     {{ end }}
   }
@@ -115,23 +116,26 @@
      ],
     "description": "{{- .Params.Description | plainify -}}",
     "performer": [
-      {{- range .Params.hosts -}}
-      {{- $person := $site.GetPage (printf "/person/%s" .) -}}
+      
+      {{- $hostLen := (len .Params.hosts) -}}
+      {{- range $index, $value := .Params.hosts -}}
+      {{- $person := $site.GetPage (printf "/person/%s" $value) -}}
       {
         "@type": "Person",
         "name": "{{- $person.Title -}}",
         "image": {{- partial "metadata/image-ld.html" $person -}},
         "url": {{- $person.Permalink -}}
-      },
+      }{{- if ne (add $index 1) $hostLen -}},{{- end -}}
     {{- end -}}
-    {{- range .Params.guests -}}
+    {{- $guestLen := (len .Params.guests) -}}
+    {{- range $index, $value := .Params.guests -}}
       {{- $person := $site.GetPage (printf "/person/%s" .) -}}
       {
         "@type": "Person",
         "name": "{{- $person.Title -}}",
         "image": {{- partial "metadata/image-ld.html" $person -}},
         "url": {{- $person.Permalink -}}
-      },
+      }{{- if ne (add $index 1) $guestLen -}},{{- end -}}
     {{- end -}}
     ],
     "organizer": {
