@@ -26,7 +26,7 @@
           "name": "{{- $person.Title -}}",
           "image": {{- partial "metadata/image-ld.html" $person -}},
           "url": {{- $person.Permalink -}}
-        }{{- if ne (add $index 1) $guestLen -}},{{- end -}}
+        }{{- if ne (add $index 1) $hostLen -}},{{- end -}}
       {{- end -}}
       {{- range $index, $value := .Params.guests -}}
         {{- $person := $site.GetPage (printf "/person/%s" $value) -}}
