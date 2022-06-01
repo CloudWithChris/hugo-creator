@@ -5,11 +5,11 @@
 {{ $hostLen := 0 }}
 
 {{ with $content.Params.guests }}
-  {{ $guestLen := len . }}
+  {{ $guestLen = len . }}
 {{ end }}
 
 {{ with $content.Params.hosts }}
-  {{ $hostLen := len . }}
+  {{ $hostLen = len . }}
 {{ end }}
 
 <script defer type="application/ld+json" id="meta-episode">
