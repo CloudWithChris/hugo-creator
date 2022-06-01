@@ -12,6 +12,8 @@
   {{ $hostLen = len . }}
 {{ end }}
 
+{{ $peopleLen := add $guestLen $hostLen }}
+
 <script defer type="application/ld+json" id="meta-episode">
   { 
     "@context": "http://schema.org", 
@@ -26,7 +28,7 @@
           "name": "{{- $person.Title -}}",
           "image": {{- partial "metadata/image-ld.html" $person -}},
           "url": {{- $person.Permalink -}}
-        }{{- if ne (add $index 1) $hostLen -}},{{- end -}}
+        }{{- if ne (add $index 1) $peopleLen -}},{{- end -}}
       {{- end -}}
       {{- range $index, $value := .Params.guests -}}
         {{- $person := $site.GetPage (printf "/person/%s" $value) -}}
@@ -35,7 +37,7 @@
           "name": "{{- $person.Title -}}",
           "image": {{- partial "metadata/image-ld.html" $person -}},
           "url": {{- $person.Permalink -}}
-        }{{- if ne (add $index 1) $guestLen -}},{{- end -}}
+        }{{- if ne (add (add $index 1) $hostLen) $peopleLen -}},{{- end -}}
       {{- end -}}
     ],
     "url": {{- .Permalink  -}},
