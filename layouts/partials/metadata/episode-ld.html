@@ -19,23 +19,23 @@
     "name": "{{- .Params.Title -}}",
     "image": {{- partial "metadata/image-ld.html" . -}},
     "author": [
-      {{- range .Params.hosts -}}
-        {{- $person := $site.GetPage (printf "/person/%s" .) -}}
+      {{- range $index, $value := .Params.hosts -}}
+        {{- $person := $site.GetPage (printf "/person/%s" $value) -}}
         {
           "@type": "Person",
           "name": "{{- $person.Title -}}",
           "image": {{- partial "metadata/image-ld.html" $person -}},
           "url": {{- $person.Permalink -}}
-        },
+        }{{- if ne (add $index 1) $guestLen -}},{{- end -}}
       {{- end -}}
-      {{- range .Params.guests -}}
-        {{- $person := $site.GetPage (printf "/person/%s" .) -}}
+      {{- range $index, $value := .Params.guests -}}
+        {{- $person := $site.GetPage (printf "/person/%s" $value) -}}
         {
           "@type": "Person",
           "name": "{{- $person.Title -}}",
           "image": {{- partial "metadata/image-ld.html" $person -}},
           "url": {{- $person.Permalink -}}
-        },
+        }{{- if ne (add $index 1) $guestLen -}},{{- end -}}
       {{- end -}}
     ],
     "url": {{- .Permalink  -}},
