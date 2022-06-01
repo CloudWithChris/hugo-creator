@@ -55,9 +55,8 @@
           "name": "{{- $content.Title -}}",
           "thumbnailUrl": {{- $content.Params.image | absURL -}},
           "description": "{{- $content.Params.Description | plainify -}}",
-          "uploadDate": "{{- $content.Date.Format "2006-01-02" -}}",
-          
-        },
+          "uploadDate": "{{- $content.Date.Format "2006-01-02" -}}"          
+        }
       {{ end }}
     ],
     {{ with .Params.Series }}
