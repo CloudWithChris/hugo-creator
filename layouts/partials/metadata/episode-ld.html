@@ -47,7 +47,8 @@
         {
           "@type": "MediaObject",
           "contentUrl": {{- printf "%s%s" $site.Params.content.site.media_prefix . | absURL -}}
-        },
+        }
+        {{ with $content.Params.youtube }},{{ end }}
       {{ end }}
 
       {{ with .Params.youtube }}
@@ -60,8 +61,9 @@
           "uploadDate": "{{- $content.Date.Format "2006-01-02" -}}"          
         }
       {{ end }}
-    ],
+    ]
     {{ with .Params.Series }}
+    ,
       {{- $counter := 0 -}}
       {{ with . }}
         {{- range $key, $value := . -}}
