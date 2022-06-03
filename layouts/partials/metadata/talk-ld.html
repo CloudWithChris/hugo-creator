@@ -1,4 +1,9 @@
 {{- $site := .Site -}}
+
+{{ $speakerLen := 0 }}
+{{ with $content.Params.Speakers }}
+  {{ $speakerLen = len . }}
+{{ end }}
 <script defer type="application/ld+json" id="meta-talk">
 { 
   "@context": "http://schema.org", 
@@ -28,7 +33,7 @@
         "name": "{{- $person.Title -}}",
         "image": {{- partial "metadata/image-ld.html" $person -}},
         "url": {{- $person.Permalink -}}
-      },
+      }{{- if ne (add $index 1) $speakerLen -}},{{- end -}}
     {{- end -}}
   ],
   {{ if and (isset .Params.event "organizername") }}
