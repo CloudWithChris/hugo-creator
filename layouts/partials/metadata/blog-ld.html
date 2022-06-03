@@ -1,5 +1,10 @@
 {{ $content := . }}
 {{ $site := .Site }}
+{{ $authorLen := 0 }}
+{{ with $content.Params.Authors }}
+  {{ $authorLen = len . }}
+{{ end }}
+
 <script defer type="application/ld+json" id="meta-blog">
   { 
     "@context": "http://schema.org", 
@@ -10,14 +15,14 @@
     "dateModified": "{{ .Lastmod.Format "2006-01-02" }}",
     "headline": {{ .Title }},
     "author": [
-      {{- range .Params.Authors -}}
-        {{- $person := $site.GetPage (printf "/person/%s" .) -}}
+      {{- range $index, $value := .Params.Authors -}}
+        {{- $person := $site.GetPage (printf "/person/%s" $value) -}}
         {
           "@type": "Person",
           "name": "{{ $person.Title }}",
           "image": {{ partial "metadata/image-ld.html" $person }},
           "url": {{ $person.Permalink }}
-        },
+        }{{- if ne (add $index 1) $authorLen -}},{{- end -}}
       {{- end -}} 
     ],
     "datePublished": "{{ .Date.Format "2006-01-02" }}",
