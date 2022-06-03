@@ -27,7 +27,7 @@
     "https://schema.org/OnlineEventAttendanceMode",
   {{ end }}
   "performer": [
-    {{- range .Params.speakers -}}
+    {{- range $index, $value := .Params.speakers -}}
       {{- $person := $site.GetPage (printf "/person/%s" .) -}}
       {
         "@type": "Person",
