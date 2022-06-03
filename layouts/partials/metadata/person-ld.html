@@ -23,7 +23,7 @@
 { 
   "@context": "http://schema.org", 
   "@type": "Person",
-  "name": "{{ .Params.description }}",
+  "description": "{{ .Params.description }}",
   "name": "{{ .Params.Title }}",
   "image": {{ partial "metadata/image-ld.html" . }},
   "url": {{ .Permalink }},
