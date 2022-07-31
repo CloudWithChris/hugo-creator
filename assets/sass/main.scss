@@ -1,7 +1,5 @@
 // Include parts of Bootstrap
 
-// Followed by our default maps
-@import "bootstrap/maps";
 // 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
 @import "bootstrap/functions";
 
@@ -28,6 +26,9 @@ $theme-colors: (
 $blockquote-border-color: $accent-color;
 $blockquote-border-width: 5px;
 $blockquote-font-size: 15px;
+
+// Followed by our default maps
+@import "bootstrap/maps";
 
 // 3. Include remainder of required Bootstrap stylesheets
 @import "bootstrap/mixins";
