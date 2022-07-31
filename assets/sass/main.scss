@@ -27,7 +27,8 @@ $blockquote-border-color: $accent-color;
 $blockquote-border-width: 5px;
 $blockquote-font-size: 15px;
 
-// Followed by our default maps
+// Followed by our default variables and maps
+@import "bootstrap/variables";
 @import "bootstrap/maps";
 
 // 3. Include remainder of required Bootstrap stylesheets
