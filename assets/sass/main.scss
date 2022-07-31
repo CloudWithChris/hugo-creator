@@ -2,6 +2,9 @@
 // 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
 @import "bootstrap/functions";
 
+// Variables come next
+@import "variables";
+
 $fa-font-path: "/webfonts";
 $breadcrumb-divider: quote(">");
 
@@ -27,6 +30,7 @@ $blockquote-font-size: 15px;
 
 // Followed by our default maps
 @import "maps";
+
 
 // 2. Include any default variable overrides here
 
