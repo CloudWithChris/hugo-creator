@@ -3,7 +3,7 @@
 @import "bootstrap/functions";
 
 // Variables come next
-@import "variables";
+@import "bootstrap/variables";
 
 $fa-font-path: "/webfonts";
 $breadcrumb-divider: quote(">");
@@ -29,7 +29,7 @@ $blockquote-border-width: 5px;
 $blockquote-font-size: 15px;
 
 // Followed by our default maps
-@import "maps";
+@import "bootstrap/maps";
 
 
 // 2. Include any default variable overrides here
