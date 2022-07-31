@@ -2,8 +2,8 @@
 // 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
 @import "bootstrap/functions";
 
-// Variables come next
-@import "bootstrap/variables";
+// Followed by our default maps
+@import "bootstrap/maps";
 
 $fa-font-path: "/webfonts";
 $breadcrumb-divider: quote(">");
@@ -28,12 +28,7 @@ $blockquote-border-color: $accent-color;
 $blockquote-border-width: 5px;
 $blockquote-font-size: 15px;
 
-// Followed by our default maps
-@import "bootstrap/maps";
-
 // 3. Include remainder of required Bootstrap stylesheets
-@import "bootstrap/variables";
-@import "bootstrap/mixins";
 @import "bootstrap/mixins";
 @import "bootstrap/utilities";
 
@@ -65,6 +60,5 @@ $blockquote-font-size: 15px;
 @import "fontawesome/fontawesome.scss";
 @import "fontawesome/solid.scss";
 @import "fontawesome/brands.scss";
-
 
 @import "styles.scss"
