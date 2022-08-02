@@ -6,6 +6,9 @@ FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${NODE_VERSION}
 ARG VARIANT=hugo_extended
 # VERSION can be either 'latest' or a specific version number
 ARG VERSION=latest
+# GOVERSION - should be the specific GO Version number
+ARG GOVERSION=1.18.5
+
 
 # Download Hugo
 RUN apt-get update && apt-get install -y ca-certificates openssl git curl && \
@@ -24,7 +27,10 @@ RUN apt-get update && apt-get install -y ca-certificates openssl git curl && \
     echo ${ARCH} && \
     wget -O ${VERSION}.tar.gz https://github.com/gohugoio/hugo/releases/download/v${VERSION}/${VARIANT}_${VERSION}_Linux-${ARCH}.tar.gz && \
     tar xf ${VERSION}.tar.gz && \
-    mv hugo /usr/bin/hugo
+    mv hugo /usr/bin/hugo && \
+    wget -O https://go.dev/dl/go${GOVERSION}.linux-amd64.tar.gz && \
+    rm -rf /usr/local/go && tar -C /usr/local -xzf go${GOVERSION}.linux-amd64.tar.gz && \
+    export PATH=$PATH:/usr/local/go/bin
 
 # Hugo dev server port
 EXPOSE 1313
