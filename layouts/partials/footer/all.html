@@ -52,15 +52,21 @@
 </footer>
 <!-- JavaScript and dependencies -->
 
-<!-- Bootstrap Dependencies -->
+
+
 {{ $scripts := .Site.Data.bootstrapdeps  }} 
-  {{ $.Scratch.Set "bootstrapDeps" slice }}
+{{ $.Scratch.Set "bootstrapDeps" slice }}
+{{ with $scripts }}
   {{ range $scripts.scripts }}    
-    {{ $.Scratch.Add "bootstrapDeps" (resources.Get . ) }}
+    {{ with resources.Get .}}
+      {{ $.Scratch.Add "bootstrapDeps" . }}
+    {{ end }}
   {{ end }}
 
-{{ $bootstrapJs := .Scratch.Get "bootstrapDeps" | resources.Concat "js/bootstrap.js" | resources.Minify | fingerprint }}
-<script src="{{ $bootstrapJs.Permalink }}"  cookie-consent="strictly-necessary" defer></script>
+  {{ $bootstrapJs := $.Scratch.Get "bootstrapDeps" | resources.Concat "js/bootstrap.js" | resources.Minify | fingerprint }}
+  <script src="{{ $bootstrapJs.RelPermalink }}"  cookie-consent="strictly-necessary" defer></script>
+
+{{ end }}
 
 {{ $consent := resources.Get "./js/cookie-consent.js" }}
 {{ $consentJs := slice $consent | resources.Concat "js/consent-bundle.js" | resources.Minify | fingerprint }}
