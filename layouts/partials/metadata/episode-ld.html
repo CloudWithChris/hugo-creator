@@ -130,26 +130,24 @@
      ],
     "description": "{{- .Params.Description | plainify -}}",
     "performer": [
-      
-      {{- $hostLen := (len .Params.hosts) -}}
       {{- range $index, $value := .Params.hosts -}}
-      {{- $person := $site.GetPage (printf "/person/%s" $value) -}}
-      {
-        "@type": "Person",
-        "name": "{{- $person.Title -}}",
-        "image": {{- partial "metadata/image-ld.html" $person -}},
-        "url": {{- $person.Permalink -}}
-      }{{- if ne (add $index 1) $hostLen -}},{{- end -}}
-    {{- end -}}
-    {{- range $index, $value := .Params.guests -}}
-      {{- $person := $site.GetPage (printf "/person/%s" .) -}}
-      {
-        "@type": "Person",
-        "name": "{{- $person.Title -}}",
-        "image": {{- partial "metadata/image-ld.html" $person -}},
-        "url": {{- $person.Permalink -}}
-      }{{- if ne (add $index 1) $guestLen -}},{{- end -}}
-    {{- end -}}
+        {{- $person := $site.GetPage (printf "/person/%s" $value) -}}
+        {
+          "@type": "Person",
+          "name": "{{- $person.Title -}}",
+          "image": {{- partial "metadata/image-ld.html" $person -}},
+          "url": {{- $person.Permalink -}}
+        }{{- if ne (add $index 1) $peopleLen -}},{{- end -}}
+      {{- end -}}
+      {{- range $index, $value := .Params.guests -}}
+        {{- $person := $site.GetPage (printf "/person/%s" $value) -}}
+        {
+          "@type": "Person",
+          "name": "{{- $person.Title -}}",
+          "image": {{- partial "metadata/image-ld.html" $person -}},
+          "url": {{- $person.Permalink -}}
+        }{{- if ne (add (add $index 1) $hostLen) $peopleLen -}},{{- end -}}
+      {{- end -}}
     ],
     "organizer": {
       "@type": "Organization",
