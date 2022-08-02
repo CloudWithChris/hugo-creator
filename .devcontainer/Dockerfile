@@ -28,7 +28,7 @@ RUN apt-get update && apt-get install -y ca-certificates openssl git curl && \
     wget -O ${VERSION}.tar.gz https://github.com/gohugoio/hugo/releases/download/v${VERSION}/${VARIANT}_${VERSION}_Linux-${ARCH}.tar.gz && \
     tar xf ${VERSION}.tar.gz && \
     mv hugo /usr/bin/hugo && \
-    wget -O https://go.dev/dl/go${GOVERSION}.linux-amd64.tar.gz && \
+    wget https://go.dev/dl/go${GOVERSION}.linux-amd64.tar.gz && \
     rm -rf /usr/local/go && tar -C /usr/local -xzf go${GOVERSION}.linux-amd64.tar.gz && \
     export PATH=$PATH:/usr/local/go/bin
 
