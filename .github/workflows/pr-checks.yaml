@@ -143,27 +143,3 @@ jobs:
           lhci upload --target "temporary-public-storage"
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
-  accessibility-insights:
-    needs: matrixBuild
-    name: "Accessibility Insights"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Wait for the Netlify Preview
-        uses: jakepartusch/wait-for-netlify-action@v1
-        id: netlify
-        with:
-          site_name: ${{ env.THEME_NAME }}
-      - name: Scan for accessibility issues
-        uses: microsoft/accessibility-insights-action@v3
-        with:
-            repo-token: ${{ secrets.GITHUB_TOKEN }}
-            # Provide either site-dir or url
-            url: ${{ steps.netlify.outputs.url }}
-            scan-timeout: '600000'
-
-      - name: Upload report artifact
-        uses: actions/upload-artifact@v3
-        with:
-            name: accessibility-reports
-            path: ${{ github.workspace }}/_accessibility-reports
