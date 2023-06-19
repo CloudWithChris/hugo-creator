@@ -71,7 +71,7 @@
     </div>
     <div class="row">
     {{ end }}
-      {{ range where $.Site.RegularPages "RelPermalink" "in" $popular }}
+      {{ range (where $.Site.RegularPages "RelPermalink" "in" $popular | first 3) }}
         <div class="px-0 px-lg-2 mh-100 h-100 col-lg-4 col-sm-12 my-2">
           <a href="{{ .Permalink }}" class="card bg-cwc text-white">
             <div class="card-body">
