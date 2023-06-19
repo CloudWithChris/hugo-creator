@@ -77,7 +77,7 @@ jobs:
       # Run Linter against code base #
       ################################
       - name: Lint ${{env.SITE_FOLDER_PATH}} Content
-        uses: github/super-linter@v4
+        uses: github/super-linter@v5
         env:
           FILTER_REGEX_INCLUDE: ${{env.SITE_FOLDER_PATH}}/content/**
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
@@ -86,7 +86,7 @@ jobs:
       # Run Linter against code base #
       ################################
       - name: Lint ${{env.THEME_NAME}} Theme Archetypes Folder
-        uses: github/super-linter@v4
+        uses: github/super-linter@v5
         env:
           FILTER_REGEX_INCLUDE: archetypes/**
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
