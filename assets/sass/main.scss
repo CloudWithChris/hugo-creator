@@ -12,6 +12,8 @@ $accent-color: {{ .Site.Params.content.theme.accentcolor | default "#157DB9" }};
 $footer-color: {{ .Site.Params.content.theme.footercolor | default "#157DB9" }};
 $compliment-color: {{ .Site.Params.content.theme.complimentcolor | default "#CFDCE1" }};
 
+$enable-dark-mode: false;
+
 $theme-colors: (
   "primary":    #FFFFFF,
   "secondary":  #FFFFFF,
@@ -29,6 +31,7 @@ $blockquote-font-size: 15px;
 
 // Followed by our default variables and maps
 @import "bootstrap/variables";
+@import "bootstrap/variables-dark";
 @import "bootstrap/maps";
 
 // 3. Include remainder of required Bootstrap stylesheets
