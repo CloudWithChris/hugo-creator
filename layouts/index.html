@@ -58,12 +58,19 @@
           </div>
         {{ end }}
       </div>
+
+      
     </div>
+    {{ $popularJson := $.Site.Data.popular }}
+    {{ $popular := slice }}
+    {{ if $popularJson }}
+      {{ $popular = $popularJson }}
+
     <div class="row">
       <h1>Popular</h1>
     </div>
     <div class="row">
-      {{ $popular := $.Site.Data.popular | first 3 }}
+    {{ end }}
       {{ range where $.Site.RegularPages "RelPermalink" "in" $popular }}
         <div class="px-0 px-lg-2 mh-100 h-100 col-lg-4 col-sm-12 my-2">
           <a href="{{ .Permalink }}" class="card bg-cwc text-white">
