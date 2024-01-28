@@ -202,15 +202,6 @@ params:
       youtube: "CloudWithChris" # Your youtube channel name
   # Parameters relating to site features and functionality
   features:
-    # Settings relating to audio players embedded 
-    # within the site.
-    audio_player:
-      use: "podscribe"  # The optionms are default or podscribe
-      podscribe:
-        someconfig: "tbc"
-    # Settings related to analytics
-    analytics:
-      googleAnalytics: ""       # Google Analytics ID
     # Settings related to the Social bar at top of site
     socialbox: true
   # Settings relating to site security. This mainly
@@ -225,15 +216,6 @@ params:
       connectsrc: ""
       framesrc: ""
       objectsrc: ""
-# Privacy options built in to hugo. The hugo docs explain how to configure this to align with GDPR, so please make sure to ensure this is configured as appropriate for your deployment.
-# -
-# https://gohugo.io/about/hugo-and-gdpr/
-privacy:
-  googleAnalytics:
-    anonymizeIP: true
-    disable: false
-    respectDoNotTrack: true
-    useSessionStorage: false
 # Taxonomies in hugo are used to easily identify content that belongs
 # to a given piece of metadata. This is particularly useful for tags,
 # or pieces of content that appear in a series. All taxonomies used within
@@ -466,24 +448,12 @@ The configuration options in this section are focused around giving user flexibi
 ```yaml
 # Parameters relating to site features and functionality
 features:
-  # Settings relating to audio players embedded 
-  # within the site.
-  audio_player:
-    use: "podscribe"  # The optionms are default or podscribe
-    podscribe:
-      someconfig: "tbc"
-  # Settings related to analytics
-  analytics:
-    googleAnalytics: ""       # Google Analytics ID
-    # Settings related to the Social bar at top of site
-    socialbox: true
+  # Settings related to the Social bar at top of site
+  socialbox: true
 ```
 
 | Field Name   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Example                                                                                                                                                                                                                                                                                                 |
 |--------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| audio_player | Yes      | Settings related to audio players embedded within the site.  Details on subproperties:  **use** controls which player is used. Options are default or podscribe. **podscribe** contains a configuration blog which relates to the podscribe configuration.                                                                                                                                                                                                                                                                                                                                                                                                                             | audio_player:   use: "podscribe"  # The optionms are default or podscribe   podscribe:     someconfig: "tbc"                                                                                                                                                                                            |
-| analytics    | No       | Configuration settings to associate your Google Analytics / Microsoft Clarity telemetry.  Details on subproperties:  **googleAnalytics** is the Tracking ID of your Google Analytics **microsoftClarity** is the tracking code provided in the Setup experience of Microsoft Clarity (e.g. the last string in the Clarity tracking codeblock)                                                                                                                                                                                                                                                                                                                                          | # Settings related to analytics analytics:   googleAnalytics: ""       # Google Analytics ID   microsoftClarity: ""                                                                                                                                                                                     |
-| comments     | Yes      | Configuration settings relating to the comments system that is configured on the site.  Details on subproperties:  * 
 | socialbox     | No      | True/false - Determines if the social bar is displayed. Defaults to false if unset. | socialbox: true |
 
 #### Security
@@ -512,18 +482,6 @@ security:
 ### Privacy Settings
 
 There are a number of configuration settings built-in to Hugo to help meet Privacy / Data Protection Regulations. The configuration shown is an example configuration. You should make your own decisions on what privacy settings are required, using the [Hugo and the GEneral Data Protection Regulation Documentation](https://gohugo.io/about/hugo-and-gdpr/).
-
-```yaml
-# Privacy options built in to hugo. The hugo docs explain how to configure this to align with GDPR, so please make sure to ensure this is configured as appropriate for your deployment.
-# -
-# https://gohugo.io/about/hugo-and-gdpr/
-privacy:
-  googleAnalytics:
-    anonymizeIP: true
-    disable: false
-    respectDoNotTrack: true
-    useSessionStorage: false
-```
 
 ### Taxonomy Settings
 
