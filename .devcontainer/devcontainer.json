@@ -9,7 +9,8 @@
 	"features": {
 		"ghcr.io/devcontainers/features/hugo:1": {
 			"extended": true
-		}
+		},
+		"ghcr.io/devcontainers/features/node:1": {}
 	},
 	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
