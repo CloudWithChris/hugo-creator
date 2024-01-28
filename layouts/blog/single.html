@@ -75,9 +75,6 @@
 
   <div class="py-5 container" align="center">
     <div class="col">
-      <div class="row">
-        {{ partial "component/comments.html" (dict "site" $site) }}
-      </div>
       <div class="row float-center">
         {{ $related := .Site.RegularPages.Related . | first 3 }}
         {{ with $related }}

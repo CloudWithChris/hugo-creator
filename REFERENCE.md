@@ -211,18 +211,6 @@ params:
     # Settings related to analytics
     analytics:
       googleAnalytics: ""       # Google Analytics ID
-    # Settings related to the comments section
-    # embedded within the site.
-    comments:
-      giscus:
-        repository: ""
-        repository_id: ""
-        category: "Content Discussion"
-        category_id: "DIC_kwDODmTrrM4B-kuQ"
-        mapping: "pathname"
-        reactions_enabled: 1
-        emit_metadata: 0
-        theme: "light"
     # Settings related to the Social bar at top of site
     socialbox: true
   # Settings relating to site security. This mainly
@@ -487,18 +475,6 @@ features:
   # Settings related to analytics
   analytics:
     googleAnalytics: ""       # Google Analytics ID
-  # Settings related to the comments section
-  # embedded within the site.
-  comments:
-    giscus:
-      repository: ""
-      repository_id: ""
-      category: "Content Discussion"
-      category_id: "DIC_kwDODmTrrM4B-kuQ"
-      mapping: "pathname"
-      reactions_enabled: 1
-      emit_metadata: 0
-      theme: "light"
     # Settings related to the Social bar at top of site
     socialbox: true
 ```
@@ -507,7 +483,7 @@ features:
 |--------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | audio_player | Yes      | Settings related to audio players embedded within the site.  Details on subproperties:  **use** controls which player is used. Options are default or podscribe. **podscribe** contains a configuration blog which relates to the podscribe configuration.                                                                                                                                                                                                                                                                                                                                                                                                                             | audio_player:   use: "podscribe"  # The optionms are default or podscribe   podscribe:     someconfig: "tbc"                                                                                                                                                                                            |
 | analytics    | No       | Configuration settings to associate your Google Analytics / Microsoft Clarity telemetry.  Details on subproperties:  **googleAnalytics** is the Tracking ID of your Google Analytics **microsoftClarity** is the tracking code provided in the Setup experience of Microsoft Clarity (e.g. the last string in the Clarity tracking codeblock)                                                                                                                                                                                                                                                                                                                                          | # Settings related to analytics analytics:   googleAnalytics: ""       # Google Analytics ID   microsoftClarity: ""                                                                                                                                                                                     |
-| comments     | Yes      | Configuration settings relating to the comments system that is configured on the site.  Details on subproperties:  * **giscus** has several subproperties   * **repository** is the name as displayed on GitHub, e.g. CloudWithChris/cloudwithchris.com   * **repository_id** is the ID of the repository.   * **category** is the Category where you would like discussion threads to be posted   * **category_id** is the ID of the category noted above   * **mapping** is what the GitHub discussion will be titled   * **reactions_enabled** - 1 means enabled, 0 means disabled   * **emit_metadata** to be referenced via Giscus docs   * **theme** - Options are light or dark | # Settings related to the comments section # embedded within the site. comments:   giscus:     repository: ""     repository_id: ""     category: "Content Discussion"     category_id: "DIC_kwDODmTrrM4B-kuQ"     mapping: "pathname"     reactions_enabled: 1     emit_metadata: 0     theme: "light" |                                                                                                                                                                                     |
+| comments     | Yes      | Configuration settings relating to the comments system that is configured on the site.  Details on subproperties:  * 
 | socialbox     | No      | True/false - Determines if the social bar is displayed. Defaults to false if unset. | socialbox: true |
 
 #### Security
