@@ -211,7 +211,6 @@ params:
     # Settings related to analytics
     analytics:
       googleAnalytics: ""       # Google Analytics ID
-      microsoftClarity: ""
     # Settings related to the comments section
     # embedded within the site.
     comments:
@@ -488,7 +487,6 @@ features:
   # Settings related to analytics
   analytics:
     googleAnalytics: ""       # Google Analytics ID
-    microsoftClarity: ""
   # Settings related to the comments section
   # embedded within the site.
   comments:
