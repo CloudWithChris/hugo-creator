@@ -6,6 +6,7 @@ license = "MIT"
 licenselink = "https://github.com/CloudWithChris/hugo-creator/blob/master/LICENSE"
 description = "Hugo Creator is a theme for the Hugo Static Site Generator. It is intended for content creators of all varieties. Whether you're a blogger, podcaster or YouTuber - The theme should hopefully meet your needs!"
 homepage = "https://hugo-creator.cloudwithchris.com/"
+demosite = "https://hugo-creator.cloudwithchris.com/"
 tags = ["Content Creator", "Responsive"]
 features = ["Responsive", "Blog"]
 min_version = "0.41.0"
