@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout Repository'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
       - name: 'Dependency Review'
         uses: actions/dependency-review-action@v2
   imagecompressor:
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: Compress Images
         uses: calibreapp/image-actions@main
@@ -40,7 +40,7 @@ jobs:
         hugo: [0.76.5, 0.95.0, 0.96.0, 0.97.3]
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
         with:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
@@ -68,7 +68,7 @@ jobs:
       # Checkout the code base #
       ##########################
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
         with:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
@@ -96,7 +96,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
         with:
           submodules: true
       - name: Setup Hugo
@@ -126,7 +126,7 @@ jobs:
     name: "Lighthouse Eval"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
       - name: Wait for the Netlify Preview
         uses: jakepartusch/wait-for-netlify-action@v1
         id: netlify
